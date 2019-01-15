@@ -1,0 +1,41 @@
+{
+    "name": "Conta",
+    "fields": [
+        {
+            "fieldName": "nome",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "valor",
+            "fieldType": "Long"
+        },
+        {
+            "fieldName": "dataVencimento",
+            "fieldType": "Instant"
+        },
+        {
+            "fieldName": "pagamento",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "nota",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "tipo",
+            "fieldType": "String"
+        }
+    ],
+    "relationships": [],
+    "changelogDate": "20190115001953",
+    "entityTableName": "conta",
+    "dto": "mapstruct",
+    "pagination": "no",
+    "service": "serviceImpl",
+    "jpaMetamodelFiltering": false,
+    "fluentMethods": true,
+    "clientRootFolder": "",
+    "applications": [
+        "obras"
+    ]
+}

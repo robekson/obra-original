@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.5.xsd">
+    <!--
+        Added the constraints for entity Periodo.
+    -->
+    <changeSet id="20190115001952-2" author="jhipster">
+        
+        <addForeignKeyConstraint baseColumnNames="obras_id"
+                                 baseTableName="periodo"
+                                 constraintName="fk_periodo_obras_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="obras"/>
+
+        <addForeignKeyConstraint baseColumnNames="periodo_id"
+                                 baseTableName="periodo"
+                                 constraintName="fk_periodo_periodo_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="conta"/>
+
+    </changeSet>
+</databaseChangeLog>

@@ -1,0 +1,44 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <form name="editForm" role="form" novalidate (ngSubmit)="save()" #editForm="ngForm">
+            <h2 id="jhi-lancamento-gastos-heading" jhiTranslate="obrasApp.lancamentoGastos.home.createOrEditLabel">Create or edit a Lancamento Gastos</h2>
+            <div>
+                <jhi-alert-error></jhi-alert-error>
+                <div class="form-group" [hidden]="!lancamentoGastos.id">
+                    <label for="id" jhiTranslate="global.field.id">ID</label>
+                    <input type="text" class="form-control" id="id" name="id"
+                        [(ngModel)]="lancamentoGastos.id" readonly />
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="obrasApp.lancamentoGastos.nomeObra" for="field_nomeObra">Nome Obra</label>
+                    <input type="text" class="form-control" name="nomeObra" id="field_nomeObra"
+                        [(ngModel)]="lancamentoGastos.nomeObra" />
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="obrasApp.lancamentoGastos.valorDeposito" for="field_valorDeposito">Valor Deposito</label>
+                    <input type="number" class="form-control" name="valorDeposito" id="field_valorDeposito"
+                        [(ngModel)]="lancamentoGastos.valorDeposito" />
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="obrasApp.lancamentoGastos.valorDespesa" for="field_valorDespesa">Valor Despesa</label>
+                    <input type="number" class="form-control" name="valorDespesa" id="field_valorDespesa"
+                        [(ngModel)]="lancamentoGastos.valorDespesa" />
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="obrasApp.lancamentoGastos.valorSaldo" for="field_valorSaldo">Valor Saldo</label>
+                    <input type="number" class="form-control" name="valorSaldo" id="field_valorSaldo"
+                        [(ngModel)]="lancamentoGastos.valorSaldo" />
+                </div>
+
+            </div>
+            <div>
+                <button type="button" id="cancel-save" class="btn btn-secondary"  (click)="previousState()">
+                    <fa-icon [icon]="'ban'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+                </button>
+                <button type="submit" id="save-entity" [disabled]="editForm.form.invalid || isSaving" class="btn btn-primary">
+                    <fa-icon [icon]="'save'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+                </button>
+            </div>
+        </form>
+    </div>
+</div>

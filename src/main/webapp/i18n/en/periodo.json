@@ -1,0 +1,24 @@
+{
+    "obrasApp": {
+        "periodo": {
+            "home": {
+                "title": "Periodos",
+                "createLabel": "Create a new Periodo",
+                "createOrEditLabel": "Create or edit a Periodo"
+            },
+            "created": "A new Periodo is created with identifier {{ param }}",
+            "updated": "A Periodo is updated with identifier {{ param }}",
+            "deleted": "A Periodo is deleted with identifier {{ param }}",
+            "delete": {
+                "question": "Are you sure you want to delete Periodo {{ id }}?"
+            },
+            "detail": {
+                "title": "Periodo"
+            },
+            "idConta": "Id Conta",
+            "data": "Data",
+            "obras": "Obras",
+            "periodo": "Periodo"
+        }
+    }
+}

@@ -1,0 +1,65 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <form name="editForm" role="form" novalidate (ngSubmit)="save()" #editForm="ngForm">
+            <h2 id="jhi-obras-heading" jhiTranslate="obrasApp.obras.home.createOrEditLabel">Create or edit a Obras</h2>
+            <div>
+                <jhi-alert-error></jhi-alert-error>
+                <div class="form-group" [hidden]="!obras.id">
+                    <label for="id" jhiTranslate="global.field.id">ID</label>
+                    <input type="text" class="form-control" id="id" name="id"
+                        [(ngModel)]="obras.id" readonly />
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="obrasApp.obras.nome" for="field_nome">Nome</label>
+                    <input type="text" class="form-control" name="nome" id="field_nome"
+                        [(ngModel)]="obras.nome" />
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="obrasApp.obras.local" for="field_local">Local</label>
+                    <input type="text" class="form-control" name="local" id="field_local"
+                        [(ngModel)]="obras.local" />
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="obrasApp.obras.metragem" for="field_metragem">Metragem</label>
+                    <input type="number" class="form-control" name="metragem" id="field_metragem"
+                        [(ngModel)]="obras.metragem" />
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="obrasApp.obras.status" for="field_status">Status</label>
+                    <input type="text" class="form-control" name="status" id="field_status"
+                        [(ngModel)]="obras.status" />
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="obrasApp.obras.dataInicio" for="field_dataInicio">Data Inicio</label>
+                    <div class="d-flex">
+                        <input id="field_dataInicio" type="datetime-local" class="form-control" name="dataInicio" [(ngModel)]="dataInicio"
+                        />
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="obrasApp.obras.dataFim" for="field_dataFim">Data Fim</label>
+                    <div class="d-flex">
+                        <input id="field_dataFim" type="datetime-local" class="form-control" name="dataFim" [(ngModel)]="dataFim"
+                        />
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="obrasApp.obras.obra" for="field_obra">Obra</label>
+                    <select class="form-control" id="field_obra" name="obra" [(ngModel)]="obras.obraId">
+                        <option [ngValue]="null"></option>
+                        <option [ngValue]="lancamentoGastosOption.id" *ngFor="let lancamentoGastosOption of obras; trackBy: trackLancamentoGastosById">{{lancamentoGastosOption.id}}</option>
+                    </select>
+                </div>
+            </div>
+            <div>
+                <button type="button" id="cancel-save" class="btn btn-secondary"  (click)="previousState()">
+                    <fa-icon [icon]="'ban'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+                </button>
+                <button type="submit" id="save-entity" [disabled]="editForm.form.invalid || isSaving" class="btn btn-primary">
+                    <fa-icon [icon]="'save'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+                </button>
+            </div>
+        </form>
+    </div>
+</div>

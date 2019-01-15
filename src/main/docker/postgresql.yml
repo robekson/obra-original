@@ -1,0 +1,11 @@
+version: '2'
+services:
+    obras-postgresql:
+        image: postgres:10.4
+        # volumes:
+        #     - ~/volumes/jhipster/obras/postgresql/:/var/lib/postgresql/data/
+        environment:
+            - POSTGRES_USER=obras
+            - POSTGRES_PASSWORD=
+        ports:
+            - 5432:5432

@@ -1,0 +1,56 @@
+{
+    "name": "Obras",
+    "fields": [
+        {
+            "fieldName": "nome",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "local",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "metragem",
+            "fieldType": "Long"
+        },
+        {
+            "fieldName": "status",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "dataInicio",
+            "fieldType": "Instant"
+        },
+        {
+            "fieldName": "dataFim",
+            "fieldType": "Instant"
+        }
+    ],
+    "relationships": [
+        {
+            "relationshipType": "one-to-one",
+            "relationshipName": "obra",
+            "otherEntityName": "lancamentoGastos",
+            "otherEntityField": "id",
+            "ownerSide": true,
+            "otherEntityRelationshipName": "obras"
+        },
+        {
+            "relationshipType": "one-to-many",
+            "relationshipName": "obra",
+            "otherEntityName": "periodo",
+            "otherEntityRelationshipName": "obras"
+        }
+    ],
+    "changelogDate": "20190115001950",
+    "entityTableName": "obras",
+    "dto": "mapstruct",
+    "pagination": "pagination",
+    "service": "serviceImpl",
+    "jpaMetamodelFiltering": false,
+    "fluentMethods": true,
+    "clientRootFolder": "",
+    "applications": [
+        "obras"
+    ]
+}

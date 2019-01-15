@@ -1,0 +1,33 @@
+{
+    "name": "LancamentoGastos",
+    "fields": [
+        {
+            "fieldName": "nomeObra",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "valorDeposito",
+            "fieldType": "Long"
+        },
+        {
+            "fieldName": "valorDespesa",
+            "fieldType": "Long"
+        },
+        {
+            "fieldName": "valorSaldo",
+            "fieldType": "Long"
+        }
+    ],
+    "relationships": [],
+    "changelogDate": "20190115001951",
+    "entityTableName": "lancamento_gastos",
+    "dto": "mapstruct",
+    "pagination": "pagination",
+    "service": "serviceImpl",
+    "jpaMetamodelFiltering": false,
+    "fluentMethods": true,
+    "clientRootFolder": "",
+    "applications": [
+        "obras"
+    ]
+}

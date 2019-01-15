@@ -1,0 +1,50 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <form name="editForm" role="form" novalidate (ngSubmit)="save()" #editForm="ngForm">
+            <h2 id="jhi-periodo-heading" jhiTranslate="obrasApp.periodo.home.createOrEditLabel">Create or edit a Periodo</h2>
+            <div>
+                <jhi-alert-error></jhi-alert-error>
+                <div class="form-group" [hidden]="!periodo.id">
+                    <label for="id" jhiTranslate="global.field.id">ID</label>
+                    <input type="text" class="form-control" id="id" name="id"
+                        [(ngModel)]="periodo.id" readonly />
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="obrasApp.periodo.idConta" for="field_idConta">Id Conta</label>
+                    <input type="text" class="form-control" name="idConta" id="field_idConta"
+                        [(ngModel)]="periodo.idConta" />
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="obrasApp.periodo.data" for="field_data">Data</label>
+                    <div class="d-flex">
+                        <input id="field_data" type="datetime-local" class="form-control" name="data" [(ngModel)]="data"
+                        />
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="obrasApp.periodo.obras" for="field_obras">Obras</label>
+                    <select class="form-control" id="field_obras" name="obras" [(ngModel)]="periodo.obrasId" >
+                        <option [ngValue]="null"></option>
+                        <option [ngValue]="obrasOption.id" *ngFor="let obrasOption of obras; trackBy: trackObrasById">{{obrasOption.id}}</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="obrasApp.periodo.periodo" for="field_periodo">Periodo</label>
+                    <select class="form-control" id="field_periodo" name="periodo" [(ngModel)]="periodo.periodoId">
+                        <option [ngValue]="null"></option>
+                        <option [ngValue]="contaOption.id" *ngFor="let contaOption of periodos; trackBy: trackContaById">{{contaOption.id}}</option>
+                    </select>
+                </div>
+            </div>
+            <div>
+                <button type="button" id="cancel-save" class="btn btn-secondary"  (click)="previousState()">
+                    <fa-icon [icon]="'ban'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+                </button>
+                <button type="submit" id="save-entity" [disabled]="editForm.form.invalid || isSaving" class="btn btn-primary">
+                    <fa-icon [icon]="'save'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+                </button>
+            </div>
+        </form>
+    </div>
+</div>

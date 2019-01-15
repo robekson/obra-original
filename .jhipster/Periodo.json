@@ -1,0 +1,40 @@
+{
+    "name": "Periodo",
+    "fields": [
+        {
+            "fieldName": "idConta",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "data",
+            "fieldType": "Instant"
+        }
+    ],
+    "relationships": [
+        {
+            "relationshipName": "obras",
+            "otherEntityName": "obras",
+            "relationshipType": "many-to-one",
+            "otherEntityField": "id"
+        },
+        {
+            "relationshipType": "one-to-one",
+            "relationshipName": "periodo",
+            "otherEntityName": "conta",
+            "otherEntityField": "id",
+            "ownerSide": true,
+            "otherEntityRelationshipName": "periodo"
+        }
+    ],
+    "changelogDate": "20190115001952",
+    "entityTableName": "periodo",
+    "dto": "mapstruct",
+    "pagination": "no",
+    "service": "serviceImpl",
+    "jpaMetamodelFiltering": false,
+    "fluentMethods": true,
+    "clientRootFolder": "",
+    "applications": [
+        "obras"
+    ]
+}

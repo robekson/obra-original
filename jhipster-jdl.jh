@@ -1,0 +1,85 @@
+application {
+  config {
+    baseName obras
+    applicationType monolith
+    databaseType sql
+    prodDatabaseType postgresql
+    buildTool maven
+    packageName br.slobra.aplicacao
+    authenticationType jwt
+    clientFramework angular
+    clientPackageManager npm
+    serverPort 8080
+    nativeLanguage pt-br 
+    enableTranslation true
+    languages 	[pt-br,en,es]
+    testFrameworks [cucumber]
+    enableHibernateCache false
+    serviceDiscoveryType false
+    websocket false
+    useSass false
+   clientPackageManager npm
+
+  }
+  entities * 
+}
+
+entity Obras {
+    id Integer,
+	nome String,
+    local String,
+    metragem Long,
+    status String,
+    dataInicio Instant,
+    dataFim Instant,
+}
+                    
+
+
+entity LancamentoGastos {
+	nomeObra String,
+    valorDeposito Long,
+    valorDespesa Long,
+    valorSaldo Long
+}
+
+relationship OneToOne {
+	Obras{obra} to LancamentoGastos,
+    Periodo{periodo} to Conta
+}
+
+relationship OneToMany {
+	Obras{obra} to Periodo
+}
+
+entity Periodo {   
+	idConta String,
+    data Instant
+}
+
+entity Conta {
+    id Integer,
+	nome String,
+    valor Long,
+    dataVencimento Instant,
+    pagamento String,
+    nota String,
+    tipo String,
+}
+
+
+
+
+// Set pagination options
+
+paginate Obras with pagination
+paginate LancamentoGastos with pagination
+
+// Use Data Transfert Objects (DTO)
+dto * with mapstruct
+
+// Set service options to all except few
+service all with serviceImpl
+
+// Set an angular suffix
+// angularSuffix * with mySuffix

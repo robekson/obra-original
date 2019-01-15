@@ -1,0 +1,24 @@
+{
+    "obrasApp": {
+        "lancamentoGastos": {
+            "home": {
+                "title": "Lancamento Gastos",
+                "createLabel": "Create a new Lancamento Gastos",
+                "createOrEditLabel": "Create or edit a Lancamento Gastos"
+            },
+            "created": "A new Lancamento Gastos is created with identifier {{ param }}",
+            "updated": "A Lancamento Gastos is updated with identifier {{ param }}",
+            "deleted": "A Lancamento Gastos is deleted with identifier {{ param }}",
+            "delete": {
+                "question": "Are you sure you want to delete Lancamento Gastos {{ id }}?"
+            },
+            "detail": {
+                "title": "Lancamento Gastos"
+            },
+            "nomeObra": "Nome Obra",
+            "valorDeposito": "Valor Deposito",
+            "valorDespesa": "Valor Despesa",
+            "valorSaldo": "Valor Saldo"
+        }
+    }
+}
