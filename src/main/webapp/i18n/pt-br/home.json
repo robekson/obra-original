@@ -1,11 +1,8 @@
 {
     "home": {
-        "title": "Bem vindo, \"{{username}}\".",
+        "title": "Painel de Controle.",
         "logged": {
             "message": "Você está logado como \"{{username}}\"."
-        },
-        "question": "Em caso de dúvida sobre o JHipster:",
-        "like": "Se você gosta do JHipster, não se esqueça de avaliar no",
-        "github": "GitHub"
+        }
     }
 }
