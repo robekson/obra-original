@@ -85,6 +85,7 @@
             }
         }
     </script>
+
     <!-- uncomment this for adding service worker
         <script>
             if ('serviceWorker' in navigator) {
@@ -106,21 +107,29 @@
         r.parentNode.insertBefore(e,r)}(window,document,'script','ga'));
         ga('create','UA-XXXXX-X');ga('send','pageview');
     </script>-->
-    
+
     <script src="content/css/bootstrap.min.css"></script>
-      
+
     <!-- Bootstrap core JavaScript-->
     <script src="content/js/jquery.min.js"></script>
     <script src="content/js/bootstrap.bundle.min.js"></script>
 
-    
+
     <!-- Page level plugin JavaScript-->
     <script src="content/js/Chart.min.js"></script>
-
-
-    <!-- Demo scripts for this page-->
     <script src="content/js/chart-area-demo.js"></script>
-    
-    
+   
+
+    <script type="text/javascript" language="javascript">
+        // show an error message if the app loading takes more than 5 sec       
+        setInterval(function () {
+          var chart = document.getElementById("showChart");
+          alert(chart);
+          if(chart!=null) buildLineChart();
+
+        }, 1000);
+    </script>
+
+
 </body>
 </html>
