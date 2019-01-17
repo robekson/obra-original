@@ -44,13 +44,12 @@ entity LancamentoGastos {
 }
 
 relationship OneToOne {
-	Obras{obra} to LancamentoGastos,
     Periodo{periodo} to Conta
 }
 
 relationship OneToMany {
     Obras{obra} to Periodo
-    LancamentoGastos to Obras{obra} 
+    LancamentoGastos{lancamento} to Obras
 }
 
 entity Periodo {   
@@ -63,12 +62,23 @@ entity Conta {
     nome String required,
     valor Long,
     dataVencimento LocalDate required,
-    pagamento String,
-    nota String,
-    tipo String,
+    pagamento Pago,
+    nota NotaFiscal,
+    tipo TipoConta,
+    parcelado Integer
 }
 
+enum NotaFiscal {
+    SIM, NAO
+}
 
+enum TipoConta {
+    MAO_DE_OBRA, MATERIAIS, DECORACAO, DOCUMENTACAO
+}
+
+enum Pago {
+    SIM, NAO
+}
 
 
 // Set pagination options
