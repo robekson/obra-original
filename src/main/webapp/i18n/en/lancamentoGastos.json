@@ -18,7 +18,8 @@
             "nomeObra": "Nome Obra",
             "valorDeposito": "Valor Deposito",
             "valorDespesa": "Valor Despesa",
-            "valorSaldo": "Valor Saldo"
+            "valorSaldo": "Valor Saldo",
+            "lancamento": "Lancamento"
         }
     }
 }

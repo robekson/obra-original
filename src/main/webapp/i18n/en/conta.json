@@ -20,7 +20,8 @@
             "dataVencimento": "Data Vencimento",
             "pagamento": "Pagamento",
             "nota": "Nota",
-            "tipo": "Tipo"
+            "tipo": "Tipo",
+            "parcelado": "Parcelado"
         }
     }
 }

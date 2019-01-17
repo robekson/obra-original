@@ -12,6 +12,8 @@ import org.mapstruct.*;
 public interface LancamentoGastosMapper extends EntityMapper<LancamentoGastosDTO, LancamentoGastos> {
 
 
+    @Mapping(target = "lancamentos", ignore = true)
+    LancamentoGastos toEntity(LancamentoGastosDTO lancamentoGastosDTO);
 
     default LancamentoGastos fromId(Long id) {
         if (id == null) {

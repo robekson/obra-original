@@ -1,8 +1,12 @@
 package br.slobra.aplicacao.service.dto;
 
 import java.time.LocalDate;
+import javax.validation.constraints.*;
 import java.io.Serializable;
 import java.util.Objects;
+import br.slobra.aplicacao.domain.enumeration.Pago;
+import br.slobra.aplicacao.domain.enumeration.NotaFiscal;
+import br.slobra.aplicacao.domain.enumeration.TipoConta;
 
 /**
  * A DTO for the Conta entity.
@@ -11,17 +15,21 @@ public class ContaDTO implements Serializable {
 
     private Long id;
 
+    @NotNull
     private String nome;
 
     private Long valor;
 
+    @NotNull
     private LocalDate dataVencimento;
 
-    private String pagamento;
+    private Pago pagamento;
 
-    private String nota;
+    private NotaFiscal nota;
 
-    private String tipo;
+    private TipoConta tipo;
+
+    private Integer parcelado;
 
     public Long getId() {
         return id;
@@ -55,28 +63,36 @@ public class ContaDTO implements Serializable {
         this.dataVencimento = dataVencimento;
     }
 
-    public String getPagamento() {
+    public Pago getPagamento() {
         return pagamento;
     }
 
-    public void setPagamento(String pagamento) {
+    public void setPagamento(Pago pagamento) {
         this.pagamento = pagamento;
     }
 
-    public String getNota() {
+    public NotaFiscal getNota() {
         return nota;
     }
 
-    public void setNota(String nota) {
+    public void setNota(NotaFiscal nota) {
         this.nota = nota;
     }
 
-    public String getTipo() {
+    public TipoConta getTipo() {
         return tipo;
     }
 
-    public void setTipo(String tipo) {
+    public void setTipo(TipoConta tipo) {
         this.tipo = tipo;
+    }
+
+    public Integer getParcelado() {
+        return parcelado;
+    }
+
+    public void setParcelado(Integer parcelado) {
+        this.parcelado = parcelado;
     }
 
     @Override
@@ -110,6 +126,7 @@ public class ContaDTO implements Serializable {
             ", pagamento='" + getPagamento() + "'" +
             ", nota='" + getNota() + "'" +
             ", tipo='" + getTipo() + "'" +
+            ", parcelado=" + getParcelado() +
             "}";
     }
 }

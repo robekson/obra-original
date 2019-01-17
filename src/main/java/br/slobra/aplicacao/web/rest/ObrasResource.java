@@ -16,6 +16,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.net.URI;
 import java.net.URISyntaxException;
 
@@ -48,7 +49,7 @@ public class ObrasResource {
      */
     @PostMapping("/obras")
     @Timed
-    public ResponseEntity<ObrasDTO> createObras(@RequestBody ObrasDTO obrasDTO) throws URISyntaxException {
+    public ResponseEntity<ObrasDTO> createObras(@Valid @RequestBody ObrasDTO obrasDTO) throws URISyntaxException {
         log.debug("REST request to save Obras : {}", obrasDTO);
         if (obrasDTO.getId() != null) {
             throw new BadRequestAlertException("A new obras cannot already have an ID", ENTITY_NAME, "idexists");
@@ -70,7 +71,7 @@ public class ObrasResource {
      */
     @PutMapping("/obras")
     @Timed
-    public ResponseEntity<ObrasDTO> updateObras(@RequestBody ObrasDTO obrasDTO) throws URISyntaxException {
+    public ResponseEntity<ObrasDTO> updateObras(@Valid @RequestBody ObrasDTO obrasDTO) throws URISyntaxException {
         log.debug("REST request to update Obras : {}", obrasDTO);
         if (obrasDTO.getId() == null) {
             throw new BadRequestAlertException("Invalid id", ENTITY_NAME, "idnull");
