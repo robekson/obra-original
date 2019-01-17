@@ -60,4 +60,10 @@ function buildLineChart() {
   }
 
 }
+setInterval(function () {
+    var chart = document.getElementById("showChart");
+   // alert(chart);
+    if(chart!=null && chart.value.length > 0) buildLineChart();
+
+  }, 1000);
 
