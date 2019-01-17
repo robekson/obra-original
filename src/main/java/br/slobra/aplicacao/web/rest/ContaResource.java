@@ -66,7 +66,7 @@ public class ContaResource {
      */
     @PutMapping("/contas")
     @Timed
-    public ResponseEntity<ContaDTO> updateConta(@RequestBody ContaDTO contaDTO) throws URISyntaxException {
+    public ResponseEntity<ContaDTO> updateConta(@Valid @RequestBody ContaDTO contaDTO) throws URISyntaxException {
         log.debug("REST request to update Conta : {}", contaDTO);
         if (contaDTO.getId() == null) {
             throw new BadRequestAlertException("Invalid id", ENTITY_NAME, "idnull");
