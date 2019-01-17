@@ -1,6 +1,6 @@
 package br.slobra.aplicacao.service.dto;
 
-import java.time.Instant;
+import java.time.LocalDate;
 import java.io.Serializable;
 import java.util.Objects;
 
@@ -15,7 +15,7 @@ public class ContaDTO implements Serializable {
 
     private Long valor;
 
-    private Instant dataVencimento;
+    private LocalDate dataVencimento;
 
     private String pagamento;
 
@@ -47,11 +47,11 @@ public class ContaDTO implements Serializable {
         this.valor = valor;
     }
 
-    public Instant getDataVencimento() {
+    public LocalDate getDataVencimento() {
         return dataVencimento;
     }
 
-    public void setDataVencimento(Instant dataVencimento) {
+    public void setDataVencimento(LocalDate dataVencimento) {
         this.dataVencimento = dataVencimento;
     }
 
