@@ -18,7 +18,7 @@ application {
     serviceDiscoveryType false
     websocket false
     useSass false
-   clientPackageManager npm
+    clientPackageManager npm
 
   }
   entities * 
@@ -26,12 +26,12 @@ application {
 
 entity Obras {
     id Integer,
-	nome String,
-    local String,
+    nome String required,
+    local String required,
     metragem Long,
     status String,
-    dataInicio Instant,
-    dataFim Instant,
+    dataInicio LocalDate required,
+    dataFim LocalDate required,
 }
                     
 
@@ -49,19 +49,20 @@ relationship OneToOne {
 }
 
 relationship OneToMany {
-	Obras{obra} to Periodo
+    Obras{obra} to Periodo
+    LancamentoGastos to Obras{obra} 
 }
 
 entity Periodo {   
-	idConta String,
-    data Instant
+    idConta String,
+    data LocalDate
 }
 
 entity Conta {
     id Integer,
-	nome String,
+    nome String required,
     valor Long,
-    dataVencimento Instant,
+    dataVencimento LocalDate required,
     pagamento String,
     nota String,
     tipo String,
