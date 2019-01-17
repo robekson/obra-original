@@ -1,0 +1,9 @@
+{
+    "obrasApp": {
+        "Pago": {
+            "null": "",
+            "SIM": "SIM",
+            "NAO": "NAO"
+        }
+    }
+}

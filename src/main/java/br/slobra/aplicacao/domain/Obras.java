@@ -1,11 +1,13 @@
 package br.slobra.aplicacao.domain;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import javax.persistence.*;
+import javax.validation.constraints.*;
 
 import java.io.Serializable;
-import java.time.Instant;
+import java.time.LocalDate;
 import java.util.HashSet;
 import java.util.Set;
 import java.util.Objects;
@@ -24,10 +26,12 @@ public class Obras implements Serializable {
     @SequenceGenerator(name = "sequenceGenerator")
     private Long id;
 
-    @Column(name = "nome")
+    @NotNull
+    @Column(name = "nome", nullable = false)
     private String nome;
 
-    @Column(name = "jhi_local")
+    @NotNull
+    @Column(name = "jhi_local", nullable = false)
     private String local;
 
     @Column(name = "metragem")
@@ -36,17 +40,20 @@ public class Obras implements Serializable {
     @Column(name = "status")
     private String status;
 
-    @Column(name = "data_inicio")
-    private Instant dataInicio;
+    @NotNull
+    @Column(name = "data_inicio", nullable = false)
+    private LocalDate dataInicio;
 
-    @Column(name = "data_fim")
-    private Instant dataFim;
-
-    @OneToOne    @JoinColumn(unique = true)
-    private LancamentoGastos obra;
+    @NotNull
+    @Column(name = "data_fim", nullable = false)
+    private LocalDate dataFim;
 
     @OneToMany(mappedBy = "obras")
     private Set<Periodo> obras = new HashSet<>();
+    @ManyToOne
+    @JsonIgnoreProperties("lancamentos")
+    private LancamentoGastos lancamentoGastos;
+
     // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
     public Long getId() {
         return id;
@@ -108,43 +115,30 @@ public class Obras implements Serializable {
         this.status = status;
     }
 
-    public Instant getDataInicio() {
+    public LocalDate getDataInicio() {
         return dataInicio;
     }
 
-    public Obras dataInicio(Instant dataInicio) {
+    public Obras dataInicio(LocalDate dataInicio) {
         this.dataInicio = dataInicio;
         return this;
     }
 
-    public void setDataInicio(Instant dataInicio) {
+    public void setDataInicio(LocalDate dataInicio) {
         this.dataInicio = dataInicio;
     }
 
-    public Instant getDataFim() {
+    public LocalDate getDataFim() {
         return dataFim;
     }
 
-    public Obras dataFim(Instant dataFim) {
+    public Obras dataFim(LocalDate dataFim) {
         this.dataFim = dataFim;
         return this;
     }
 
-    public void setDataFim(Instant dataFim) {
+    public void setDataFim(LocalDate dataFim) {
         this.dataFim = dataFim;
-    }
-
-    public LancamentoGastos getObra() {
-        return obra;
-    }
-
-    public Obras obra(LancamentoGastos lancamentoGastos) {
-        this.obra = lancamentoGastos;
-        return this;
-    }
-
-    public void setObra(LancamentoGastos lancamentoGastos) {
-        this.obra = lancamentoGastos;
     }
 
     public Set<Periodo> getObras() {
@@ -170,6 +164,19 @@ public class Obras implements Serializable {
 
     public void setObras(Set<Periodo> periodos) {
         this.obras = periodos;
+    }
+
+    public LancamentoGastos getLancamentoGastos() {
+        return lancamentoGastos;
+    }
+
+    public Obras lancamentoGastos(LancamentoGastos lancamentoGastos) {
+        this.lancamentoGastos = lancamentoGastos;
+        return this;
+    }
+
+    public void setLancamentoGastos(LancamentoGastos lancamentoGastos) {
+        this.lancamentoGastos = lancamentoGastos;
     }
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here, do not remove
 

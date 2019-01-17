@@ -25,8 +25,8 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.validation.Validator;
 
 import javax.persistence.EntityManager;
-import java.time.Instant;
-import java.time.temporal.ChronoUnit;
+import java.time.LocalDate;
+import java.time.ZoneId;
 import java.util.List;
 
 
@@ -57,11 +57,11 @@ public class ObrasResourceIntTest {
     private static final String DEFAULT_STATUS = "AAAAAAAAAA";
     private static final String UPDATED_STATUS = "BBBBBBBBBB";
 
-    private static final Instant DEFAULT_DATA_INICIO = Instant.ofEpochMilli(0L);
-    private static final Instant UPDATED_DATA_INICIO = Instant.now().truncatedTo(ChronoUnit.MILLIS);
+    private static final LocalDate DEFAULT_DATA_INICIO = LocalDate.ofEpochDay(0L);
+    private static final LocalDate UPDATED_DATA_INICIO = LocalDate.now(ZoneId.systemDefault());
 
-    private static final Instant DEFAULT_DATA_FIM = Instant.ofEpochMilli(0L);
-    private static final Instant UPDATED_DATA_FIM = Instant.now().truncatedTo(ChronoUnit.MILLIS);
+    private static final LocalDate DEFAULT_DATA_FIM = LocalDate.ofEpochDay(0L);
+    private static final LocalDate UPDATED_DATA_FIM = LocalDate.now(ZoneId.systemDefault());
 
     @Autowired
     private ObrasRepository obrasRepository;
@@ -167,6 +167,82 @@ public class ObrasResourceIntTest {
         // Validate the Obras in the database
         List<Obras> obrasList = obrasRepository.findAll();
         assertThat(obrasList).hasSize(databaseSizeBeforeCreate);
+    }
+
+    @Test
+    @Transactional
+    public void checkNomeIsRequired() throws Exception {
+        int databaseSizeBeforeTest = obrasRepository.findAll().size();
+        // set the field null
+        obras.setNome(null);
+
+        // Create the Obras, which fails.
+        ObrasDTO obrasDTO = obrasMapper.toDto(obras);
+
+        restObrasMockMvc.perform(post("/api/obras")
+            .contentType(TestUtil.APPLICATION_JSON_UTF8)
+            .content(TestUtil.convertObjectToJsonBytes(obrasDTO)))
+            .andExpect(status().isBadRequest());
+
+        List<Obras> obrasList = obrasRepository.findAll();
+        assertThat(obrasList).hasSize(databaseSizeBeforeTest);
+    }
+
+    @Test
+    @Transactional
+    public void checkLocalIsRequired() throws Exception {
+        int databaseSizeBeforeTest = obrasRepository.findAll().size();
+        // set the field null
+        obras.setLocal(null);
+
+        // Create the Obras, which fails.
+        ObrasDTO obrasDTO = obrasMapper.toDto(obras);
+
+        restObrasMockMvc.perform(post("/api/obras")
+            .contentType(TestUtil.APPLICATION_JSON_UTF8)
+            .content(TestUtil.convertObjectToJsonBytes(obrasDTO)))
+            .andExpect(status().isBadRequest());
+
+        List<Obras> obrasList = obrasRepository.findAll();
+        assertThat(obrasList).hasSize(databaseSizeBeforeTest);
+    }
+
+    @Test
+    @Transactional
+    public void checkDataInicioIsRequired() throws Exception {
+        int databaseSizeBeforeTest = obrasRepository.findAll().size();
+        // set the field null
+        obras.setDataInicio(null);
+
+        // Create the Obras, which fails.
+        ObrasDTO obrasDTO = obrasMapper.toDto(obras);
+
+        restObrasMockMvc.perform(post("/api/obras")
+            .contentType(TestUtil.APPLICATION_JSON_UTF8)
+            .content(TestUtil.convertObjectToJsonBytes(obrasDTO)))
+            .andExpect(status().isBadRequest());
+
+        List<Obras> obrasList = obrasRepository.findAll();
+        assertThat(obrasList).hasSize(databaseSizeBeforeTest);
+    }
+
+    @Test
+    @Transactional
+    public void checkDataFimIsRequired() throws Exception {
+        int databaseSizeBeforeTest = obrasRepository.findAll().size();
+        // set the field null
+        obras.setDataFim(null);
+
+        // Create the Obras, which fails.
+        ObrasDTO obrasDTO = obrasMapper.toDto(obras);
+
+        restObrasMockMvc.perform(post("/api/obras")
+            .contentType(TestUtil.APPLICATION_JSON_UTF8)
+            .content(TestUtil.convertObjectToJsonBytes(obrasDTO)))
+            .andExpect(status().isBadRequest());
+
+        List<Obras> obrasList = obrasRepository.findAll();
+        assertThat(obrasList).hasSize(databaseSizeBeforeTest);
     }
 
     @Test

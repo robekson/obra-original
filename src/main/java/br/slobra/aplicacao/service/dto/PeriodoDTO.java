@@ -1,6 +1,6 @@
 package br.slobra.aplicacao.service.dto;
 
-import java.time.Instant;
+import java.time.LocalDate;
 import java.io.Serializable;
 import java.util.Objects;
 
@@ -13,7 +13,7 @@ public class PeriodoDTO implements Serializable {
 
     private String idConta;
 
-    private Instant data;
+    private LocalDate data;
 
     private Long obrasId;
 
@@ -35,11 +35,11 @@ public class PeriodoDTO implements Serializable {
         this.idConta = idConta;
     }
 
-    public Instant getData() {
+    public LocalDate getData() {
         return data;
     }
 
-    public void setData(Instant data) {
+    public void setData(LocalDate data) {
         this.data = data;
     }
 

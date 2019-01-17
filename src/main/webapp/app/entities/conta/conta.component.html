@@ -21,6 +21,7 @@
             <th><span jhiTranslate="obrasApp.conta.pagamento">Pagamento</span></th>
             <th><span jhiTranslate="obrasApp.conta.nota">Nota</span></th>
             <th><span jhiTranslate="obrasApp.conta.tipo">Tipo</span></th>
+            <th><span jhiTranslate="obrasApp.conta.parcelado">Parcelado</span></th>
             <th></th>
             </tr>
             </thead>
@@ -29,10 +30,11 @@
                 <td><a [routerLink]="['/conta', conta.id, 'view' ]">{{conta.id}}</a></td>
                 <td>{{conta.nome}}</td>
                 <td>{{conta.valor}}</td>
-                <td>{{conta.dataVencimento | date:'medium'}}</td>
-                <td>{{conta.pagamento}}</td>
-                <td>{{conta.nota}}</td>
-                <td>{{conta.tipo}}</td>
+                <td>{{conta.dataVencimento | date:'mediumDate'}}</td>
+                <td jhiTranslate="{{'obrasApp.Pago.' + conta.pagamento}}">{{conta.pagamento}}</td>
+                <td jhiTranslate="{{'obrasApp.NotaFiscal.' + conta.nota}}">{{conta.nota}}</td>
+                <td jhiTranslate="{{'obrasApp.TipoConta.' + conta.tipo}}">{{conta.tipo}}</td>
+                <td>{{conta.parcelado}}</td>
                 <td class="text-right">
                     <div class="btn-group flex-btn-group-container">
                         <button type="submit"

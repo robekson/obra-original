@@ -3,7 +3,6 @@ import { ActivatedRoute } from '@angular/router';
 import { HttpResponse, HttpErrorResponse } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import * as moment from 'moment';
-import { DATE_TIME_FORMAT } from 'app/shared/constants/input.constants';
 import { JhiAlertService } from 'ng-jhipster';
 
 import { IPeriodo } from 'app/shared/model/periodo.model';
@@ -24,7 +23,7 @@ export class PeriodoUpdateComponent implements OnInit {
     obras: IObras[];
 
     periodos: IConta[];
-    data: string;
+    dataDp: any;
 
     constructor(
         protected jhiAlertService: JhiAlertService,
@@ -38,7 +37,6 @@ export class PeriodoUpdateComponent implements OnInit {
         this.isSaving = false;
         this.activatedRoute.data.subscribe(({ periodo }) => {
             this.periodo = periodo;
-            this.data = this.periodo.data != null ? this.periodo.data.format(DATE_TIME_FORMAT) : null;
         });
         this.obrasService.query().subscribe(
             (res: HttpResponse<IObras[]>) => {
@@ -69,7 +67,6 @@ export class PeriodoUpdateComponent implements OnInit {
 
     save() {
         this.isSaving = true;
-        this.periodo.data = this.data != null ? moment(this.data, DATE_TIME_FORMAT) : null;
         if (this.periodo.id !== undefined) {
             this.subscribeToSaveResponse(this.periodoService.update(this.periodo));
         } else {

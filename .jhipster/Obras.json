@@ -3,11 +3,17 @@
     "fields": [
         {
             "fieldName": "nome",
-            "fieldType": "String"
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "required"
+            ]
         },
         {
             "fieldName": "local",
-            "fieldType": "String"
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "required"
+            ]
         },
         {
             "fieldName": "metragem",
@@ -19,30 +25,34 @@
         },
         {
             "fieldName": "dataInicio",
-            "fieldType": "Instant"
+            "fieldType": "LocalDate",
+            "fieldValidateRules": [
+                "required"
+            ]
         },
         {
             "fieldName": "dataFim",
-            "fieldType": "Instant"
+            "fieldType": "LocalDate",
+            "fieldValidateRules": [
+                "required"
+            ]
         }
     ],
     "relationships": [
-        {
-            "relationshipType": "one-to-one",
-            "relationshipName": "obra",
-            "otherEntityName": "lancamentoGastos",
-            "otherEntityField": "id",
-            "ownerSide": true,
-            "otherEntityRelationshipName": "obras"
-        },
         {
             "relationshipType": "one-to-many",
             "relationshipName": "obra",
             "otherEntityName": "periodo",
             "otherEntityRelationshipName": "obras"
+        },
+        {
+            "relationshipName": "lancamentoGastos",
+            "otherEntityName": "lancamentoGastos",
+            "relationshipType": "many-to-one",
+            "otherEntityField": "id"
         }
     ],
-    "changelogDate": "20190115001950",
+    "changelogDate": "20190117162054",
     "entityTableName": "obras",
     "dto": "mapstruct",
     "pagination": "pagination",

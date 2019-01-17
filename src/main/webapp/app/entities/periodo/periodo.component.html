@@ -26,7 +26,7 @@
             <tr *ngFor="let periodo of periodos ;trackBy: trackId">
                 <td><a [routerLink]="['/periodo', periodo.id, 'view' ]">{{periodo.id}}</a></td>
                 <td>{{periodo.idConta}}</td>
-                <td>{{periodo.data | date:'medium'}}</td>
+                <td>{{periodo.data | date:'mediumDate'}}</td>
                 <td>
                     <div *ngIf="periodo.obrasId">
                         <a [routerLink]="['../obras', periodo.obrasId , 'view' ]" >{{periodo.obrasId}}</a>

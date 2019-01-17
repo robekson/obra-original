@@ -3,7 +3,6 @@ import { ActivatedRoute } from '@angular/router';
 import { HttpResponse, HttpErrorResponse } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import * as moment from 'moment';
-import { DATE_TIME_FORMAT } from 'app/shared/constants/input.constants';
 
 import { IConta } from 'app/shared/model/conta.model';
 import { ContaService } from './conta.service';
@@ -15,7 +14,7 @@ import { ContaService } from './conta.service';
 export class ContaUpdateComponent implements OnInit {
     conta: IConta;
     isSaving: boolean;
-    dataVencimento: string;
+    dataVencimentoDp: any;
 
     constructor(protected contaService: ContaService, protected activatedRoute: ActivatedRoute) {}
 
@@ -23,7 +22,6 @@ export class ContaUpdateComponent implements OnInit {
         this.isSaving = false;
         this.activatedRoute.data.subscribe(({ conta }) => {
             this.conta = conta;
-            this.dataVencimento = this.conta.dataVencimento != null ? this.conta.dataVencimento.format(DATE_TIME_FORMAT) : null;
         });
     }
 
@@ -33,7 +31,6 @@ export class ContaUpdateComponent implements OnInit {
 
     save() {
         this.isSaving = true;
-        this.conta.dataVencimento = this.dataVencimento != null ? moment(this.dataVencimento, DATE_TIME_FORMAT) : null;
         if (this.conta.id !== undefined) {
             this.subscribeToSaveResponse(this.contaService.update(this.conta));
         } else {

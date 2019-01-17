@@ -2,10 +2,17 @@ package br.slobra.aplicacao.domain;
 
 
 import javax.persistence.*;
+import javax.validation.constraints.*;
 
 import java.io.Serializable;
-import java.time.Instant;
+import java.time.LocalDate;
 import java.util.Objects;
+
+import br.slobra.aplicacao.domain.enumeration.Pago;
+
+import br.slobra.aplicacao.domain.enumeration.NotaFiscal;
+
+import br.slobra.aplicacao.domain.enumeration.TipoConta;
 
 /**
  * A Conta.
@@ -21,23 +28,31 @@ public class Conta implements Serializable {
     @SequenceGenerator(name = "sequenceGenerator")
     private Long id;
 
-    @Column(name = "nome")
+    @NotNull
+    @Column(name = "nome", nullable = false)
     private String nome;
 
     @Column(name = "valor")
     private Long valor;
 
-    @Column(name = "data_vencimento")
-    private Instant dataVencimento;
+    @NotNull
+    @Column(name = "data_vencimento", nullable = false)
+    private LocalDate dataVencimento;
 
+    @Enumerated(EnumType.STRING)
     @Column(name = "pagamento")
-    private String pagamento;
+    private Pago pagamento;
 
+    @Enumerated(EnumType.STRING)
     @Column(name = "nota")
-    private String nota;
+    private NotaFiscal nota;
 
+    @Enumerated(EnumType.STRING)
     @Column(name = "tipo")
-    private String tipo;
+    private TipoConta tipo;
+
+    @Column(name = "parcelado")
+    private Integer parcelado;
 
     // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
     public Long getId() {
@@ -74,56 +89,69 @@ public class Conta implements Serializable {
         this.valor = valor;
     }
 
-    public Instant getDataVencimento() {
+    public LocalDate getDataVencimento() {
         return dataVencimento;
     }
 
-    public Conta dataVencimento(Instant dataVencimento) {
+    public Conta dataVencimento(LocalDate dataVencimento) {
         this.dataVencimento = dataVencimento;
         return this;
     }
 
-    public void setDataVencimento(Instant dataVencimento) {
+    public void setDataVencimento(LocalDate dataVencimento) {
         this.dataVencimento = dataVencimento;
     }
 
-    public String getPagamento() {
+    public Pago getPagamento() {
         return pagamento;
     }
 
-    public Conta pagamento(String pagamento) {
+    public Conta pagamento(Pago pagamento) {
         this.pagamento = pagamento;
         return this;
     }
 
-    public void setPagamento(String pagamento) {
+    public void setPagamento(Pago pagamento) {
         this.pagamento = pagamento;
     }
 
-    public String getNota() {
+    public NotaFiscal getNota() {
         return nota;
     }
 
-    public Conta nota(String nota) {
+    public Conta nota(NotaFiscal nota) {
         this.nota = nota;
         return this;
     }
 
-    public void setNota(String nota) {
+    public void setNota(NotaFiscal nota) {
         this.nota = nota;
     }
 
-    public String getTipo() {
+    public TipoConta getTipo() {
         return tipo;
     }
 
-    public Conta tipo(String tipo) {
+    public Conta tipo(TipoConta tipo) {
         this.tipo = tipo;
         return this;
     }
 
-    public void setTipo(String tipo) {
+    public void setTipo(TipoConta tipo) {
         this.tipo = tipo;
+    }
+
+    public Integer getParcelado() {
+        return parcelado;
+    }
+
+    public Conta parcelado(Integer parcelado) {
+        this.parcelado = parcelado;
+        return this;
+    }
+
+    public void setParcelado(Integer parcelado) {
+        this.parcelado = parcelado;
     }
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here, do not remove
 
@@ -157,6 +185,7 @@ public class Conta implements Serializable {
             ", pagamento='" + getPagamento() + "'" +
             ", nota='" + getNota() + "'" +
             ", tipo='" + getTipo() + "'" +
+            ", parcelado=" + getParcelado() +
             "}";
     }
 }

@@ -3,7 +3,10 @@
     "fields": [
         {
             "fieldName": "nome",
-            "fieldType": "String"
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "required"
+            ]
         },
         {
             "fieldName": "valor",
@@ -11,23 +14,33 @@
         },
         {
             "fieldName": "dataVencimento",
-            "fieldType": "Instant"
+            "fieldType": "LocalDate",
+            "fieldValidateRules": [
+                "required"
+            ]
         },
         {
             "fieldName": "pagamento",
-            "fieldType": "String"
+            "fieldType": "Pago",
+            "fieldValues": "SIM,NAO"
         },
         {
             "fieldName": "nota",
-            "fieldType": "String"
+            "fieldType": "NotaFiscal",
+            "fieldValues": "SIM,NAO"
         },
         {
             "fieldName": "tipo",
-            "fieldType": "String"
+            "fieldType": "TipoConta",
+            "fieldValues": "MAO_DE_OBRA,MATERIAIS,DECORACAO,DOCUMENTACAO"
+        },
+        {
+            "fieldName": "parcelado",
+            "fieldType": "Integer"
         }
     ],
     "relationships": [],
-    "changelogDate": "20190115001953",
+    "changelogDate": "20190117162057",
     "entityTableName": "conta",
     "dto": "mapstruct",
     "pagination": "no",

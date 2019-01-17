@@ -51,7 +51,7 @@ export class PeriodoService {
 
     protected convertDateFromClient(periodo: IPeriodo): IPeriodo {
         const copy: IPeriodo = Object.assign({}, periodo, {
-            data: periodo.data != null && periodo.data.isValid() ? periodo.data.toJSON() : null
+            data: periodo.data != null && periodo.data.isValid() ? periodo.data.format(DATE_FORMAT) : null
         });
         return copy;
     }

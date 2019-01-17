@@ -5,7 +5,7 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import javax.persistence.*;
 
 import java.io.Serializable;
-import java.time.Instant;
+import java.time.LocalDate;
 import java.util.Objects;
 
 /**
@@ -26,7 +26,7 @@ public class Periodo implements Serializable {
     private String idConta;
 
     @Column(name = "data")
-    private Instant data;
+    private LocalDate data;
 
     @ManyToOne
     @JsonIgnoreProperties("obras")
@@ -57,16 +57,16 @@ public class Periodo implements Serializable {
         this.idConta = idConta;
     }
 
-    public Instant getData() {
+    public LocalDate getData() {
         return data;
     }
 
-    public Periodo data(Instant data) {
+    public Periodo data(LocalDate data) {
         this.data = data;
         return this;
     }
 
-    public void setData(Instant data) {
+    public void setData(LocalDate data) {
         this.data = data;
     }
 

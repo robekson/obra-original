@@ -5,9 +5,9 @@ import { HttpClient, HttpResponse } from '@angular/common/http';
 import { of } from 'rxjs';
 import { take, map } from 'rxjs/operators';
 import * as moment from 'moment';
-import { DATE_TIME_FORMAT } from 'app/shared/constants/input.constants';
+import { DATE_FORMAT } from 'app/shared/constants/input.constants';
 import { ContaService } from 'app/entities/conta/conta.service';
-import { IConta, Conta } from 'app/shared/model/conta.model';
+import { IConta, Conta, Pago, NotaFiscal, TipoConta } from 'app/shared/model/conta.model';
 
 describe('Service Tests', () => {
     describe('Conta Service', () => {
@@ -25,14 +25,14 @@ describe('Service Tests', () => {
             httpMock = injector.get(HttpTestingController);
             currentDate = moment();
 
-            elemDefault = new Conta(0, 'AAAAAAA', 0, currentDate, 'AAAAAAA', 'AAAAAAA', 'AAAAAAA');
+            elemDefault = new Conta(0, 'AAAAAAA', 0, currentDate, Pago.SIM, NotaFiscal.SIM, TipoConta.MAO_DE_OBRA, 0);
         });
 
         describe('Service methods', async () => {
             it('should find an element', async () => {
                 const returnedFromService = Object.assign(
                     {
-                        dataVencimento: currentDate.format(DATE_TIME_FORMAT)
+                        dataVencimento: currentDate.format(DATE_FORMAT)
                     },
                     elemDefault
                 );
@@ -49,7 +49,7 @@ describe('Service Tests', () => {
                 const returnedFromService = Object.assign(
                     {
                         id: 0,
-                        dataVencimento: currentDate.format(DATE_TIME_FORMAT)
+                        dataVencimento: currentDate.format(DATE_FORMAT)
                     },
                     elemDefault
                 );
@@ -72,10 +72,11 @@ describe('Service Tests', () => {
                     {
                         nome: 'BBBBBB',
                         valor: 1,
-                        dataVencimento: currentDate.format(DATE_TIME_FORMAT),
+                        dataVencimento: currentDate.format(DATE_FORMAT),
                         pagamento: 'BBBBBB',
                         nota: 'BBBBBB',
-                        tipo: 'BBBBBB'
+                        tipo: 'BBBBBB',
+                        parcelado: 1
                     },
                     elemDefault
                 );
@@ -99,10 +100,11 @@ describe('Service Tests', () => {
                     {
                         nome: 'BBBBBB',
                         valor: 1,
-                        dataVencimento: currentDate.format(DATE_TIME_FORMAT),
+                        dataVencimento: currentDate.format(DATE_FORMAT),
                         pagamento: 'BBBBBB',
                         nota: 'BBBBBB',
-                        tipo: 'BBBBBB'
+                        tipo: 'BBBBBB',
+                        parcelado: 1
                     },
                     elemDefault
                 );

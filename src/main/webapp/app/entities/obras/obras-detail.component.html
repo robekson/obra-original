@@ -29,10 +29,10 @@
                 <dd>
                     <span>{{obras.dataFim}}</span>
                 </dd>
-                <dt><span jhiTranslate="obrasApp.obras.obra">Obra</span></dt>
+                <dt><span jhiTranslate="obrasApp.obras.lancamentoGastos">Lancamento Gastos</span></dt>
                 <dd>
-                    <div *ngIf="obras.obraId">
-                        <a [routerLink]="['/lancamento-gastos', obras.obraId, 'view']">{{obras.obraId}}</a>
+                    <div *ngIf="obras.lancamentoGastosId">
+                        <a [routerLink]="['/lancamento-gastos', obras.lancamentoGastosId, 'view']">{{obras.lancamentoGastosId}}</a>
                     </div>
                 </dd>
             </dl>

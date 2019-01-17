@@ -19,15 +19,19 @@
                 </dd>
                 <dt><span jhiTranslate="obrasApp.conta.pagamento">Pagamento</span></dt>
                 <dd>
-                    <span>{{conta.pagamento}}</span>
+                    <span jhiTranslate="{{'obrasApp.Pago.' + conta.pagamento}}">{{conta.pagamento}}</span>
                 </dd>
                 <dt><span jhiTranslate="obrasApp.conta.nota">Nota</span></dt>
                 <dd>
-                    <span>{{conta.nota}}</span>
+                    <span jhiTranslate="{{'obrasApp.NotaFiscal.' + conta.nota}}">{{conta.nota}}</span>
                 </dd>
                 <dt><span jhiTranslate="obrasApp.conta.tipo">Tipo</span></dt>
                 <dd>
-                    <span>{{conta.tipo}}</span>
+                    <span jhiTranslate="{{'obrasApp.TipoConta.' + conta.tipo}}">{{conta.tipo}}</span>
+                </dd>
+                <dt><span jhiTranslate="obrasApp.conta.parcelado">Parcelado</span></dt>
+                <dd>
+                    <span>{{conta.parcelado}}</span>
                 </dd>
             </dl>
 

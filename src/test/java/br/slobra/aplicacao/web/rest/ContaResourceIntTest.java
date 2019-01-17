@@ -25,8 +25,8 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.validation.Validator;
 
 import javax.persistence.EntityManager;
-import java.time.Instant;
-import java.time.temporal.ChronoUnit;
+import java.time.LocalDate;
+import java.time.ZoneId;
 import java.util.List;
 
 
@@ -36,6 +36,9 @@ import static org.hamcrest.Matchers.hasItem;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
+import br.slobra.aplicacao.domain.enumeration.Pago;
+import br.slobra.aplicacao.domain.enumeration.NotaFiscal;
+import br.slobra.aplicacao.domain.enumeration.TipoConta;
 /**
  * Test class for the ContaResource REST controller.
  *
@@ -51,17 +54,20 @@ public class ContaResourceIntTest {
     private static final Long DEFAULT_VALOR = 1L;
     private static final Long UPDATED_VALOR = 2L;
 
-    private static final Instant DEFAULT_DATA_VENCIMENTO = Instant.ofEpochMilli(0L);
-    private static final Instant UPDATED_DATA_VENCIMENTO = Instant.now().truncatedTo(ChronoUnit.MILLIS);
+    private static final LocalDate DEFAULT_DATA_VENCIMENTO = LocalDate.ofEpochDay(0L);
+    private static final LocalDate UPDATED_DATA_VENCIMENTO = LocalDate.now(ZoneId.systemDefault());
 
-    private static final String DEFAULT_PAGAMENTO = "AAAAAAAAAA";
-    private static final String UPDATED_PAGAMENTO = "BBBBBBBBBB";
+    private static final Pago DEFAULT_PAGAMENTO = Pago.SIM;
+    private static final Pago UPDATED_PAGAMENTO = Pago.NAO;
 
-    private static final String DEFAULT_NOTA = "AAAAAAAAAA";
-    private static final String UPDATED_NOTA = "BBBBBBBBBB";
+    private static final NotaFiscal DEFAULT_NOTA = NotaFiscal.SIM;
+    private static final NotaFiscal UPDATED_NOTA = NotaFiscal.NAO;
 
-    private static final String DEFAULT_TIPO = "AAAAAAAAAA";
-    private static final String UPDATED_TIPO = "BBBBBBBBBB";
+    private static final TipoConta DEFAULT_TIPO = TipoConta.MAO_DE_OBRA;
+    private static final TipoConta UPDATED_TIPO = TipoConta.MATERIAIS;
+
+    private static final Integer DEFAULT_PARCELADO = 1;
+    private static final Integer UPDATED_PARCELADO = 2;
 
     @Autowired
     private ContaRepository contaRepository;
@@ -116,7 +122,8 @@ public class ContaResourceIntTest {
             .dataVencimento(DEFAULT_DATA_VENCIMENTO)
             .pagamento(DEFAULT_PAGAMENTO)
             .nota(DEFAULT_NOTA)
-            .tipo(DEFAULT_TIPO);
+            .tipo(DEFAULT_TIPO)
+            .parcelado(DEFAULT_PARCELADO);
         return conta;
     }
 
@@ -147,6 +154,7 @@ public class ContaResourceIntTest {
         assertThat(testConta.getPagamento()).isEqualTo(DEFAULT_PAGAMENTO);
         assertThat(testConta.getNota()).isEqualTo(DEFAULT_NOTA);
         assertThat(testConta.getTipo()).isEqualTo(DEFAULT_TIPO);
+        assertThat(testConta.getParcelado()).isEqualTo(DEFAULT_PARCELADO);
     }
 
     @Test
@@ -171,6 +179,44 @@ public class ContaResourceIntTest {
 
     @Test
     @Transactional
+    public void checkNomeIsRequired() throws Exception {
+        int databaseSizeBeforeTest = contaRepository.findAll().size();
+        // set the field null
+        conta.setNome(null);
+
+        // Create the Conta, which fails.
+        ContaDTO contaDTO = contaMapper.toDto(conta);
+
+        restContaMockMvc.perform(post("/api/contas")
+            .contentType(TestUtil.APPLICATION_JSON_UTF8)
+            .content(TestUtil.convertObjectToJsonBytes(contaDTO)))
+            .andExpect(status().isBadRequest());
+
+        List<Conta> contaList = contaRepository.findAll();
+        assertThat(contaList).hasSize(databaseSizeBeforeTest);
+    }
+
+    @Test
+    @Transactional
+    public void checkDataVencimentoIsRequired() throws Exception {
+        int databaseSizeBeforeTest = contaRepository.findAll().size();
+        // set the field null
+        conta.setDataVencimento(null);
+
+        // Create the Conta, which fails.
+        ContaDTO contaDTO = contaMapper.toDto(conta);
+
+        restContaMockMvc.perform(post("/api/contas")
+            .contentType(TestUtil.APPLICATION_JSON_UTF8)
+            .content(TestUtil.convertObjectToJsonBytes(contaDTO)))
+            .andExpect(status().isBadRequest());
+
+        List<Conta> contaList = contaRepository.findAll();
+        assertThat(contaList).hasSize(databaseSizeBeforeTest);
+    }
+
+    @Test
+    @Transactional
     public void getAllContas() throws Exception {
         // Initialize the database
         contaRepository.saveAndFlush(conta);
@@ -185,7 +231,8 @@ public class ContaResourceIntTest {
             .andExpect(jsonPath("$.[*].dataVencimento").value(hasItem(DEFAULT_DATA_VENCIMENTO.toString())))
             .andExpect(jsonPath("$.[*].pagamento").value(hasItem(DEFAULT_PAGAMENTO.toString())))
             .andExpect(jsonPath("$.[*].nota").value(hasItem(DEFAULT_NOTA.toString())))
-            .andExpect(jsonPath("$.[*].tipo").value(hasItem(DEFAULT_TIPO.toString())));
+            .andExpect(jsonPath("$.[*].tipo").value(hasItem(DEFAULT_TIPO.toString())))
+            .andExpect(jsonPath("$.[*].parcelado").value(hasItem(DEFAULT_PARCELADO)));
     }
     
     @Test
@@ -204,7 +251,8 @@ public class ContaResourceIntTest {
             .andExpect(jsonPath("$.dataVencimento").value(DEFAULT_DATA_VENCIMENTO.toString()))
             .andExpect(jsonPath("$.pagamento").value(DEFAULT_PAGAMENTO.toString()))
             .andExpect(jsonPath("$.nota").value(DEFAULT_NOTA.toString()))
-            .andExpect(jsonPath("$.tipo").value(DEFAULT_TIPO.toString()));
+            .andExpect(jsonPath("$.tipo").value(DEFAULT_TIPO.toString()))
+            .andExpect(jsonPath("$.parcelado").value(DEFAULT_PARCELADO));
     }
 
     @Test
@@ -233,7 +281,8 @@ public class ContaResourceIntTest {
             .dataVencimento(UPDATED_DATA_VENCIMENTO)
             .pagamento(UPDATED_PAGAMENTO)
             .nota(UPDATED_NOTA)
-            .tipo(UPDATED_TIPO);
+            .tipo(UPDATED_TIPO)
+            .parcelado(UPDATED_PARCELADO);
         ContaDTO contaDTO = contaMapper.toDto(updatedConta);
 
         restContaMockMvc.perform(put("/api/contas")
@@ -251,6 +300,7 @@ public class ContaResourceIntTest {
         assertThat(testConta.getPagamento()).isEqualTo(UPDATED_PAGAMENTO);
         assertThat(testConta.getNota()).isEqualTo(UPDATED_NOTA);
         assertThat(testConta.getTipo()).isEqualTo(UPDATED_TIPO);
+        assertThat(testConta.getParcelado()).isEqualTo(UPDATED_PARCELADO);
     }
 
     @Test

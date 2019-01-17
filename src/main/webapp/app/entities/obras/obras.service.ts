@@ -51,8 +51,8 @@ export class ObrasService {
 
     protected convertDateFromClient(obras: IObras): IObras {
         const copy: IObras = Object.assign({}, obras, {
-            dataInicio: obras.dataInicio != null && obras.dataInicio.isValid() ? obras.dataInicio.toJSON() : null,
-            dataFim: obras.dataFim != null && obras.dataFim.isValid() ? obras.dataFim.toJSON() : null
+            dataInicio: obras.dataInicio != null && obras.dataInicio.isValid() ? obras.dataInicio.format(DATE_FORMAT) : null,
+            dataFim: obras.dataFim != null && obras.dataFim.isValid() ? obras.dataFim.format(DATE_FORMAT) : null
         });
         return copy;
     }

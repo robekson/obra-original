@@ -9,8 +9,8 @@ export interface IObras {
     status?: string;
     dataInicio?: Moment;
     dataFim?: Moment;
-    obraId?: number;
     obras?: IPeriodo[];
+    lancamentoGastosId?: number;
 }
 
 export class Obras implements IObras {
@@ -22,7 +22,7 @@ export class Obras implements IObras {
         public status?: string,
         public dataInicio?: Moment,
         public dataFim?: Moment,
-        public obraId?: number,
-        public obras?: IPeriodo[]
+        public obras?: IPeriodo[],
+        public lancamentoGastosId?: number
     ) {}
 }

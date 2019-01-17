@@ -21,7 +21,7 @@
             <th jhiSortBy="status"><span jhiTranslate="obrasApp.obras.status">Status</span> <fa-icon [icon]="'sort'"></fa-icon></th>
             <th jhiSortBy="dataInicio"><span jhiTranslate="obrasApp.obras.dataInicio">Data Inicio</span> <fa-icon [icon]="'sort'"></fa-icon></th>
             <th jhiSortBy="dataFim"><span jhiTranslate="obrasApp.obras.dataFim">Data Fim</span> <fa-icon [icon]="'sort'"></fa-icon></th>
-            <th jhiSortBy="obraId"><span jhiTranslate="obrasApp.obras.obra">Obra</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="lancamentoGastosId"><span jhiTranslate="obrasApp.obras.lancamentoGastos">Lancamento Gastos</span> <fa-icon [icon]="'sort'"></fa-icon></th>
             <th></th>
             </tr>
             </thead>
@@ -32,11 +32,11 @@
                 <td>{{obras.local}}</td>
                 <td>{{obras.metragem}}</td>
                 <td>{{obras.status}}</td>
-                <td>{{obras.dataInicio | date:'medium'}}</td>
-                <td>{{obras.dataFim | date:'medium'}}</td>
+                <td>{{obras.dataInicio | date:'mediumDate'}}</td>
+                <td>{{obras.dataFim | date:'mediumDate'}}</td>
                 <td>
-                    <div *ngIf="obras.obraId">
-                        <a [routerLink]="['../lancamento-gastos', obras.obraId , 'view' ]" >{{obras.obraId}}</a>
+                    <div *ngIf="obras.lancamentoGastosId">
+                        <a [routerLink]="['../lancamento-gastos', obras.lancamentoGastosId , 'view' ]" >{{obras.lancamentoGastosId}}</a>
                     </div>
                 </td>
                 <td class="text-right">

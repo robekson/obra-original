@@ -1,0 +1,11 @@
+{
+    "obrasApp": {
+        "TipoConta": {
+            "null": "",
+            "MAO_DE_OBRA": "MAO_DE_OBRA",
+            "MATERIAIS": "MATERIAIS",
+            "DECORACAO": "DECORACAO",
+            "DOCUMENTACAO": "DOCUMENTACAO"
+        }
+    }
+}

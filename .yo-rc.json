@@ -35,7 +35,7 @@
     "jhipsterVersion": "5.7.2",
     "skipUserManagement": false,
     "cacheProvider": "ehcache",
-    "jwtSecretKey": "ZTM1YjAwZGFlOWZmZTRiNjFiNWMwMTFlMjI4MjllZTBiNTZlOTU4NDUxNzE0Mjk2YjlmMDUyY2NlZTYyYTBmN2ZhNThhNWU2ZjJlYTI0Mjc2YTlhM2FjMGIyYmY4MGQzNWExYWJhMGUyMjI0MjAyNDM2MWE3YjRjNzAyNzcxZTE=",
+    "jwtSecretKey": "Yjc2ZjA3NjA1NjE0NWFlOWIwYzFlZDBkMGExYTdkMmM0YmVjMTU2ZGQ0ZTgzNGYwNjVlNmMyNjU4MTFlMWRjMzQyZWY2NWUyMzA0MWM2NmU4OGJmYmE2OGVkNDY5NTY5ZjFlMTUwOGI1YjM3M2I2ZDIzZGIwZTdiNGQ0YzhiYjQ=",
     "otherModules": [],
     "herokuAppName": "arcane-sea-27502",
     "herokuDeployType": "git"

@@ -16,9 +16,12 @@
                 </div>
                 <div class="form-group">
                     <label class="form-control-label" jhiTranslate="obrasApp.periodo.data" for="field_data">Data</label>
-                    <div class="d-flex">
-                        <input id="field_data" type="datetime-local" class="form-control" name="data" [(ngModel)]="data"
+                    <div class="input-group">
+                        <input id="field_data" type="text" class="form-control" name="data" ngbDatepicker  #dataDp="ngbDatepicker" [(ngModel)]="periodo.data"
                         />
+                        <span class="input-group-append">
+                            <button type="button" class="btn btn-secondary" (click)="dataDp.toggle()"><fa-icon [icon]="'calendar-alt'"></fa-icon></button>
+                        </span>
                     </div>
                 </div>
 

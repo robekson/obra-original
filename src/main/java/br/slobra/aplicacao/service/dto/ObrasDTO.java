@@ -1,6 +1,7 @@
 package br.slobra.aplicacao.service.dto;
 
-import java.time.Instant;
+import java.time.LocalDate;
+import javax.validation.constraints.*;
 import java.io.Serializable;
 import java.util.Objects;
 
@@ -11,19 +12,23 @@ public class ObrasDTO implements Serializable {
 
     private Long id;
 
+    @NotNull
     private String nome;
 
+    @NotNull
     private String local;
 
     private Long metragem;
 
     private String status;
 
-    private Instant dataInicio;
+    @NotNull
+    private LocalDate dataInicio;
 
-    private Instant dataFim;
+    @NotNull
+    private LocalDate dataFim;
 
-    private Long obraId;
+    private Long lancamentoGastosId;
 
     public Long getId() {
         return id;
@@ -65,28 +70,28 @@ public class ObrasDTO implements Serializable {
         this.status = status;
     }
 
-    public Instant getDataInicio() {
+    public LocalDate getDataInicio() {
         return dataInicio;
     }
 
-    public void setDataInicio(Instant dataInicio) {
+    public void setDataInicio(LocalDate dataInicio) {
         this.dataInicio = dataInicio;
     }
 
-    public Instant getDataFim() {
+    public LocalDate getDataFim() {
         return dataFim;
     }
 
-    public void setDataFim(Instant dataFim) {
+    public void setDataFim(LocalDate dataFim) {
         this.dataFim = dataFim;
     }
 
-    public Long getObraId() {
-        return obraId;
+    public Long getLancamentoGastosId() {
+        return lancamentoGastosId;
     }
 
-    public void setObraId(Long lancamentoGastosId) {
-        this.obraId = lancamentoGastosId;
+    public void setLancamentoGastosId(Long lancamentoGastosId) {
+        this.lancamentoGastosId = lancamentoGastosId;
     }
 
     @Override
@@ -120,7 +125,7 @@ public class ObrasDTO implements Serializable {
             ", status='" + getStatus() + "'" +
             ", dataInicio='" + getDataInicio() + "'" +
             ", dataFim='" + getDataFim() + "'" +
-            ", obra=" + getObraId() +
+            ", lancamentoGastos=" + getLancamentoGastosId() +
             "}";
     }
 }

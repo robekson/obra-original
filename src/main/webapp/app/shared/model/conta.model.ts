@@ -1,13 +1,31 @@
 import { Moment } from 'moment';
 
+export const enum Pago {
+    SIM = 'SIM',
+    NAO = 'NAO'
+}
+
+export const enum NotaFiscal {
+    SIM = 'SIM',
+    NAO = 'NAO'
+}
+
+export const enum TipoConta {
+    MAO_DE_OBRA = 'MAO_DE_OBRA',
+    MATERIAIS = 'MATERIAIS',
+    DECORACAO = 'DECORACAO',
+    DOCUMENTACAO = 'DOCUMENTACAO'
+}
+
 export interface IConta {
     id?: number;
     nome?: string;
     valor?: number;
     dataVencimento?: Moment;
-    pagamento?: string;
-    nota?: string;
-    tipo?: string;
+    pagamento?: Pago;
+    nota?: NotaFiscal;
+    tipo?: TipoConta;
+    parcelado?: number;
 }
 
 export class Conta implements IConta {
@@ -16,8 +34,9 @@ export class Conta implements IConta {
         public nome?: string,
         public valor?: number,
         public dataVencimento?: Moment,
-        public pagamento?: string,
-        public nota?: string,
-        public tipo?: string
+        public pagamento?: Pago,
+        public nota?: NotaFiscal,
+        public tipo?: TipoConta,
+        public parcelado?: number
     ) {}
 }

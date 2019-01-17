@@ -25,8 +25,8 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.validation.Validator;
 
 import javax.persistence.EntityManager;
-import java.time.Instant;
-import java.time.temporal.ChronoUnit;
+import java.time.LocalDate;
+import java.time.ZoneId;
 import java.util.List;
 
 
@@ -48,8 +48,8 @@ public class PeriodoResourceIntTest {
     private static final String DEFAULT_ID_CONTA = "AAAAAAAAAA";
     private static final String UPDATED_ID_CONTA = "BBBBBBBBBB";
 
-    private static final Instant DEFAULT_DATA = Instant.ofEpochMilli(0L);
-    private static final Instant UPDATED_DATA = Instant.now().truncatedTo(ChronoUnit.MILLIS);
+    private static final LocalDate DEFAULT_DATA = LocalDate.ofEpochDay(0L);
+    private static final LocalDate UPDATED_DATA = LocalDate.now(ZoneId.systemDefault());
 
     @Autowired
     private PeriodoRepository periodoRepository;

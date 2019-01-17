@@ -3,7 +3,6 @@ import { ActivatedRoute } from '@angular/router';
 import { HttpResponse, HttpErrorResponse } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import * as moment from 'moment';
-import { DATE_TIME_FORMAT } from 'app/shared/constants/input.constants';
 import { JhiAlertService } from 'ng-jhipster';
 
 import { IObras } from 'app/shared/model/obras.model';
@@ -19,9 +18,9 @@ export class ObrasUpdateComponent implements OnInit {
     obras: IObras;
     isSaving: boolean;
 
-    obrasCollection: ILancamentoGastos[];
-    dataInicio: string;
-    dataFim: string;
+    lancamentogastos: ILancamentoGastos[];
+    dataInicioDp: any;
+    dataFimDp: any;
 
     constructor(
         protected jhiAlertService: JhiAlertService,
@@ -34,21 +33,10 @@ export class ObrasUpdateComponent implements OnInit {
         this.isSaving = false;
         this.activatedRoute.data.subscribe(({ obras }) => {
             this.obras = obras;
-            this.dataInicio = this.obras.dataInicio != null ? this.obras.dataInicio.format(DATE_TIME_FORMAT) : null;
-            this.dataFim = this.obras.dataFim != null ? this.obras.dataFim.format(DATE_TIME_FORMAT) : null;
         });
-        this.lancamentoGastosService.query({ filter: 'obras-is-null' }).subscribe(
+        this.lancamentoGastosService.query().subscribe(
             (res: HttpResponse<ILancamentoGastos[]>) => {
-                if (!this.obras.obraId) {
-                    this.obrasCollection = res.body;
-                } else {
-                    this.lancamentoGastosService.find(this.obras.obraId).subscribe(
-                        (subRes: HttpResponse<ILancamentoGastos>) => {
-                            this.obrasCollection = [subRes.body].concat(res.body);
-                        },
-                        (subRes: HttpErrorResponse) => this.onError(subRes.message)
-                    );
-                }
+                this.lancamentogastos = res.body;
             },
             (res: HttpErrorResponse) => this.onError(res.message)
         );
@@ -60,8 +48,6 @@ export class ObrasUpdateComponent implements OnInit {
 
     save() {
         this.isSaving = true;
-        this.obras.dataInicio = this.dataInicio != null ? moment(this.dataInicio, DATE_TIME_FORMAT) : null;
-        this.obras.dataFim = this.dataFim != null ? moment(this.dataFim, DATE_TIME_FORMAT) : null;
         if (this.obras.id !== undefined) {
             this.subscribeToSaveResponse(this.obrasService.update(this.obras));
         } else {

@@ -1,9 +1,12 @@
 package br.slobra.aplicacao.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
 
 import java.io.Serializable;
+import java.util.HashSet;
+import java.util.Set;
 import java.util.Objects;
 
 /**
@@ -32,6 +35,8 @@ public class LancamentoGastos implements Serializable {
     @Column(name = "valor_saldo")
     private Long valorSaldo;
 
+    @OneToMany(mappedBy = "lancamentoGastos")
+    private Set<Obras> lancamentos = new HashSet<>();
     // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
     public Long getId() {
         return id;
@@ -91,6 +96,31 @@ public class LancamentoGastos implements Serializable {
 
     public void setValorSaldo(Long valorSaldo) {
         this.valorSaldo = valorSaldo;
+    }
+
+    public Set<Obras> getLancamentos() {
+        return lancamentos;
+    }
+
+    public LancamentoGastos lancamentos(Set<Obras> obras) {
+        this.lancamentos = obras;
+        return this;
+    }
+
+    public LancamentoGastos addLancamento(Obras obras) {
+        this.lancamentos.add(obras);
+        obras.setLancamentoGastos(this);
+        return this;
+    }
+
+    public LancamentoGastos removeLancamento(Obras obras) {
+        this.lancamentos.remove(obras);
+        obras.setLancamentoGastos(null);
+        return this;
+    }
+
+    public void setLancamentos(Set<Obras> obras) {
+        this.lancamentos = obras;
     }
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here, do not remove
 

@@ -51,7 +51,7 @@ export class ContaService {
 
     protected convertDateFromClient(conta: IConta): IConta {
         const copy: IConta = Object.assign({}, conta, {
-            dataVencimento: conta.dataVencimento != null && conta.dataVencimento.isValid() ? conta.dataVencimento.toJSON() : null
+            dataVencimento: conta.dataVencimento != null && conta.dataVencimento.isValid() ? conta.dataVencimento.format(DATE_FORMAT) : null
         });
         return copy;
     }
