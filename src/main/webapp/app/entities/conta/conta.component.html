@@ -29,7 +29,7 @@
             <tr *ngFor="let conta of contas ;trackBy: trackId">
                 <td><a [routerLink]="['/conta', conta.id, 'view' ]">{{conta.id}}</a></td>
                 <td>{{conta.nome}}</td>
-                <td>{{conta.valor}}</td>
+                <td>{{conta.valor | currency: 'R$'}}</td>
                 <td>{{conta.dataVencimento | date:'mediumDate'}}</td>
                 <td jhiTranslate="{{'obrasApp.Pago.' + conta.pagamento}}">{{conta.pagamento}}</td>
                 <td jhiTranslate="{{'obrasApp.NotaFiscal.' + conta.nota}}">{{conta.nota}}</td>
