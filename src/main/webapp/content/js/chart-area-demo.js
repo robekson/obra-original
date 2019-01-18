@@ -66,19 +66,3 @@ setInterval(function () {
     if(chart!=null && chart.value.length > 0) buildLineChart();
 
   }, 1000);
-
-function buildMask() {
-
-		    $("#field_valorDeposito").inputmask('decimal', {
-		                'alias': 'numeric',
-		                'groupSeparator': ',',
-		                'autoGroup': true,
-		                'digits': 2,
-		                'radixPoint': ".",
-		                'digitsOptional': false,
-		                'allowMinus': false,
-		                'prefix': 'R$ ',
-		                'placeholder': ''
-		    });
-	
-}
