@@ -16,16 +16,16 @@
                 </div>
                 <div class="form-group">
                     <label class="form-control-label" jhiTranslate="obrasApp.lancamentoGastos.valorDeposito" for="field_valorDeposito">Valor Deposito</label>
-                    <input type="number" class="form-control" name="valorDeposito" id="field_valorDeposito"
+                    <input type="number" class="form-control" name="valorDeposito" data-number-to-fixed="2" id="field_valorDeposito"
                         [(ngModel)]="lancamentoGastos.valorDeposito" />
                 </div>
                 <div class="form-group">
                     <label class="form-control-label" jhiTranslate="obrasApp.lancamentoGastos.valorDespesa" for="field_valorDespesa">Valor Despesa</label>
-                    <input type="number" class="form-control" name="valorDespesa" id="field_valorDespesa"
+                    <input type="number" class="form-control" name="valorDespesa" data-number-to-fixed="2"  id="field_valorDespesa"
                         [(ngModel)]="lancamentoGastos.valorDespesa" />
                 </div>
                 <div class="form-group">
-                    <label class="form-control-label" jhiTranslate="obrasApp.lancamentoGastos.valorSaldo" for="field_valorSaldo">Valor Saldo</label>
+                    <label class="form-control-label" jhiTranslate="obrasApp.lancamentoGastos.valorSaldo" data-number-to-fixed="2" for="field_valorSaldo">Valor Saldo</label>
                     <input type="number" class="form-control" name="valorSaldo" id="field_valorSaldo"
                         [(ngModel)]="lancamentoGastos.valorSaldo" />
                 </div>
