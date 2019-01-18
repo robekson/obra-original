@@ -18,6 +18,7 @@ import { ObrasHomeModule } from './home/home.module';
 import { ObrasAccountModule } from './account/account.module';
 import { ObrasEntityModule } from './entities/entity.module';
 import * as moment from 'moment';
+import { ObrasDashboardModule } from './dashboard/dashboard.module';
 // jhipster-needle-angular-add-module-import JHipster will add new module here
 import { JhiMainComponent, NavbarComponent, FooterComponent, PageRibbonComponent, ActiveMenuDirective, ErrorComponent } from './layouts';
 
@@ -37,6 +38,7 @@ import { JhiMainComponent, NavbarComponent, FooterComponent, PageRibbonComponent
         ObrasCoreModule,
         ObrasHomeModule,
         ObrasAccountModule,
+        ObrasDashboardModule,
         // jhipster-needle-angular-add-module JHipster will add new module here
         ObrasEntityModule
     ],
