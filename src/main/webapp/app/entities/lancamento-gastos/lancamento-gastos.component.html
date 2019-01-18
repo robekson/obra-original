@@ -26,9 +26,9 @@
             <tr *ngFor="let lancamentoGastos of lancamentoGastos ;trackBy: trackId">
                 <td><a [routerLink]="['/lancamento-gastos', lancamentoGastos.id, 'view' ]">{{lancamentoGastos.id}}</a></td>
                 <td>{{lancamentoGastos.nomeObra}}</td>
-                <td>{{lancamentoGastos.valorDeposito}}</td>
-                <td>{{lancamentoGastos.valorDespesa}}</td>
-                <td>{{lancamentoGastos.valorSaldo}}</td>
+                <td>{{lancamentoGastos.valorDeposito | currency: 'R$'}}</td>
+                <td>{{lancamentoGastos.valorDespesa | currency: 'R$'}}</td>
+                <td>{{lancamentoGastos.valorSaldo | currency: 'R$'}}</td>
                 <td class="text-right">
                     <div class="btn-group flex-btn-group-container">
                         <button type="submit"
