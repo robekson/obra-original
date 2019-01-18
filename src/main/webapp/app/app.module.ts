@@ -1,13 +1,11 @@
 import './vendor.ts';
 
-import { NgxCurrencyModule } from 'ngx-currency';
-import {NgModule } from '@angular/core';
+import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { NgbDatepickerConfig } from '@ng-bootstrap/ng-bootstrap';
 import { Ng2Webstorage } from 'ngx-webstorage';
 import { NgJhipsterModule } from 'ng-jhipster';
-
 
 import { AuthInterceptor } from './blocks/interceptor/auth.interceptor';
 import { AuthExpiredInterceptor } from './blocks/interceptor/auth-expired.interceptor';
@@ -23,19 +21,6 @@ import * as moment from 'moment';
 import { ObrasDashboardModule } from './dashboard/dashboard.module';
 // jhipster-needle-angular-add-module-import JHipster will add new module here
 import { JhiMainComponent, NavbarComponent, FooterComponent, PageRibbonComponent, ActiveMenuDirective, ErrorComponent } from './layouts';
-
-
-export const customCurrencyMaskConfig = {
-        align: "right",
-        allowNegative: true,
-        allowZero: true,
-        decimal: ",",
-        precision: 2,
-        prefix: "R$ ",
-        suffix: "",
-        thousands: ".",
-        nullable: true
- };
 
 @NgModule({
     imports: [
@@ -54,7 +39,6 @@ export const customCurrencyMaskConfig = {
         ObrasHomeModule,
         ObrasAccountModule,
         ObrasDashboardModule,
-        NgxCurrencyModule.forRoot(customCurrencyMaskConfig),
         // jhipster-needle-angular-add-module JHipster will add new module here
         ObrasEntityModule
     ],
