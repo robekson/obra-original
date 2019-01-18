@@ -1,6 +1,6 @@
 import './vendor.ts';
 
-import { LOCALE_ID, NgModule } from '@angular/core';
+import {NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { NgbDatepickerConfig } from '@ng-bootstrap/ng-bootstrap';
@@ -63,8 +63,7 @@ import { JhiMainComponent, NavbarComponent, FooterComponent, PageRibbonComponent
             provide: HTTP_INTERCEPTORS,
             useClass: NotificationInterceptor,
             multi: true
-        },
-        { provide: LOCALE_ID, useValue: 'pt-BR' }
+        }
     ],
     bootstrap: [JhiMainComponent]
 })
