@@ -1,0 +1,61 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <div *ngIf="gasto">
+            <h2><span jhiTranslate="obrasApp.gasto.detail.title">Gasto</span> {{gasto.id}}</h2>
+            <hr>
+            <jhi-alert-error></jhi-alert-error>
+            <dl class="row-md jh-entity-details">
+                <dt><span jhiTranslate="obrasApp.gasto.nome">Nome</span></dt>
+                <dd>
+                    <span>{{gasto.nome}}</span>
+                </dd>
+                <dt><span jhiTranslate="obrasApp.gasto.valor">Valor</span></dt>
+                <dd>
+                    <span>{{gasto.valor}}</span>
+                </dd>
+                <dt><span jhiTranslate="obrasApp.gasto.dataVencimento">Data Vencimento</span></dt>
+                <dd>
+                    <span>{{gasto.dataVencimento}}</span>
+                </dd>
+                <dt><span jhiTranslate="obrasApp.gasto.pagamento">Pagamento</span></dt>
+                <dd>
+                    <span jhiTranslate="{{'obrasApp.Pago.' + gasto.pagamento}}">{{gasto.pagamento}}</span>
+                </dd>
+                <dt><span jhiTranslate="obrasApp.gasto.nota">Nota</span></dt>
+                <dd>
+                    <span jhiTranslate="{{'obrasApp.NotaFiscal.' + gasto.nota}}">{{gasto.nota}}</span>
+                </dd>
+                <dt><span jhiTranslate="obrasApp.gasto.tipo">Tipo</span></dt>
+                <dd>
+                    <span jhiTranslate="{{'obrasApp.TipoConta.' + gasto.tipo}}">{{gasto.tipo}}</span>
+                </dd>
+                <dt><span jhiTranslate="obrasApp.gasto.parcelado">Parcelado</span></dt>
+                <dd>
+                    <span>{{gasto.parcelado}}</span>
+                </dd>
+                <dt><span jhiTranslate="obrasApp.gasto.mesAno">Mes Ano</span></dt>
+                <dd>
+                    <span>{{gasto.mesAno}}</span>
+                </dd>
+                <dt><span jhiTranslate="obrasApp.gasto.obra">Obra</span></dt>
+                <dd>
+                    <div *ngIf="gasto.obraId">
+                        <a [routerLink]="['/obra', gasto.obraId, 'view']">{{gasto.obraId}}</a>
+                    </div>
+                </dd>
+            </dl>
+
+            <button type="submit"
+                    (click)="previousState()"
+                    class="btn btn-info">
+                <fa-icon [icon]="'arrow-left'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back"> Back</span>
+            </button>
+
+            <button type="button"
+                    [routerLink]="['/gasto', gasto.id, 'edit']"
+                    class="btn btn-primary">
+                <fa-icon [icon]="'pencil-alt'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit"> Edit</span>
+            </button>
+        </div>
+    </div>
+</div>

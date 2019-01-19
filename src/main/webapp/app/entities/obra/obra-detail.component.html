@@ -1,0 +1,69 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <div *ngIf="obra">
+            <h2><span jhiTranslate="obrasApp.obra.detail.title">Obra</span> {{obra.id}}</h2>
+            <hr>
+            <jhi-alert-error></jhi-alert-error>
+            <dl class="row-md jh-entity-details">
+                <dt><span jhiTranslate="obrasApp.obra.nome">Nome</span></dt>
+                <dd>
+                    <span>{{obra.nome}}</span>
+                </dd>
+                <dt><span jhiTranslate="obrasApp.obra.endereco">Endereco</span></dt>
+                <dd>
+                    <span>{{obra.endereco}}</span>
+                </dd>
+                <dt><span jhiTranslate="obrasApp.obra.metragem">Metragem</span></dt>
+                <dd>
+                    <span>{{obra.metragem}}</span>
+                </dd>
+                <dt><span jhiTranslate="obrasApp.obra.valorTerreno">Valor Terreno</span></dt>
+                <dd>
+                    <span>{{obra.valorTerreno}}</span>
+                </dd>
+                <dt><span jhiTranslate="obrasApp.obra.valorEscritura">Valor Escritura</span></dt>
+                <dd>
+                    <span>{{obra.valorEscritura}}</span>
+                </dd>
+                <dt><span jhiTranslate="obrasApp.obra.porcentagemCorretagem">Porcentagem Corretagem</span></dt>
+                <dd>
+                    <span>{{obra.porcentagemCorretagem}}</span>
+                </dd>
+                <dt><span jhiTranslate="obrasApp.obra.tipoCorretagem">Tipo Corretagem</span></dt>
+                <dd>
+                    <span jhiTranslate="{{'obrasApp.TipoCorretagem.' + obra.tipoCorretagem}}">{{obra.tipoCorretagem}}</span>
+                </dd>
+                <dt><span jhiTranslate="obrasApp.obra.status">Status</span></dt>
+                <dd>
+                    <span jhiTranslate="{{'obrasApp.StatusObra.' + obra.status}}">{{obra.status}}</span>
+                </dd>
+                <dt><span jhiTranslate="obrasApp.obra.dataInicio">Data Inicio</span></dt>
+                <dd>
+                    <span>{{obra.dataInicio}}</span>
+                </dd>
+                <dt><span jhiTranslate="obrasApp.obra.dataFim">Data Fim</span></dt>
+                <dd>
+                    <span>{{obra.dataFim}}</span>
+                </dd>
+                <dt><span jhiTranslate="obrasApp.obra.resumoGasto">Resumo Gasto</span></dt>
+                <dd>
+                    <div *ngIf="obra.resumoGastoId">
+                        <a [routerLink]="['/resumo-gasto', obra.resumoGastoId, 'view']">{{obra.resumoGastoId}}</a>
+                    </div>
+                </dd>
+            </dl>
+
+            <button type="submit"
+                    (click)="previousState()"
+                    class="btn btn-info">
+                <fa-icon [icon]="'arrow-left'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back"> Back</span>
+            </button>
+
+            <button type="button"
+                    [routerLink]="['/obra', obra.id, 'edit']"
+                    class="btn btn-primary">
+                <fa-icon [icon]="'pencil-alt'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit"> Edit</span>
+            </button>
+        </div>
+    </div>
+</div>

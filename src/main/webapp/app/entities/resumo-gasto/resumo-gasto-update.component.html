@@ -1,0 +1,44 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <form name="editForm" role="form" novalidate (ngSubmit)="save()" #editForm="ngForm">
+            <h2 id="jhi-resumo-gasto-heading" jhiTranslate="obrasApp.resumoGasto.home.createOrEditLabel">Create or edit a Resumo Gasto</h2>
+            <div>
+                <jhi-alert-error></jhi-alert-error>
+                <div class="form-group" [hidden]="!resumoGasto.id">
+                    <label for="id" jhiTranslate="global.field.id">ID</label>
+                    <input type="text" class="form-control" id="id" name="id"
+                        [(ngModel)]="resumoGasto.id" readonly />
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="obrasApp.resumoGasto.nomeObra" for="field_nomeObra">Nome Obra</label>
+                    <input type="text" class="form-control" name="nomeObra" id="field_nomeObra"
+                        [(ngModel)]="resumoGasto.nomeObra" />
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="obrasApp.resumoGasto.valorDeposito" for="field_valorDeposito">Valor Deposito</label>
+                    <input type="number" class="form-control" name="valorDeposito" id="field_valorDeposito"
+                        [(ngModel)]="resumoGasto.valorDeposito" />
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="obrasApp.resumoGasto.valorDespesa" for="field_valorDespesa">Valor Despesa</label>
+                    <input type="number" class="form-control" name="valorDespesa" id="field_valorDespesa"
+                        [(ngModel)]="resumoGasto.valorDespesa" />
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="obrasApp.resumoGasto.valorSaldo" for="field_valorSaldo">Valor Saldo</label>
+                    <input type="number" class="form-control" name="valorSaldo" id="field_valorSaldo"
+                        [(ngModel)]="resumoGasto.valorSaldo" />
+                </div>
+
+            </div>
+            <div>
+                <button type="button" id="cancel-save" class="btn btn-secondary"  (click)="previousState()">
+                    <fa-icon [icon]="'ban'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+                </button>
+                <button type="submit" id="save-entity" [disabled]="editForm.form.invalid || isSaving" class="btn btn-primary">
+                    <fa-icon [icon]="'save'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+                </button>
+            </div>
+        </form>
+    </div>
+</div>

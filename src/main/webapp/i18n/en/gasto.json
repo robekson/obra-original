@@ -1,0 +1,29 @@
+{
+    "obrasApp": {
+        "gasto": {
+            "home": {
+                "title": "Gastos",
+                "createLabel": "Create a new Gasto",
+                "createOrEditLabel": "Create or edit a Gasto"
+            },
+            "created": "A new Gasto is created with identifier {{ param }}",
+            "updated": "A Gasto is updated with identifier {{ param }}",
+            "deleted": "A Gasto is deleted with identifier {{ param }}",
+            "delete": {
+                "question": "Are you sure you want to delete Gasto {{ id }}?"
+            },
+            "detail": {
+                "title": "Gasto"
+            },
+            "nome": "Nome",
+            "valor": "Valor",
+            "dataVencimento": "Data Vencimento",
+            "pagamento": "Pagamento",
+            "nota": "Nota",
+            "tipo": "Tipo",
+            "parcelado": "Parcelado",
+            "mesAno": "Mes Ano",
+            "obra": "Obra"
+        }
+    }
+}

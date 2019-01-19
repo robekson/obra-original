@@ -1,0 +1,32 @@
+{
+    "obrasApp": {
+        "obra": {
+            "home": {
+                "title": "Obras",
+                "createLabel": "Create a new Obra",
+                "createOrEditLabel": "Create or edit a Obra"
+            },
+            "created": "A new Obra is created with identifier {{ param }}",
+            "updated": "A Obra is updated with identifier {{ param }}",
+            "deleted": "A Obra is deleted with identifier {{ param }}",
+            "delete": {
+                "question": "Are you sure you want to delete Obra {{ id }}?"
+            },
+            "detail": {
+                "title": "Obra"
+            },
+            "nome": "Nome",
+            "endereco": "Endereco",
+            "metragem": "Metragem",
+            "valorTerreno": "Valor Terreno",
+            "valorEscritura": "Valor Escritura",
+            "porcentagemCorretagem": "Porcentagem Corretagem",
+            "tipoCorretagem": "Tipo Corretagem",
+            "status": "Status",
+            "dataInicio": "Data Inicio",
+            "dataFim": "Data Fim",
+            "resumoGasto": "Resumo Gasto",
+            "gasto": "Gasto"
+        }
+    }
+}

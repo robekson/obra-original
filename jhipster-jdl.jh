@@ -24,48 +24,48 @@ application {
   entities * 
 }
 
-entity Obras {
+entity Obra {
     id Integer,
     nome String required,
-    local String required,
+    endereco String required,
     metragem Long,
-    status String,
+    valorTerreno BigDecimal,
+    valorEscritura BigDecimal,
+    porcentagemCorretagem Integer,
+    tipoCorretagem TipoCorretagem,
+    status StatusObra required,
     dataInicio LocalDate required,
     dataFim LocalDate required,
 }
                     
 
 
-entity LancamentoGastos {
+entity ResumoGasto {
 	nomeObra String,
-    valorDeposito Long,
-    valorDespesa Long,
-    valorSaldo Long
+    valorDeposito BigDecimal,
+    valorDespesa BigDecimal,
+    valorSaldo BigDecimal
 }
 
 relationship OneToOne {
-    Periodo{periodo} to Conta
+    Obra{resumoGasto} to ResumoGasto
 }
 
 relationship OneToMany {
-    Obras{obra} to Periodo
-    LancamentoGastos{lancamento} to Obras
+    Obra{gasto} to Gasto
 }
 
-entity Periodo {   
-    idConta String,
-    data LocalDate
-}
 
-entity Conta {
+entity Gasto {
     id Integer,
     nome String required,
-    valor Long,
+    valor BigDecimal,
     dataVencimento LocalDate required,
     pagamento Pago,
     nota NotaFiscal,
     tipo TipoConta,
-    parcelado Integer
+    parcelado Integer,
+    mesAno LocalDate
 }
 
 enum NotaFiscal {
@@ -73,18 +73,27 @@ enum NotaFiscal {
 }
 
 enum TipoConta {
-    MAO_DE_OBRA, MATERIAIS, DECORACAO, DOCUMENTACAO
+    MAO_DE_OBRA, MATERIAIS, DECORACAO, DOCUMENTACAO, INVESTIMENTO_DEPOSITO
 }
+
 
 enum Pago {
     SIM, NAO
 }
 
+enum TipoCorretagem {
+    Tipo1, Tipo2, Tipo3
+}
 
+enum StatusObra {
+    ANDAMENTO, FINALIZADA, PARADA
+}
 // Set pagination options
 
-paginate Obras with pagination
-paginate LancamentoGastos with pagination
+paginate Obra with pagination
+paginate Gasto with pagination
+paginate ResumoGasto with pagination
+
 
 // Use Data Transfert Objects (DTO)
 dto * with mapstruct

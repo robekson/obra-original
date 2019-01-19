@@ -5,7 +5,8 @@
             "MAO_DE_OBRA": "MAO_DE_OBRA",
             "MATERIAIS": "MATERIAIS",
             "DECORACAO": "DECORACAO",
-            "DOCUMENTACAO": "DOCUMENTACAO"
+            "DOCUMENTACAO": "DOCUMENTACAO",
+            "INVESTIMENTO_DEPOSITO": "INVESTIMENTO_DEPOSITO"
         }
     }
 }

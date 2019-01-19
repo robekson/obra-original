@@ -1,18 +1,16 @@
 import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 
-import { ObrasObrasModule } from './obras/obras.module';
-import { ObrasLancamentoGastosModule } from './lancamento-gastos/lancamento-gastos.module';
-import { ObrasPeriodoModule } from './periodo/periodo.module';
-import { ObrasContaModule } from './conta/conta.module';
+import { ObrasObraModule } from './obra/obra.module';
+import { ObrasResumoGastoModule } from './resumo-gasto/resumo-gasto.module';
+import { ObrasGastoModule } from './gasto/gasto.module';
 /* jhipster-needle-add-entity-module-import - JHipster will add entity modules imports here */
 
 @NgModule({
     // prettier-ignore
     imports: [
-        ObrasObrasModule,
-        ObrasLancamentoGastosModule,
-        ObrasPeriodoModule,
-        ObrasContaModule,
+        ObrasObraModule,
+        ObrasResumoGastoModule,
+        ObrasGastoModule,
         /* jhipster-needle-add-entity-module - JHipster will add entity modules here */
     ],
     declarations: [],

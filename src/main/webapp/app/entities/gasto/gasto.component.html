@@ -1,0 +1,82 @@
+<div>
+    <h2 id="page-heading">
+        <span jhiTranslate="obrasApp.gasto.home.title">Gastos</span>
+        <button id="jh-create-entity" class="btn btn-primary float-right jh-create-entity create-gasto" [routerLink]="['/gasto/new']">
+            <fa-icon [icon]="'plus'"></fa-icon>
+            <span  jhiTranslate="obrasApp.gasto.home.createLabel">
+            Create new Gasto
+            </span>
+        </button>
+    </h2>
+    <jhi-alert></jhi-alert>
+    <br/>
+    <div class="table-responsive" *ngIf="gastos">
+        <table class="table table-striped">
+            <thead>
+            <tr jhiSort [(predicate)]="predicate" [(ascending)]="reverse" [callback]="transition.bind(this)">
+            <th jhiSortBy="id"><span jhiTranslate="global.field.id">ID</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="nome"><span jhiTranslate="obrasApp.gasto.nome">Nome</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="valor"><span jhiTranslate="obrasApp.gasto.valor">Valor</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="dataVencimento"><span jhiTranslate="obrasApp.gasto.dataVencimento">Data Vencimento</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="pagamento"><span jhiTranslate="obrasApp.gasto.pagamento">Pagamento</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="nota"><span jhiTranslate="obrasApp.gasto.nota">Nota</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="tipo"><span jhiTranslate="obrasApp.gasto.tipo">Tipo</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="parcelado"><span jhiTranslate="obrasApp.gasto.parcelado">Parcelado</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="mesAno"><span jhiTranslate="obrasApp.gasto.mesAno">Mes Ano</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="obraId"><span jhiTranslate="obrasApp.gasto.obra">Obra</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th></th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr *ngFor="let gasto of gastos ;trackBy: trackId">
+                <td><a [routerLink]="['/gasto', gasto.id, 'view' ]">{{gasto.id}}</a></td>
+                <td>{{gasto.nome}}</td>
+                <td>{{gasto.valor}}</td>
+                <td>{{gasto.dataVencimento | date:'mediumDate'}}</td>
+                <td jhiTranslate="{{'obrasApp.Pago.' + gasto.pagamento}}">{{gasto.pagamento}}</td>
+                <td jhiTranslate="{{'obrasApp.NotaFiscal.' + gasto.nota}}">{{gasto.nota}}</td>
+                <td jhiTranslate="{{'obrasApp.TipoConta.' + gasto.tipo}}">{{gasto.tipo}}</td>
+                <td>{{gasto.parcelado}}</td>
+                <td>{{gasto.mesAno | date:'mediumDate'}}</td>
+                <td>
+                    <div *ngIf="gasto.obraId">
+                        <a [routerLink]="['../obra', gasto.obraId , 'view' ]" >{{gasto.obraId}}</a>
+                    </div>
+                </td>
+                <td class="text-right">
+                    <div class="btn-group flex-btn-group-container">
+                        <button type="submit"
+                                [routerLink]="['/gasto', gasto.id, 'view' ]"
+                                class="btn btn-info btn-sm">
+                            <fa-icon [icon]="'eye'"></fa-icon>
+                            <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
+                        </button>
+                        <button type="submit"
+                                [routerLink]="['/gasto', gasto.id, 'edit']"
+                                class="btn btn-primary btn-sm">
+                            <fa-icon [icon]="'pencil-alt'"></fa-icon>
+                            <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
+                        </button>
+                        <button type="submit"
+                                [routerLink]="['/', { outlets: { popup: 'gasto/'+ gasto.id + '/delete'} }]"
+                                replaceUrl="true"
+                                queryParamsHandling="merge"
+                                class="btn btn-danger btn-sm">
+                            <fa-icon [icon]="'times'"></fa-icon>
+                            <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
+                        </button>
+                    </div>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+    <div *ngIf="gastos && gastos.length">
+        <div class="row justify-content-center">
+            <jhi-item-count [page]="page" [total]="queryCount" [maxSize]="5" [itemsPerPage]="itemsPerPage"></jhi-item-count>
+        </div>
+        <div class="row justify-content-center">
+            <ngb-pagination [collectionSize]="totalItems" [(page)]="page" [pageSize]="itemsPerPage" [maxSize]="5" [rotate]="true" [boundaryLinks]="true" (pageChange)="loadPage(page)"></ngb-pagination>
+        </div>
+    </div>
+</div>

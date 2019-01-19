@@ -1,0 +1,33 @@
+{
+    "name": "ResumoGasto",
+    "fields": [
+        {
+            "fieldName": "nomeObra",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "valorDeposito",
+            "fieldType": "BigDecimal"
+        },
+        {
+            "fieldName": "valorDespesa",
+            "fieldType": "BigDecimal"
+        },
+        {
+            "fieldName": "valorSaldo",
+            "fieldType": "BigDecimal"
+        }
+    ],
+    "relationships": [],
+    "changelogDate": "20190118233723",
+    "entityTableName": "resumo_gasto",
+    "dto": "mapstruct",
+    "pagination": "pagination",
+    "service": "serviceImpl",
+    "jpaMetamodelFiltering": false,
+    "fluentMethods": true,
+    "clientRootFolder": "",
+    "applications": [
+        "obras"
+    ]
+}

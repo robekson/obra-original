@@ -1,0 +1,65 @@
+{
+    "name": "Gasto",
+    "fields": [
+        {
+            "fieldName": "nome",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "required"
+            ]
+        },
+        {
+            "fieldName": "valor",
+            "fieldType": "BigDecimal"
+        },
+        {
+            "fieldName": "dataVencimento",
+            "fieldType": "LocalDate",
+            "fieldValidateRules": [
+                "required"
+            ]
+        },
+        {
+            "fieldName": "pagamento",
+            "fieldType": "Pago",
+            "fieldValues": "SIM,NAO"
+        },
+        {
+            "fieldName": "nota",
+            "fieldType": "NotaFiscal",
+            "fieldValues": "SIM,NAO"
+        },
+        {
+            "fieldName": "tipo",
+            "fieldType": "TipoConta",
+            "fieldValues": "MAO_DE_OBRA,MATERIAIS,DECORACAO,DOCUMENTACAO,INVESTIMENTO_DEPOSITO"
+        },
+        {
+            "fieldName": "parcelado",
+            "fieldType": "Integer"
+        },
+        {
+            "fieldName": "mesAno",
+            "fieldType": "LocalDate"
+        }
+    ],
+    "relationships": [
+        {
+            "relationshipName": "obra",
+            "otherEntityName": "obra",
+            "relationshipType": "many-to-one",
+            "otherEntityField": "id"
+        }
+    ],
+    "changelogDate": "20190118233724",
+    "entityTableName": "gasto",
+    "dto": "mapstruct",
+    "pagination": "pagination",
+    "service": "serviceImpl",
+    "jpaMetamodelFiltering": false,
+    "fluentMethods": true,
+    "clientRootFolder": "",
+    "applications": [
+        "obras"
+    ]
+}

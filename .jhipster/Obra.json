@@ -1,0 +1,89 @@
+{
+    "name": "Obra",
+    "fields": [
+        {
+            "fieldName": "nome",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "required"
+            ]
+        },
+        {
+            "fieldName": "endereco",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "required"
+            ]
+        },
+        {
+            "fieldName": "metragem",
+            "fieldType": "Long"
+        },
+        {
+            "fieldName": "valorTerreno",
+            "fieldType": "BigDecimal"
+        },
+        {
+            "fieldName": "valorEscritura",
+            "fieldType": "BigDecimal"
+        },
+        {
+            "fieldName": "porcentagemCorretagem",
+            "fieldType": "Integer"
+        },
+        {
+            "fieldName": "tipoCorretagem",
+            "fieldType": "TipoCorretagem",
+            "fieldValues": "Tipo1,Tipo2,Tipo3"
+        },
+        {
+            "fieldName": "status",
+            "fieldType": "StatusObra",
+            "fieldValues": "ANDAMENTO,FINALIZADA,PARADA",
+            "fieldValidateRules": [
+                "required"
+            ]
+        },
+        {
+            "fieldName": "dataInicio",
+            "fieldType": "LocalDate",
+            "fieldValidateRules": [
+                "required"
+            ]
+        },
+        {
+            "fieldName": "dataFim",
+            "fieldType": "LocalDate",
+            "fieldValidateRules": [
+                "required"
+            ]
+        }
+    ],
+    "relationships": [
+        {
+            "relationshipType": "one-to-one",
+            "relationshipName": "resumoGasto",
+            "otherEntityName": "resumoGasto",
+            "otherEntityField": "id",
+            "ownerSide": true,
+            "otherEntityRelationshipName": "obra"
+        },
+        {
+            "relationshipType": "one-to-many",
+            "relationshipName": "gasto",
+            "otherEntityName": "gasto",
+            "otherEntityRelationshipName": "obra"
+        }
+    ],
+    "changelogDate": "20190118233722",
+    "entityTableName": "obra",
+    "dto": "mapstruct",
+    "pagination": "pagination",
+    "service": "serviceImpl",
+    "jpaMetamodelFiltering": false,
+    "fluentMethods": true,
+    "clientRootFolder": "",
+    "applications": [
+        "obras"
+    ]
+}

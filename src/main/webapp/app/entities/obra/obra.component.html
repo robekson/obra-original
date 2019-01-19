@@ -1,0 +1,86 @@
+<div>
+    <h2 id="page-heading">
+        <span jhiTranslate="obrasApp.obra.home.title">Obras</span>
+        <button id="jh-create-entity" class="btn btn-primary float-right jh-create-entity create-obra" [routerLink]="['/obra/new']">
+            <fa-icon [icon]="'plus'"></fa-icon>
+            <span  jhiTranslate="obrasApp.obra.home.createLabel">
+            Create new Obra
+            </span>
+        </button>
+    </h2>
+    <jhi-alert></jhi-alert>
+    <br/>
+    <div class="table-responsive" *ngIf="obras">
+        <table class="table table-striped">
+            <thead>
+            <tr jhiSort [(predicate)]="predicate" [(ascending)]="reverse" [callback]="transition.bind(this)">
+            <th jhiSortBy="id"><span jhiTranslate="global.field.id">ID</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="nome"><span jhiTranslate="obrasApp.obra.nome">Nome</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="endereco"><span jhiTranslate="obrasApp.obra.endereco">Endereco</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="metragem"><span jhiTranslate="obrasApp.obra.metragem">Metragem</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="valorTerreno"><span jhiTranslate="obrasApp.obra.valorTerreno">Valor Terreno</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="valorEscritura"><span jhiTranslate="obrasApp.obra.valorEscritura">Valor Escritura</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="porcentagemCorretagem"><span jhiTranslate="obrasApp.obra.porcentagemCorretagem">Porcentagem Corretagem</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="tipoCorretagem"><span jhiTranslate="obrasApp.obra.tipoCorretagem">Tipo Corretagem</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="status"><span jhiTranslate="obrasApp.obra.status">Status</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="dataInicio"><span jhiTranslate="obrasApp.obra.dataInicio">Data Inicio</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="dataFim"><span jhiTranslate="obrasApp.obra.dataFim">Data Fim</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="resumoGastoId"><span jhiTranslate="obrasApp.obra.resumoGasto">Resumo Gasto</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th></th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr *ngFor="let obra of obras ;trackBy: trackId">
+                <td><a [routerLink]="['/obra', obra.id, 'view' ]">{{obra.id}}</a></td>
+                <td>{{obra.nome}}</td>
+                <td>{{obra.endereco}}</td>
+                <td>{{obra.metragem}}</td>
+                <td>{{obra.valorTerreno}}</td>
+                <td>{{obra.valorEscritura}}</td>
+                <td>{{obra.porcentagemCorretagem}}</td>
+                <td jhiTranslate="{{'obrasApp.TipoCorretagem.' + obra.tipoCorretagem}}">{{obra.tipoCorretagem}}</td>
+                <td jhiTranslate="{{'obrasApp.StatusObra.' + obra.status}}">{{obra.status}}</td>
+                <td>{{obra.dataInicio | date:'mediumDate'}}</td>
+                <td>{{obra.dataFim | date:'mediumDate'}}</td>
+                <td>
+                    <div *ngIf="obra.resumoGastoId">
+                        <a [routerLink]="['../resumo-gasto', obra.resumoGastoId , 'view' ]" >{{obra.resumoGastoId}}</a>
+                    </div>
+                </td>
+                <td class="text-right">
+                    <div class="btn-group flex-btn-group-container">
+                        <button type="submit"
+                                [routerLink]="['/obra', obra.id, 'view' ]"
+                                class="btn btn-info btn-sm">
+                            <fa-icon [icon]="'eye'"></fa-icon>
+                            <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
+                        </button>
+                        <button type="submit"
+                                [routerLink]="['/obra', obra.id, 'edit']"
+                                class="btn btn-primary btn-sm">
+                            <fa-icon [icon]="'pencil-alt'"></fa-icon>
+                            <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
+                        </button>
+                        <button type="submit"
+                                [routerLink]="['/', { outlets: { popup: 'obra/'+ obra.id + '/delete'} }]"
+                                replaceUrl="true"
+                                queryParamsHandling="merge"
+                                class="btn btn-danger btn-sm">
+                            <fa-icon [icon]="'times'"></fa-icon>
+                            <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
+                        </button>
+                    </div>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+    <div *ngIf="obras && obras.length">
+        <div class="row justify-content-center">
+            <jhi-item-count [page]="page" [total]="queryCount" [maxSize]="5" [itemsPerPage]="itemsPerPage"></jhi-item-count>
+        </div>
+        <div class="row justify-content-center">
+            <ngb-pagination [collectionSize]="totalItems" [(page)]="page" [pageSize]="itemsPerPage" [maxSize]="5" [rotate]="true" [boundaryLinks]="true" (pageChange)="loadPage(page)"></ngb-pagination>
+        </div>
+    </div>
+</div>

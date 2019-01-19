@@ -1,0 +1,24 @@
+{
+    "obrasApp": {
+        "resumoGasto": {
+            "home": {
+                "title": "Resumo Gastos",
+                "createLabel": "Criar novo Resumo Gasto",
+                "createOrEditLabel": "Criar ou editar Resumo Gasto"
+            },
+            "created": "Um novo Resumo Gasto foi criado com o identificador {{ param }}",
+            "updated": "Um Resumo Gasto foi atualizado com o identificador {{ param }}",
+            "deleted": "Um Resumo Gasto foi deletado com o identificador {{ param }}",
+            "delete": {
+                "question": "Tem certeza de que deseja excluir Resumo Gasto {{ id }}?"
+            },
+            "detail": {
+                "title": "Resumo Gasto"
+            },
+            "nomeObra": "Nome Obra",
+            "valorDeposito": "Valor Deposito",
+            "valorDespesa": "Valor Despesa",
+            "valorSaldo": "Valor Saldo"
+        }
+    }
+}
