@@ -11,11 +11,11 @@
                 </dd>
                 <dt><span jhiTranslate="obrasApp.gasto.valor">Valor</span></dt>
                 <dd>
-                    <span>{{gasto.valor}}</span>
+                    <span>{{gasto.valor | currency: 'R$'}}</span>
                 </dd>
                 <dt><span jhiTranslate="obrasApp.gasto.dataVencimento">Data Vencimento</span></dt>
                 <dd>
-                    <span>{{gasto.dataVencimento}}</span>
+                    <span>{{gasto.dataVencimento | date:'shortDate'}}</span>
                 </dd>
                 <dt><span jhiTranslate="obrasApp.gasto.pagamento">Pagamento</span></dt>
                 <dd>

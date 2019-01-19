@@ -11,15 +11,15 @@
                 </dd>
                 <dt><span jhiTranslate="obrasApp.resumoGasto.valorDeposito">Valor Deposito</span></dt>
                 <dd>
-                    <span>{{resumoGasto.valorDeposito}}</span>
+                    <span>{{resumoGasto.valorDeposito | currency: 'R$'}}</span>
                 </dd>
                 <dt><span jhiTranslate="obrasApp.resumoGasto.valorDespesa">Valor Despesa</span></dt>
                 <dd>
-                    <span>{{resumoGasto.valorDespesa}}</span>
+                    <span>{{resumoGasto.valorDespesa | currency: 'R$'}}</span>
                 </dd>
                 <dt><span jhiTranslate="obrasApp.resumoGasto.valorSaldo">Valor Saldo</span></dt>
                 <dd>
-                    <span>{{resumoGasto.valorSaldo}}</span>
+                    <span>{{resumoGasto.valorSaldo | currency: 'R$'}}</span>
                 </dd>
             </dl>
 

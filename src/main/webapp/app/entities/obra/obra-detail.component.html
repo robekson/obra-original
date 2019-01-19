@@ -19,11 +19,11 @@
                 </dd>
                 <dt><span jhiTranslate="obrasApp.obra.valorTerreno">Valor Terreno</span></dt>
                 <dd>
-                    <span>{{obra.valorTerreno}}</span>
+                    <span>{{obra.valorTerreno | currency: 'R$'}}</span>
                 </dd>
                 <dt><span jhiTranslate="obrasApp.obra.valorEscritura">Valor Escritura</span></dt>
                 <dd>
-                    <span>{{obra.valorEscritura}}</span>
+                    <span>{{obra.valorEscritura | currency: 'R$'}}</span>
                 </dd>
                 <dt><span jhiTranslate="obrasApp.obra.porcentagemCorretagem">Porcentagem Corretagem</span></dt>
                 <dd>
@@ -39,11 +39,11 @@
                 </dd>
                 <dt><span jhiTranslate="obrasApp.obra.dataInicio">Data Inicio</span></dt>
                 <dd>
-                    <span>{{obra.dataInicio}}</span>
+                    <span>{{obra.dataInicio | date:'shortDate'}}</span>
                 </dd>
                 <dt><span jhiTranslate="obrasApp.obra.dataFim">Data Fim</span></dt>
                 <dd>
-                    <span>{{obra.dataFim}}</span>
+                    <span>{{obra.dataFim | date:'shortDate'}}</span>
                 </dd>
                 <dt><span jhiTranslate="obrasApp.obra.resumoGasto">Resumo Gasto</span></dt>
                 <dd>

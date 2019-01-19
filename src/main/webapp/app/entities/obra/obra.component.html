@@ -35,13 +35,13 @@
                 <td>{{obra.nome}}</td>
                 <td>{{obra.endereco}}</td>
                 <td>{{obra.metragem}}</td>
-                <td>{{obra.valorTerreno}}</td>
-                <td>{{obra.valorEscritura}}</td>
+                <td>{{obra.valorTerreno | currency: 'R$'}}</td>
+                <td>{{obra.valorEscritura | currency: 'R$'}}</td>
                 <td>{{obra.porcentagemCorretagem}}</td>
                 <td jhiTranslate="{{'obrasApp.TipoCorretagem.' + obra.tipoCorretagem}}">{{obra.tipoCorretagem}}</td>
                 <td jhiTranslate="{{'obrasApp.StatusObra.' + obra.status}}">{{obra.status}}</td>
-                <td>{{obra.dataInicio | date:'mediumDate'}}</td>
-                <td>{{obra.dataFim | date:'mediumDate'}}</td>
+                <td>{{obra.dataInicio | date:'shortDate'}}</td>
+                <td>{{obra.dataFim | date:'shortDate'}}</td>
                 <td>
                     <div *ngIf="obra.resumoGastoId">
                         <a [routerLink]="['../resumo-gasto', obra.resumoGastoId , 'view' ]" >{{obra.resumoGastoId}}</a>

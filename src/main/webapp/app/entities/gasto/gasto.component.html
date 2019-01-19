@@ -31,13 +31,13 @@
             <tr *ngFor="let gasto of gastos ;trackBy: trackId">
                 <td><a [routerLink]="['/gasto', gasto.id, 'view' ]">{{gasto.id}}</a></td>
                 <td>{{gasto.nome}}</td>
-                <td>{{gasto.valor}}</td>
-                <td>{{gasto.dataVencimento | date:'mediumDate'}}</td>
+                <td>{{gasto.valor | currency: 'R$'}}</td>
+                <td>{{gasto.dataVencimento | date:'shortDate'}}</td>
                 <td jhiTranslate="{{'obrasApp.Pago.' + gasto.pagamento}}">{{gasto.pagamento}}</td>
                 <td jhiTranslate="{{'obrasApp.NotaFiscal.' + gasto.nota}}">{{gasto.nota}}</td>
                 <td jhiTranslate="{{'obrasApp.TipoConta.' + gasto.tipo}}">{{gasto.tipo}}</td>
                 <td>{{gasto.parcelado}}</td>
-                <td>{{gasto.mesAno | date:'mediumDate'}}</td>
+                <td>{{gasto.mesAno | date:'shortDate'}}</td>
                 <td>
                     <div *ngIf="gasto.obraId">
                         <a [routerLink]="['../obra', gasto.obraId , 'view' ]" >{{gasto.obraId}}</a>

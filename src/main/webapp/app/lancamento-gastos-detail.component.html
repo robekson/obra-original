@@ -1,0 +1,39 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <div *ngIf="lancamentoGastos">
+            <h2><span jhiTranslate="obrasApp.lancamentoGastos.detail.title">Lancamento Gastos</span> {{lancamentoGastos.id}}</h2>
+            <hr>
+            <jhi-alert-error></jhi-alert-error>
+            <dl class="row-md jh-entity-details">
+                <dt><span jhiTranslate="obrasApp.lancamentoGastos.nomeObra">Nome Obra</span></dt>
+                <dd>
+                    <span>{{lancamentoGastos.nomeObra}}</span>
+                </dd>
+                <dt><span jhiTranslate="obrasApp.lancamentoGastos.valorDeposito">Valor Deposito</span></dt>
+                <dd>
+                    <span>{{lancamentoGastos.valorDeposito | currency: 'R$'}}</span>
+                </dd>
+                <dt><span jhiTranslate="obrasApp.lancamentoGastos.valorDespesa">Valor Despesa</span></dt>
+                <dd>
+                    <span>{{lancamentoGastos.valorDespesa | currency: 'R$'}}</span>
+                </dd>
+                <dt><span jhiTranslate="obrasApp.lancamentoGastos.valorSaldo">Valor Saldo</span></dt>
+                <dd>
+                    <span>{{lancamentoGastos.valorSaldo | currency: 'R$'}}</span>
+                </dd>
+            </dl>
+
+            <button type="submit"
+                    (click)="previousState()"
+                    class="btn btn-info">
+                <fa-icon [icon]="'arrow-left'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back"> Back</span>
+            </button>
+
+            <button type="button"
+                    [routerLink]="['/lancamento-gastos', lancamentoGastos.id, 'edit']"
+                    class="btn btn-primary">
+                <fa-icon [icon]="'pencil-alt'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit"> Edit</span>
+            </button>
+        </div>
+    </div>
+</div>
