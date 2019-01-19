@@ -18,9 +18,9 @@
             <th jhiSortBy="nome"><span jhiTranslate="obrasApp.obra.nome">Nome</span> <fa-icon [icon]="'sort'"></fa-icon></th>
             <th jhiSortBy="endereco"><span jhiTranslate="obrasApp.obra.endereco">Endereco</span> <fa-icon [icon]="'sort'"></fa-icon></th>
             <th jhiSortBy="metragem"><span jhiTranslate="obrasApp.obra.metragem">Metragem</span> <fa-icon [icon]="'sort'"></fa-icon></th>
-            <th jhiSortBy="valorTerreno"><span jhiTranslate="obrasApp.obra.valorTerreno">Valor Terreno</span> <fa-icon [icon]="'sort'"></fa-icon></th>
-            <th jhiSortBy="valorEscritura"><span jhiTranslate="obrasApp.obra.valorEscritura">Valor Escritura</span> <fa-icon [icon]="'sort'"></fa-icon></th>
-            <th jhiSortBy="porcentagemCorretagem"><span jhiTranslate="obrasApp.obra.porcentagemCorretagem">Porcentagem Corretagem</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="valorTerreno"><span jhiTranslate="obrasApp.obra.valorTerreno">Terreno</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+           <!-- <th jhiSortBy="valorEscritura"><span jhiTranslate="obrasApp.obra.valorEscritura">Valor Escritura</span> <fa-icon [icon]="'sort'"></fa-icon></th>-->
+            <!--<th jhiSortBy="porcentagemCorretagem"><span jhiTranslate="obrasApp.obra.porcentagemCorretagem">Porcentagem Corretagem</span> <fa-icon [icon]="'sort'"></fa-icon></th>-->
             <!-- <th jhiSortBy="tipoCorretagem"><span jhiTranslate="obrasApp.obra.tipoCorretagem">Tipo Corretagem</span> <fa-icon [icon]="'sort'"></fa-icon></th>-->
             <th jhiSortBy="status"><span jhiTranslate="obrasApp.obra.status">Status</span> <fa-icon [icon]="'sort'"></fa-icon></th>
             <th jhiSortBy="dataInicio"><span jhiTranslate="obrasApp.obra.dataInicio">Data Inicio</span> <fa-icon [icon]="'sort'"></fa-icon></th>
@@ -36,8 +36,8 @@
                 <td>{{obra.endereco}}</td>
                 <td>{{obra.metragem}}</td>
                 <td>{{obra.valorTerreno | currency: 'R$'}}</td>
-                <td>{{obra.valorEscritura | currency: 'R$'}}</td>
-                <td>{{obra.porcentagemCorretagem | percent }}</td>
+               <!-- <td>{{obra.valorEscritura | currency: 'R$'}}</td>-->
+               <!-- <td>{{obra.porcentagemCorretagem | percent }}</td>-->
                 <!-- <td jhiTranslate="{{'obrasApp.TipoCorretagem.' + obra.tipoCorretagem}}">{{obra.tipoCorretagem}}</td> -->
                 <td jhiTranslate="{{'obrasApp.StatusObra.' + obra.status}}">{{obra.status}}</td>
                 <td>{{obra.dataInicio | date:'shortDate'}}</td>
