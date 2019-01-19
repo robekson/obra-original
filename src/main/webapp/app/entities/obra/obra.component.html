@@ -14,39 +14,39 @@
         <table class="table table-striped">
             <thead>
             <tr jhiSort [(predicate)]="predicate" [(ascending)]="reverse" [callback]="transition.bind(this)">
-            <th jhiSortBy="id"><span jhiTranslate="global.field.id">ID</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <!--  <th jhiSortBy="id"><span jhiTranslate="global.field.id">ID</span> <fa-icon [icon]="'sort'"></fa-icon></th>-->
             <th jhiSortBy="nome"><span jhiTranslate="obrasApp.obra.nome">Nome</span> <fa-icon [icon]="'sort'"></fa-icon></th>
             <th jhiSortBy="endereco"><span jhiTranslate="obrasApp.obra.endereco">Endereco</span> <fa-icon [icon]="'sort'"></fa-icon></th>
             <th jhiSortBy="metragem"><span jhiTranslate="obrasApp.obra.metragem">Metragem</span> <fa-icon [icon]="'sort'"></fa-icon></th>
             <th jhiSortBy="valorTerreno"><span jhiTranslate="obrasApp.obra.valorTerreno">Valor Terreno</span> <fa-icon [icon]="'sort'"></fa-icon></th>
             <th jhiSortBy="valorEscritura"><span jhiTranslate="obrasApp.obra.valorEscritura">Valor Escritura</span> <fa-icon [icon]="'sort'"></fa-icon></th>
             <th jhiSortBy="porcentagemCorretagem"><span jhiTranslate="obrasApp.obra.porcentagemCorretagem">Porcentagem Corretagem</span> <fa-icon [icon]="'sort'"></fa-icon></th>
-            <th jhiSortBy="tipoCorretagem"><span jhiTranslate="obrasApp.obra.tipoCorretagem">Tipo Corretagem</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <!-- <th jhiSortBy="tipoCorretagem"><span jhiTranslate="obrasApp.obra.tipoCorretagem">Tipo Corretagem</span> <fa-icon [icon]="'sort'"></fa-icon></th>-->
             <th jhiSortBy="status"><span jhiTranslate="obrasApp.obra.status">Status</span> <fa-icon [icon]="'sort'"></fa-icon></th>
             <th jhiSortBy="dataInicio"><span jhiTranslate="obrasApp.obra.dataInicio">Data Inicio</span> <fa-icon [icon]="'sort'"></fa-icon></th>
             <th jhiSortBy="dataFim"><span jhiTranslate="obrasApp.obra.dataFim">Data Fim</span> <fa-icon [icon]="'sort'"></fa-icon></th>
-            <th jhiSortBy="resumoGastoId"><span jhiTranslate="obrasApp.obra.resumoGasto">Resumo Gasto</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+           <!--  <th jhiSortBy="resumoGastoId"><span jhiTranslate="obrasApp.obra.resumoGasto">Resumo Gasto</span> <fa-icon [icon]="'sort'"></fa-icon></th>-->
             <th></th>
             </tr>
             </thead>
             <tbody>
             <tr *ngFor="let obra of obras ;trackBy: trackId">
-                <td><a [routerLink]="['/obra', obra.id, 'view' ]">{{obra.id}}</a></td>
-                <td>{{obra.nome}}</td>
+               <!--   <td><a [routerLink]="['/obra', obra.id, 'view' ]">{{obra.id}}</a></td>-->
+                <td><a [routerLink]="['/obra', obra.id, 'view' ]">{{obra.nome}}</a></td>
                 <td>{{obra.endereco}}</td>
                 <td>{{obra.metragem}}</td>
                 <td>{{obra.valorTerreno | currency: 'R$'}}</td>
                 <td>{{obra.valorEscritura | currency: 'R$'}}</td>
                 <td>{{obra.porcentagemCorretagem}}</td>
-                <td jhiTranslate="{{'obrasApp.TipoCorretagem.' + obra.tipoCorretagem}}">{{obra.tipoCorretagem}}</td>
+                <!-- <td jhiTranslate="{{'obrasApp.TipoCorretagem.' + obra.tipoCorretagem}}">{{obra.tipoCorretagem}}</td> -->
                 <td jhiTranslate="{{'obrasApp.StatusObra.' + obra.status}}">{{obra.status}}</td>
                 <td>{{obra.dataInicio | date:'shortDate'}}</td>
                 <td>{{obra.dataFim | date:'shortDate'}}</td>
-                <td>
+                <!--  <td>
                     <div *ngIf="obra.resumoGastoId">
                         <a [routerLink]="['../resumo-gasto', obra.resumoGastoId , 'view' ]" >{{obra.resumoGastoId}}</a>
                     </div>
-                </td>
+                </td>-->
                 <td class="text-right">
                     <div class="btn-group flex-btn-group-container">
                         <button type="submit"
