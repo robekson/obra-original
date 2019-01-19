@@ -11,7 +11,7 @@
     <jhi-alert></jhi-alert>
     <br/>
     <div class="table-responsive" *ngIf="gastos">
-        <table class="table table-striped">
+        <table class="table">
             <thead>
             <tr jhiSort [(predicate)]="predicate" [(ascending)]="reverse" [callback]="transition.bind(this)">
             <!--  <th jhiSortBy="id"><span jhiTranslate="global.field.id">ID</span> <fa-icon [icon]="'sort'"></fa-icon></th>-->
@@ -28,7 +28,7 @@
             </tr>
             </thead>
             <tbody>
-            <tr *ngFor="let gasto of gastos ;trackBy: trackId">
+            <tr *ngFor="let gasto of gastos ;trackBy: trackId" class="{{gasto.pagamento=='NAO' ? 'alert alert-danger odd' : ''}}" >
                 <!--  <td><a [routerLink]="['/gasto', gasto.id, 'view' ]">{{gasto.id}}</a></td>-->
                 <td><a [routerLink]="['/gasto', gasto.id, 'view' ]">{{gasto.nome}}</a></td>
                 <td>{{gasto.valor | currency: 'R$'}}</td>

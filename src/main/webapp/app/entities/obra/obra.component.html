@@ -11,7 +11,7 @@
     <jhi-alert></jhi-alert>
     <br/>
     <div class="table-responsive" *ngIf="obras">
-        <table class="table table-striped">
+        <table class="table">
             <thead>
             <tr jhiSort [(predicate)]="predicate" [(ascending)]="reverse" [callback]="transition.bind(this)">
             <!--  <th jhiSortBy="id"><span jhiTranslate="global.field.id">ID</span> <fa-icon [icon]="'sort'"></fa-icon></th>-->
@@ -30,7 +30,7 @@
             </tr>
             </thead>
             <tbody>
-            <tr *ngFor="let obra of obras ;trackBy: trackId">
+            <tr *ngFor="let obra of obras ;trackBy: trackId" class="{{obra.status=='ANDAMENTO' ? 'alert alert-info' : obra.status=='PARADA' ? 'alert alert-warning': 'alert alert-danger' }}">
                <!--   <td><a [routerLink]="['/obra', obra.id, 'view' ]">{{obra.id}}</a></td>-->
                 <td><a [routerLink]="['/obra', obra.id, 'view' ]">{{obra.nome}}</a></td>
                 <td>{{obra.endereco}}</td>
