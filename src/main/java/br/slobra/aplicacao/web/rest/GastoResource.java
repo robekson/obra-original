@@ -7,6 +7,7 @@ import br.slobra.aplicacao.web.rest.util.HeaderUtil;
 import br.slobra.aplicacao.web.rest.util.PaginationUtil;
 import br.slobra.aplicacao.service.dto.GastoDTO;
 import br.slobra.aplicacao.service.dto.ResumoContaDTO;
+import br.slobra.aplicacao.service.mapper.GastoMapper;
 import br.slobra.aplicacao.service.dto.MesAnoDTO;
 import io.github.jhipster.web.util.ResponseUtil;
 import org.slf4j.Logger;
@@ -44,6 +45,9 @@ public class GastoResource {
     private static final String ENTITY_NAME = "gasto";
 
     private final GastoService gastoService;
+    
+    @Autowired
+    private GastoMapper gastoMapper;
 
     public GastoResource(GastoService gastoService) {
         this.gastoService = gastoService;
@@ -101,6 +105,8 @@ public class GastoResource {
     @Timed
     public ResponseEntity<ResumoContaDTO> getResumoConta(Pageable pageable) {
         log.debug("Request to get all Gastos");
+        
+        
         Page<GastoDTO> invoiceList = gastoService.findAll(pageable).map(gastoMapper::toDto);
 
         BigDecimal semNota = invoiceList.stream().filter(i -> i.getNota().name().equals(NotaFiscal.NAO)).map(GastoDTO::getValor).reduce(BigDecimal.ZERO, BigDecimal::add);
