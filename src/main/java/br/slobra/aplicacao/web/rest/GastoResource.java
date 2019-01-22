@@ -18,7 +18,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import java.math.BigDecimal;
-import br.slobra.aplicacao.domain.enumeration.NotaFiscal.*;
 
 import javax.validation.Valid;
 import java.net.URI;
@@ -30,6 +29,7 @@ import java.util.Optional;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+import static br.slobra.aplicacao.domain.enumeration.NotaFiscal.*;
 
 
 /**
@@ -101,7 +101,7 @@ public class GastoResource {
     @Timed
     public ResponseEntity<ResumoContaDTO> getResumoConta(Pageable pageable) {
         log.debug("Request to get all Gastos");
-        Page<GastoDTO> invoiceList = gastoRepository.findAll(pageable).map(gastoMapper::toDto);
+        Page<GastoDTO> invoiceList = gastoService.findAll(pageable).map(gastoMapper::toDto);
 
         BigDecimal semNota = invoiceList.stream().filter(i -> i.getNota().name().equals(NotaFiscal.NAO)).map(GastoDTO::getValor).reduce(BigDecimal.ZERO, BigDecimal::add);
         BigDecimal comNota = invoiceList.stream().filter(i -> i.getNota().name().equals(NotaFiscal.SIM)).map(GastoDTO::getValor).reduce(BigDecimal.ZERO, BigDecimal::add);
