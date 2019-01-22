@@ -130,7 +130,7 @@ public class GastoResource {
     
     @GetMapping("/gastoMesAno")
     @Timed
-    public ResponseEntity<List<MesAnoDTO>> getResumoConta(Pageable pageable) {
+    public ResponseEntity<List<MesAnoDTO>> getMesAno() {
     	
         SimpleDateFormat formato = new SimpleDateFormat("MM/yyyy");		
 		Calendar dia25 = Calendar.getInstance(); 
