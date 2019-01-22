@@ -4,9 +4,6 @@ import java.io.Serializable;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.Objects;
-
-import br.slobra.aplicacao.web.rest.Calendar;
-import br.slobra.aplicacao.web.rest.SimpleDateFormat;
 import java.time.format.DateTimeFormatter;
 
 /**
