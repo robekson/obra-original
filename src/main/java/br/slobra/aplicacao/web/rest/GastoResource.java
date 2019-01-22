@@ -147,7 +147,7 @@ public class GastoResource {
     
     @GetMapping("/graficoGastoObra")
     @Timed
-    public ResponseEntity<List<ResumoContaDTO>> graficoGastoObra(Pageable pageable() {  
+    public ResponseEntity<List<ResumoContaDTO>> graficoGastoObra(Pageable pageable) {  
     	
     	List<ResumoContaDTO> listaResumo = new ArrayList<>();  	
         List<MesAnoDTO> lista = getListaMesAno();	       
