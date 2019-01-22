@@ -31,7 +31,8 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import br.slobra.aplicacao.domain.enumeration.NotaFiscal;
-import java.util.Collections;
+import java.util.Comparator;
+import java.util.stream.Collectors;
 
 
 
@@ -147,7 +148,9 @@ public class GastoResource {
 			dto.setData(formato.format(dia25.getTime()));
 			lista.add(dto);
 		}
-		Collections.sort(lista, Collections.reverseOrder());
+		
+		lista = lista.stream().sorted(Comparator.comparing(MesAnoDTO::getData).reversed()).collect(Collectors.toList());
+		
 		return ResponseEntity.ok().body(lista);
     	
     }
