@@ -43,7 +43,6 @@ export interface IResumoGasto {
     despesaSemNota?: number;
     despesaGeralSubTotal?: number;
     totalDespesas?: number;
-    obraId?: number;
 }
 
 export class ResumoGasto implements IResumoGasto {
@@ -58,8 +57,7 @@ export class ResumoGasto implements IResumoGasto {
         public despesaComNota?: number,
         public despesaSemNota?: number,        
         public despesaGeralSubTotal?: number,
-        public totalDespesas?: number,               
-        public obraId?: number
+        public totalDespesas?: number
     ) {}
 }
 
