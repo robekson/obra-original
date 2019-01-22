@@ -161,7 +161,7 @@ public class GastoResource {
             listaResumo.add(contaDTO);
         }      
         
-		return ResponseEntity.ok().body(lista);   	
+		return ResponseEntity.ok().body(listaResumo);   	
     }
 
 
