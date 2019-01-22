@@ -45,9 +45,6 @@ public class GastoResource {
     private static final String ENTITY_NAME = "gasto";
 
     private final GastoService gastoService;
-    
-    @Autowired
-    private GastoMapper gastoMapper;
 
     public GastoResource(GastoService gastoService) {
         this.gastoService = gastoService;
@@ -107,7 +104,7 @@ public class GastoResource {
         log.debug("Request to get all Gastos");
         
         
-        Page<GastoDTO> invoiceList = gastoService.findAll(pageable).map(gastoMapper::toDto);
+        Page<GastoDTO> invoiceList = gastoService.findAll(pageable);
 
         BigDecimal semNota = invoiceList.stream().filter(i -> i.getNota().name().equals(NotaFiscal.NAO)).map(GastoDTO::getValor).reduce(BigDecimal.ZERO, BigDecimal::add);
         BigDecimal comNota = invoiceList.stream().filter(i -> i.getNota().name().equals(NotaFiscal.SIM)).map(GastoDTO::getValor).reduce(BigDecimal.ZERO, BigDecimal::add);
