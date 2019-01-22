@@ -31,6 +31,40 @@ export interface IGasto {
     obraId?: number;
 }
 
+export interface IResumoGasto {
+    id?: number;
+    honorarioAdministracao?: string;
+    valorDeposito?: number;
+    quantidadeComNota?: number;
+    quantidadeSemNota?: number;
+    mesAnoFormatado?: string;  
+    mesAno?: Moment;   
+    despesaComNota?: number;
+    despesaSemNota?: number;
+    despesaGeralSubTotal?: number;
+    totalDespesas?: number;
+    obraId?: number;
+}
+
+export class ResumoGasto implements IResumoGasto {
+    constructor(
+        public id?: number,
+        public honorarioAdministracao?: string,
+        public valorDeposito?: number,
+        public quantidadeComNota?: number,
+        public quantidadeSemNota?: number,        
+        public mesAnoFormatado?: string,
+        public mesAno?: Moment,      
+        public despesaComNota?: number,
+        public despesaSemNota?: number,        
+        public despesaGeralSubTotal?: number,
+        public totalDespesas?: number,               
+        public obraId?: number
+    ) {}
+}
+
+
+
 export class Gasto implements IGasto {
     constructor(
         public id?: number,
