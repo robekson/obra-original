@@ -6,6 +6,8 @@ import br.slobra.aplicacao.web.rest.errors.BadRequestAlertException;
 import br.slobra.aplicacao.web.rest.util.HeaderUtil;
 import br.slobra.aplicacao.web.rest.util.PaginationUtil;
 import br.slobra.aplicacao.service.dto.GastoDTO;
+import br.slobra.aplicacao.service.dto.ResumoContaDTO;
+import br.slobra.aplicacao.service.dto.MesAnoDTO;
 import io.github.jhipster.web.util.ResponseUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -15,6 +17,7 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import java.math.BigDecimal;
 
 import javax.validation.Valid;
 import java.net.URI;
@@ -22,6 +25,11 @@ import java.net.URISyntaxException;
 
 import java.util.List;
 import java.util.Optional;
+
+mport java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Calendar;
+
 
 /**
  * REST controller for managing Gasto.
@@ -80,6 +88,60 @@ public class GastoResource {
         return ResponseEntity.ok()
             .headers(HeaderUtil.createEntityUpdateAlert(ENTITY_NAME, gastoDTO.getId().toString()))
             .body(result);
+    }
+    
+    
+    /**
+     * 
+     * @param pageable
+     * @return
+     */
+    @GetMapping("/resumoConta")
+    @Timed
+    public ResponseEntity<ResumoContaDTO> getResumoConta(Pageable pageable) {
+        log.debug("Request to get all Gastos");
+        Page<GastoDTO> invoiceList = gastoRepository.findAll(pageable).map(gastoMapper::toDto);
+
+        BigDecimal semNota = invoiceList.stream().filter(i -> i.getNota().name().equals(NotaFiscal.NAO)).map(GastoDTO::getValor).reduce(BigDecimal.ZERO, BigDecimal::add);
+        BigDecimal comNota = invoiceList.stream().filter(i -> i.getNota().name().equals(NotaFiscal.SIM)).map(GastoDTO::getValor).reduce(BigDecimal.ZERO, BigDecimal::add);
+
+        long countSemNota = invoiceList.stream().filter(i -> i.getNota().name().equals(NotaFiscal.NAO)).count();
+        long countComNota = invoiceList.stream().filter(i -> i.getNota().name().equals(NotaFiscal.SIM)).count();
+
+        BigDecimal valorDeposito = invoiceList.stream().map(GastoDTO::getValor).reduce(BigDecimal.ZERO, BigDecimal::add);
+
+       // BigDecimal pagoNao = invoiceList.stream().filter(i -> i.getPagamento().name().equals(Pago.NAO)).map(GastoDTO::getValor).reduce(BigDecimal.ZERO, BigDecimal::add);
+        ResumoContaDTO dto = new ResumoContaDTO();
+        dto.setDespesaSemNota(semNota);
+        dto.setDespesaComNota(comNota);
+        dto.setQuantidadeComNota(countComNota);
+        dto.setQuantidadeSemNota(countSemNota);
+        dto.setValorDeposito(valorDeposito);
+        return Optional.of(dto);
+    }
+    
+    
+    @GetMapping("/gastoMesAno")
+    @Timed
+    public ResponseEntity<List<MesAnoDTO>> getResumoConta(Pageable pageable) {
+    	
+        SimpleDateFormat formato = new SimpleDateFormat("MM/yyyy");		
+		Calendar dia25 = Calendar.getInstance(); 
+
+		List<MesAnoDTO> lista = new ArrayList<>();
+		MesAnoDTO dto1=new MesAnoDTO();		
+		dto1.setData(formato.format(dia25.getTime()));
+		lista.add(dto1);
+		
+		for(int x=0;x<10;x++) {
+			dia25.add(Calendar.MONTH, -1); 
+			MesAnoDTO dto= new MesAnoDTO();
+			dto.setData(formato.format(dia25.getTime()));
+			lista.add(dto);
+		}
+		
+		return ResponseEntity.ok().body(lista);
+    	
     }
 
     /**
