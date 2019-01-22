@@ -5,6 +5,10 @@ import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.Objects;
 
+import br.slobra.aplicacao.web.rest.Calendar;
+import br.slobra.aplicacao.web.rest.SimpleDateFormat;
+import java.time.format.DateTimeFormatter;
+
 /**
  * A DTO for the ResumoConta entity.
  */
@@ -27,8 +31,20 @@ public class ResumoContaDTO implements Serializable {
     private BigDecimal despesaSemNota;
 
     private BigDecimal despesaGeralSubTotal;
+    
+    private String mesAnoFormatado;
 
-    public LocalDate getMesAno() {
+    public String getMesAnoFormatado() {   	
+        DateTimeFormatter formatador = DateTimeFormatter.ofPattern("MM/yyyy");
+    	mesAnoFormatado = mesAno.format(formatador);	
+		return mesAnoFormatado;
+	}
+
+	public void setMesAnoFormatado(String mesAnoFormatado) {
+		this.mesAnoFormatado = mesAnoFormatado;
+	}
+
+	public LocalDate getMesAno() {
         return mesAno;
     }
 
