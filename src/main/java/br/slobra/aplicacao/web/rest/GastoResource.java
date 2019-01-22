@@ -30,7 +30,8 @@ import java.util.Optional;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
-import static br.slobra.aplicacao.domain.enumeration.NotaFiscal.*;
+import br.slobra.aplicacao.domain.enumeration.NotaFiscal;
+
 
 
 /**
