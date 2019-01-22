@@ -117,7 +117,9 @@ public class GastoResource {
         dto.setQuantidadeComNota(countComNota);
         dto.setQuantidadeSemNota(countSemNota);
         dto.setValorDeposito(valorDeposito);
-        return Optional.of(dto);
+        
+       
+        return ResponseUtil.wrapOrNotFound(dto);
     }
     
     
