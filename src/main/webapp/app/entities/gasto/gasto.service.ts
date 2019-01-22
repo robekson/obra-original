@@ -52,7 +52,8 @@ export class GastoService {
     resumo(req?: any): Observable<EntityResponseTypeResumo> {
         const options = createRequestOption(req);
         return this.http
-            .get<IResumoGasto>(this.resourceUrlResumo, { params: options, observe: 'response' });
+            .get<IResumoGasto>(this.resourceUrlResumo, { params: options, observe: 'response' })
+            .pipe(map((res: EntityResponseTypeResumo) => this.convertDateArrayFromServer2(res)));
     }
 
     delete(id: number): Observable<HttpResponse<any>> {
@@ -85,4 +86,17 @@ export class GastoService {
         }
         return res;
     }
+    
+    protected convertDateArrayFromServer2(res: EntityResponseTypeResumo): EntityResponseTypeResumo {
+        if (res.body) {
+           // res.body.forEach((resumo: IResumoGasto) => {
+               // gasto.dataVencimento = gasto.dataVencimento != null ? moment(gasto.dataVencimento) : null;
+               // gasto.mesAno = gasto.mesAno != null ? moment(gasto.mesAno) : null;
+               
+          //  });
+        }
+        return res;
+    }
+    
+    
 }
