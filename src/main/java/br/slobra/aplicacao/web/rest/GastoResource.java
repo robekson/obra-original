@@ -109,11 +109,11 @@ public class GastoResource {
         
         Page<GastoDTO> invoiceList = gastoService.findAll(pageable);
 
-        BigDecimal semNota = invoiceList.stream().filter(i -> i.getNota().name().equals(NotaFiscal.NAO)).map(GastoDTO::getValor).reduce(BigDecimal.ZERO, BigDecimal::add);
-        BigDecimal comNota = invoiceList.stream().filter(i -> i.getNota().name().equals(NotaFiscal.SIM)).map(GastoDTO::getValor).reduce(BigDecimal.ZERO, BigDecimal::add);
+        BigDecimal semNota = invoiceList.stream().filter(i -> i.getNota().equals(NotaFiscal.NAO)).map(GastoDTO::getValor).reduce(BigDecimal.ZERO, BigDecimal::add);
+        BigDecimal comNota = invoiceList.stream().filter(i -> i.getNota().equals(NotaFiscal.SIM)).map(GastoDTO::getValor).reduce(BigDecimal.ZERO, BigDecimal::add);
 
-        long countSemNota = invoiceList.stream().filter(i -> i.getNota().name().equals(NotaFiscal.NAO)).count();
-        long countComNota = invoiceList.stream().filter(i -> i.getNota().name().equals(NotaFiscal.SIM)).count();
+        long countSemNota = invoiceList.stream().filter(i -> i.getNota().equals(NotaFiscal.NAO)).count();
+        long countComNota = invoiceList.stream().filter(i -> i.getNota().equals(NotaFiscal.SIM)).count();
 
         BigDecimal valorDeposito = invoiceList.stream().map(GastoDTO::getValor).reduce(BigDecimal.ZERO, BigDecimal::add);
 
