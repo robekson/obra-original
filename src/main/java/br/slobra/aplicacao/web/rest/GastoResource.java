@@ -31,6 +31,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import br.slobra.aplicacao.domain.enumeration.NotaFiscal;
+import java.util.Collections;
 
 
 
@@ -146,7 +147,7 @@ public class GastoResource {
 			dto.setData(formato.format(dia25.getTime()));
 			lista.add(dto);
 		}
-		
+		Collections.sort(lista, Collections.reverseOrder());
 		return ResponseEntity.ok().body(lista);
     	
     }
