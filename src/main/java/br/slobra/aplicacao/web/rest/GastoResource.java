@@ -116,14 +116,18 @@ public class GastoResource {
         long countComNota = invoiceList.stream().filter(i -> i.getNota().equals(NotaFiscal.SIM)).count();
 
         BigDecimal valorDeposito = invoiceList.stream().map(GastoDTO::getValor).reduce(BigDecimal.ZERO, BigDecimal::add);
-
-       // BigDecimal pagoNao = invoiceList.stream().filter(i -> i.getPagamento().name().equals(Pago.NAO)).map(GastoDTO::getValor).reduce(BigDecimal.ZERO, BigDecimal::add);
+        
         ResumoContaDTO dto = new ResumoContaDTO();
         dto.setDespesaSemNota(semNota);
         dto.setDespesaComNota(comNota);
         dto.setQuantidadeComNota(countComNota);
         dto.setQuantidadeSemNota(countSemNota);
         dto.setValorDeposito(valorDeposito);
+        
+        List<GastoDTO> listData = invoiceList.getContent();       
+        if(!listData.isEmpty()) {
+        	dto.setMesAno(listData.get(0).getMesAno());  	
+        }
         
         
         return ResponseUtil.wrapOrNotFound(Optional.of(dto));
