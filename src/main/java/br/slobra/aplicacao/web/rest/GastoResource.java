@@ -18,6 +18,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import java.math.BigDecimal;
+import br.slobra.aplicacao.domain.enumeration.NotaFiscal.*;
 
 import javax.validation.Valid;
 import java.net.URI;
