@@ -5,7 +5,6 @@ import br.slobra.aplicacao.service.GastoService;
 import br.slobra.aplicacao.web.rest.errors.BadRequestAlertException;
 import br.slobra.aplicacao.web.rest.util.HeaderUtil;
 import br.slobra.aplicacao.web.rest.util.PaginationUtil;
-import br.slobra.aplicacao.service.dto.DateTimeFormatter;
 import br.slobra.aplicacao.service.dto.GastoDTO;
 import br.slobra.aplicacao.service.dto.ResumoContaDTO;
 import br.slobra.aplicacao.service.mapper.GastoMapper;
