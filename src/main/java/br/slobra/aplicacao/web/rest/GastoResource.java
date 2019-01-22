@@ -5,6 +5,7 @@ import br.slobra.aplicacao.service.GastoService;
 import br.slobra.aplicacao.web.rest.errors.BadRequestAlertException;
 import br.slobra.aplicacao.web.rest.util.HeaderUtil;
 import br.slobra.aplicacao.web.rest.util.PaginationUtil;
+import br.slobra.aplicacao.service.dto.DateTimeFormatter;
 import br.slobra.aplicacao.service.dto.GastoDTO;
 import br.slobra.aplicacao.service.dto.ResumoContaDTO;
 import br.slobra.aplicacao.service.mapper.GastoMapper;
@@ -33,6 +34,7 @@ import java.util.Calendar;
 import br.slobra.aplicacao.domain.enumeration.NotaFiscal;
 import java.util.Comparator;
 import java.util.stream.Collectors;
+import java.time.format.DateTimeFormatter;
 
 
 
@@ -136,28 +138,33 @@ public class GastoResource {
     
     @GetMapping("/gastoMesAno")
     @Timed
-    public ResponseEntity<List<MesAnoDTO>> getMesAno() {
-    	
-        SimpleDateFormat formato = new SimpleDateFormat("MM/yyyy");		
-		Calendar dia25 = Calendar.getInstance(); 
-
-		List<MesAnoDTO> lista = new ArrayList<>();
-		MesAnoDTO dto1=new MesAnoDTO();		
-		dto1.setData(formato.format(dia25.getTime()));
-		lista.add(dto1);
-		
-		for(int x=0;x<10;x++) {
-			dia25.add(Calendar.MONTH, -1); 
-			MesAnoDTO dto= new MesAnoDTO();
-			dto.setData(formato.format(dia25.getTime()));
-			lista.add(dto);
-		}
-		
-		lista = lista.stream().sorted(Comparator.comparing(MesAnoDTO::getData).reversed()).collect(Collectors.toList());
-		
-		return ResponseEntity.ok().body(lista);
-    	
+    public ResponseEntity<List<MesAnoDTO>> getMesAno() {   	
+        List<MesAnoDTO> lista = getListaMesAno();		
+		return ResponseEntity.ok().body(lista);   	
     }
+    
+    
+    
+    @GetMapping("/graficoGastoObra")
+    @Timed
+    public ResponseEntity<List<ResumoContaDTO>> graficoGastoObra(Pageable pageable() {  
+    	
+    	List<ResumoContaDTO> listaResumo = new ArrayList<>();  	
+        List<MesAnoDTO> lista = getListaMesAno();	       
+        List<GastoDTO> listGasto = gastoService.findAll(pageable).getContent();          
+        
+        DateTimeFormatter formatador = DateTimeFormatter.ofPattern("MM/yyyy");
+        for(MesAnoDTO mesAno : lista) {       	
+        	ResumoContaDTO contaDTO = new ResumoContaDTO();
+            BigDecimal valorTotal = listGasto.stream().filter(i -> i.getMesAno().format(formatador).equals(mesAno.getData())).map(GastoDTO::getValor).reduce(BigDecimal.ZERO, BigDecimal::add);	           
+            contaDTO.setTotalDespesas(valorTotal);
+            contaDTO.setMesAnoFormatado(mesAno.getData());
+            listaResumo.add(contaDTO);
+        }      
+        
+		return ResponseEntity.ok().body(lista);   	
+    }
+
 
     /**
      * GET  /gastos : get all the gastos.
@@ -201,4 +208,25 @@ public class GastoResource {
         gastoService.delete(id);
         return ResponseEntity.ok().headers(HeaderUtil.createEntityDeletionAlert(ENTITY_NAME, id.toString())).build();
     }
+    
+    
+	private List<MesAnoDTO> getListaMesAno() {
+		SimpleDateFormat formato = new SimpleDateFormat("MM/yyyy");		
+		Calendar dia25 = Calendar.getInstance(); 
+
+		List<MesAnoDTO> lista = new ArrayList<>();
+		MesAnoDTO dto1=new MesAnoDTO();		
+		dto1.setData(formato.format(dia25.getTime()));
+		lista.add(dto1);
+		
+		for(int x=0;x<10;x++) {
+			dia25.add(Calendar.MONTH, -1); 
+			MesAnoDTO dto= new MesAnoDTO();
+			dto.setData(formato.format(dia25.getTime()));
+			lista.add(dto);
+		}
+		
+		lista = lista.stream().sorted(Comparator.comparing(MesAnoDTO::getData).reversed()).collect(Collectors.toList());
+		return lista;
+	}
 }
