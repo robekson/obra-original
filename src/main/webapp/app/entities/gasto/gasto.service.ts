@@ -2,13 +2,13 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpResponse } from '@angular/common/http';
 import * as moment from 'moment';
 import { DATE_FORMAT } from 'app/shared/constants/input.constants';
-import { map } from 'rxjs/operators';
+import { map, catchError } from 'rxjs/operators';
 
 import { SERVER_API_URL } from 'app/app.constants';
 import { createRequestOption } from 'app/shared';
 import { IGasto, IResumoGasto } from 'app/shared/model/gasto.model';
 import { Observable } from "rxjs";
-import 'rxjs/add/observable/throw';
+import { throwError } from 'rxjs';
 
 type EntityResponseType = HttpResponse<IGasto>;
 type EntityArrayResponseType = HttpResponse<IGasto[]>;
@@ -78,7 +78,7 @@ export class GastoService {
           errMsg = error.message ? error.message : error.toString();
         }
         console.error(errMsg);
-        return Observable.throw(errMsg);
+        return throwError(errMsg);
     }
 
     delete(id: number): Observable<HttpResponse<any>> {
