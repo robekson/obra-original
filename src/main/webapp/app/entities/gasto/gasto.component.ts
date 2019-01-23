@@ -4,7 +4,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { JhiEventManager, JhiParseLinks, JhiAlertService } from 'ng-jhipster';
 
-import { IGasto, IResumoGasto } from 'app/shared/model/gasto.model';
+import { IGasto, IResumoDespesa } from 'app/shared/model/gasto.model';
 import { AccountService } from 'app/core';
 
 import { ITEMS_PER_PAGE } from 'app/shared';
@@ -17,7 +17,7 @@ import { GastoService } from './gasto.service';
 export class GastoComponent implements OnInit, OnDestroy {
     currentAccount: any;
     gastos: IGasto[];
-    resumo:IResumoGasto;
+    resumo: IResumoDespesa;
     error: any;
     success: any;
     eventSubscriber: Subscription;
@@ -60,19 +60,19 @@ export class GastoComponent implements OnInit, OnDestroy {
                 (res: HttpResponse<IGasto[]>) => this.paginateGastos(res.body, res.headers),
                 (res: HttpErrorResponse) => this.onError(res.message)
             );
-        
-        
-        this.gastoService.resumo({
-            page: this.page - 1,
-            size: this.itemsPerPage,
-            sort: this.sort()
-        }).subscribe(
-            (res: HttpResponse<IResumoGasto>) =>  this.resumo = res.body,
-            (res: HttpErrorResponse) => this.onError(res.message)
-        );  
-        
-        console.log("Resumo ="+this.resumo);
-        
+
+        this.gastoService
+            .resumo({
+                page: this.page - 1,
+                size: this.itemsPerPage,
+                sort: this.sort()
+            })
+            .subscribe(
+                (res: HttpResponse<IResumoDespesa>) => this.montaGastos(res.body, res.headers),
+                (res: HttpErrorResponse) => this.onError(res.message)
+            );
+
+        console.log('Resumo =' + this.resumo);
     }
 
     loadPage(page: number) {
@@ -138,6 +138,12 @@ export class GastoComponent implements OnInit, OnDestroy {
         this.totalItems = parseInt(headers.get('X-Total-Count'), 10);
         this.queryCount = this.totalItems;
         this.gastos = data;
+    }
+
+    protected montaGastos(data: IResumoDespesa, headers: HttpHeaders) {
+        this.links = this.parseLinks.parse(headers.get('link'));
+        this.totalItems = parseInt(headers.get('X-Total-Count'), 10);
+        this.resumo = data;
     }
 
     protected onError(errorMessage: string) {
