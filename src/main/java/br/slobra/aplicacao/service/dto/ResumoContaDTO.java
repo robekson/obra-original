@@ -5,6 +5,7 @@ import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.Objects;
 import java.time.format.DateTimeFormatter;
+import java.util.Locale;
 
 /**
  * A DTO for the ResumoConta entity.
@@ -45,8 +46,8 @@ public class ResumoContaDTO implements Serializable {
 	}
 
 	public String getMesAnoFormatadoExtenso() {		
-		DateTimeFormatter formatador = DateTimeFormatter.ofPattern("MMMM/yyyy");
-        if(mesAno!=null)mesAnoFormatadoExtenso = mesAno.format(formatador);
+		DateTimeFormatter formatador = DateTimeFormatter.ofPattern("MMMM/yyyy").withLocale(new Locale("pt", "br"));
+       if(mesAno!=null)mesAnoFormatadoExtenso = mesAno.format(formatador);
 		return mesAnoFormatadoExtenso;
 	}
 
