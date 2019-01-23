@@ -31,7 +31,7 @@ export interface IGasto {
     obraId?: number;
 }
 
-export interface IResumoDespesa {
+export interface IResumoGasto {
     id?: number;
     honorarioAdministracao?: string;
     valorDeposito?: number;
@@ -45,7 +45,7 @@ export interface IResumoDespesa {
     totalDespesas?: number;
 }
 
-export class ResumoDespesa implements IResumoDespesa {
+export class ResumoGasto implements IResumoGasto {
     constructor(
         public id?: number,
         public honorarioAdministracao?: string,

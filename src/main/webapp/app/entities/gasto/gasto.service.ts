@@ -7,12 +7,12 @@ import { map } from 'rxjs/operators';
 
 import { SERVER_API_URL } from 'app/app.constants';
 import { createRequestOption } from 'app/shared';
-import { IGasto, IResumoDespesa } from 'app/shared/model/gasto.model';
+import { IGasto, IResumoGasto } from 'app/shared/model/gasto.model';
 
 type EntityResponseType = HttpResponse<IGasto>;
 type EntityArrayResponseType = HttpResponse<IGasto[]>;
 
-type EntityResponseTypeResumo = HttpResponse<IResumoDespesa>;
+type EntityResponseTypeResumo = HttpResponse<IResumoGasto>;
 
 @Injectable({ providedIn: 'root' })
 export class GastoService {
