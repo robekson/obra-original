@@ -77,6 +77,7 @@ export class GastoComponent implements OnInit, OnDestroy {
           //  .subscribe((res : IResumoGasto)=>{this.resumo = res;}, (res: HttpErrorResponse) => this.onError(res.message));
 
         console.log('Resumo =' + this.resumo);
+        console.log('Resumo =' + this.gastos);
     }
 
     loadPage(page: number) {
