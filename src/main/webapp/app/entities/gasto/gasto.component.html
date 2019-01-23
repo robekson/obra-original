@@ -89,7 +89,7 @@
                     <p class="lead">Despesas com nota</p>
                 </div>
                 <div class="col-9">
-                    <p class="lead text-left">{{resumo.despesaComNota}}</p>
+                    <p class="lead text-left">R$ {{resumo.despesaComNota | currency: 'R$'}}</p>
                 </div>
 
             </div>
@@ -99,7 +99,7 @@
                     <p class="lead">Despesas sem nota</p>
                 </div>
                 <div class="col-9">
-                    <p class="lead text-left">{{resumo.despesaSemNota}}</p>
+                    <p class="lead text-left">{{resumo.despesaSemNota | currency: 'R$'}}</p>
                 </div>
 
             </div>
@@ -130,7 +130,7 @@
                     <p class="lead">Valor depositado</p>
                 </div>
                 <div class="col-9">
-                    <p class="lead text-left">{{resumo.valorDeposito}}</p>
+                    <p class="lead text-left">{{resumo.valorDeposito | currency: 'R$'}}</p>
                 </div>
             </div>
 

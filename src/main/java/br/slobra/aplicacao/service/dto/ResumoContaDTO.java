@@ -30,6 +30,8 @@ public class ResumoContaDTO implements Serializable {
     private BigDecimal despesaGeralSubTotal;
 
     private String mesAnoFormatado;
+    
+    private String mesAnoFormatadoExtenso;
 
     private BigDecimal totalDespesas;
 
@@ -40,6 +42,16 @@ public class ResumoContaDTO implements Serializable {
 
 	public void setTotalDespesas(BigDecimal totalDespesas) {
 		this.totalDespesas = totalDespesas;
+	}
+
+	public String getMesAnoFormatadoExtenso() {		
+		DateTimeFormatter formatador = DateTimeFormatter.ofPattern("MMMM/yyyy");
+        if(mesAno!=null)mesAnoFormatadoExtenso = mesAno.format(formatador);
+		return mesAnoFormatadoExtenso;
+	}
+
+	public void setMesAnoFormatadoExtenso(String mesAnoFormatadoExtenso) {
+		this.mesAnoFormatadoExtenso = mesAnoFormatadoExtenso;
 	}
 
 	public String getMesAnoFormatado() {
