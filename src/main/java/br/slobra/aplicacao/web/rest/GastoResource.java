@@ -128,7 +128,6 @@ public class GastoResource {
         List<GastoDTO> listData = invoiceList.getContent();
         if(!listData.isEmpty()) {
         	dto.setMesAno(listData.get(0).getMesAno());
-        	dto.setMesAnoFormatadoExtenso(listData.get(0).getMesAno());
         }
 
 

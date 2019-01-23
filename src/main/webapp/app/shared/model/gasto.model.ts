@@ -38,6 +38,7 @@ export interface IResumoGasto {
     quantidadeComNota?: number;
     quantidadeSemNota?: number;
     mesAnoFormatado?: string;
+    mesAnoFormatadoExtenso?: string;
     mesAno?: Moment;
     despesaComNota?: number;
     despesaSemNota?: number;
@@ -53,6 +54,7 @@ export class ResumoGasto implements IResumoGasto {
         public quantidadeComNota?: number,
         public quantidadeSemNota?: number,
         public mesAnoFormatado?: string,
+        public mesAnoFormatadoExtenso?: string,
         public mesAno?: Moment,
         public despesaComNota?: number,
         public despesaSemNota?: number,
