@@ -42,6 +42,16 @@
                     </div>
                 </div>
                 <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="obrasApp.gasto.tipo" for="field_tipo">Tipo</label>
+                    <select class="form-control" name="tipo" [(ngModel)]="gasto.tipo" id="field_tipo" >
+                        <option value="MAO_DE_OBRA">{{'obrasApp.TipoConta.MAO_DE_OBRA' | translate}}</option>
+                        <option value="MATERIAIS">{{'obrasApp.TipoConta.MATERIAIS' | translate}}</option>
+                        <option value="DECORACAO">{{'obrasApp.TipoConta.DECORACAO' | translate}}</option>
+                        <option value="DOCUMENTACAO">{{'obrasApp.TipoConta.DOCUMENTACAO' | translate}}</option>
+                        <option value="INVESTIMENTO_DEPOSITO">{{'obrasApp.TipoConta.INVESTIMENTO_DEPOSITO' | translate}}</option>
+                    </select>
+                </div>
+                <div class="form-group">
                     <label class="form-control-label" jhiTranslate="obrasApp.gasto.pagamento" for="field_pagamento">Pagamento</label>
                     <select class="form-control" name="pagamento" [(ngModel)]="gasto.pagamento" id="field_pagamento" >
                         <option value="SIM">{{'obrasApp.Pago.SIM' | translate}}</option>
@@ -53,16 +63,6 @@
                     <select class="form-control" name="nota" [(ngModel)]="gasto.nota" id="field_nota" >
                         <option value="SIM">{{'obrasApp.NotaFiscal.SIM' | translate}}</option>
                         <option value="NAO">{{'obrasApp.NotaFiscal.NAO' | translate}}</option>
-                    </select>
-                </div>
-                <div class="form-group">
-                    <label class="form-control-label" jhiTranslate="obrasApp.gasto.tipo" for="field_tipo">Tipo</label>
-                    <select class="form-control" name="tipo" [(ngModel)]="gasto.tipo" id="field_tipo" >
-                        <option value="MAO_DE_OBRA">{{'obrasApp.TipoConta.MAO_DE_OBRA' | translate}}</option>
-                        <option value="MATERIAIS">{{'obrasApp.TipoConta.MATERIAIS' | translate}}</option>
-                        <option value="DECORACAO">{{'obrasApp.TipoConta.DECORACAO' | translate}}</option>
-                        <option value="DOCUMENTACAO">{{'obrasApp.TipoConta.DOCUMENTACAO' | translate}}</option>
-                        <option value="INVESTIMENTO_DEPOSITO">{{'obrasApp.TipoConta.INVESTIMENTO_DEPOSITO' | translate}}</option>
                     </select>
                 </div>
                 <div class="form-group">
