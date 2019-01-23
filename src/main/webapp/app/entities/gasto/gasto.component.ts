@@ -17,7 +17,7 @@ import { GastoService } from './gasto.service';
 export class GastoComponent implements OnInit, OnDestroy {
     currentAccount: any;
     gastos: IGasto[];
-    resumo: IResumoGasto;
+    resumo: IResumoGasto[];
     error: any;
     success: any;
     eventSubscriber: Subscription;
