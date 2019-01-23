@@ -2,8 +2,8 @@
     "obrasApp": {
         "obra": {
             "home": {
-                "title": "Obras",
-                "createLabel": "Criar novo Obra",
+                "title": "Obras Cadastradas",
+                "createLabel": "Adicionar Obra",
                 "createOrEditLabel": "Criar ou editar Obra"
             },
             "created": "Um novo Obra foi criado com o identificador {{ param }}",
@@ -15,16 +15,16 @@
             "detail": {
                 "title": "Obra"
             },
-            "nome": "Nome",
-            "endereco": "Endereco",
-            "metragem": "Metragem",
+            "nome": "Nome da Obra/Empreendimento",
+            "endereco": "Endereço",
+            "metragem": "Metragem (m²)",
             "valorTerreno": "Terreno",
             "valorEscritura": "Valor Escritura",
-            "porcentagemCorretagem": "Porcentagem Corretagem",
+            "porcentagemCorretagem": "Corretagem",
             "tipoCorretagem": "Tipo Corretagem",
             "status": "Status",
-            "dataInicio": "Data Inicio",
-            "dataFim": "Data Fim",
+            "dataInicio": "Inicio da Obra",
+            "dataFim": "Fim da Obra",
             "resumoGasto": "Resumo Gasto",
             "gasto": "Gasto"
         }

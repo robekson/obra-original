@@ -2,8 +2,8 @@
     "obrasApp": {
         "gasto": {
             "home": {
-                "title": "Gastos",
-                "createLabel": "Criar novo Gasto",
+                "title": "Lista de Gastos",
+                "createLabel": "Adicionar Gasto",
                 "createOrEditLabel": "Criar ou editar Gasto"
             },
             "created": "Um novo Gasto foi criado com o identificador {{ param }}",
@@ -19,9 +19,9 @@
             "valor": "Valor",
             "dataVencimento": "Data Vencimento",
             "pagamento": "Pagamento",
-            "nota": "Nota",
+            "nota": "Nota Fiscal",
             "tipo": "Tipo",
-            "parcelado": "Parcelado",
+            "parcelado": "Propagar",
             "mesAno": "Mes Ano",
             "obra": "Obra"
         }

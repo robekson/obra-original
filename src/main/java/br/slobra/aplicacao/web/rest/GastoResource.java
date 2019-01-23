@@ -31,6 +31,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import br.slobra.aplicacao.domain.enumeration.NotaFiscal;
+import br.slobra.aplicacao.domain.enumeration.TipoConta;
 import java.util.Comparator;
 import java.util.stream.Collectors;
 import java.time.format.DateTimeFormatter;
@@ -116,7 +117,9 @@ public class GastoResource {
         long countSemNota = invoiceList.stream().filter(i -> i.getNota().equals(NotaFiscal.NAO)).count();
         long countComNota = invoiceList.stream().filter(i -> i.getNota().equals(NotaFiscal.SIM)).count();
 
-        BigDecimal valorDeposito = invoiceList.stream().map(GastoDTO::getValor).reduce(BigDecimal.ZERO, BigDecimal::add);
+        BigDecimal valorDeposito = invoiceList.stream().filter(i -> i.getTipo().equals(TipoConta.INVESTIMENTO_DEPOSITO)).map(GastoDTO::getValor).reduce(BigDecimal.ZERO, BigDecimal::add);
+
+        BigDecimal total = invoiceList.stream().map(GastoDTO::getValor).reduce(BigDecimal.ZERO, BigDecimal::add);
 
         ResumoContaDTO dto = new ResumoContaDTO();
         dto.setDespesaSemNota(semNota);
@@ -124,6 +127,7 @@ public class GastoResource {
         dto.setQuantidadeComNota(countComNota);
         dto.setQuantidadeSemNota(countSemNota);
         dto.setValorDeposito(valorDeposito);
+        dto.setDespesaGeralSubTotal(total);
 
         List<GastoDTO> listData = invoiceList.getContent();
         if(!listData.isEmpty()) {
@@ -159,6 +163,7 @@ public class GastoResource {
             System.out.println("valorTotal "+valorTotal);
             System.out.println("mesAno.getData()"+mesAno.getData());
             contaDTO.setTotalDespesas(valorTotal);
+            contaDTO.setDespesaGeralSubTotal(valorTotal);
             contaDTO.setMesAnoFormatado(mesAno.getData());
            listaResumo.add(contaDTO);
         }

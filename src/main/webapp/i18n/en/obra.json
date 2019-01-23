@@ -2,7 +2,7 @@
     "obrasApp": {
         "obra": {
             "home": {
-                "title": "Obras",
+                "title": "Obras registered",
                 "createLabel": "Create a new Obra",
                 "createOrEditLabel": "Create or edit a Obra"
             },
