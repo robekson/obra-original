@@ -57,7 +57,7 @@ export class GastoService {
     resumo(req?: any): Observable<EntityResponseTypeResumo> {
         return this.http
             .get<IResumoGasto>(this.resourceUrlResumo, { observe: 'response' })
-            .pipe(map((res: EntityResponseTypeResumo) => this.convertDateFromServer(res)));
+            .pipe(map((res: EntityResponseTypeResumo) => this.convertDateArrayFromServer2(res)));
     }
     
     
