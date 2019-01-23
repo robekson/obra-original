@@ -67,7 +67,14 @@ export class GastoComponent implements OnInit, OnDestroy {
                 page: this.page - 1,
                 size: this.itemsPerPage,
                 sort: this.sort()
-            }) .subscribe((res : IResumoGasto)=>{this.resumo = res;}, (res: HttpErrorResponse) => this.onError(res.message));
+            }).subscribe(
+                    (res: HttpResponse<IResumoGasto>) => this.montaGastos(res.body, res.headers),
+                    (res: HttpErrorResponse) => this.onError(res.message)
+                );
+            
+            
+            
+          //  .subscribe((res : IResumoGasto)=>{this.resumo = res;}, (res: HttpErrorResponse) => this.onError(res.message));
 
         console.log('Resumo =' + this.resumo);
     }
@@ -135,6 +142,10 @@ export class GastoComponent implements OnInit, OnDestroy {
         this.totalItems = parseInt(headers.get('X-Total-Count'), 10);
         this.queryCount = this.totalItems;
         this.gastos = data;
+    }
+    
+    protected montaGastos(data: IResumoGasto, headers: HttpHeaders) {
+        this.resumo = data;
     }
 
     protected onError(errorMessage: string) {

@@ -54,11 +54,10 @@ export class GastoService {
         return this.http.get<any>(this.resourceUrlResumo, { params: options, observe: 'response' });
     }*/
     
-    
-    
-    resumo(req?: any): Observable<IResumoGasto> {
-        return this.http.get(this.resourceUrlResumo)
-                        .pipe(map(this.extractData));
+    resumo(req?: any): Observable<EntityResponseTypeResumo> {
+        return this.http
+            .get<IResumoGasto>(this.resourceUrlResumo, { observe: 'response' })
+            .pipe(map((res: EntityResponseTypeResumo) => this.convertDateFromServer(res)));
     }
     
     
@@ -67,6 +66,19 @@ export class GastoService {
         return body || { };
    }
     
+    private handleError (error: Response | any) {
+        // In a real world app, you might use a remote logging infrastructure
+        let errMsg: string;
+        if (error instanceof Response) {
+          const body = error.json() || '';
+          const err =  JSON.stringify(body);
+          errMsg = `${error.status} - ${error.statusText || ''} ${err}`;
+        } else {
+          errMsg = error.message ? error.message : error.toString();
+        }
+        console.error(errMsg);
+        return throwError(errMsg);
+    }
 
     delete(id: number): Observable<HttpResponse<any>> {
         return this.http.delete<any>(`${this.resourceUrl}/${id}`, { observe: 'response' });
