@@ -1,7 +1,7 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { HttpErrorResponse, HttpHeaders, HttpResponse } from '@angular/common/http';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Subscription } from 'rxjs';
+import { Subscription, Observable } from 'rxjs';
 import { JhiEventManager, JhiParseLinks, JhiAlertService } from 'ng-jhipster';
 
 import { IGasto, IResumoGasto } from 'app/shared/model/gasto.model';
@@ -61,16 +61,13 @@ export class GastoComponent implements OnInit, OnDestroy {
                 (res: HttpErrorResponse) => this.onError(res.message)
             );
 
+
         this.gastoService
             .resumo({
                 page: this.page - 1,
                 size: this.itemsPerPage,
                 sort: this.sort()
-            })
-            .subscribe(
-                (res: HttpResponse<IResumoGasto>) => (this.resumo = res.body),
-                (res: HttpErrorResponse) => this.onError(res.message)
-            );
+            }) .subscribe((res : IResumoGasto)=>{this.resumo = res;}, error => console.error('error', error));
 
         console.log('Resumo =' + this.resumo);
     }
