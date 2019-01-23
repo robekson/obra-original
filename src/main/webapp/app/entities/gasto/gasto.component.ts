@@ -60,24 +60,6 @@ export class GastoComponent implements OnInit, OnDestroy {
                 (res: HttpResponse<IGasto[]>) => this.paginateGastos(res.body, res.headers),
                 (res: HttpErrorResponse) => this.onError(res.message)
             );
-
-
-        this.gastoService
-            .resumo({
-                page: this.page - 1,
-                size: this.itemsPerPage,
-                sort: this.sort()
-            }).subscribe(
-                    (res: HttpResponse<IResumoGasto>) => this.montaGastos(res.body, res.headers),
-                    (res: HttpErrorResponse) => this.onError(res.message)
-                );
-            
-            
-            
-          //  .subscribe((res : IResumoGasto)=>{this.resumo = res;}, (res: HttpErrorResponse) => this.onError(res.message));
-
-        console.log('Resumo =' + this.resumo);
-        console.log('Resumo =' + this.gastos);
     }
 
     loadPage(page: number) {
@@ -116,6 +98,28 @@ export class GastoComponent implements OnInit, OnDestroy {
             this.currentAccount = account;
         });
         this.registerChangeInGastos();
+        
+
+
+        this.gastoService
+            .resumo({
+                page: this.page - 1,
+                size: this.itemsPerPage,
+                sort: this.sort()
+            }).subscribe(
+                    (res: HttpResponse<IResumoGasto>) => this.montaGastos(res.body, res.headers),
+                    (res: HttpErrorResponse) => this.onError(res.message)
+                );
+            
+            
+            
+          //  .subscribe((res : IResumoGasto)=>{this.resumo = res;}, (res: HttpErrorResponse) => this.onError(res.message));
+
+        console.log('Resumo =' + this.resumo);
+        console.log('Resumo =' + this.gastos);
+        
+        
+        
     }
 
     ngOnDestroy() {

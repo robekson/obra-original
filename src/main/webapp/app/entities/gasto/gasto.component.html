@@ -79,7 +79,7 @@
             <ngb-pagination [collectionSize]="totalItems" [(page)]="page" [pageSize]="itemsPerPage" [maxSize]="5" [rotate]="true" [boundaryLinks]="true" (pageChange)="loadPage(page)"></ngb-pagination>
         </div>
     </div>
-    <div class="jumbotron jumbotron-fluid">
+    <div  *ngIf="resumo" class="jumbotron jumbotron-fluid">
         <div class="container">
             <h1 class="display-4">Resumo</h1>
             <p class="lead"></p><h3>Mês MAIO/2018</h3><p></p>
