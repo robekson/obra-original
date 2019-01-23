@@ -146,6 +146,7 @@ export class GastoComponent implements OnInit, OnDestroy {
     
     protected montaGastos(data: IResumoGasto, headers: HttpHeaders) {
         this.resumo = data;
+        console.log('Resumo =' + this.resumo);
     }
 
     protected onError(errorMessage: string) {
