@@ -15,6 +15,36 @@
             "detail": {
                 "title": "Obra"
             },
+            "nome": "Nome",
+            "endereco": "Local",
+            "metragem": "Metragem",
+            "valorTerreno": "Terreno",
+            "valorEscritura": "Valor Escritura",
+            "porcentagemCorretagem": "Corretagem",
+            "tipoCorretagem": "Tipo Corretagem",
+            "status": "Status",
+            "dataInicio": "Data Inicio",
+            "dataFim": "Data Fim",
+            "resumoGasto": "Resumo Gasto",
+            "gasto": "Gasto"
+        }
+    },
+    "obrasAppEdit": {
+        "obra": {
+            "home": {
+                "title": "Obras Cadastradas",
+                "createLabel": "Adicionar Obra",
+                "createOrEditLabel": "Criar ou editar Obra"
+            },
+            "created": "Um novo Obra foi criado com o identificador {{ param }}",
+            "updated": "Um Obra foi atualizado com o identificador {{ param }}",
+            "deleted": "Um Obra foi deletado com o identificador {{ param }}",
+            "delete": {
+                "question": "Tem certeza de que deseja excluir Obra {{ id }}?"
+            },
+            "detail": {
+                "title": "Obra"
+            },
             "nome": "Nome da Obra/Empreendimento",
             "endereco": "Endereço",
             "metragem": "Metragem (m²)",
