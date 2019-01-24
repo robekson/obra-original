@@ -47,7 +47,13 @@ export class LinechartComponent implements OnInit {
 
     protected montaGrafico(data: IResumoGasto[], headers: HttpHeaders) {
         //this.resumo = data;
-        console.log('data = ' + data);
+        console.log('data = ' + data);      
+        for (let resumoGasto of data) {
+            console.log(resumoGasto.totalDespesas); 
+            console.log(resumoGasto.mesAnoFormatadoExtenso); 
+        }
+        
+      
     }
 
     protected onError(errorMessage: string) {
