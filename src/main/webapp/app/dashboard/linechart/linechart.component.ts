@@ -1,6 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { JhiLanguageService } from 'ng-jhipster';
 import { Message } from 'primeng/components/common/api';
+import { Subscription, Observable } from 'rxjs';
+import { LinechartService } from './linechart.service';
+import { IResumoGasto } from 'app/shared/model/gasto.model';
+import { HttpErrorResponse, HttpHeaders, HttpResponse } from '@angular/common/http';
+import { JhiEventManager, JhiParseLinks, JhiAlertService } from 'ng-jhipster';
 
 @Component({
     selector: 'jhi-linechart',
@@ -11,7 +16,7 @@ export class LinechartComponent implements OnInit {
     data: any;
     msgs: Message[];
 
-    constructor() {
+    constructor(protected lineChartService: LinechartService, protected jhiAlertService: JhiAlertService) {
         this.data = {
             labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
             datasets: [
@@ -31,7 +36,23 @@ export class LinechartComponent implements OnInit {
         };
     }
 
-    ngOnInit() {}
+    ngOnInit() {
+        this.lineChartService
+            .query({})
+            .subscribe(
+                (res: HttpResponse<IResumoGasto[]>) => this.montaGrafico(res.body, res.headers),
+                (res: HttpErrorResponse) => this.onError(res.message)
+            );
+    }
+
+    protected montaGrafico(data: IResumoGasto[], headers: HttpHeaders) {
+        //this.resumo = data;
+        console.log('data = ' + data);
+    }
+
+    protected onError(errorMessage: string) {
+        this.jhiAlertService.error(errorMessage, null, null);
+    }
 
     selectData(event) {
         this.msgs = [];
