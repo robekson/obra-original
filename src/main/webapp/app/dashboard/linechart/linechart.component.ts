@@ -17,23 +17,7 @@ export class LinechartComponent implements OnInit {
     msgs: Message[];
 
     constructor(protected lineChartService: LinechartService, protected jhiAlertService: JhiAlertService) {
-        this.data = {
-            labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
-            datasets: [
-                {
-                    label: 'First Dataset',
-                    data: [65, 59, 80, 81, 56, 55, 40],
-                    fill: false,
-                    borderColor: '#4bc0c0'
-                },
-                {
-                    label: 'Second Dataset',
-                    data: [28, 48, 40, 19, 86, 27, 90],
-                    fill: false,
-                    borderColor: '#565656'
-                }
-            ]
-        };
+        this.data = {};
     }
 
     ngOnInit() {
@@ -46,14 +30,26 @@ export class LinechartComponent implements OnInit {
     }
 
     protected montaGrafico(data: IResumoGasto[], headers: HttpHeaders) {
-        //this.resumo = data;
-        console.log('data = ' + data);      
+        console.log('data = ' + data);
+        var v_json = {};
+        var lineChartLabels = [];
+        var lineChartDataSet = [];
+        var dataValues = [];
+
+        //data: [65, 59, 80, 81, 56, 55, 40],
+
         for (let resumoGasto of data) {
-            console.log(resumoGasto.totalDespesas); 
-            console.log(resumoGasto.mesAnoFormatadoExtenso); 
+            lineChartLabels.push(resumoGasto.mesAnoFormatado);
+            dataValues.push(resumoGasto.totalDespesas);
+            console.log(resumoGasto.totalDespesas);
+            console.log(resumoGasto.mesAnoFormatado);
         }
-        
-      
+
+        v_json['labels'] = lineChartLabels;
+        lineChartDataSet.push({ label: 'Gastos', fill: false, data: dataValues, borderColor: '#4bc0c0' });
+        v_json['datasets'] = lineChartDataSet;
+        this.data = v_json;
+        console.log(JSON.stringify(v_json));
     }
 
     protected onError(errorMessage: string) {
