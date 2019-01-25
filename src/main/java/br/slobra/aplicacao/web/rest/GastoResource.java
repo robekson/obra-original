@@ -26,6 +26,7 @@ import java.net.URISyntaxException;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.Collections;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -231,8 +232,11 @@ public class GastoResource {
 			dto.setData(formato.format(dia25.getTime()));
 			lista.add(dto);
 		}
+        log.debug("Lista : {}", lista );
+        Collections.reverse(lista);
+        log.debug("reverse : {}", lista );
 
-		lista = lista.stream().sorted(Comparator.comparing(MesAnoDTO::getData).reversed()).collect(Collectors.toList());
+		//lista = lista.stream().sorted(Comparator.comparing(MesAnoDTO::getData).reversed()).collect(Collectors.toList());
 		return lista;
 	}
 }
