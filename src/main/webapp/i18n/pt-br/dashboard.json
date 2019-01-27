@@ -12,12 +12,12 @@
         },
         "linechart": {
             "home": {
-                "title": "LineChart"
+                "title": "Gráfico de linha"
             }
         },
         "piechart": {
             "home": {
-                "title": "PieChart"
+                "title": "Gráfico de Pizza"
             }
         },
         "polarareachart": {

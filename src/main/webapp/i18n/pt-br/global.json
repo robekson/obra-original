@@ -8,8 +8,8 @@
                 "main": "Dashboard",
                 "barchart": "BarChart",
                 "doughnutchart": "DoughnutChart",
-                "linechart": "LineChart",
-                "piechart": "PieChart",
+                "linechart": "Gráfico de linha",
+                "piechart": "Gráfico de Pizza",
                 "polarareachart": "PolarAreaChart",
                 "radarchart": "RadarChart"
             },
