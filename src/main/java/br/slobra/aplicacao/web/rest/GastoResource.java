@@ -253,12 +253,12 @@ public class GastoResource {
 
 	private List<MesAnoDTO> getListaMesAno() {	
 		
-		SimpleDateFormat formato = new SimpleDateFormat("MMMM/yyyy",new Locale("pt", "br"));
+		SimpleDateFormat formato = new SimpleDateFormat("MMM/yyyy",new Locale("pt", "br"));
 		Calendar dia25 = Calendar.getInstance();
 
 		List<MesAnoDTO> lista = new ArrayList<>();
 		MesAnoDTO dto1=new MesAnoDTO();
-		dto1.setData(formato.format(dia25.getTime()).substring(0, 3));
+		dto1.setData(formato.format(dia25.getTime()));
 		lista.add(dto1);
 
 		for(int x=0;x<10;x++) {
