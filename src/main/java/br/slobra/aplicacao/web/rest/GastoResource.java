@@ -93,7 +93,7 @@ public class GastoResource {
         ObraDTO obra = obraService.findOne(result.getObraId()).get();         
         resumoGastoDTO.setNomeObra(obra.getNome());        
         List<GastoDTO> lista = gastoService.findByObra(result.getObraId());  
-        log.debug("lista: {}", lista));
+        log.debug("lista: {}", lista);
         
         BigDecimal valorDeposito = lista.stream().filter(i -> i.getTipo().equals(TipoConta.INVESTIMENTO_DEPOSITO)).map(GastoDTO::getValor).reduce(BigDecimal.ZERO, BigDecimal::add);
         resumoGastoDTO.setValorDeposito(valorDeposito);        
