@@ -14,6 +14,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 /**
  * Service Implementation for managing Gasto.
@@ -67,7 +68,7 @@ public class GastoServiceImpl implements GastoService {
     @Transactional(readOnly = true)
     public List<GastoDTO> findByObra(Long idObra) {
         log.debug("Request to get all Gastos");
-        return gastoRepository.findByObra(idObra).map(gastoMapper::toDto);
+        return gastoRepository.findByObra(idObra).stream().map(gastoMapper::toDto).collect(Collectors.toList());;
     }
 
 
