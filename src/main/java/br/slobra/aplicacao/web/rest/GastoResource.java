@@ -25,6 +25,7 @@ import java.net.URI;
 import java.net.URISyntaxException;
 
 import java.util.List;
+import java.util.Locale;
 import java.util.Optional;
 import java.util.Collections;
 
@@ -250,8 +251,9 @@ public class GastoResource {
     }
 
 
-	private List<MesAnoDTO> getListaMesAno() {
-		SimpleDateFormat formato = new SimpleDateFormat("MM/yyyy");
+	private List<MesAnoDTO> getListaMesAno() {	
+		
+		SimpleDateFormat formato = new SimpleDateFormat("MMMM/yyyy",new Locale("pt", "br"));
 		Calendar dia25 = Calendar.getInstance();
 
 		List<MesAnoDTO> lista = new ArrayList<>();
