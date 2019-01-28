@@ -6,6 +6,7 @@ import { ObrasPiechartModule } from './piechart/piechart.module';
 import { ObrasPolarareachartModule } from './polarareachart/polarareachart.module';
 import { ObrasRadarchartModule } from './radarchart/radarchart.module';
 import { LinechartService } from './linechart/linechart.service';
+import { PiechartService } from './piechart/piechart.service';
 
 @NgModule({
     imports: [
@@ -18,7 +19,7 @@ import { LinechartService } from './linechart/linechart.service';
     ],
     declarations: [],
     entryComponents: [],
-    providers: [LinechartService],
+    providers: [LinechartService, PiechartService],
     schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
 export class ObrasDashboardModule {}

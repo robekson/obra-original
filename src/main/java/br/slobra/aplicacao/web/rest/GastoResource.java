@@ -104,6 +104,39 @@ public class GastoResource {
      * @param pageable
      * @return
      */
+    @GetMapping("/graficoResumoConta")
+    @Timed
+    public ResponseEntity<ResumoContaDTO> graficoResumoConta(Pageable pageable) {
+        log.debug("Request to get all Gastos");
+
+
+        Page<GastoDTO> invoiceList = gastoService.findAll(pageable);
+
+        BigDecimal semNota = invoiceList.stream().filter(i -> i.getNota().equals(NotaFiscal.NAO)).map(GastoDTO::getValor).reduce(BigDecimal.ZERO, BigDecimal::add);
+        BigDecimal comNota = invoiceList.stream().filter(i -> i.getNota().equals(NotaFiscal.SIM)).map(GastoDTO::getValor).reduce(BigDecimal.ZERO, BigDecimal::add);
+
+        long countSemNota = invoiceList.stream().filter(i -> i.getNota().equals(NotaFiscal.NAO)).count();
+        long countComNota = invoiceList.stream().filter(i -> i.getNota().equals(NotaFiscal.SIM)).count();
+
+        BigDecimal valorDeposito = invoiceList.stream().filter(i -> i.getTipo().equals(TipoConta.INVESTIMENTO_DEPOSITO)).map(GastoDTO::getValor).reduce(BigDecimal.ZERO, BigDecimal::add);
+
+        BigDecimal total = invoiceList.stream().map(GastoDTO::getValor).reduce(BigDecimal.ZERO, BigDecimal::add);
+
+        ResumoContaDTO dto = new ResumoContaDTO();
+        dto.setDespesaSemNota(semNota);
+        dto.setDespesaComNota(comNota);
+        dto.setHonorarioAdministracao(new BigDecimal("100"));
+        //dto.setQuantidadeComNota(countComNota);
+        //dto.setQuantidadeSemNota(countSemNota);
+        dto.setValorDeposito(valorDeposito);
+        dto.setDespesaGeralSubTotal(total);
+
+
+        return ResponseUtil.wrapOrNotFound(Optional.of(dto));
+    }
+
+
+
     @GetMapping("/resumoConta")
     @Timed
     public ResponseEntity<ResumoContaDTO> getResumoConta(Pageable pageable) {
@@ -132,7 +165,7 @@ public class GastoResource {
 
         List<GastoDTO> listData = invoiceList.getContent();
         if(!listData.isEmpty()) {
-        	dto.setMesAno(listData.get(0).getMesAno());
+            dto.setMesAno(listData.get(0).getMesAno());
         }
 
 
