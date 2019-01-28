@@ -4,7 +4,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { Subscription, Observable } from 'rxjs';
 import { JhiEventManager, JhiParseLinks, JhiAlertService } from 'ng-jhipster';
 
-import { IGasto, IResumoGasto } from 'app/shared/model/gasto.model';
+import { IGasto, IResumoGasto, MesAno } from 'app/shared/model/gasto.model';
 import { AccountService } from 'app/core';
 
 import { ITEMS_PER_PAGE } from 'app/shared';
@@ -17,6 +17,7 @@ import { GastoService } from './gasto.service';
 export class GastoComponent implements OnInit, OnDestroy {
     currentAccount: any;
     gastos: IGasto[];
+    mesesAno: MesAno[];
     resumo: IResumoGasto;
     error: any;
     success: any;
@@ -99,8 +100,6 @@ export class GastoComponent implements OnInit, OnDestroy {
         });
         this.registerChangeInGastos();
         
-
-
         this.gastoService
             .resumo({
                 page: this.page - 1,
@@ -110,13 +109,13 @@ export class GastoComponent implements OnInit, OnDestroy {
                     (res: HttpResponse<IResumoGasto>) => this.montaGastos(res.body, res.headers),
                     (res: HttpErrorResponse) => this.onError(res.message)
                 );
-            
-            
-            
-          //  .subscribe((res : IResumoGasto)=>{this.resumo = res;}, (res: HttpErrorResponse) => this.onError(res.message));
+       
+        this.gastoService
+        .findMesesAno({ }).subscribe(
+                (res: HttpResponse<MesAno[]>) => this.montaMeses(res.body, res.headers),
+                (res: HttpErrorResponse) => this.onError(res.message)
+            );
 
-        console.log('Resumo =' + this.resumo);
-        console.log('Resumo =' + this.gastos);
         
         
         
@@ -152,6 +151,11 @@ export class GastoComponent implements OnInit, OnDestroy {
     protected montaGastos(data: IResumoGasto, headers: HttpHeaders) {
         this.resumo = data;
         console.log('Resumo =' + this.resumo);
+    }
+    
+    protected montaMeses(data: MesAno[], headers: HttpHeaders) {
+        this.mesesAno = data;
+        console.log('Meses Ano =' + this.mesesAno);
     }
 
     protected onError(errorMessage: string) {

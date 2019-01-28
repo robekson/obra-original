@@ -18,6 +18,11 @@ export const enum TipoConta {
     INVESTIMENTO_DEPOSITO = 'INVESTIMENTO_DEPOSITO'
 }
 
+
+export interface MesAno {
+   data?: string;
+}
+
 export interface IGasto {
     id?: number;
     nome?: string;

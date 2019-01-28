@@ -6,7 +6,7 @@ import { map, catchError } from 'rxjs/operators';
 
 import { SERVER_API_URL } from 'app/app.constants';
 import { createRequestOption } from 'app/shared';
-import { IGasto, IResumoGasto } from 'app/shared/model/gasto.model';
+import { IGasto, IResumoGasto, MesAno } from 'app/shared/model/gasto.model';
 import { Observable } from "rxjs";
 import { throwError } from 'rxjs';
 
@@ -14,11 +14,13 @@ type EntityResponseType = HttpResponse<IGasto>;
 type EntityArrayResponseType = HttpResponse<IGasto[]>;
 
 type EntityResponseTypeResumo = HttpResponse<IResumoGasto>;
+type EntityResponseTypeMesAno = HttpResponse<MesAno[]>;
 
 @Injectable({ providedIn: 'root' })
 export class GastoService {
     public resourceUrl = SERVER_API_URL + 'api/gastos';
     public resourceUrlResumo = SERVER_API_URL + 'api/resumoConta';
+    public resourceUrlMeses= SERVER_API_URL + 'api/gastoMesAno';
 
     constructor(protected http: HttpClient) {}
 
@@ -60,6 +62,12 @@ export class GastoService {
             .pipe(map((res: EntityResponseTypeResumo) => this.convertDateArrayFromServer2(res)));
     }
     
+    findMesesAno(req?: any): Observable<EntityResponseTypeMesAno> {
+        return this.http
+            .get<MesAno[]>(this.resourceUrlMeses, { observe: 'response' })
+            .pipe(map((res: EntityResponseTypeMesAno) => this.convertDateArrayFromServer3(res)));
+    }
+    
 
     delete(id: number): Observable<HttpResponse<any>> {
         return this.http.delete<any>(`${this.resourceUrl}/${id}`, { observe: 'response' });
@@ -93,6 +101,16 @@ export class GastoService {
     }
 
     protected convertDateArrayFromServer2(res: EntityResponseTypeResumo): EntityResponseTypeResumo {
+        if (res.body) {
+            // res.body.forEach((resumo: IResumoGasto) => {
+            // gasto.dataVencimento = gasto.dataVencimento != null ? moment(gasto.dataVencimento) : null;
+            // gasto.mesAno = gasto.mesAno != null ? moment(gasto.mesAno) : null;
+            //  });
+        }
+        return res;
+    }
+    
+    protected convertDateArrayFromServer3(res: EntityResponseTypeMesAno): EntityResponseTypeMesAno {
         if (res.body) {
             // res.body.forEach((resumo: IResumoGasto) => {
             // gasto.dataVencimento = gasto.dataVencimento != null ? moment(gasto.dataVencimento) : null;
