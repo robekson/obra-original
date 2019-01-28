@@ -60,10 +60,10 @@ public class GastoResource {
     private final GastoService gastoService;
     
     @Autowired
-    private final ResumoGastoService resumoGastoService;
+    ResumoGastoService resumoGastoService;
     
     @Autowired
-    private final ObraService obraService;
+    ObraService obraService;
 
     public GastoResource(GastoService gastoService) {
         this.gastoService = gastoService;
