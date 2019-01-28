@@ -191,7 +191,7 @@ public class GastoResource {
         List<MesAnoDTO> lista = getListaMesAno();
         List<GastoDTO> listGasto = gastoService.findAll(pageable).getContent();
 
-        DateTimeFormatter formatador = DateTimeFormatter.ofPattern("MM/yyyy");
+        DateTimeFormatter formatador = DateTimeFormatter.ofPattern("MMM/yyyy").withLocale(new Locale("pt", "br"));
         for(MesAnoDTO mesAno : lista) {
         	ResumoContaDTO contaDTO = new ResumoContaDTO();
             BigDecimal valorTotal = listGasto.stream().filter(i -> i.getMesAno().format(formatador).equals(mesAno.getData())).map(GastoDTO::getValor).reduce(BigDecimal.ZERO, BigDecimal::add);

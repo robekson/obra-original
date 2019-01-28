@@ -56,7 +56,7 @@ public class ResumoContaDTO implements Serializable {
 	}
 
 	public String getMesAnoFormatado() {
-        DateTimeFormatter formatador = DateTimeFormatter.ofPattern("MMM/yyyy");
+        DateTimeFormatter formatador = DateTimeFormatter.ofPattern("MMM/yyyy").withLocale(new Locale("pt", "br"));
         if(mesAno!=null)mesAnoFormatado = mesAno.format(formatador);
 		return mesAnoFormatado;
 	}
