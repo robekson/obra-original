@@ -258,7 +258,7 @@ public class GastoResource {
 
 		List<MesAnoDTO> lista = new ArrayList<>();
 		MesAnoDTO dto1=new MesAnoDTO();
-		dto1.setData(formato.format(dia25.getTime()));
+		dto1.setData(formato.format(dia25.getTime()).substring(0, 3));
 		lista.add(dto1);
 
 		for(int x=0;x<10;x++) {
