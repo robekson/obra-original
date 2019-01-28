@@ -25,10 +25,6 @@ export class LinechartService {
 
     protected convertDateArrayFromServer2(res: EntityResponseTypeResumo): EntityResponseTypeResumo {
         if (res.body) {
-            // res.body.forEach((resumo: IResumoGasto) => {
-            // gasto.dataVencimento = gasto.dataVencimento != null ? moment(gasto.dataVencimento) : null;
-            // gasto.mesAno = gasto.mesAno != null ? moment(gasto.mesAno) : null;
-            //  });
         }
         return res;
     }

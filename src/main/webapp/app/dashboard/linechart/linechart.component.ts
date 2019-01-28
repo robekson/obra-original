@@ -36,13 +36,9 @@ export class LinechartComponent implements OnInit {
         var lineChartDataSet = [];
         var dataValues = [];
 
-        //data: [65, 59, 80, 81, 56, 55, 40],
-
         for (let resumoGasto of data) {
             lineChartLabels.push(resumoGasto.mesAnoFormatado);
             dataValues.push(resumoGasto.totalDespesas);
-            console.log(resumoGasto.totalDespesas);
-            console.log(resumoGasto.mesAnoFormatado);
         }
 
         v_json['labels'] = lineChartLabels;
