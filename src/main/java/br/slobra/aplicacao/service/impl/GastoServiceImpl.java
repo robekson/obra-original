@@ -67,9 +67,9 @@ public class GastoServiceImpl implements GastoService {
     @Override
     @Transactional(readOnly = true)
     public List<GastoDTO> findByObra(Long idObra) {
-        log.debug("Request to get all Gastos");
-        
-        return gastoRepository.findByObra(idObra).stream().map(gastoMapper::toDto).collect(Collectors.toList());
+        log.debug("Request to get all Gastos");        
+        List<Gasto> lista = gastoRepository.findByObra(idObra);       
+        return lista.stream().map(gastoMapper::toDto).collect(Collectors.toList());
     }
 
 
