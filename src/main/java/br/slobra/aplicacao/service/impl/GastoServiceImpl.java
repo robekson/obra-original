@@ -12,7 +12,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
+import java.util.List;
 import java.util.Optional;
 
 /**
@@ -60,6 +60,14 @@ public class GastoServiceImpl implements GastoService {
         log.debug("Request to get all Gastos");
         return gastoRepository.findAll(pageable)
             .map(gastoMapper::toDto);
+    }
+    
+    
+    @Override
+    @Transactional(readOnly = true)
+    public List<GastoDTO> findByObra(Long idObra) {
+        log.debug("Request to get all Gastos");
+        return gastoRepository.findByObra(idObra).map(gastoMapper::toDto);
     }
 
 

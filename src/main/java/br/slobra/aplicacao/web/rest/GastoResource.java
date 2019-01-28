@@ -2,11 +2,15 @@ package br.slobra.aplicacao.web.rest;
 
 import com.codahale.metrics.annotation.Timed;
 import br.slobra.aplicacao.service.GastoService;
+import br.slobra.aplicacao.service.ObraService;
+import br.slobra.aplicacao.service.ResumoGastoService;
 import br.slobra.aplicacao.web.rest.errors.BadRequestAlertException;
 import br.slobra.aplicacao.web.rest.util.HeaderUtil;
 import br.slobra.aplicacao.web.rest.util.PaginationUtil;
 import br.slobra.aplicacao.service.dto.GastoDTO;
+import br.slobra.aplicacao.service.dto.ObraDTO;
 import br.slobra.aplicacao.service.dto.ResumoContaDTO;
+import br.slobra.aplicacao.service.dto.ResumoGastoDTO;
 import br.slobra.aplicacao.service.mapper.GastoMapper;
 import br.slobra.aplicacao.service.dto.MesAnoDTO;
 import io.github.jhipster.web.util.ResponseUtil;
@@ -18,6 +22,7 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.beans.factory.annotation.Autowired;
 import java.math.BigDecimal;
 
 import javax.validation.Valid;
@@ -40,6 +45,7 @@ import java.time.format.DateTimeFormatter;
 
 
 
+
 /**
  * REST controller for managing Gasto.
  */
@@ -52,6 +58,12 @@ public class GastoResource {
     private static final String ENTITY_NAME = "gasto";
 
     private final GastoService gastoService;
+    
+    @Autowired
+    private final ResumoGastoService resumoGastoService;
+    
+    @Autowired
+    private final ObraService obraService;
 
     public GastoResource(GastoService gastoService) {
         this.gastoService = gastoService;
@@ -71,7 +83,27 @@ public class GastoResource {
         if (gastoDTO.getId() != null) {
             throw new BadRequestAlertException("A new gasto cannot already have an ID", ENTITY_NAME, "idexists");
         }
-        GastoDTO result = gastoService.save(gastoDTO);
+        
+        
+        log.debug("Log instancia1 : {}", resumoGastoService);
+        log.debug("Log instancia2 : {}", obraService);
+        GastoDTO result = gastoService.save(gastoDTO);        
+        ResumoGastoDTO resumoGastoDTO = new ResumoGastoDTO();
+        log.debug("Log id obra : {}", result.getObraId());
+        ObraDTO obra = obraService.findOne(result.getObraId()).get();         
+        resumoGastoDTO.setNomeObra(obra.getNome());        
+        List<GastoDTO> lista = gastoService.findByObra(result.getObraId());  
+        log.debug("lista: {}", lista));
+        
+        BigDecimal valorDeposito = lista.stream().filter(i -> i.getTipo().equals(TipoConta.INVESTIMENTO_DEPOSITO)).map(GastoDTO::getValor).reduce(BigDecimal.ZERO, BigDecimal::add);
+        resumoGastoDTO.setValorDeposito(valorDeposito);        
+        BigDecimal valorDespesa = lista.stream().map(GastoDTO::getValor).reduce(BigDecimal.ZERO, BigDecimal::add);
+        resumoGastoDTO.setValorDespesa(valorDespesa);   
+        BigDecimal valorSaldo = valorDeposito.subtract(valorDespesa);
+        resumoGastoDTO.setValorSaldo(valorSaldo);
+        
+        ResumoGastoDTO result2 = resumoGastoService.save(resumoGastoDTO);
+        
         return ResponseEntity.created(new URI("/api/gastos/" + result.getId()))
             .headers(HeaderUtil.createEntityCreationAlert(ENTITY_NAME, result.getId().toString()))
             .body(result);
