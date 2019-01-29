@@ -62,13 +62,13 @@ public class GastoServiceImpl implements GastoService {
         return gastoRepository.findAll(pageable)
             .map(gastoMapper::toDto);
     }
-    
-    
+
+
     @Override
     @Transactional(readOnly = true)
     public List<GastoDTO> findByObra(Long idObra) {
-        log.debug("Request to get all Gastos");        
-        List<Gasto> lista = gastoRepository.findByObra(idObra);       
+        log.debug("Request to get all Gastos");
+        List<Gasto> lista = gastoRepository.findByObra(idObra);
         return lista.stream().map(gastoMapper::toDto).collect(Collectors.toList());
     }
 

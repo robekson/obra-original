@@ -13,6 +13,8 @@ public class ResumoGastoDTO implements Serializable {
 
     private String nomeObra;
 
+    private Long idObra;
+
     private BigDecimal valorDeposito;
 
     private BigDecimal valorDespesa;
@@ -57,6 +59,14 @@ public class ResumoGastoDTO implements Serializable {
 
     public void setValorSaldo(BigDecimal valorSaldo) {
         this.valorSaldo = valorSaldo;
+    }
+
+    public Long getIdObra() {
+        return idObra;
+    }
+
+    public void setIdObra(Long idObra) {
+        this.idObra = idObra;
     }
 
     @Override

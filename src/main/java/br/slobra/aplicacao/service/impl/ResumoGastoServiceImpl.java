@@ -77,6 +77,13 @@ public class ResumoGastoServiceImpl implements ResumoGastoService {
             .map(resumoGastoMapper::toDto);
     }
 
+    @Override
+    @Transactional(readOnly = true)
+    public ResumoGastoDTO findByObra(Long idObra) {
+        ResumoGasto resumoGasto = resumoGastoRepository.findByObra(idObra);
+        return resumoGastoMapper.toDto(resumoGasto);
+    }
+
     /**
      * Delete the resumoGasto by id.
      *

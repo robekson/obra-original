@@ -43,4 +43,6 @@ public interface ResumoGastoService {
      * @param id the id of the entity
      */
     void delete(Long id);
+
+    ResumoGastoDTO findByObra(Long idObra);
 }

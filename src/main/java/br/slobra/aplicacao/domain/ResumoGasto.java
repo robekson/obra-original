@@ -24,6 +24,9 @@ public class ResumoGasto implements Serializable {
     @Column(name = "nome_obra")
     private String nomeObra;
 
+    @Column(name = "id_obra")
+    private Long idObra;
+
     @Column(name = "valor_deposito", precision = 10, scale = 2)
     private BigDecimal valorDeposito;
 
@@ -45,6 +48,15 @@ public class ResumoGasto implements Serializable {
     public String getNomeObra() {
         return nomeObra;
     }
+
+    public Long getIdObra() {
+        return idObra;
+    }
+
+    public void setIdObra(Long idObra) {
+        this.idObra = idObra;
+    }
+
 
     public ResumoGasto nomeObra(String nomeObra) {
         this.nomeObra = nomeObra;

@@ -58,10 +58,10 @@ public class GastoResource {
     private static final String ENTITY_NAME = "gasto";
 
     private final GastoService gastoService;
-    
+
     @Autowired
     ResumoGastoService resumoGastoService;
-    
+
     @Autowired
     ObraService obraService;
 
@@ -83,37 +83,34 @@ public class GastoResource {
         if (gastoDTO.getId() != null) {
             throw new BadRequestAlertException("A new gasto cannot already have an ID", ENTITY_NAME, "idexists");
         }
-        
-        GastoDTO result = gastoService.save(gastoDTO);    
-                      
+        //Regra de inserir os calculos no resumo da obra
+        GastoDTO result = gastoService.save(gastoDTO);
         ResumoGastoDTO resumoGastoDTO = new ResumoGastoDTO();
-        log.debug("Log id obra : {}", result.getObraId());
-        ObraDTO obra = obraService.findOne(result.getObraId()).get();        
-        log.debug("obra.getResumoGastoId() : {}", obra.getResumoGastoId());     
-        resumoGastoDTO.setNomeObra(obra.getNome());        
-        List<GastoDTO> lista = gastoService.findByObra(result.getObraId());  
-        log.debug("lista: {}", lista);
-        
+        ObraDTO obra = obraService.findOne(result.getObraId()).get();
+        resumoGastoDTO.setNomeObra(obra.getNome());
+        List<GastoDTO> lista = gastoService.findByObra(result.getObraId());
         BigDecimal valorDeposito = lista.stream().filter(i -> i.getTipo().equals(TipoConta.INVESTIMENTO_DEPOSITO)).map(GastoDTO::getValor).reduce(BigDecimal.ZERO, BigDecimal::add);
-        resumoGastoDTO.setValorDeposito(valorDeposito);        
-        BigDecimal valorDespesa = lista.stream().map(GastoDTO::getValor).reduce(BigDecimal.ZERO, BigDecimal::add);
-        resumoGastoDTO.setValorDespesa(valorDespesa);   
+        resumoGastoDTO.setValorDeposito(valorDeposito);
+        BigDecimal valorDespesa = lista.stream().filter(i -> ! i.getTipo().equals(TipoConta.INVESTIMENTO_DEPOSITO)).map(GastoDTO::getValor).reduce(BigDecimal.ZERO, BigDecimal::add);
+        resumoGastoDTO.setValorDespesa(valorDespesa);
         BigDecimal valorSaldo = valorDeposito.subtract(valorDespesa);
         resumoGastoDTO.setValorSaldo(valorSaldo);
-        
-        if(obra.getResumoGastoId()==null) {//insert
-        	ResumoGastoDTO result2 = resumoGastoService.save(resumoGastoDTO);	
+
+        ResumoGastoDTO  resumoGastoDTO1 = resumoGastoService.findByObra(result.getObraId());
+
+        if(resumoGastoDTO1==null) {//insert
+            resumoGastoDTO.setIdObra(result.getObraId());
+        	ResumoGastoDTO result2 = resumoGastoService.save(resumoGastoDTO);
         } else {//update
-        	resumoGastoDTO = resumoGastoService.findOne(obra.getResumoGastoId()).get();
-        	resumoGastoDTO.setValorDeposito(valorDeposito);
-        	resumoGastoDTO.setValorDespesa(valorDespesa);
+            resumoGastoDTO1.setValorDeposito(valorDeposito);
+            resumoGastoDTO1.setValorDespesa(valorDespesa);
         	BigDecimal valorSaldo1 = valorDeposito.subtract(valorDespesa);
-            resumoGastoDTO.setValorSaldo(valorSaldo1);
-            ResumoGastoDTO result2 = resumoGastoService.save(resumoGastoDTO);	
+            resumoGastoDTO1.setValorSaldo(valorSaldo1);
+            ResumoGastoDTO result2 = resumoGastoService.save(resumoGastoDTO1);
         }
-        
-        
-        
+
+
+
         return ResponseEntity.created(new URI("/api/gastos/" + result.getId()))
             .headers(HeaderUtil.createEntityCreationAlert(ENTITY_NAME, result.getId().toString()))
             .body(result);
@@ -136,6 +133,33 @@ public class GastoResource {
             throw new BadRequestAlertException("Invalid id", ENTITY_NAME, "idnull");
         }
         GastoDTO result = gastoService.save(gastoDTO);
+
+        //Regra de atualizar os calculos no resumo da obra
+        ResumoGastoDTO resumoGastoDTO = new ResumoGastoDTO();
+        ObraDTO obra = obraService.findOne(result.getObraId()).get();
+        resumoGastoDTO.setNomeObra(obra.getNome());
+        List<GastoDTO> lista = gastoService.findByObra(result.getObraId());
+        BigDecimal valorDeposito = lista.stream().filter(i -> i.getTipo().equals(TipoConta.INVESTIMENTO_DEPOSITO)).map(GastoDTO::getValor).reduce(BigDecimal.ZERO, BigDecimal::add);
+        resumoGastoDTO.setValorDeposito(valorDeposito);
+        BigDecimal valorDespesa = lista.stream().filter(i -> ! i.getTipo().equals(TipoConta.INVESTIMENTO_DEPOSITO)).map(GastoDTO::getValor).reduce(BigDecimal.ZERO, BigDecimal::add);
+        resumoGastoDTO.setValorDespesa(valorDespesa);
+        BigDecimal valorSaldo = valorDeposito.subtract(valorDespesa);
+        resumoGastoDTO.setValorSaldo(valorSaldo);
+
+        ResumoGastoDTO  resumoGastoDTO1 = resumoGastoService.findByObra(result.getObraId());
+
+        if(resumoGastoDTO1==null) {//insert
+            resumoGastoDTO.setIdObra(result.getObraId());
+            ResumoGastoDTO result2 = resumoGastoService.save(resumoGastoDTO);
+        } else {//update
+            resumoGastoDTO1.setValorDeposito(valorDeposito);
+            resumoGastoDTO1.setValorDespesa(valorDespesa);
+            BigDecimal valorSaldo1 = valorDeposito.subtract(valorDespesa);
+            resumoGastoDTO1.setValorSaldo(valorSaldo1);
+            ResumoGastoDTO result2 = resumoGastoService.save(resumoGastoDTO1);
+        }
+
+
         return ResponseEntity.ok()
             .headers(HeaderUtil.createEntityUpdateAlert(ENTITY_NAME, gastoDTO.getId().toString()))
             .body(result);
@@ -293,8 +317,8 @@ public class GastoResource {
     }
 
 
-	private List<MesAnoDTO> getListaMesAno() {	
-		
+	private List<MesAnoDTO> getListaMesAno() {
+
 		SimpleDateFormat formato = new SimpleDateFormat("MMM/yyyy",new Locale("pt", "br"));
 		Calendar dia25 = Calendar.getInstance();
 
