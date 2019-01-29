@@ -84,13 +84,15 @@ public class GastoResource {
             throw new BadRequestAlertException("A new gasto cannot already have an ID", ENTITY_NAME, "idexists");
         }
         
+
+        GastoDTO result = gastoService.save(gastoDTO);    
         
-        log.debug("Log instancia1 : {}", resumoGastoService);
-        log.debug("Log instancia2 : {}", obraService);
-        GastoDTO result = gastoService.save(gastoDTO);        
+        
+        
         ResumoGastoDTO resumoGastoDTO = new ResumoGastoDTO();
         log.debug("Log id obra : {}", result.getObraId());
-        ObraDTO obra = obraService.findOne(result.getObraId()).get();         
+        ObraDTO obra = obraService.findOne(result.getObraId()).get();        
+        log.debug("obra.getResumoGastoId() : {}", obra.getResumoGastoId());     
         resumoGastoDTO.setNomeObra(obra.getNome());        
         List<GastoDTO> lista = gastoService.findByObra(result.getObraId());  
         log.debug("lista: {}", lista);
@@ -102,7 +104,18 @@ public class GastoResource {
         BigDecimal valorSaldo = valorDeposito.subtract(valorDespesa);
         resumoGastoDTO.setValorSaldo(valorSaldo);
         
-        ResumoGastoDTO result2 = resumoGastoService.save(resumoGastoDTO);
+        if(obra.getResumoGastoId()==null) {//insert
+        	ResumoGastoDTO result2 = resumoGastoService.save(resumoGastoDTO);	
+        } else {//update
+        	resumoGastoDTO = resumoGastoService.findOne(obra.getResumoGastoId()).get();
+        	resumoGastoDTO.setValorDeposito(valorDeposito);
+        	resumoGastoDTO.setValorDespesa(valorDespesa);
+        	BigDecimal valorSaldo = valorDeposito.subtract(valorDespesa);
+            resumoGastoDTO.setValorSaldo(valorSaldo);
+            ResumoGastoDTO result2 = resumoGastoService.save(resumoGastoDTO);	
+        }
+        
+        
         
         return ResponseEntity.created(new URI("/api/gastos/" + result.getId()))
             .headers(HeaderUtil.createEntityCreationAlert(ENTITY_NAME, result.getId().toString()))
