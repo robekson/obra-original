@@ -86,8 +86,7 @@ public class GastoResource {
         
 
         GastoDTO result = gastoService.save(gastoDTO);    
-        
-        
+               
         
         ResumoGastoDTO resumoGastoDTO = new ResumoGastoDTO();
         log.debug("Log id obra : {}", result.getObraId());
