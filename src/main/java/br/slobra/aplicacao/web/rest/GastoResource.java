@@ -84,11 +84,8 @@ public class GastoResource {
             throw new BadRequestAlertException("A new gasto cannot already have an ID", ENTITY_NAME, "idexists");
         }
         
-
         GastoDTO result = gastoService.save(gastoDTO);    
-        
-        
-        
+                      
         ResumoGastoDTO resumoGastoDTO = new ResumoGastoDTO();
         log.debug("Log id obra : {}", result.getObraId());
         ObraDTO obra = obraService.findOne(result.getObraId()).get();        
