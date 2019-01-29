@@ -110,7 +110,7 @@ public class GastoResource {
         	resumoGastoDTO = resumoGastoService.findOne(obra.getResumoGastoId()).get();
         	resumoGastoDTO.setValorDeposito(valorDeposito);
         	resumoGastoDTO.setValorDespesa(valorDespesa);
-        	BigDecimal valorSaldo = valorDeposito.subtract(valorDespesa);
+        	valorSaldo = valorDeposito.subtract(valorDespesa);
             resumoGastoDTO.setValorSaldo(valorSaldo);
             ResumoGastoDTO result2 = resumoGastoService.save(resumoGastoDTO);	
         }
