@@ -86,7 +86,8 @@ public class GastoResource {
         
 
         GastoDTO result = gastoService.save(gastoDTO);    
-               
+        
+        
         
         ResumoGastoDTO resumoGastoDTO = new ResumoGastoDTO();
         log.debug("Log id obra : {}", result.getObraId());
@@ -109,8 +110,8 @@ public class GastoResource {
         	resumoGastoDTO = resumoGastoService.findOne(obra.getResumoGastoId()).get();
         	resumoGastoDTO.setValorDeposito(valorDeposito);
         	resumoGastoDTO.setValorDespesa(valorDespesa);
-        	valorSaldo = valorDeposito.subtract(valorDespesa);
-            resumoGastoDTO.setValorSaldo(valorSaldo);
+        	BigDecimal valorSaldo1 = valorDeposito.subtract(valorDespesa);
+            resumoGastoDTO.setValorSaldo(valorSaldo1);
             ResumoGastoDTO result2 = resumoGastoService.save(resumoGastoDTO);	
         }
         
