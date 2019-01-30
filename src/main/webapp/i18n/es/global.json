@@ -16,9 +16,9 @@
             "jhipster-needle-menu-add-element": "JHipster will add additional menu entries here (do not translate!)",
             "entities": {
                 "main": "Entidades",
-                "obra": "Obra",
-                "resumoGasto": "Resumo Gasto",
-                "gasto": "Gasto",
+                "obra": "Obras",
+                "resumoGasto": "Resumo de Gastoa",
+                "gasto": "Lançamento de Gastos",
                 "jhipster-needle-menu-add-entry": "JHipster will add additional entities here (do not translate!)"
             },
             "account": {

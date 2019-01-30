@@ -79,17 +79,17 @@
                             <fa-icon icon="asterisk" fixedWidth="true"></fa-icon>
                             <span jhiTranslate="global.menu.entities.obra">Obra</span>
                         </a>
+                    </li>                  
+                    <li>
+                        <a class="dropdown-item" routerLink="gasto" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" (click)="collapseNavbar()">
+                            <fa-icon icon="asterisk" fixedWidth="true"></fa-icon>
+                            <span jhiTranslate="global.menu.entities.gasto">Gasto</span>
+                        </a>
                     </li>
                     <li>
                         <a class="dropdown-item" routerLink="resumo-gasto" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" (click)="collapseNavbar()">
                             <fa-icon icon="asterisk" fixedWidth="true"></fa-icon>
                             <span jhiTranslate="global.menu.entities.resumoGasto">Resumo Gasto</span>
-                        </a>
-                    </li>
-                    <li>
-                        <a class="dropdown-item" routerLink="gasto" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" (click)="collapseNavbar()">
-                            <fa-icon icon="asterisk" fixedWidth="true"></fa-icon>
-                            <span jhiTranslate="global.menu.entities.gasto">Gasto</span>
                         </a>
                     </li>
                     <!-- jhipster-needle-add-entity-to-menu - JHipster will add entities to the menu here -->
