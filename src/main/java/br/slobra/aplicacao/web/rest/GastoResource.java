@@ -83,8 +83,8 @@ public class GastoResource {
         if (gastoDTO.getId() != null) {
             throw new BadRequestAlertException("A new gasto cannot already have an ID", ENTITY_NAME, "idexists");
         }
-        //Regra de inserir os calculos no resumo da obra
         GastoDTO result = gastoService.save(gastoDTO);
+        //Regra de inserir os calculos no resumo da obra
         ResumoGastoDTO resumoGastoDTO = new ResumoGastoDTO();
         ObraDTO obra = obraService.findOne(result.getObraId()).get();
         resumoGastoDTO.setNomeObra(obra.getNome());
@@ -312,7 +312,34 @@ public class GastoResource {
     @Timed
     public ResponseEntity<Void> deleteGasto(@PathVariable Long id) {
         log.debug("REST request to delete Gasto : {}", id);
+
+        GastoDTO result = gastoService.findOne(id).get();
         gastoService.delete(id);
+
+        //Regra de atualizar os calculos no resumo da obra
+        ResumoGastoDTO resumoGastoDTO = new ResumoGastoDTO();
+        ObraDTO obra = obraService.findOne(result.getObraId()).get();
+        resumoGastoDTO.setNomeObra(obra.getNome());
+        List<GastoDTO> lista = gastoService.findByObra(result.getObraId());
+        BigDecimal valorDeposito = lista.stream().filter(i -> i.getTipo().equals(TipoConta.INVESTIMENTO_DEPOSITO)).map(GastoDTO::getValor).reduce(BigDecimal.ZERO, BigDecimal::add);
+        resumoGastoDTO.setValorDeposito(valorDeposito);
+        BigDecimal valorDespesa = lista.stream().filter(i -> ! i.getTipo().equals(TipoConta.INVESTIMENTO_DEPOSITO)).map(GastoDTO::getValor).reduce(BigDecimal.ZERO, BigDecimal::add);
+        resumoGastoDTO.setValorDespesa(valorDespesa);
+        BigDecimal valorSaldo = valorDeposito.subtract(valorDespesa);
+        resumoGastoDTO.setValorSaldo(valorSaldo);
+
+        ResumoGastoDTO  resumoGastoDTO1 = resumoGastoService.findByObra(result.getObraId());
+
+        if(resumoGastoDTO1!=null) {//update
+            resumoGastoDTO1.setValorDeposito(valorDeposito);
+            resumoGastoDTO1.setValorDespesa(valorDespesa);
+            BigDecimal valorSaldo1 = valorDeposito.subtract(valorDespesa);
+            resumoGastoDTO1.setValorSaldo(valorSaldo1);
+            ResumoGastoDTO result2 = resumoGastoService.save(resumoGastoDTO1);
+        }
+
+
+
         return ResponseEntity.ok().headers(HeaderUtil.createEntityDeletionAlert(ENTITY_NAME, id.toString())).build();
     }
 
