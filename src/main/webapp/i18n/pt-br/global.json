@@ -5,7 +5,7 @@
         "menu": {
             "home": "Início",
             "dashboard": {
-                "main": "Dashboard",
+                "main": "Gráficos",
                 "barchart": "BarChart",
                 "doughnutchart": "DoughnutChart",
                 "linechart": "Gráfico de linha",
