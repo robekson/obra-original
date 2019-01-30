@@ -18,7 +18,7 @@
                 "main": "Entidades",
                 "obra": "Obras",
                 "resumoGasto": "Resumo de Gastoa",
-                "gasto": "Lançamento de Gastos",
+                "gasto": "Lançcamento de Gastos",
                 "jhipster-needle-menu-add-entry": "JHipster will add additional entities here (do not translate!)"
             },
             "account": {
