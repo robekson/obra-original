@@ -103,17 +103,14 @@ export class ObraComponent implements OnInit, OnDestroy {
         });
         this.registerChangeInObras();
         
-        let exampleId: any = $('#example');
-        
-        var table = exampleId.DataTable( {
-            lengthChange: false,
-            buttons: [ 'copy', 'excel', 'pdf', 'colvis' ]
+        $('#example').DataTable( {
+            dom: 'Bfrtip',
+            buttons: [
+                'copy', 'csv', 'excel', 'pdf', 'print'
+            ]
         } );
         
-        console.log("sample "+exampleId);
         
-        table.buttons().container()
-        .appendTo( '#example_wrapper .col-sm-6:eq(0)' );
     }
 
     ngOnDestroy() {
