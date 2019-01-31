@@ -10,6 +10,9 @@ import { AccountService } from 'app/core';
 import { ITEMS_PER_PAGE } from 'app/shared';
 import { ObraService } from './obra.service';
 
+import * as $ from 'jquery';
+import 'datatables.net'
+
 @Component({
     selector: 'jhi-obra',
     templateUrl: './obra.component.html'
@@ -29,6 +32,7 @@ export class ObraComponent implements OnInit, OnDestroy {
     predicate: any;
     previousPage: any;
     reverse: any;
+    tableWidget: any;
 
     constructor(
         protected obraService: ObraService,
@@ -97,6 +101,9 @@ export class ObraComponent implements OnInit, OnDestroy {
             this.currentAccount = account;
         });
         this.registerChangeInObras();
+        
+        let exampleId: any = $('#example');
+        console.log("sample "+exampleId);
     }
 
     ngOnDestroy() {
