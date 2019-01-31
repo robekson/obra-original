@@ -140,6 +140,15 @@
             link: function (scope, element, attrs) {},
         }
     });
+    
+    function MyCtrl($scope) {
+		$scope.isStarted = "Project initializing...";
+       var init = function () {
+				$scope.isStarted = $scope.isStarted + "Project now initialized";
+       }
+     init();
+    }
+    
     </script>
 
 </body>
