@@ -141,12 +141,12 @@
         }
     });
     
-    function MyCtrl($scope) {
-		$scope.isStarted = "Project initializing...";
-       var init = function () {
-				$scope.isStarted = $scope.isStarted + "Project now initialized";
-       }
-     init();
+    
+    angular.module('controllerAsExample', [])
+    .controller('SettingsController1', SettingsController1);
+    
+    function SettingsController1() {
+    	  alert("oi");
     }
     
     </script>
