@@ -76,7 +76,7 @@
             </tbody>
         </table>
     </div>
-    <div *ngIf="obras && obras.length">
+    <div ng-init="alert('oi')" *ngIf="obras && obras.length">
         <div class="row justify-content-center">
             <jhi-item-count [page]="page" [total]="queryCount" [maxSize]="5" [itemsPerPage]="itemsPerPage"></jhi-item-count>
         </div>
@@ -85,14 +85,7 @@
         </div>
     </div>
      
-  The date and time are 1:<br>
-    <script>
-        $(document).ready(function(){
-        	alert('oi');
-        });
-    </script>
-    
-    
+  The date and time are 2:<br>
   
 </div>
 
