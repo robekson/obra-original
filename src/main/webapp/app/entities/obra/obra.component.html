@@ -1,4 +1,5 @@
 <div>
+  <body>
     <h2 id="page-heading">
         <span jhiTranslate="obrasApp.obra.home.title">Obras</span>
         <button id="jh-create-entity" class="btn btn-primary float-right jh-create-entity create-obra" [routerLink]="['/obra/new']">
@@ -83,15 +84,11 @@
             <ngb-pagination [collectionSize]="totalItems" [(page)]="page" [pageSize]="itemsPerPage" [maxSize]="5" [rotate]="true" [boundaryLinks]="true" (pageChange)="loadPage(page)"></ngb-pagination>
         </div>
     </div>
-</div>
-<script type="text/javascript" language="javascript">
-$(document).ready(function() {
-    var table = $('#example').DataTable( {
-        lengthChange: false,
-        buttons: [ 'copy', 'excel', 'pdf', 'colvis' ]
-    } );
- 
-    table.buttons().container()
-        .appendTo( '#example_wrapper .col-sm-6:eq(0)' );
-} );
+     
+  The date and time are:<br>
+<script language="JavaScript">
+  // Now call the function we defined above
+  print_todays_date( );
 </script>
+</div>
+
