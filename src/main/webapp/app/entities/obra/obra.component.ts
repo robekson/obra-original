@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit,ViewChild, OnDestroy } from '@angular/core';
 import { HttpErrorResponse, HttpHeaders, HttpResponse } from '@angular/common/http';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
@@ -12,6 +12,7 @@ import { ObraService } from './obra.service';
 
 import * as $ from 'jquery';
 import 'datatables.net'
+
 
 @Component({
     selector: 'jhi-obra',
@@ -103,7 +104,16 @@ export class ObraComponent implements OnInit, OnDestroy {
         this.registerChangeInObras();
         
         let exampleId: any = $('#example');
+        
+        var table = exampleId.DataTable( {
+            lengthChange: false,
+            buttons: [ 'copy', 'excel', 'pdf', 'colvis' ]
+        } );
+        
         console.log("sample "+exampleId);
+        
+        table.buttons().container()
+        .appendTo( '#example_wrapper .col-sm-6:eq(0)' );
     }
 
     ngOnDestroy() {
