@@ -117,7 +117,19 @@
     <!-- Page level plugin JavaScript-->
     <script src="content/js/Chart.min.js"></script>
     <script src="content/js/chart-area-demo.js"></script>
-    <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.0.7/angular.min.js"></script>
+
+     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
+     
+     <script>
+		var app = angular.module('myApp', []);
+		app.controller('myCtrl', function($scope) {
+		alert('oi');
+		    $scope.firstName = "John";
+		    $scope.lastName = "Doe";
+		});
+	</script>
+     
+     
     <script src="content/js/angular-locale_pt-br.js"></script>  
     
     
@@ -133,23 +145,7 @@
     <script src="https://cdn.datatables.net/buttons/1.5.2/js/buttons.print.min.js"></script>
     <script src="https://cdn.datatables.net/buttons/1.5.2/js/buttons.colVis.min.js"></script>
  
-  <script type="text/javascript" language="javascript">
-    var app = angular.module('myApp', []);
-    app.directive('myDirective', function () {
-        return {
-            link: function (scope, element, attrs) {},
-        }
-    });
-    
-    
-    angular.module('controllerAsExample', [])
-    .controller('SettingsController1', SettingsController1);
-    
-    function SettingsController1() {
-    	  alert("oi");
-    }
-    
-    </script>
+     
 
 </body>
 </html>
