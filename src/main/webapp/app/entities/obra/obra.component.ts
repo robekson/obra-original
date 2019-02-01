@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { HttpErrorResponse, HttpHeaders, HttpResponse } from '@angular/common/http';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
@@ -9,9 +9,6 @@ import { AccountService } from 'app/core';
 
 import { ITEMS_PER_PAGE } from 'app/shared';
 import { ObraService } from './obra.service';
-
-import * as $ from 'jquery';
-import 'datatables.net';
 
 @Component({
     selector: 'jhi-obra',
@@ -32,7 +29,6 @@ export class ObraComponent implements OnInit, OnDestroy {
     predicate: any;
     previousPage: any;
     reverse: any;
-    tableWidget: any;
 
     constructor(
         protected obraService: ObraService,
@@ -101,11 +97,6 @@ export class ObraComponent implements OnInit, OnDestroy {
             this.currentAccount = account;
         });
         this.registerChangeInObras();
-
-        $('#example').DataTable({
-            dom: 'Bfrtip',
-            buttons: ['copy', 'csv', 'excel', 'pdf', 'print']
-        });
     }
 
     ngOnDestroy() {
