@@ -156,7 +156,7 @@
     }
 
     function createBotaoExportObra() {
-        var table = $('#example').DataTable( {
+        var table = $('#idTableObra').DataTable( {
             lengthChange: false,
             ordering: false,
             paging: false,
@@ -165,7 +165,21 @@
             buttons: ['copy', 'excel', 'pdf']
             });
 
-       table.buttons().container().appendTo( '#example_wrapper .col-sm-12:eq(0)' );
+       table.buttons().container().appendTo( '#idTableObra_wrapper .col-sm-12:eq(0)' );
+
+    }
+        
+    function createBotaoExportGasto() {
+        var table = $('#idTableGasto').DataTable( {
+            lengthChange: false,
+            ordering: false,
+            paging: false,
+            searching: false,
+            info: false,
+            buttons: ['copy', 'excel', 'pdf']
+            });
+
+       table.buttons().container().appendTo( '#idTableGasto_wrapper .col-sm-12:eq(0)' );
 
     }
     </script>
