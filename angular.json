@@ -35,5 +35,24 @@
         "@schematics/angular:service": {
             "spec": false
         }
-    }
+    },
+    "scripts": [
+        "node_modules/jquery/dist/jquery.js",
+        "node_modules/datatables.net/js/jquery.dataTables.js",
+        "node_modules/jszip/dist/jszip.js",
+        "node_modules/datatables.net-buttons/js/dataTables.buttons.js",
+        "node_modules/datatables.net-buttons/js/buttons.colVis.js",
+        "node_modules/datatables.net-buttons/js/buttons.flash.js",
+        "node_modules/datatables.net-buttons/js/buttons.html5.js",
+        "node_modules/datatables.net-buttons/js/buttons.print.js",
+        "src/assets/pdfmake/pdfmake.min.js",
+        "src/assets/pdfmake/vfs_fonts.js"
+    ],
+    "styles": [
+        "styles.css",
+        "node_modules/bootstrap/dist/css/bootstrap.min.css",
+        "node_modules/bootstrap/dist/css/bootstrap-theme.min.css",
+        "node_modules/datatables.net-bs/css/dataTables.bootstrap.css",
+        "node_modules/datatables.net-select-bs/css/select.bootstrap.css"
+    ]
 }
