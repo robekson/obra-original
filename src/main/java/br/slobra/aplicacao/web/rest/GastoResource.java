@@ -293,8 +293,13 @@ public class GastoResource {
         UriComponents uriComponents = uriComponentsBuilder.build();
         String path = uriComponents.getPath();
         MultiValueMap<String, String> queryParams = uriComponents.getQueryParams();
+ 
         
         log.debug(" data parametro "+queryParams.get("data"));
+        if(queryParams.get("data")!=null) {
+	        SimpleDateFormat formato = new SimpleDateFormat("MMM/yyyy",new Locale("pt", "br"));
+	        Date date = formatter.parse(queryParams.get("data"));
+        }
         
         HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/gastos");
         return ResponseEntity.ok().headers(headers).body(page.getContent());
