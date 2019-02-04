@@ -299,7 +299,7 @@ public class GastoResource {
         log.debug(" data parametro "+queryParams.get("data"));
         if(queryParams.get("data")!=null) {
 	        SimpleDateFormat formato = new SimpleDateFormat("MMM/yyyy",new Locale("pt", "br"));
-	        Date date = formato.parse(queryParams.get("data"));
+	        //Date date = formato.parse(queryParams.get("data"));
         }
         
         HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/gastos");
