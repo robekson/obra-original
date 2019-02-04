@@ -69,6 +69,11 @@ export class GastoComponent implements OnInit, OnDestroy {
             this.transition();
         }
     }
+    
+    selecionaData(param:any){
+        
+        console.log(param);
+    }
 
     transition() {
         this.router.navigate(['/gasto'], {
