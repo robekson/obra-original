@@ -289,7 +289,7 @@ public class GastoResource {
         
        // UriComponentsBuilder.fromUriString(baseUrl).queryParam("page", page).queryParam("size", size).toUriString();
         
-        UriComponentsBuilder uriComponentsBuilder = UriComponentsBuilder.fromUri("/api/gastos");
+        UriComponentsBuilder uriComponentsBuilder = UriComponentsBuilder.fromUriString("/api/gastos");
         UriComponents uriComponents = uriComponentsBuilder.build();
         String path = uriComponents.getPath();
         MultiValueMap<String, String> queryParams = uriComponents.getQueryParams();
