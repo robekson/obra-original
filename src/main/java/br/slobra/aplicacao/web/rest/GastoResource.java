@@ -43,7 +43,9 @@ import java.util.Comparator;
 import java.util.stream.Collectors;
 import java.time.format.DateTimeFormatter;
 
-
+import org.springframework.util.MultiValueMap;
+import org.springframework.web.util.UriComponents;
+import org.springframework.web.util.UriComponentsBuilder;
 
 
 /**
@@ -284,6 +286,16 @@ public class GastoResource {
     public ResponseEntity<List<GastoDTO>> getAllGastos(Pageable pageable) {
         log.debug("REST request to get a page of Gastos");
         Page<GastoDTO> page = gastoService.findAll(pageable);
+        
+       // UriComponentsBuilder.fromUriString(baseUrl).queryParam("page", page).queryParam("size", size).toUriString();
+        
+        UriComponentsBuilder uriComponentsBuilder = UriComponentsBuilder.fromUri("/api/gastos");
+        UriComponents uriComponents = uriComponentsBuilder.build();
+        String path = uriComponents.getPath();
+        MultiValueMap<String, String> queryParams = uriComponents.getQueryParams();
+        
+        log.debug(" data parametro "+queryParams.get("data"));
+        
         HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/gastos");
         return ResponseEntity.ok().headers(headers).body(page.getContent());
     }

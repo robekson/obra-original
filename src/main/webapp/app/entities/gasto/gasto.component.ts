@@ -73,6 +73,19 @@ export class GastoComponent implements OnInit, OnDestroy {
     selecionaData(param:any){
         
         console.log(param);
+        
+        this.gastoService
+        .query({
+            page: this.page - 1,
+            size: this.itemsPerPage,
+            sort: this.sort(),
+            data:param
+        })
+        .subscribe(
+            (res: HttpResponse<IGasto[]>) => this.paginateGastos(res.body, res.headers),
+            (res: HttpErrorResponse) => this.onError(res.message)
+        );
+        
     }
 
     transition() {
