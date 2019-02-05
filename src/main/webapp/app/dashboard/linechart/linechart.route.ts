@@ -3,8 +3,7 @@ import { UserRouteAccessService } from '../../core';
 import { LinechartComponent } from './linechart.component';
 
 export const linechartRoute: Route = {
-   // path: 'linechart',
-    path: '',
+    path: 'linechart',
     component: LinechartComponent,
     data: {
         authorities: ['ROLE_USER'],
