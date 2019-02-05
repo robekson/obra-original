@@ -69,23 +69,21 @@ export class GastoComponent implements OnInit, OnDestroy {
             this.transition();
         }
     }
-    
-    selecionaData(param:any){
-        
+
+    selecionaData(param: any) {
         console.log(param);
-        
+
         this.gastoService
-        .query({
-            page: this.page - 1,
-            size: this.itemsPerPage,
-            sort: this.sort(),
-            data:param
-        })
-        .subscribe(
-            (res: HttpResponse<IGasto[]>) => this.paginateGastos(res.body, res.headers),
-            (res: HttpErrorResponse) => this.onError(res.message)
-        );
-        
+            .query({
+                page: this.page - 1,
+                size: this.itemsPerPage,
+                sort: this.sort(),
+                data: param
+            })
+            .subscribe(
+                (res: HttpResponse<IGasto[]>) => this.paginateGastos(res.body, res.headers),
+                (res: HttpErrorResponse) => this.onError(res.message)
+            );
     }
 
     transition() {
@@ -117,26 +115,24 @@ export class GastoComponent implements OnInit, OnDestroy {
             this.currentAccount = account;
         });
         this.registerChangeInGastos();
-        
+
         this.gastoService
             .resumo({
                 page: this.page - 1,
                 size: this.itemsPerPage,
                 sort: this.sort()
-            }).subscribe(
-                    (res: HttpResponse<IResumoGasto>) => this.montaGastos(res.body, res.headers),
-                    (res: HttpErrorResponse) => this.onError(res.message)
-                );
-       
-        this.gastoService
-        .findMesesAno({ }).subscribe(
-                (res: HttpResponse<MesAno[]>) => this.montaMeses(res.body, res.headers),
+            })
+            .subscribe(
+                (res: HttpResponse<IResumoGasto>) => this.montaGastos(res.body, res.headers),
                 (res: HttpErrorResponse) => this.onError(res.message)
             );
 
-        
-        
-        
+        this.gastoService
+            .findMesesAno({})
+            .subscribe(
+                (res: HttpResponse<MesAno[]>) => this.montaMeses(res.body, res.headers),
+                (res: HttpErrorResponse) => this.onError(res.message)
+            );
     }
 
     ngOnDestroy() {
@@ -165,12 +161,12 @@ export class GastoComponent implements OnInit, OnDestroy {
         this.queryCount = this.totalItems;
         this.gastos = data;
     }
-    
+
     protected montaGastos(data: IResumoGasto, headers: HttpHeaders) {
         this.resumo = data;
         console.log('Resumo =' + this.resumo);
     }
-    
+
     protected montaMeses(data: MesAno[], headers: HttpHeaders) {
         this.mesesAno = data;
         console.log('Meses Ano =' + this.mesesAno);

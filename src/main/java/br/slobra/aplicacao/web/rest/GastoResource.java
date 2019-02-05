@@ -25,6 +25,8 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import java.math.BigDecimal;
 
+import org.springframework.web.bind.annotation.RequestParam;
+
 import javax.validation.Valid;
 import java.net.URI;
 import java.net.URISyntaxException;
@@ -34,6 +36,7 @@ import java.util.Locale;
 import java.util.Date;
 import java.util.Optional;
 import java.util.Collections;
+import java.util.Map;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -284,24 +287,20 @@ public class GastoResource {
      */
     @GetMapping("/gastos")
     @Timed
-    public ResponseEntity<List<GastoDTO>> getAllGastos(Pageable pageable) {
+    public ResponseEntity<List<GastoDTO>> getAllGastos(Pageable pageable,@RequestParam Map<String, String> parameters) {
         log.debug("REST request to get a page of Gastos");
         Page<GastoDTO> page = gastoService.findAll(pageable);
-        
-       // UriComponentsBuilder.fromUriString(baseUrl).queryParam("page", page).queryParam("size", size).toUriString();
-        
-        UriComponentsBuilder uriComponentsBuilder = UriComponentsBuilder.fromUriString("/api/gastos");
-        UriComponents uriComponents = uriComponentsBuilder.build();
-        String path = uriComponents.getPath();
-        MultiValueMap<String, String> queryParams = uriComponents.getQueryParams();
- 
-        
-        log.debug(" data parametro "+queryParams.get("data"));
-        if(queryParams.get("data")!=null) {
+       if(parameters.get("data")!=null) {
 	        SimpleDateFormat formato = new SimpleDateFormat("MMM/yyyy",new Locale("pt", "br"));
-	        //Date date = formato.parse(queryParams.get("data"));
+           try {
+               Date date = formato.parse(parameters.get("data"));
+               log.debug(" date"+date);
+           }
+           catch (Exception e) {
+               //The handling for the code
+           }
         }
-        
+
         HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/gastos");
         return ResponseEntity.ok().headers(headers).body(page.getContent());
     }
