@@ -28,9 +28,11 @@ public interface GastoService {
      * @return the list of entities
      */
     Page<GastoDTO> findAll(Pageable pageable);
- 
+
+     Page<GastoDTO> findByAnoMes(int ano,int mes, Pageable pageable);
+
     /**
-     * 
+     *
      * @param idObra
      * @return
      */

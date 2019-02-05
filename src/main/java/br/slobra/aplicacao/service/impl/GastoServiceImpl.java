@@ -48,8 +48,7 @@ public class GastoServiceImpl implements GastoService {
         gasto = gastoRepository.save(gasto);
         return gastoMapper.toDto(gasto);
     }
-
-    /**
+   /**
      * Get all the gastos.
      *
      * @param pageable the pagination information
@@ -61,6 +60,13 @@ public class GastoServiceImpl implements GastoService {
         log.debug("Request to get all Gastos");
         return gastoRepository.findAll(pageable)
             .map(gastoMapper::toDto);
+    }
+
+    @Override
+    @Transactional(readOnly = true)
+    public Page<GastoDTO> findByAnoMes(int ano,int mes, Pageable pageable) {
+        log.debug("Request to get Gastos mes ano");
+        return gastoRepository.getByGastoYearAndMonth(ano,mes,pageable).map(gastoMapper::toDto);
     }
 
 

@@ -41,6 +41,7 @@ import java.util.Map;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.GregorianCalendar;
 import br.slobra.aplicacao.domain.enumeration.NotaFiscal;
 import br.slobra.aplicacao.domain.enumeration.TipoConta;
 import java.util.Comparator;
@@ -295,6 +296,15 @@ public class GastoResource {
            try {
                Date date = formato.parse(parameters.get("data"));
                log.debug(" date"+date);
+
+               Calendar calendar = new GregorianCalendar();
+               calendar.setTime(date);
+               int ano = calendar.get(Calendar.YEAR);
+               int mes = calendar.get(Calendar.MONTH)+1;
+
+               page = gastoService.findByAnoMes(ano,mes,pageable);
+
+               log.debug("REST request to get a page of Gastos");
            }
            catch (Exception e) {
                //The handling for the code
