@@ -51,16 +51,32 @@ export class GastoComponent implements OnInit, OnDestroy {
     }
 
     loadAll() {
-        this.gastoService
-            .query({
-                page: this.page - 1,
-                size: this.itemsPerPage,
-                sort: this.sort()
-            })
-            .subscribe(
-                (res: HttpResponse<IGasto[]>) => this.paginateGastos(res.body, res.headers),
-                (res: HttpErrorResponse) => this.onError(res.message)
-            );
+        let param = localStorage.getItem('data');
+        if (!param === null) {
+            this.gastoService
+                .query({
+                    page: this.page - 1,
+                    size: this.itemsPerPage,
+                    sort: this.sort(),
+                    data: param
+                })
+                .subscribe(
+                    (res: HttpResponse<IGasto[]>) => this.paginateGastos(res.body, res.headers),
+                    (res: HttpErrorResponse) => this.onError(res.message)
+                );
+
+            this.gastoService
+                .resumo({
+                    page: this.page - 1,
+                    size: this.itemsPerPage,
+                    sort: this.sort(),
+                    data: param
+                })
+                .subscribe(
+                    (res: HttpResponse<IResumoGasto>) => this.montaGastos(res.body, res.headers),
+                    (res: HttpErrorResponse) => this.onError(res.message)
+                );
+        }
     }
 
     loadPage(page: number) {
@@ -72,6 +88,7 @@ export class GastoComponent implements OnInit, OnDestroy {
 
     selecionaData(param: any) {
         console.log(param);
+        localStorage.setItem('data', param);
 
         this.gastoService
             .query({
@@ -84,16 +101,31 @@ export class GastoComponent implements OnInit, OnDestroy {
                 (res: HttpResponse<IGasto[]>) => this.paginateGastos(res.body, res.headers),
                 (res: HttpErrorResponse) => this.onError(res.message)
             );
+
+        this.gastoService
+            .resumo({
+                page: this.page - 1,
+                size: this.itemsPerPage,
+                sort: this.sort(),
+                data: param
+            })
+            .subscribe(
+                (res: HttpResponse<IResumoGasto>) => this.montaGastos(res.body, res.headers),
+                (res: HttpErrorResponse) => this.onError(res.message)
+            );
     }
 
     transition() {
-        this.router.navigate(['/gasto'], {
-            queryParams: {
-                page: this.page,
-                size: this.itemsPerPage,
-                sort: this.predicate + ',' + (this.reverse ? 'asc' : 'desc')
-            }
-        });
+        let param = localStorage.getItem('data');
+        if (!param === null) {
+            this.router.navigate(['/gasto'], {
+                queryParams: {
+                    page: this.page,
+                    size: this.itemsPerPage,
+                    sort: this.predicate + ',' + (this.reverse ? 'asc' : 'desc')
+                }
+            });
+        }
         this.loadAll();
     }
 
@@ -115,17 +147,6 @@ export class GastoComponent implements OnInit, OnDestroy {
             this.currentAccount = account;
         });
         this.registerChangeInGastos();
-
-        this.gastoService
-            .resumo({
-                page: this.page - 1,
-                size: this.itemsPerPage,
-                sort: this.sort()
-            })
-            .subscribe(
-                (res: HttpResponse<IResumoGasto>) => this.montaGastos(res.body, res.headers),
-                (res: HttpErrorResponse) => this.onError(res.message)
-            );
 
         this.gastoService
             .findMesesAno({})

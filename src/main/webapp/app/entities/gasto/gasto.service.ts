@@ -7,7 +7,7 @@ import { map, catchError } from 'rxjs/operators';
 import { SERVER_API_URL } from 'app/app.constants';
 import { createRequestOption } from 'app/shared';
 import { IGasto, IResumoGasto, MesAno } from 'app/shared/model/gasto.model';
-import { Observable } from "rxjs";
+import { Observable } from 'rxjs';
 import { throwError } from 'rxjs';
 
 type EntityResponseType = HttpResponse<IGasto>;
@@ -20,7 +20,7 @@ type EntityResponseTypeMesAno = HttpResponse<MesAno[]>;
 export class GastoService {
     public resourceUrl = SERVER_API_URL + 'api/gastos';
     public resourceUrlResumo = SERVER_API_URL + 'api/resumoConta';
-    public resourceUrlMeses= SERVER_API_URL + 'api/gastoMesAno';
+    public resourceUrlMeses = SERVER_API_URL + 'api/gastoMesAno';
 
     constructor(protected http: HttpClient) {}
 
@@ -51,23 +51,22 @@ export class GastoService {
             .pipe(map((res: EntityArrayResponseType) => this.convertDateArrayFromServer(res)));
     }
 
-   /* resumo(req?: any): Observable<any> {
-        const options = createRequestOption(req);      
+    /* resumo(req?: any): Observable<any> {
+        const options = createRequestOption(req);
         return this.http.get<any>(this.resourceUrlResumo, { params: options, observe: 'response' });
     }*/
-    
+
     resumo(req?: any): Observable<EntityResponseTypeResumo> {
         return this.http
             .get<IResumoGasto>(this.resourceUrlResumo, { observe: 'response' })
             .pipe(map((res: EntityResponseTypeResumo) => this.convertDateArrayFromServer2(res)));
     }
-    
+
     findMesesAno(req?: any): Observable<EntityResponseTypeMesAno> {
         return this.http
             .get<MesAno[]>(this.resourceUrlMeses, { observe: 'response' })
             .pipe(map((res: EntityResponseTypeMesAno) => this.convertDateArrayFromServer3(res)));
     }
-    
 
     delete(id: number): Observable<HttpResponse<any>> {
         return this.http.delete<any>(`${this.resourceUrl}/${id}`, { observe: 'response' });
@@ -109,7 +108,7 @@ export class GastoService {
         }
         return res;
     }
-    
+
     protected convertDateArrayFromServer3(res: EntityResponseTypeMesAno): EntityResponseTypeMesAno {
         if (res.body) {
             // res.body.forEach((resumo: IResumoGasto) => {

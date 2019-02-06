@@ -213,11 +213,30 @@ public class GastoResource {
 
     @GetMapping("/resumoConta")
     @Timed
-    public ResponseEntity<ResumoContaDTO> getResumoConta(Pageable pageable) {
-        log.debug("Request to get all Gastos");
-
+    public ResponseEntity<ResumoContaDTO> getResumoConta(Pageable pageable,@RequestParam Map<String, String> parameters) {
+        log.debug("getResumoConta");
 
         Page<GastoDTO> invoiceList = gastoService.findAll(pageable);
+
+        if(parameters.get("data")!=null) {
+            SimpleDateFormat formato = new SimpleDateFormat("MMM/yyyy",new Locale("pt", "br"));
+            try {
+                Date date = formato.parse(parameters.get("data"));
+                Calendar calendar = new GregorianCalendar();
+                calendar.setTime(date);
+                int ano = calendar.get(Calendar.YEAR);
+                int mes = calendar.get(Calendar.MONTH)+1;
+
+                invoiceList = gastoService.findByAnoMes(ano,mes,pageable);
+
+                log.debug("REST invoiceList"+invoiceList);
+            }
+            catch (Exception e) {
+                //The handling for the code
+            }
+        }
+
+
 
         BigDecimal semNota = invoiceList.stream().filter(i -> i.getNota().equals(NotaFiscal.NAO)).map(GastoDTO::getValor).reduce(BigDecimal.ZERO, BigDecimal::add);
         BigDecimal comNota = invoiceList.stream().filter(i -> i.getNota().equals(NotaFiscal.SIM)).map(GastoDTO::getValor).reduce(BigDecimal.ZERO, BigDecimal::add);
@@ -288,15 +307,13 @@ public class GastoResource {
      */
     @GetMapping("/gastos")
     @Timed
-    public ResponseEntity<List<GastoDTO>> getAllGastos(Pageable pageable,@RequestParam Map<String, String> parameters) {
+    public ResponseEntity<List<GastoDTO>> getAllGastos(Pageable pageable, @RequestParam Map<String, String> parameters) {
         log.debug("REST request to get a page of Gastos");
         Page<GastoDTO> page = gastoService.findAll(pageable);
        if(parameters.get("data")!=null) {
 	        SimpleDateFormat formato = new SimpleDateFormat("MMM/yyyy",new Locale("pt", "br"));
            try {
                Date date = formato.parse(parameters.get("data"));
-               log.debug(" date"+date);
-
                Calendar calendar = new GregorianCalendar();
                calendar.setTime(date);
                int ano = calendar.get(Calendar.YEAR);
