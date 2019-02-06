@@ -35,7 +35,7 @@ export class GastoUpdateComponent implements OnInit {
         this.activatedRoute.data.subscribe(({ gasto }) => {
             this.gasto = gasto;
             let dateString = localStorage.getItem('data');
-            if (dateString != null && this.gasto.mesAno === null) {
+            if (dateString != null && this.gasto.mesAno == null) {
                 console.log(dateString);
                 console.log(moment(dateString, 'MMM/YYYY', 'pt-BR'));
                 this.gasto.mesAno = moment(dateString, 'MMM/YYYY', 'pt-BR');
