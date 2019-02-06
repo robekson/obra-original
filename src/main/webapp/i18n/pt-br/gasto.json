@@ -50,7 +50,7 @@
             "nota": "Nota Fiscal",
             "tipo": "Tipo",
             "parcelado": "Propagar",
-            "mesAno": "Mes Ano",
+            "mesAno": "Mes/Ano",
             "obra": "Obra"
         }
     }

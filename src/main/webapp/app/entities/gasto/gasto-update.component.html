@@ -86,7 +86,7 @@
                 <div class="form-group">
                     <label class="form-control-label" jhiTranslate="obrasAppEdit.gasto.mesAno" for="field_mesAno">Mes Ano</label>
                     <div class="input-group">
-                        <input id="field_mesAno" type="text" class="form-control" name="mesAno" ngbDatepicker  #mesAnoDp="ngbDatepicker" [(ngModel)]="gasto.mesAno"
+                        <input id="field_mesAno" type="text" class="form-control" name="mesAno" ngbDatepicker  #mesAnoDp="ngbDatepicker"   [(ngModel)]="gasto.mesAno"
                         />
                         <span class="input-group-append">
                             <button type="button" class="btn btn-secondary" (click)="mesAnoDp.toggle()"><fa-icon [icon]="'calendar-alt'"></fa-icon></button>

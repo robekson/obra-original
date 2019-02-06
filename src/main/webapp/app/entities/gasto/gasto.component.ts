@@ -52,7 +52,7 @@ export class GastoComponent implements OnInit, OnDestroy {
 
     loadAll() {
         let param = localStorage.getItem('data');
-        if (!param === null) {
+        if (param !== null) {
             this.gastoService
                 .query({
                     page: this.page - 1,
@@ -117,7 +117,7 @@ export class GastoComponent implements OnInit, OnDestroy {
 
     transition() {
         let param = localStorage.getItem('data');
-        if (!param === null) {
+        if (param !== null) {
             this.router.navigate(['/gasto'], {
                 queryParams: {
                     page: this.page,

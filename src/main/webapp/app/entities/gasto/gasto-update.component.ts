@@ -3,6 +3,7 @@ import { ActivatedRoute } from '@angular/router';
 import { HttpResponse, HttpErrorResponse } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import * as moment from 'moment';
+import 'moment/locale/pt-br';
 import { JhiAlertService } from 'ng-jhipster';
 
 import { IGasto } from 'app/shared/model/gasto.model';
@@ -33,6 +34,12 @@ export class GastoUpdateComponent implements OnInit {
         this.isSaving = false;
         this.activatedRoute.data.subscribe(({ gasto }) => {
             this.gasto = gasto;
+            let dateString = localStorage.getItem('data');
+            if (dateString != null) {
+                console.log(dateString);
+                console.log(moment(dateString, 'MMM/YYYY', 'pt-BR'));
+                this.gasto.mesAno = moment(dateString, 'MMM/YYYY', 'pt-BR');
+            }
         });
         this.obraService.query().subscribe(
             (res: HttpResponse<IObra[]>) => {
