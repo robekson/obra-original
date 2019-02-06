@@ -98,7 +98,7 @@
                     <label class="form-control-label" jhiTranslate="obrasAppEdit.gasto.obra" for="field_obra">Obra</label>
                     <select class="form-control" id="field_obra" name="obra" [(ngModel)]="gasto.obraId" >
                         <option [ngValue]="null"></option>
-                        <option [ngValue]="obraOption.id" *ngFor="let obraOption of obras; trackBy: trackObraById">{{obraOption.id}}</option>
+                        <option [ngValue]="obraOption.id" *ngFor="let obraOption of obras; trackBy: trackObraById">{{obraOption.nome}}</option>
                     </select>
                 </div>
             </div>
