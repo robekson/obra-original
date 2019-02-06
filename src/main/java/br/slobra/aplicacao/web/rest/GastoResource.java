@@ -216,7 +216,7 @@ public class GastoResource {
     public ResponseEntity<ResumoContaDTO> getResumoConta(Pageable pageable,@RequestParam Map<String, String> parameters) {
         log.debug("getResumoConta");
 
-        Page<GastoDTO> invoiceList = gastoService.findAll(pageable);
+        Page<GastoDTO> invoiceList = Page.empty();
 
         if(parameters.get("data")!=null) {
             SimpleDateFormat formato = new SimpleDateFormat("MMM/yyyy",new Locale("pt", "br"));
@@ -309,7 +309,7 @@ public class GastoResource {
     @Timed
     public ResponseEntity<List<GastoDTO>> getAllGastos(Pageable pageable, @RequestParam Map<String, String> parameters) {
         log.debug("REST request to get a page of Gastos");
-        Page<GastoDTO> page = gastoService.findAll(pageable);
+        Page<GastoDTO> page = Page.empty();
        if(parameters.get("data")!=null) {
 	        SimpleDateFormat formato = new SimpleDateFormat("MMM/yyyy",new Locale("pt", "br"));
            try {

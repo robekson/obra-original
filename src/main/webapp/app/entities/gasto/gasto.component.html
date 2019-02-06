@@ -1,5 +1,5 @@
 <nav class="nav nav-tabs ">
-    <a  routerLink="/gasto" routerLinkActive="active"  [routerLinkActiveOptions]="{ exact: true }" *ngFor="let item of mesesAno" class="nav-link" (click)="selecionaData(item.data)" >{{item.data}}</a>
+    <a  routerLink="gasto" routerLinkActive="active"  [routerLinkActiveOptions]="{ exact: true }" *ngFor="let item of mesesAno" class="nav-link" (click)="selecionaData(item.data)" >{{item.data}}</a>
 </nav>
 </br>
 <div>
@@ -14,13 +14,15 @@
     </h2>
     <jhi-alert></jhi-alert>
     <br/>
-    <a onclick="createBotaoExportGasto()">
+
+    <div class="table-responsive" *ngIf="gastos && gastos.length">
+        <a onclick="createBotaoExportGasto()">
         <span>
             <i class="fas fa-download fa-w-14 fa-fw fa-2x" aria-hidden="true"></i>
         </span>
-    </a>
-    <br/>
-    <div class="table-responsive" *ngIf="gastos">
+        </a>
+        <br/>
+
         <table id="idTableGasto" class="table">
             <thead>
             <tr jhiSort [(predicate)]="predicate" [(ascending)]="reverse" [callback]="transition.bind(this)">
@@ -89,7 +91,7 @@
              <ngb-pagination [collectionSize]="totalItems" [(page)]="page" [pageSize]="itemsPerPage" [maxSize]="5" [rotate]="true" [boundaryLinks]="true" (pageChange)="loadPage(page)"></ngb-pagination>
          </div>
      </div>
-     <div *ngIf="resumo"  class="jumbotron jumbotron-fluid">
+     <div *ngIf="resumo && gastos && gastos.length; else mensagemNaoExisteDados"  class="jumbotron jumbotron-fluid">
          <div class="container">
              <h1 class="display-4">Resumo</h1>
              <p class="lead"></p><h3>Mês {{resumo.mesAnoFormatadoExtenso}}</h3><p></p>
@@ -164,3 +166,8 @@
          </div>
      </div>
  </div>
+<ng-template #mensagemNaoExisteDados>
+    <div class="alert alert-warning" role="alert">
+        Não existe dados para o mês selecionado, selecione outro mes.
+    </div>
+</ng-template>
