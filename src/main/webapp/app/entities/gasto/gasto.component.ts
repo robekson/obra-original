@@ -104,9 +104,6 @@ export class GastoComponent implements OnInit, OnDestroy {
 
         this.gastoService
             .resumo({
-                page: this.page - 1,
-                size: this.itemsPerPage,
-                sort: this.sort(),
                 data: param
             })
             .subscribe(

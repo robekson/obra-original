@@ -64,9 +64,17 @@ public class GastoServiceImpl implements GastoService {
 
     @Override
     @Transactional(readOnly = true)
-    public Page<GastoDTO> findByAnoMes(int ano,int mes, Pageable pageable) {
+    public Page<GastoDTO> findByAnoMesPage(int ano,int mes, Pageable pageable) {
         log.debug("Request to get Gastos mes ano");
-        return gastoRepository.getByGastoYearAndMonth(ano,mes,pageable).map(gastoMapper::toDto);
+        return gastoRepository.getByGastoYearAndMonthPage(ano,mes,pageable).map(gastoMapper::toDto);
+    }
+
+    @Override
+    @Transactional(readOnly = true)
+    public List<GastoDTO> findByAnoMes(int ano,int mes) {
+        log.debug("Request to get Gastos mes ano");
+        List<Gasto> lista = gastoRepository.getByGastoYearAndMonth(ano,mes);
+        return lista.stream().map(gastoMapper::toDto).collect(Collectors.toList());
     }
 
 

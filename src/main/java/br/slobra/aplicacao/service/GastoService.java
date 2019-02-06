@@ -29,7 +29,9 @@ public interface GastoService {
      */
     Page<GastoDTO> findAll(Pageable pageable);
 
-     Page<GastoDTO> findByAnoMes(int ano,int mes, Pageable pageable);
+    Page<GastoDTO> findByAnoMesPage(int ano,int mes, Pageable pageable);
+
+    List<GastoDTO> findByAnoMes(int ano,int mes);
 
     /**
      *

@@ -213,10 +213,10 @@ public class GastoResource {
 
     @GetMapping("/resumoConta")
     @Timed
-    public ResponseEntity<ResumoContaDTO> getResumoConta(Pageable pageable,@RequestParam Map<String, String> parameters) {
+    public ResponseEntity<ResumoContaDTO> getResumoConta(@RequestParam Map<String, String> parameters) {
         log.debug("getResumoConta");
 
-        Page<GastoDTO> invoiceList = Page.empty();
+        List<GastoDTO> invoiceList = new ArrayList<GastoDTO>();;
 
         if(parameters.get("data")!=null) {
             SimpleDateFormat formato = new SimpleDateFormat("MMM/yyyy",new Locale("pt", "br"));
@@ -227,7 +227,7 @@ public class GastoResource {
                 int ano = calendar.get(Calendar.YEAR);
                 int mes = calendar.get(Calendar.MONTH)+1;
 
-                invoiceList = gastoService.findByAnoMes(ano,mes,pageable);
+                invoiceList = gastoService.findByAnoMes(ano,mes);
 
                 log.debug("REST invoiceList"+invoiceList);
             }
@@ -256,7 +256,7 @@ public class GastoResource {
         dto.setValorDeposito(valorDeposito);
         dto.setDespesaGeralSubTotal(total);
 
-        List<GastoDTO> listData = invoiceList.getContent();
+        List<GastoDTO> listData = invoiceList;
         if(!listData.isEmpty()) {
             dto.setMesAno(listData.get(0).getMesAno());
         }
@@ -319,7 +319,7 @@ public class GastoResource {
                int ano = calendar.get(Calendar.YEAR);
                int mes = calendar.get(Calendar.MONTH)+1;
 
-               page = gastoService.findByAnoMes(ano,mes,pageable);
+               page = gastoService.findByAnoMesPage(ano,mes,pageable);
 
                log.debug("REST request to get a page of Gastos");
            }
