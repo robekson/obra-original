@@ -37,7 +37,7 @@
             <tbody>
             <tr *ngFor="let obra of obras ;trackBy: trackId" class="{{obra.status=='ANDAMENTO' ? 'alert alert-info' : obra.status=='PARADA' ? 'alert alert-warning': 'alert alert-danger' }}">
                <!--   <td><a [routerLink]="['/obra', obra.id, 'view' ]">{{obra.id}}</a></td>-->
-                <td><a [routerLink]="['/obra', obra.id, 'view' ]">{{obra.nome}}</a></td>
+                <td><a [routerLink]="['/gasto', obra.id, obra.nome, 'view' ]">{{obra.nome}}</a></td>
                 <td>{{obra.endereco}}</td>
                 <td>{{obra.metragem}}</td>
                 <td>{{obra.valorTerreno | currency: 'R$'}}</td>

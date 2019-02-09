@@ -18,6 +18,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -47,6 +49,7 @@ import br.slobra.aplicacao.domain.enumeration.TipoConta;
 import java.util.Comparator;
 import java.util.stream.Collectors;
 import java.time.format.DateTimeFormatter;
+import java.lang.*;
 
 import org.springframework.util.MultiValueMap;
 import org.springframework.web.util.UriComponents;
@@ -307,7 +310,7 @@ public class GastoResource {
      */
     @GetMapping("/gastos")
     @Timed
-    public ResponseEntity<List<GastoDTO>> getAllGastos(Pageable pageable, @RequestParam Map<String, String> parameters) {
+    public ResponseEntity<List<GastoDTO>> getAllGastos( Pageable pageable, @RequestParam Map<String, String> parameters) {
         log.debug("REST request to get a page of Gastos");
         Page<GastoDTO> page = Page.empty();
        if(parameters.get("data")!=null) {
@@ -319,7 +322,13 @@ public class GastoResource {
                int ano = calendar.get(Calendar.YEAR);
                int mes = calendar.get(Calendar.MONTH)+1;
 
-               page = gastoService.findByAnoMesPage(ano,mes,pageable);
+               Long idObra = Long.valueOf(parameters.get("idObra"));
+               log.debug("idObra "+idObra);
+
+               Sort defaultSort = Sort.by("nome").ascending();
+               //pageable = PageRequest.of(pageable.getPageNumber(), pageable.getPageSize(), defaultSort);
+
+               page = gastoService.findByAnoMesPage(ano,mes,idObra,pageable);
 
                log.debug("REST request to get a page of Gastos");
            }

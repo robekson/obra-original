@@ -12,6 +12,7 @@ import { ObraDetailComponent } from './obra-detail.component';
 import { ObraUpdateComponent } from './obra-update.component';
 import { ObraDeletePopupComponent } from './obra-delete-dialog.component';
 import { IObra } from 'app/shared/model/obra.model';
+import { GastoComponent } from 'app/entities/gasto/gasto.component';
 
 @Injectable({ providedIn: 'root' })
 export class ObraResolve implements Resolve<IObra> {
@@ -40,6 +41,19 @@ export const obraRoute: Routes = [
             authorities: ['ROLE_USER'],
             defaultSort: 'id,asc',
             pageTitle: 'obrasApp.obra.home.title'
+        },
+        canActivate: [UserRouteAccessService]
+    },
+    {
+        path: 'gasto/:id/:nome/view',
+        component: GastoComponent,
+        resolve: {
+            pagingParams: JhiResolvePagingParams
+        },
+        data: {
+            authorities: ['ROLE_USER'],
+            defaultSort: 'id,asc',
+            pageTitle: 'obrasApp.gasto.home.title'
         },
         canActivate: [UserRouteAccessService]
     },

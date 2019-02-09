@@ -4,7 +4,13 @@
 </br>
 <div>
     <h2 id="page-heading">
-        <span jhiTranslate="obrasApp.gasto.home.title">Gastos</span>
+        <span>Lançamentos da Obra {{nomeObra}}</span>
+
+        <button id="jh-resumo-entity" class="btn btn-success jh-create-entity create-gasto" [routerLink]="['/gasto/new']" style="position: relative;left: 20%;top: 50%;">
+            <span>
+            Resumo
+            </span>
+        </button>
         <button id="jh-create-entity" class="btn btn-primary float-right jh-create-entity create-gasto" [routerLink]="['/gasto/new']">
             <fa-icon [icon]="'plus'"></fa-icon>
             <span  jhiTranslate="obrasApp.gasto.home.createLabel">

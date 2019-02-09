@@ -3,7 +3,7 @@ import { HttpErrorResponse, HttpHeaders, HttpResponse } from '@angular/common/ht
 import { ActivatedRoute, Router } from '@angular/router';
 import { Subscription, Observable } from 'rxjs';
 import { JhiEventManager, JhiParseLinks, JhiAlertService } from 'ng-jhipster';
-
+import { IObra } from 'app/shared/model/obra.model';
 import { IGasto, IResumoGasto, MesAno } from 'app/shared/model/gasto.model';
 import { AccountService } from 'app/core';
 
@@ -31,6 +31,7 @@ export class GastoComponent implements OnInit, OnDestroy {
     predicate: any;
     previousPage: any;
     reverse: any;
+    nomeObra: any;
 
     constructor(
         protected gastoService: GastoService,
@@ -52,13 +53,15 @@ export class GastoComponent implements OnInit, OnDestroy {
 
     loadAll() {
         let param = localStorage.getItem('data');
+        let id = localStorage.getItem('idObra');
         if (param !== null) {
             this.gastoService
                 .query({
                     page: this.page - 1,
                     size: this.itemsPerPage,
                     sort: this.sort(),
-                    data: param
+                    data: param,
+                    idObra: id
                 })
                 .subscribe(
                     (res: HttpResponse<IGasto[]>) => this.paginateGastos(res.body, res.headers),
@@ -89,13 +92,15 @@ export class GastoComponent implements OnInit, OnDestroy {
     selecionaData(param: any) {
         console.log(param);
         localStorage.setItem('data', param);
-
+        let id = localStorage.getItem('idObra');
+        this.nomeObra = localStorage.getItem('nomeObra');
         this.gastoService
             .query({
                 page: this.page - 1,
                 size: this.itemsPerPage,
                 sort: this.sort(),
-                data: param
+                data: param,
+                idObra: id
             })
             .subscribe(
                 (res: HttpResponse<IGasto[]>) => this.paginateGastos(res.body, res.headers),
@@ -139,6 +144,12 @@ export class GastoComponent implements OnInit, OnDestroy {
     }
 
     ngOnInit() {
+        const idObra = this.activatedRoute.snapshot.paramMap.get('id');
+        if (idObra !== null) {
+            localStorage.setItem('idObra', idObra);
+            this.nomeObra = this.activatedRoute.snapshot.paramMap.get('nome');
+            localStorage.setItem('nomeObra', this.nomeObra);
+        }
         this.loadAll();
         this.accountService.identity().then(account => {
             this.currentAccount = account;
