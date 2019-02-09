@@ -41,13 +41,13 @@
             <th jhiSortBy="tipo"><span jhiTranslate="obrasApp.gasto.tipo">Tipo</span> <fa-icon [icon]="'sort'"></fa-icon></th>
                 <!--<th jhiSortBy="parcelado"><span jhiTranslate="obrasApp.gasto.parcelado">Parcelado</span> <fa-icon [icon]="'sort'"></fa-icon></th>-->
                 <th jhiSortBy="mesAno"><span jhiTranslate="obrasApp.gasto.mesAno">Mes Ano</span> <fa-icon [icon]="'sort'"></fa-icon></th>
-                <th jhiSortBy="obraId"><span jhiTranslate="obrasApp.gasto.obra">Obra</span> <fa-icon [icon]="'sort'"></fa-icon></th>
-                <th></th>
-                </tr>
-                </thead>
-                <tbody>
-                <tr *ngFor="let gasto of gastos ;trackBy: trackId" class="{{gasto.pagamento=='NAO' ? 'alert alert-danger odd' : ''}}" >
-                    <!--  <td><a [routerLink]="['/gasto', gasto.id, 'view' ]">{{gasto.id}}</a></td>-->
+                <!-- <th jhiSortBy="obraId"><span jhiTranslate="obrasApp.gasto.obra">Obra</span> <fa-icon [icon]="'sort'"></fa-icon></th>-->
+                 <th></th>
+                 </tr>
+                 </thead>
+                 <tbody>
+                 <tr *ngFor="let gasto of gastos ;trackBy: trackId" class="{{gasto.pagamento=='NAO' ? 'alert alert-danger odd' : ''}}" >
+                     <!--  <td><a [routerLink]="['/gasto', gasto.id, 'view' ]">{{gasto.id}}</a></td>-->
                 <td><a [routerLink]="['/gasto', gasto.id, 'view' ]">{{gasto.nome}}</a></td>
                 <td>{{gasto.valor | currency: 'R$'}}</td>
                 <td>{{gasto.dataVencimento | date:'shortDate'}}</td>
@@ -56,124 +56,124 @@
                 <td jhiTranslate="{{'obrasApp.TipoConta.' + gasto.tipo}}">{{gasto.tipo}}</td>
                 <!--  <td>{{gasto.parcelado}}</td>-->
                  <td>{{gasto.mesAno | date:'shortDate'}}</td>
-                 <td>
-                     <div *ngIf="gasto.obraId">
-                         <a [routerLink]="['../obra', gasto.obraId , 'view' ]" >{{gasto.obraId}}</a>
-                     </div>
-                 </td>
-                 <td class="text-right">
-                     <div class="btn-group flex-btn-group-container">
-                         <button type="submit"
-                                 [routerLink]="['/gasto', gasto.id, 'view' ]"
-                                 class="btn btn-info btn-sm">
-                             <fa-icon [icon]="'eye'"></fa-icon>
-                             <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
-                         </button>
-                         <button type="submit"
-                                 [routerLink]="['/gasto', gasto.id, 'edit']"
-                                 class="btn btn-primary btn-sm">
-                             <fa-icon [icon]="'pencil-alt'"></fa-icon>
-                             <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
-                         </button>
-                         <button type="submit"
-                                 [routerLink]="['/', { outlets: { popup: 'gasto/'+ gasto.id + '/delete'} }]"
-                                 replaceUrl="true"
-                                 queryParamsHandling="merge"
-                                 class="btn btn-danger btn-sm">
-                             <fa-icon [icon]="'times'"></fa-icon>
-                             <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
-                         </button>
-                     </div>
-                 </td>
-             </tr>
-             </tbody>
-         </table>
-     </div>
-     <div *ngIf="gastos && gastos.length">
-         <div class="row justify-content-center">
-             <jhi-item-count [page]="page" [total]="queryCount" [maxSize]="5" [itemsPerPage]="itemsPerPage"></jhi-item-count>
+                     <!-- <td>
+                          <div *ngIf="gasto.obraId">
+                              <a [routerLink]="['../obra', gasto.obraId , 'view' ]" >{{gasto.obraId}}</a>
+                          </div>
+                      </td>-->
+                      <td class="text-right">
+                          <div class="btn-group flex-btn-group-container">
+                              <button type="submit"
+                                      [routerLink]="['/gasto', gasto.id, 'view' ]"
+                                      class="btn btn-info btn-sm">
+                                  <fa-icon [icon]="'eye'"></fa-icon>
+                                  <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
+                              </button>
+                              <button type="submit"
+                                      [routerLink]="['/gasto', gasto.id, 'edit']"
+                                      class="btn btn-primary btn-sm">
+                                  <fa-icon [icon]="'pencil-alt'"></fa-icon>
+                                  <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
+                              </button>
+                              <button type="submit"
+                                      [routerLink]="['/', { outlets: { popup: 'gasto/'+ gasto.id + '/delete'} }]"
+                                      replaceUrl="true"
+                                      queryParamsHandling="merge"
+                                      class="btn btn-danger btn-sm">
+                                  <fa-icon [icon]="'times'"></fa-icon>
+                                  <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
+                              </button>
+                          </div>
+                      </td>
+                  </tr>
+                  </tbody>
+              </table>
+          </div>
+          <div *ngIf="gastos && gastos.length">
+              <div class="row justify-content-center">
+                  <jhi-item-count [page]="page" [total]="queryCount" [maxSize]="5" [itemsPerPage]="itemsPerPage"></jhi-item-count>
+              </div>
+              <div class="row justify-content-center">
+                  <ngb-pagination [collectionSize]="totalItems" [(page)]="page" [pageSize]="itemsPerPage" [maxSize]="5" [rotate]="true" [boundaryLinks]="true" (pageChange)="loadPage(page)"></ngb-pagination>
+              </div>
+          </div>
+          <div *ngIf="resumo && gastos && gastos.length; else mensagemNaoExisteDados"  class="jumbotron jumbotron-fluid">
+              <div class="container">
+                  <h1 class="display-4">Resumo</h1>
+                  <p class="lead"></p><h3>Mês {{resumo.mesAnoFormatadoExtenso}}</h3><p></p>
+
+                  <div class="row">
+                      <div class="col-3">
+                          <p class="lead">Despesas com nota</p>
+                      </div>
+                      <div class="col-9">
+                          <p class="lead text-left">{{resumo.despesaComNota | currency: 'R$'}}</p>
+                      </div>
+
+                  </div>
+
+                  <div class="row">
+                      <div class="col-3">
+                          <p class="lead">Despesas sem nota</p>
+                      </div>
+                      <div class="col-9">
+                          <p class="lead text-left">{{resumo.despesaSemNota | currency: 'R$'}}</p>
+                      </div>
+
+                  </div>
+
+
+                  <div class="row">
+                      <div class="col-3">
+                          <p class="lead">Despesas gerais subtotal</p>
+                      </div>
+                      <div class="col-9">
+                          <p class="lead text-left">{{resumo.despesaGeralSubTotal | currency: 'R$'}}</p>
+                      </div>
+
+                  </div>
+
+                  <div class="row">
+                      <div class="col-3">
+                          <p class="lead">Honorários Administração</p>
+                      </div>
+                      <div class="col-9">
+                          <p class="lead text-left">R$ 2.000,00</p>
+                      </div>
+
+                  </div>
+
+                  <div class="row">
+                      <div class="col-3">
+                          <p class="lead">Valor depositado</p>
+                      </div>
+                      <div class="col-9">
+                          <p class="lead text-left">{{resumo.valorDeposito | currency: 'R$'}}</p>
+                      </div>
+                  </div>
+
+                  <div class="row">
+                      <div class="col-3">
+                          <p class="lead">Quantidade de notas</p>
+                      </div>
+                      <div class="col-9">
+                          <p class="lead text-left">{{resumo.quantidadeComNota}}</p>
+                      </div>
+                  </div>
+
+                  <div class="row">
+                      <div class="col-3">
+                          <p class="lead">Quantidade sem notas</p>
+                      </div>
+                      <div class="col-9">
+                          <p class="lead text-left">{{resumo.quantidadeSemNota}}</p>
+                      </div>
+                  </div>
+              </div>
+          </div>
+      </div>
+     <ng-template #mensagemNaoExisteDados>
+         <div class="alert alert-warning" role="alert">
+             Sem lançamentos, selecione outro mês.
          </div>
-         <div class="row justify-content-center">
-             <ngb-pagination [collectionSize]="totalItems" [(page)]="page" [pageSize]="itemsPerPage" [maxSize]="5" [rotate]="true" [boundaryLinks]="true" (pageChange)="loadPage(page)"></ngb-pagination>
-         </div>
-     </div>
-     <div *ngIf="resumo && gastos && gastos.length; else mensagemNaoExisteDados"  class="jumbotron jumbotron-fluid">
-         <div class="container">
-             <h1 class="display-4">Resumo</h1>
-             <p class="lead"></p><h3>Mês {{resumo.mesAnoFormatadoExtenso}}</h3><p></p>
-
-             <div class="row">
-                 <div class="col-3">
-                     <p class="lead">Despesas com nota</p>
-                 </div>
-                 <div class="col-9">
-                     <p class="lead text-left">{{resumo.despesaComNota | currency: 'R$'}}</p>
-                 </div>
-
-             </div>
-
-             <div class="row">
-                 <div class="col-3">
-                     <p class="lead">Despesas sem nota</p>
-                 </div>
-                 <div class="col-9">
-                     <p class="lead text-left">{{resumo.despesaSemNota | currency: 'R$'}}</p>
-                 </div>
-
-             </div>
-
-
-             <div class="row">
-                 <div class="col-3">
-                     <p class="lead">Despesas gerais subtotal</p>
-                 </div>
-                 <div class="col-9">
-                     <p class="lead text-left">{{resumo.despesaGeralSubTotal | currency: 'R$'}}</p>
-                 </div>
-
-             </div>
-
-             <div class="row">
-                 <div class="col-3">
-                     <p class="lead">Honorários Administração</p>
-                 </div>
-                 <div class="col-9">
-                     <p class="lead text-left">R$ 2.000,00</p>
-                 </div>
-
-             </div>
-
-             <div class="row">
-                 <div class="col-3">
-                     <p class="lead">Valor depositado</p>
-                 </div>
-                 <div class="col-9">
-                     <p class="lead text-left">{{resumo.valorDeposito | currency: 'R$'}}</p>
-                 </div>
-             </div>
-
-             <div class="row">
-                 <div class="col-3">
-                     <p class="lead">Quantidade de notas</p>
-                 </div>
-                 <div class="col-9">
-                     <p class="lead text-left">{{resumo.quantidadeComNota}}</p>
-                 </div>
-             </div>
-
-             <div class="row">
-                 <div class="col-3">
-                     <p class="lead">Quantidade sem notas</p>
-                 </div>
-                 <div class="col-9">
-                     <p class="lead text-left">{{resumo.quantidadeSemNota}}</p>
-                 </div>
-             </div>
-         </div>
-     </div>
- </div>
-<ng-template #mensagemNaoExisteDados>
-    <div class="alert alert-warning" role="alert">
-        Sem lançamentos, selecione outro mês.
-    </div>
-</ng-template>
+     </ng-template>
