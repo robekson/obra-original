@@ -73,7 +73,8 @@ export class GastoComponent implements OnInit, OnDestroy {
                     page: this.page - 1,
                     size: this.itemsPerPage,
                     sort: this.sort(),
-                    data: param
+                    data: param,
+                    idObra: id
                 })
                 .subscribe(
                     (res: HttpResponse<IResumoGasto>) => this.montaGastos(res.body, res.headers),
@@ -109,7 +110,8 @@ export class GastoComponent implements OnInit, OnDestroy {
 
         this.gastoService
             .resumo({
-                data: param
+                data: param,
+                idObra: id
             })
             .subscribe(
                 (res: HttpResponse<IResumoGasto>) => this.montaGastos(res.body, res.headers),

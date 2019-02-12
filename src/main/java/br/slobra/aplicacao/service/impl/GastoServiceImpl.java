@@ -77,9 +77,9 @@ public class GastoServiceImpl implements GastoService {
 
     @Override
     @Transactional(readOnly = true)
-    public List<GastoDTO> findByAnoMes(int ano,int mes) {
+    public List<GastoDTO> findByAnoMes(int ano,int mes,Long idObra) {
         log.debug("Request to get Gastos mes ano");
-        List<Gasto> lista = gastoRepository.getByGastoYearAndMonth(ano,mes);
+        List<Gasto> lista = gastoRepository.getByGastoYearAndMonth(ano,mes,idObra);
         return lista.stream().map(gastoMapper::toDto).collect(Collectors.toList());
     }
 

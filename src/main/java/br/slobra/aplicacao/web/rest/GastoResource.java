@@ -230,7 +230,10 @@ public class GastoResource {
                 int ano = calendar.get(Calendar.YEAR);
                 int mes = calendar.get(Calendar.MONTH)+1;
 
-                invoiceList = gastoService.findByAnoMes(ano,mes);
+                Long idObra = Long.valueOf(parameters.get("idObra"));
+                log.debug("idObra "+idObra);
+
+                invoiceList = gastoService.findByAnoMes(ano,mes,idObra);
 
                 log.debug("REST invoiceList"+invoiceList);
             }
@@ -325,7 +328,7 @@ public class GastoResource {
                Long idObra = Long.valueOf(parameters.get("idObra"));
                log.debug("idObra "+idObra);
 
-               Sort defaultSort = Sort.by("nome").ascending();
+               //Sort defaultSort = Sort.by("nome").ascending();
                //pageable = PageRequest.of(pageable.getPageNumber(), pageable.getPageSize(), defaultSort);
 
                page = gastoService.findByAnoMesPage(ano,mes,idObra,pageable);

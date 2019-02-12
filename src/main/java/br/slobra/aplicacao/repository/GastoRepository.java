@@ -29,8 +29,8 @@ public interface GastoRepository extends JpaRepository<Gasto, Long> {
     @Query("SELECT g FROM Gasto g where year(g.mesAno) = :ano and month(g.mesAno) = :mes and g.obra.id = :id ")
     Page<Gasto> getByGastoYearAndMonthOrderByNameDesc(@Param("ano")int year, @Param("mes")int month, @Param("id")Long idObra, Pageable pageRequest);
 
-    @Query("SELECT g FROM Gasto g where year(g.mesAno) = ?1 and month(g.mesAno) = ?2")
-    List<Gasto> getByGastoYearAndMonth(int year, int month);
+    @Query("SELECT g FROM Gasto g where year(g.mesAno) = ?1 and month(g.mesAno) = ?2 and g.obra.id = ?3")
+    List<Gasto> getByGastoYearAndMonth(int year, int month, Long idObra);
 
 
 }
