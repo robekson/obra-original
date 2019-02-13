@@ -9,6 +9,7 @@ import { AccountService } from 'app/core';
 
 import { ITEMS_PER_PAGE } from 'app/shared';
 import { GastoService } from 'app/entities/gasto/gasto.service';
+import { PiechartService } from 'app/dashboard/piechart/piechart.service';
 
 @Component({
     selector: 'jhi-resumo-total',
@@ -28,6 +29,8 @@ export class ResumoTotalComponent implements OnInit, OnDestroy {
     previousPage: any;
     nomeObra: any;
 
+    data: any;
+
     constructor(
         protected gastoService: GastoService,
         protected parseLinks: JhiParseLinks,
@@ -35,12 +38,41 @@ export class ResumoTotalComponent implements OnInit, OnDestroy {
         protected accountService: AccountService,
         protected activatedRoute: ActivatedRoute,
         protected router: Router,
-        protected eventManager: JhiEventManager
-    ) {}
-    ngOnInit() {}
+        protected eventManager: JhiEventManager,
+        protected pieChartService: PiechartService
+    ) {
+        this.data = {};
+    }
+    ngOnInit() {
+        this.pieChartService
+            .query({})
+            .subscribe(
+                (res: HttpResponse<IResumoGasto>) => this.montaGrafico(res.body, res.headers),
+                (res: HttpErrorResponse) => this.onError(res.message)
+            );
+    }
 
     previousState() {
         window.history.back();
+    }
+
+    protected montaGrafico(data: IResumoGasto, headers: HttpHeaders) {
+        var v_json = {};
+
+        var lineChartLabels = ['Com Nota', 'Sem Nota', 'Honorários'];
+        var lineChartDataSet = [];
+        var dataValues = [1, 2, 1];
+
+        v_json['labels'] = lineChartLabels;
+        lineChartDataSet.push({
+            data: dataValues,
+            backgroundColor: ['#FF6384', '#36A2EB', '#FFCE56'],
+            hoverBackgroundColor: ['#FF6384', '#36A2EB', '#FFCE56']
+        });
+
+        v_json['datasets'] = lineChartDataSet;
+        this.data = v_json;
+        console.log(JSON.stringify(v_json));
     }
 
     ngOnDestroy() {
