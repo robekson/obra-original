@@ -7,6 +7,7 @@ import org.springframework.data.domain.Pageable;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.Date;
 
 /**
  * Service Interface for managing Gasto.
@@ -33,6 +34,7 @@ public interface GastoService {
 
     List<GastoDTO> findByAnoMes(int ano,int mes,Long idObra);
 
+    List<GastoDTO> findResumoTotalInterval(Date dataInicial, Date dataFinal);
     /**
      *
      * @param idObra

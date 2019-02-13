@@ -270,6 +270,68 @@ public class GastoResource {
 
         return ResponseUtil.wrapOrNotFound(Optional.of(dto));
     }
+    
+    
+    
+    @GetMapping("/resumoContaTotal")
+    @Timed
+    public ResponseEntity<ResumoContaDTO> getResumoContaTotal() {
+        log.debug("getResumoContaTotal");
+
+        List<GastoDTO> invoiceList = new ArrayList<GastoDTO>();
+        
+        List<MesAnoDTO> lista = getListaMesAno();
+        
+        invoiceList = gastoService.findResumoTotalInterval(lista.get(0).getDataNaoFormatada(), lista.get(lista.length()-1).getDataNaoFormatada());
+
+        /*if(parameters.get("data")!=null) {
+            SimpleDateFormat formato = new SimpleDateFormat("MMM/yyyy",new Locale("pt", "br"));
+            try {
+                Date date = formato.parse(parameters.get("data"));
+                Calendar calendar = new GregorianCalendar();
+                calendar.setTime(date);
+                int ano = calendar.get(Calendar.YEAR);
+                int mes = calendar.get(Calendar.MONTH)+1;
+
+                Long idObra = Long.valueOf(parameters.get("idObra"));
+                log.debug("idObra "+idObra);
+
+                invoiceList = gastoService.findByAnoMes(ano,mes,idObra);
+
+                log.debug("REST invoiceList"+invoiceList);
+            }
+            catch (Exception e) {
+                //The handling for the code
+            }
+        }*/
+
+
+
+        BigDecimal semNota = invoiceList.stream().filter(i -> i.getNota().equals(NotaFiscal.NAO)).map(GastoDTO::getValor).reduce(BigDecimal.ZERO, BigDecimal::add);
+        BigDecimal comNota = invoiceList.stream().filter(i -> i.getNota().equals(NotaFiscal.SIM)).map(GastoDTO::getValor).reduce(BigDecimal.ZERO, BigDecimal::add);
+
+        long countSemNota = invoiceList.stream().filter(i -> i.getNota().equals(NotaFiscal.NAO)).count();
+        long countComNota = invoiceList.stream().filter(i -> i.getNota().equals(NotaFiscal.SIM)).count();
+
+        BigDecimal valorDeposito = invoiceList.stream().filter(i -> i.getTipo().equals(TipoConta.INVESTIMENTO_DEPOSITO)).map(GastoDTO::getValor).reduce(BigDecimal.ZERO, BigDecimal::add);
+
+        BigDecimal total = invoiceList.stream().map(GastoDTO::getValor).reduce(BigDecimal.ZERO, BigDecimal::add);
+
+        ResumoContaDTO dto = new ResumoContaDTO();
+        dto.setDespesaSemNota(semNota);
+        dto.setDespesaComNota(comNota);
+        dto.setQuantidadeComNota(countComNota);
+        dto.setQuantidadeSemNota(countSemNota);
+        dto.setValorDeposito(valorDeposito);
+        dto.setDespesaGeralSubTotal(total);
+
+        List<GastoDTO> listData = invoiceList;
+        if(!listData.isEmpty()) {
+            dto.setMesAno(listData.get(0).getMesAno());
+        }
+
+        return ResponseUtil.wrapOrNotFound(Optional.of(dto));
+    }
 
 
     @GetMapping("/gastoMesAno")
@@ -414,6 +476,7 @@ public class GastoResource {
 			dia25.add(Calendar.MONTH, -1);
 			MesAnoDTO dto= new MesAnoDTO();
 			dto.setData(formato.format(dia25.getTime()));
+			dto.setDataNaoFormatada(dia25.getTime());
 			lista.add(dto);
 		}
         log.debug("Lista : {}", lista );
