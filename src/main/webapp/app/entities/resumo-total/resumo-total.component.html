@@ -1,94 +1,97 @@
 <div class="row justify-content-center">
     <div class="col-8">
-        <div *ngIf="resumo">
+        <div>
             <h2><span jhiTranslate="obrasApp.resumoGasto.detail.title">Resumo Gasto</span></h2>
             <hr>
             <jhi-alert-error></jhi-alert-error>
-            <div *ngIf="resumo && gastos && gastos.length; else mensagemNaoExisteDados"  class="jumbotron jumbotron-fluid">
-                <div class="container">
-                    <h1 class="display-4">Resumo</h1>
-                    <p class="lead"></p><h3>Mês {{resumo.mesAnoFormatadoExtenso}}</h3><p></p>
-
+            <div id="content-wrapper">
+                <div class="container-fluid">
                     <div class="row">
-                        <div class="col-3">
-                            <p class="lead">Despesas com nota</p>
+                        <div class="col-lg-8">
+                            <table class="table table-striped">
+                                <tbody>
+                                <tr>
+                                    <th>Despesa com nota</th>
+                                    <td>R$55.000,00</td>
+                                </tr>
+                                <tr>
+                                    <th>Despesa sem nota</th>
+                                    <td>R$16.000,00</td>
+                                </tr>
+                                <tr>
+                                    <th>DESPESAS GERAIS SUBTOTAL</th>
+                                    <td>R$216.000,00</td>
+                                </tr>
+                                <tr>
+                                    <th>HONORÁRIOS ADMINISTRAÇÃO</th>
+                                    <td>R$56.000,00</td>
+                                </tr>
+                                <tr>
+                                    <th>VALOR DEPOSITADO</th>
+                                    <td>R$229.000,00</td>
+                                </tr>
+                                <tr>
+                                    <th>QUANTIDADE DE NOTAS</th>
+                                    <td>146</td>
+                                </tr>
+                                <tr>
+                                    <th>QUANTIDADE SEM NOTA</th>
+                                    <td>98</td>
+                                </tr>
+                                <tr>
+                                    <th>VALOR EM CAIXA</th>
+                                    <td>R$576.000,00</td>
+                                </tr>
+                                <tr>
+                                    <th>ESCRITURA</th>
+                                    <td>R$66.000,00</td>
+                                </tr>
+                                <tr>
+                                    <th>DESPESAS ESCRITURA COMPRA</th>
+                                    <td>R$12.000,00</td>
+                                </tr>
+                                <tr>
+                                    <th>CORRETAGEM VENDA</th>
+                                    <td></td>
+                                </tr>
+                                <tr>
+                                    <th>VALOR REAL COMPRA TERRENO</th>
+                                    <td>R$126.000,00</td>
+                                </tr>
+                                <tr>
+                                    <th>VALOR FISCAL</th>
+                                    <td>R$86.000,00</td>
+                                </tr>
+                                </tbody>
+                            </table>
                         </div>
-                        <div class="col-9">
-                            <p class="lead text-left">{{resumo.despesaComNota | currency: 'R$'}}</p>
+                        <div class="col-lg-4">
+                            <div class="card mb-3">
+                                <div class="card-header">
+                                    <i class="fas fa-chart-pie"></i>
+                                    Pie Chart </div>
+                                <div class="card-body"><div class="chartjs-size-monitor" style="position: absolute; left: 0px; top: 0px; right: 0px; bottom: 0px; overflow: hidden; pointer-events: none; visibility: hidden; z-index: -1;"><div class="chartjs-size-monitor-expand" style="position:absolute;left:0;top:0;right:0;bottom:0;overflow:hidden;pointer-events:none;visibility:hidden;z-index:-1;"><div style="position:absolute;width:1000000px;height:1000000px;left:0;top:0"></div></div><div class="chartjs-size-monitor-shrink" style="position:absolute;left:0;top:0;right:0;bottom:0;overflow:hidden;pointer-events:none;visibility:hidden;z-index:-1;"><div style="position:absolute;width:200%;height:200%;left:0; top:0"></div></div></div>
+                                    <canvas id="myPieChart" width="303" height="303" class="chartjs-render-monitor" style="display: block; width: 303px; height: 303px;"></canvas>
+                                </div>
+                                <div class="card-footer small text-muted"></div>
+                            </div>
                         </div>
-
                     </div>
 
-                    <div class="row">
-                        <div class="col-3">
-                            <p class="lead">Despesas sem nota</p>
-                        </div>
-                        <div class="col-9">
-                            <p class="lead text-left">{{resumo.despesaSemNota | currency: 'R$'}}</p>
-                        </div>
-
-                    </div>
-
-
-                    <div class="row">
-                        <div class="col-3">
-                            <p class="lead">Despesas gerais subtotal</p>
-                        </div>
-                        <div class="col-9">
-                            <p class="lead text-left">{{resumo.despesaGeralSubTotal | currency: 'R$'}}</p>
-                        </div>
-
-                    </div>
-
-                    <div class="row">
-                        <div class="col-3">
-                            <p class="lead">Honorários Administração</p>
-                        </div>
-                        <div class="col-9">
-                            <p class="lead text-left">R$ 2.000,00</p>
-                        </div>
-
-                    </div>
-
-                    <div class="row">
-                        <div class="col-3">
-                            <p class="lead">Valor depositado</p>
-                        </div>
-                        <div class="col-9">
-                            <p class="lead text-left">{{resumo.valorDeposito | currency: 'R$'}}</p>
-                        </div>
-                    </div>
-
-                    <div class="row">
-                        <div class="col-3">
-                            <p class="lead">Quantidade de notas</p>
-                        </div>
-                        <div class="col-9">
-                            <p class="lead text-left">{{resumo.quantidadeComNota}}</p>
-                        </div>
-                    </div>
-
-                    <div class="row">
-                        <div class="col-3">
-                            <p class="lead">Quantidade sem notas</p>
-                        </div>
-                        <div class="col-9">
-                            <p class="lead text-left">{{resumo.quantidadeSemNota}}</p>
-                        </div>
-                    </div>
                 </div>
+                <!-- /.container-fluid -->
             </div>
         </div>
+        <br>
         <button type="submit"
                 (click)="previousState()"
                 class="btn btn-info">
             <fa-icon [icon]="'arrow-left'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back"> Back</span>
         </button>
-
-        <button type="button"
-                class="btn btn-primary">
-            <fa-icon [icon]="'pencil-alt'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit"> Edit</span>
-        </button>
         </div>
     </div>
 </div>
+
+
+
+
