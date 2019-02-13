@@ -15,6 +15,7 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
+import java.util.Date;
 
 /**
  * Service Implementation for managing Gasto.
@@ -82,8 +83,16 @@ public class GastoServiceImpl implements GastoService {
         List<Gasto> lista = gastoRepository.getByGastoYearAndMonth(ano,mes,idObra);
         return lista.stream().map(gastoMapper::toDto).collect(Collectors.toList());
     }
-
-
+    
+    @Override
+    @Transactional(readOnly = true)
+    public List<GastoDTO> findResumoTotalInterval(Date dataInicial,Date dataFinal) {
+        log.debug("Request to get Gastos mes ano");
+        List<Gasto> lista = gastoRepository.getByGastoResumoTotalInterval(dataInicial,dataFinal);
+        return lista.stream().map(gastoMapper::toDto).collect(Collectors.toList());
+    }
+    
+ 
     @Override
     @Transactional(readOnly = true)
     public List<GastoDTO> findByObra(Long idObra) {

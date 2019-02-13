@@ -10,6 +10,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Page;
+import java.util.Date;
 
 
 /**
@@ -31,6 +32,10 @@ public interface GastoRepository extends JpaRepository<Gasto, Long> {
 
     @Query("SELECT g FROM Gasto g where year(g.mesAno) = ?1 and month(g.mesAno) = ?2 and g.obra.id = ?3")
     List<Gasto> getByGastoYearAndMonth(int year, int month, Long idObra);
+    
+    
+    @Query("SELECT g FROM Gasto g where g.mesAno BETWEEN :startDate AND :endDate ")
+    List<Gasto> getByGastoResumoTotalInterval(@Param("startDate")Date dataInicial, @Param("endDate")Date dataFinal);
 
 
 }
