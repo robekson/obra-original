@@ -303,7 +303,7 @@ public class GastoResource {
             catch (Exception e) {
                 //The handling for the code
             }
-        }
+        }*/
 
 
 
@@ -328,9 +328,8 @@ public class GastoResource {
         List<GastoDTO> listData = invoiceList;
         if(!listData.isEmpty()) {
             dto.setMesAno(listData.get(0).getMesAno());
-        }*/
+        }
 
-          ResumoContaDTO dto = new ResumoContaDTO();
         return ResponseUtil.wrapOrNotFound(Optional.of(dto));
     }
 
