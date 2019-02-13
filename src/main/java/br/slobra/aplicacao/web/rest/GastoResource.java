@@ -270,19 +270,19 @@ public class GastoResource {
 
         return ResponseUtil.wrapOrNotFound(Optional.of(dto));
     }
-    
-    
-    
+
+
+
     @GetMapping("/resumoContaTotal")
     @Timed
     public ResponseEntity<ResumoContaDTO> getResumoContaTotal() {
         log.debug("getResumoContaTotal");
 
         List<GastoDTO> invoiceList = new ArrayList<GastoDTO>();
-        
+
         List<MesAnoDTO> lista = getListaMesAno();
-        
-        invoiceList = gastoService.findResumoTotalInterval(lista.get(0).getDataNaoFormatada(), lista.get(lista.length()-1).getDataNaoFormatada());
+
+        invoiceList = gastoService.findResumoTotalInterval(lista.get(0).getDataNaoFormatada(), lista.get(lista.size()-1).getDataNaoFormatada());
 
         /*if(parameters.get("data")!=null) {
             SimpleDateFormat formato = new SimpleDateFormat("MMM/yyyy",new Locale("pt", "br"));
