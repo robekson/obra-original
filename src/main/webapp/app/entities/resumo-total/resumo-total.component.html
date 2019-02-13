@@ -1,0 +1,94 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <div *ngIf="resumo">
+            <h2><span jhiTranslate="obrasApp.resumoGasto.detail.title">Resumo Gasto</span></h2>
+            <hr>
+            <jhi-alert-error></jhi-alert-error>
+            <div *ngIf="resumo && gastos && gastos.length; else mensagemNaoExisteDados"  class="jumbotron jumbotron-fluid">
+                <div class="container">
+                    <h1 class="display-4">Resumo</h1>
+                    <p class="lead"></p><h3>Mês {{resumo.mesAnoFormatadoExtenso}}</h3><p></p>
+
+                    <div class="row">
+                        <div class="col-3">
+                            <p class="lead">Despesas com nota</p>
+                        </div>
+                        <div class="col-9">
+                            <p class="lead text-left">{{resumo.despesaComNota | currency: 'R$'}}</p>
+                        </div>
+
+                    </div>
+
+                    <div class="row">
+                        <div class="col-3">
+                            <p class="lead">Despesas sem nota</p>
+                        </div>
+                        <div class="col-9">
+                            <p class="lead text-left">{{resumo.despesaSemNota | currency: 'R$'}}</p>
+                        </div>
+
+                    </div>
+
+
+                    <div class="row">
+                        <div class="col-3">
+                            <p class="lead">Despesas gerais subtotal</p>
+                        </div>
+                        <div class="col-9">
+                            <p class="lead text-left">{{resumo.despesaGeralSubTotal | currency: 'R$'}}</p>
+                        </div>
+
+                    </div>
+
+                    <div class="row">
+                        <div class="col-3">
+                            <p class="lead">Honorários Administração</p>
+                        </div>
+                        <div class="col-9">
+                            <p class="lead text-left">R$ 2.000,00</p>
+                        </div>
+
+                    </div>
+
+                    <div class="row">
+                        <div class="col-3">
+                            <p class="lead">Valor depositado</p>
+                        </div>
+                        <div class="col-9">
+                            <p class="lead text-left">{{resumo.valorDeposito | currency: 'R$'}}</p>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-3">
+                            <p class="lead">Quantidade de notas</p>
+                        </div>
+                        <div class="col-9">
+                            <p class="lead text-left">{{resumo.quantidadeComNota}}</p>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-3">
+                            <p class="lead">Quantidade sem notas</p>
+                        </div>
+                        <div class="col-9">
+                            <p class="lead text-left">{{resumo.quantidadeSemNota}}</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <button type="submit"
+                (click)="previousState()"
+                class="btn btn-info">
+            <fa-icon [icon]="'arrow-left'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back"> Back</span>
+        </button>
+
+        <button type="button"
+                class="btn btn-primary">
+            <fa-icon [icon]="'pencil-alt'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit"> Edit</span>
+        </button>
+        </div>
+    </div>
+</div>
