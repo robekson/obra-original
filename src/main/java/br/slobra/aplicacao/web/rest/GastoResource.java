@@ -286,6 +286,7 @@ public class GastoResource {
         invoiceList = gastoService.findResumoTotalInterval(lista.get(0).getDataNaoFormatada(), lista.get(9).getDataNaoFormatada(),idObra);
 
 
+
         BigDecimal semNota = invoiceList.stream().filter(i -> i.getNota().equals(NotaFiscal.NAO)).map(GastoDTO::getValor).reduce(BigDecimal.ZERO, BigDecimal::add);
         BigDecimal comNota = invoiceList.stream().filter(i -> i.getNota().equals(NotaFiscal.SIM)).map(GastoDTO::getValor).reduce(BigDecimal.ZERO, BigDecimal::add);
 
@@ -303,6 +304,9 @@ public class GastoResource {
         dto.setQuantidadeSemNota(countSemNota);
         dto.setValorDeposito(valorDeposito);
         dto.setDespesaGeralSubTotal(total);
+
+        ObraDTO obra = obraService.findOne(idObra).get();
+        dto.setObraDTO(obra);
 
         List<GastoDTO> listData = invoiceList;
         if(!listData.isEmpty()) {

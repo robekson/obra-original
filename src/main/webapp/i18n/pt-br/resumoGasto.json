@@ -2,7 +2,7 @@
     "obrasApp": {
         "resumoGasto": {
             "home": {
-                "title": "Resumo Gastos",
+                "title": "Resumo Gastos ",
                 "createLabel": "Criar novo Resumo Gasto",
                 "createOrEditLabel": "Criar ou editar Resumo Gasto"
             },
@@ -13,7 +13,7 @@
                 "question": "Tem certeza de que deseja excluir Resumo Gasto {{ id }}?"
             },
             "detail": {
-                "title": "Resumo Gasto"
+                "title": "Resumo Gasto "
             },
             "nomeObra": "Nome Obra",
             "valorDeposito": "Valor Deposito",

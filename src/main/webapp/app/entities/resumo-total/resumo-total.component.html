@@ -1,7 +1,7 @@
 <div class="row justify-content-center">
     <div class="col-8">
         <div>
-            <h2><span jhiTranslate="obrasApp.resumoGasto.detail.title">Resumo Gasto</span>{{nomeObra}}</h2>
+            <h2><span jhiTranslate="obrasApp.resumoGasto.detail.title">Resumo Gasto</span>{{ nomeObra}}</h2>
             <hr>
             <jhi-alert-error></jhi-alert-error>
             <div *ngIf="resumo" id="content-wrapper">
@@ -44,7 +44,7 @@
                                 </tr>
                                 <tr>
                                     <th>ESCRITURA</th>
-                                    <td>XXXXXX</td>
+                                    <td>{{resumo.obraDTO.valorEscritura | currency: 'R$'}}</td>
                                 </tr>
                                 <tr>
                                     <th>DESPESAS ESCRITURA COMPRA</th>
@@ -56,7 +56,7 @@
                                 </tr>
                                 <tr>
                                     <th>VALOR REAL COMPRA TERRENO</th>
-                                    <td>XXXXXX</td>
+                                    <td>{{resumo.obraDTO.valorTerreno| currency: 'R$'}}</td>
                                 </tr>
                                 <tr>
                                     <th>VALOR FISCAL</th>

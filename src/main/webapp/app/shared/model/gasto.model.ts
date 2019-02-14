@@ -1,4 +1,5 @@
 import { Moment } from 'moment';
+import { IObra } from 'app/shared/model/obra.model';
 
 export const enum Pago {
     SIM = 'SIM',
@@ -18,9 +19,8 @@ export const enum TipoConta {
     INVESTIMENTO_DEPOSITO = 'INVESTIMENTO_DEPOSITO'
 }
 
-
 export interface MesAno {
-   data?: string;
+    data?: string;
 }
 
 export interface IGasto {
@@ -49,6 +49,7 @@ export interface IResumoGasto {
     despesaSemNota?: number;
     despesaGeralSubTotal?: number;
     totalDespesas?: number;
+    obraDTO?: IObra;
 }
 
 export class ResumoGasto implements IResumoGasto {
@@ -64,7 +65,8 @@ export class ResumoGasto implements IResumoGasto {
         public despesaComNota?: number,
         public despesaSemNota?: number,
         public despesaGeralSubTotal?: number,
-        public totalDespesas?: number
+        public totalDespesas?: number,
+        public obraDTO?: IObra
     ) {}
 }
 
