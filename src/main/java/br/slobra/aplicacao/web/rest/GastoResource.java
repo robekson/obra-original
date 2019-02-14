@@ -281,30 +281,11 @@ public class GastoResource {
         List<GastoDTO> invoiceList = new ArrayList<GastoDTO>();
 
         List<MesAnoDTO> lista = getListaMesAno();
+        for(int x=0;x<lista.size();x++){
+            log.debug(" index "+x+""+lista.get(x).getDataNaoFormatada());
+        }
 
-        invoiceList = gastoService.findResumoTotalInterval(lista.get(0).getDataNaoFormatada(), lista.get(lista.size()-1).getDataNaoFormatada());
-
-        /*if(parameters.get("data")!=null) {
-            SimpleDateFormat formato = new SimpleDateFormat("MMM/yyyy",new Locale("pt", "br"));
-            try {
-                Date date = formato.parse(parameters.get("data"));
-                Calendar calendar = new GregorianCalendar();
-                calendar.setTime(date);
-                int ano = calendar.get(Calendar.YEAR);
-                int mes = calendar.get(Calendar.MONTH)+1;
-
-                Long idObra = Long.valueOf(parameters.get("idObra"));
-                log.debug("idObra "+idObra);
-
-                invoiceList = gastoService.findByAnoMes(ano,mes,idObra);
-
-                log.debug("REST invoiceList"+invoiceList);
-            }
-            catch (Exception e) {
-                //The handling for the code
-            }
-        }*/
-
+        invoiceList = gastoService.findResumoTotalInterval(lista.get(0).getDataNaoFormatada(), lista.get(9).getDataNaoFormatada());
 
 
         BigDecimal semNota = invoiceList.stream().filter(i -> i.getNota().equals(NotaFiscal.NAO)).map(GastoDTO::getValor).reduce(BigDecimal.ZERO, BigDecimal::add);
@@ -470,6 +451,7 @@ public class GastoResource {
 		List<MesAnoDTO> lista = new ArrayList<>();
 		MesAnoDTO dto1=new MesAnoDTO();
 		dto1.setData(formato.format(dia25.getTime()));
+        dto1.setDataNaoFormatada(dia25.getTime());
 		lista.add(dto1);
 
 		for(int x=0;x<10;x++) {

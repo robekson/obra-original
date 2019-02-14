@@ -4,7 +4,7 @@
             <h2><span jhiTranslate="obrasApp.resumoGasto.detail.title">Resumo Gasto</span></h2>
             <hr>
             <jhi-alert-error></jhi-alert-error>
-            <div id="content-wrapper">
+            <div *ngIf="resumo" id="content-wrapper">
                 <div class="container-fluid">
                     <div class="row">
                         <div class="col-lg-8">
@@ -12,15 +12,15 @@
                                 <tbody>
                                 <tr>
                                     <th>Despesa com nota</th>
-                                    <td>R$55.000,00</td>
+                                    <td>{{resumo.despesaComNota | currency: 'R$'}}</td>
                                 </tr>
                                 <tr>
                                     <th>Despesa sem nota</th>
-                                    <td>R$16.000,00</td>
+                                    <td>{{resumo.despesaSemNota | currency: 'R$'}}</td>
                                 </tr>
                                 <tr>
                                     <th>DESPESAS GERAIS SUBTOTAL</th>
-                                    <td>R$216.000,00</td>
+                                    <td>{{resumo.despesaGeralSubTotal | currency: 'R$'}}</td>
                                 </tr>
                                 <tr>
                                     <th>HONORÁRIOS ADMINISTRAÇÃO</th>
@@ -28,39 +28,39 @@
                                 </tr>
                                 <tr>
                                     <th>VALOR DEPOSITADO</th>
-                                    <td>R$229.000,00</td>
+                                    <td>{{resumo.valorDeposito | currency: 'R$'}}</td>
                                 </tr>
                                 <tr>
                                     <th>QUANTIDADE DE NOTAS</th>
-                                    <td>146</td>
+                                    <td>{{resumo.quantidadeComNota}}</td>
                                 </tr>
                                 <tr>
                                     <th>QUANTIDADE SEM NOTA</th>
-                                    <td>98</td>
+                                    <td>{{resumo.quantidadeSemNota}}</td>
                                 </tr>
                                 <tr>
                                     <th>VALOR EM CAIXA</th>
-                                    <td>R$576.000,00</td>
+                                    <td>XXXXXX</td>
                                 </tr>
                                 <tr>
                                     <th>ESCRITURA</th>
-                                    <td>R$66.000,00</td>
+                                    <td>XXXXXX</td>
                                 </tr>
                                 <tr>
                                     <th>DESPESAS ESCRITURA COMPRA</th>
-                                    <td>R$12.000,00</td>
+                                    <td>XXXXXX</td>
                                 </tr>
                                 <tr>
                                     <th>CORRETAGEM VENDA</th>
-                                    <td></td>
+                                    <td>XXXXXX</td>
                                 </tr>
                                 <tr>
                                     <th>VALOR REAL COMPRA TERRENO</th>
-                                    <td>R$126.000,00</td>
+                                    <td>XXXXXX</td>
                                 </tr>
                                 <tr>
                                     <th>VALOR FISCAL</th>
-                                    <td>R$86.000,00</td>
+                                    <td>XXXXXX</td>
                                 </tr>
                                 </tbody>
                             </table>

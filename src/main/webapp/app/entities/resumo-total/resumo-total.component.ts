@@ -50,6 +50,18 @@ export class ResumoTotalComponent implements OnInit, OnDestroy {
                 (res: HttpResponse<IResumoGasto>) => this.montaGrafico(res.body, res.headers),
                 (res: HttpErrorResponse) => this.onError(res.message)
             );
+
+        this.gastoService
+            .resumoTotal({})
+            .subscribe(
+                (res: HttpResponse<IResumoGasto>) => this.montaGastos(res.body, res.headers),
+                (res: HttpErrorResponse) => this.onError(res.message)
+            );
+    }
+
+    protected montaGastos(data: IResumoGasto, headers: HttpHeaders) {
+        this.resumo = data;
+        console.log('Resumo =' + this.resumo);
     }
 
     previousState() {

@@ -21,6 +21,7 @@ export class GastoService {
     public resourceUrl = SERVER_API_URL + 'api/gastos';
     public resourceUrlResumo = SERVER_API_URL + 'api/resumoConta';
     public resourceUrlMeses = SERVER_API_URL + 'api/gastoMesAno';
+    public resourceUrlResumoTotal = SERVER_API_URL + 'api/resumoContaTotal';
 
     constructor(protected http: HttpClient) {}
 
@@ -51,10 +52,12 @@ export class GastoService {
             .pipe(map((res: EntityArrayResponseType) => this.convertDateArrayFromServer(res)));
     }
 
-    /* resumo(req?: any): Observable<any> {
+    resumoTotal(req?: any): Observable<EntityResponseTypeResumo> {
         const options = createRequestOption(req);
-        return this.http.get<any>(this.resourceUrlResumo, { params: options, observe: 'response' });
-    }*/
+        return this.http
+            .get<IResumoGasto>(this.resourceUrlResumoTotal, { params: options, observe: 'response' })
+            .pipe(map((res: EntityResponseTypeResumo) => this.convertDateArrayFromServer2(res)));
+    }
 
     resumo(req?: any): Observable<EntityResponseTypeResumo> {
         const options = createRequestOption(req);
