@@ -44,6 +44,9 @@ export class ResumoTotalComponent implements OnInit, OnDestroy {
         this.data = {};
     }
     ngOnInit() {
+        let id = localStorage.getItem('idObra');
+        this.nomeObra = localStorage.getItem('nomeObra');
+
         this.pieChartService
             .query({})
             .subscribe(
@@ -52,7 +55,7 @@ export class ResumoTotalComponent implements OnInit, OnDestroy {
             );
 
         this.gastoService
-            .resumoTotal({})
+            .resumoTotal({ idObra: id })
             .subscribe(
                 (res: HttpResponse<IResumoGasto>) => this.montaGastos(res.body, res.headers),
                 (res: HttpErrorResponse) => this.onError(res.message)

@@ -89,13 +89,13 @@ public class GastoServiceImpl implements GastoService {
 
     @Override
     @Transactional(readOnly = true)
-    public List<GastoDTO> findResumoTotalInterval(Date dataInicial,Date dataFinal) {
+    public List<GastoDTO> findResumoTotalInterval(Date dataInicial,Date dataFinal,Long idObra) {
         log.debug("Request to get Gastos mes ano");
         LocalDate dateInicial = dataInicial.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
         LocalDate dateFinal = dataFinal.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
         dateInicial=dateInicial.plusMonths(-1);
         dateFinal=dateFinal.plusMonths(1);
-        List<Gasto> lista = gastoRepository.getByGastoResumoTotalInterval(dateInicial,dateFinal);
+        List<Gasto> lista = gastoRepository.getByGastoResumoTotalInterval(dateInicial,dateFinal,idObra);
         return lista.stream().map(gastoMapper::toDto).collect(Collectors.toList());
     }
 

@@ -35,8 +35,8 @@ public interface GastoRepository extends JpaRepository<Gasto, Long> {
     List<Gasto> getByGastoYearAndMonth(int year, int month, Long idObra);
 
 
-    @Query("SELECT g FROM Gasto g where g.mesAno BETWEEN :startDate AND :endDate ")
-    List<Gasto> getByGastoResumoTotalInterval(@Param("startDate")LocalDate dataInicial, @Param("endDate")LocalDate dataFinal);
+    @Query("SELECT g FROM Gasto g where g.mesAno BETWEEN :startDate AND :endDate and g.obra.id = :id ")
+    List<Gasto> getByGastoResumoTotalInterval(@Param("startDate")LocalDate dataInicial, @Param("endDate")LocalDate dataFinal,@Param("id")Long idObra);
 
 
 }

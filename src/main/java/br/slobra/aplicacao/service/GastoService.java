@@ -34,7 +34,7 @@ public interface GastoService {
 
     List<GastoDTO> findByAnoMes(int ano,int mes,Long idObra);
 
-    List<GastoDTO> findResumoTotalInterval(Date dataInicial, Date dataFinal);
+    List<GastoDTO> findResumoTotalInterval(Date dataInicial, Date dataFinal,Long idObra);
     /**
      *
      * @param idObra
