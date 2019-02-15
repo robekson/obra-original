@@ -47,6 +47,7 @@ import java.util.Calendar;
 import java.util.GregorianCalendar;
 import br.slobra.aplicacao.domain.enumeration.NotaFiscal;
 import br.slobra.aplicacao.domain.enumeration.TipoConta;
+import br.slobra.aplicacao.domain.enumeration.Pago;
 import java.util.Comparator;
 import java.util.stream.Collectors;
 import java.time.format.DateTimeFormatter;
@@ -107,7 +108,9 @@ public class GastoResource {
                 else {
                     localdate = localdate.plusMonths(1);
                     gastoDTO.setMesAno(localdate);
+                    gastoDTO.setPagamento(Pago.NAO);//Lançar nos próximos meses como “PAGO” o valor NÃO.
                 }
+                
                 result = gravaGastoDTO(gastoDTO);
                 x++;
             }
