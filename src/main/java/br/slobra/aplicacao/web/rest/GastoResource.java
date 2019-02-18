@@ -241,25 +241,25 @@ public class GastoResource {
        List<TipoContaDTO> listaTipoConta = new ArrayList<GastoDTO>();
        
        TipoContaDTO dto = new TipoContaDTO();      
-       dto.setValorDespesa(valorMaterial)       
-       dto.setDescricao("Materiais")
+       dto.setValorDespesa(valorMaterial);        
+       dto.setDescricao("Materiais"); 
        listaTipoConta.add(dto);
        
         
        TipoContaDTO dto1 = new TipoContaDTO();      
-       dto1.setValorDespesa(valorMaoObra)       
-       dto1.setDescricao("Mão de Obra")
+       dto1.setValorDespesa(valorMaoObra);        
+       dto1.setDescricao("Mão de Obra"); 
        listaTipoConta.add(dto1);
        
        
        TipoContaDTO dto2 = new TipoContaDTO();      
-       dto2.setValorDespesa(valorDecoracao)       
-       dto2.setDescricao("Decoração")
+       dto2.setValorDespesa(valorDecoracao);        
+       dto2.setDescricao("Decoração"); 
        listaTipoConta.add(dto2);
 
        TipoContaDTO dto3 = new TipoContaDTO();      
-       dto3.setValorDespesa(valorDocumentacao)       
-       dto3.setDescricao("Documentação")
+       dto3.setValorDespesa(valorDocumentacao);        
+       dto3.setDescricao("Documentação"); 
        listaTipoConta.add(dto3);
 
        return ResponseEntity.ok().body(listaTipoConta);
