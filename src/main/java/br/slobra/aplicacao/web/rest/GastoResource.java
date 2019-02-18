@@ -228,6 +228,8 @@ public class GastoResource {
        log.debug("Request to Grafico Pizza Tipo Conta");
        
        List<MesAnoDTO> lista = getListaMesAno();
+       
+       List<GastoDTO> invoiceList = new ArrayList<GastoDTO>();
 
        Long idObra = Long.valueOf(parameters.get("idObra"));
        invoiceList = gastoService.findResumoTotalInterval(lista.get(0).getDataNaoFormatada(), lista.get(9).getDataNaoFormatada(),idObra);
@@ -238,7 +240,7 @@ public class GastoResource {
        BigDecimal valorDocumentacao = invoiceList.stream().filter(i -> i.getTipo().equals(TipoConta.DOCUMENTACAO)).map(GastoDTO::getValor).reduce(BigDecimal.ZERO, BigDecimal::add);
        
        
-       List<TipoContaDTO> listaTipoConta = new ArrayList<GastoDTO>();
+       List<TipoContaDTO> listaTipoConta = new ArrayList<TipoContaDTO>();
        
        TipoContaDTO dto = new TipoContaDTO();      
        dto.setValorDespesa(valorMaterial);        
