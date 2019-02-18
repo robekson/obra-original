@@ -65,6 +65,11 @@ export class GastoUpdateComponent implements OnInit {
     protected subscribeToSaveResponse(result: Observable<HttpResponse<IGasto>>) {
         result.subscribe((res: HttpResponse<IGasto>) => this.onSaveSuccess(), (res: HttpErrorResponse) => this.onSaveError());
     }
+    
+    tipoContaChanged(event){
+        console.log("event "+event);
+        
+    }
 
     protected onSaveSuccess() {
         this.isSaving = false;

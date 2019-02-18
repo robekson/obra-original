@@ -48,7 +48,7 @@
                 </div>
                 <div class="form-group">
                     <label class="form-control-label" jhiTranslate="obrasAppEdit.obra.porcentagemCorretagem" for="field_porcentagemCorretagem">Porcentagem Corretagem</label>
-                    <input type="number" class="form-control" name="porcentagemCorretagem" id="field_porcentagemCorretagem"
+                    <input type="number" class="form-control"  min="1" max="100" name="porcentagemCorretagem" id="field_porcentagemCorretagem"
                         [(ngModel)]="obra.porcentagemCorretagem" />
                 </div>
                 <div class="form-group">
