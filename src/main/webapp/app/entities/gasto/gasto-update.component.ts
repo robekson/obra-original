@@ -6,10 +6,11 @@ import * as moment from 'moment';
 import 'moment/locale/pt-br';
 import { JhiAlertService } from 'ng-jhipster';
 
-import { IGasto } from 'app/shared/model/gasto.model';
+import { IGasto , Pago } from 'app/shared/model/gasto.model';
 import { GastoService } from './gasto.service';
 import { IObra } from 'app/shared/model/obra.model';
 import { ObraService } from 'app/entities/obra';
+
 
 @Component({
     selector: 'jhi-gasto-update',
@@ -68,7 +69,9 @@ export class GastoUpdateComponent implements OnInit {
     
     tipoContaChanged(event){
         console.log("event "+event);
-        
+        if(event=='INVESTIMENTO_DEPOSITO'){
+            this.gasto.pagamento=Pago.SIM;
+        }     
     }
 
     protected onSaveSuccess() {
