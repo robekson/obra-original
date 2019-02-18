@@ -381,13 +381,16 @@ public class GastoResource {
 
 
 
-    @GetMapping("/graficoGastoObra")
+    @GetMapping("/graficoGastoObraIntervaloMensal")
     @Timed
-    public ResponseEntity<List<ResumoContaDTO>> graficoGastoObra(Pageable pageable) {
+    public ResponseEntity<List<ResumoContaDTO>> graficoGastoObraIntervaloMensal(@RequestParam Map<String, String> parameters) {
+   	
+    	List<GastoDTO> listGasto = new ArrayList<GastoDTO>();
+        List<MesAnoDTO> lista = getListaMesAno();
+        Long idObra = Long.valueOf(parameters.get("idObra"));
+        listGasto = gastoService.findResumoTotalInterval(lista.get(0).getDataNaoFormatada(), lista.get(9).getDataNaoFormatada(),idObra);
 
     	List<ResumoContaDTO> listaResumo = new ArrayList<>();
-        List<MesAnoDTO> lista = getListaMesAno();
-        List<GastoDTO> listGasto = gastoService.findAll(pageable).getContent();
 
         DateTimeFormatter formatador = DateTimeFormatter.ofPattern("MMM/yyyy").withLocale(new Locale("pt", "br"));
         for(MesAnoDTO mesAno : lista) {
