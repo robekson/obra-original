@@ -11,6 +11,7 @@ import br.slobra.aplicacao.service.dto.GastoDTO;
 import br.slobra.aplicacao.service.dto.ObraDTO;
 import br.slobra.aplicacao.service.dto.ResumoContaDTO;
 import br.slobra.aplicacao.service.dto.ResumoGastoDTO;
+import br.slobra.aplicacao.service.dto.TipoContaDTO;
 import br.slobra.aplicacao.service.mapper.GastoMapper;
 import br.slobra.aplicacao.service.dto.MesAnoDTO;
 import io.github.jhipster.web.util.ResponseUtil;
@@ -214,6 +215,55 @@ public class GastoResource {
 
         return ResponseUtil.wrapOrNotFound(Optional.of(dto));
     }
+    
+    
+    /**
+    * 
+    * @param Map<String, String> parameters
+    * @return
+    */
+   @GetMapping("/graficoPizzaTipoConta")
+   @Timed
+   public ResponseEntity<List<TipoContaDTO>> graficoPizzaTipoConta(@RequestParam Map<String, String> parameters) {
+       log.debug("Request to Grafico Pizza Tipo Conta");
+       
+       List<MesAnoDTO> lista = getListaMesAno();
+
+       Long idObra = Long.valueOf(parameters.get("idObra"));
+       invoiceList = gastoService.findResumoTotalInterval(lista.get(0).getDataNaoFormatada(), lista.get(9).getDataNaoFormatada(),idObra);
+       
+       BigDecimal valorMaoObra = invoiceList.stream().filter(i -> i.getTipo().equals(TipoConta.MAO_DE_OBRA)).map(GastoDTO::getValor).reduce(BigDecimal.ZERO, BigDecimal::add);
+       BigDecimal valorMaterial = invoiceList.stream().filter(i -> i.getTipo().equals(TipoConta.MATERIAIS)).map(GastoDTO::getValor).reduce(BigDecimal.ZERO, BigDecimal::add);
+       BigDecimal valorDecoracao = invoiceList.stream().filter(i -> i.getTipo().equals(TipoConta.DECORACAO)).map(GastoDTO::getValor).reduce(BigDecimal.ZERO, BigDecimal::add);
+       BigDecimal valorDocumentacao = invoiceList.stream().filter(i -> i.getTipo().equals(TipoConta.DOCUMENTACAO)).map(GastoDTO::getValor).reduce(BigDecimal.ZERO, BigDecimal::add);
+       
+       
+       List<TipoContaDTO> listaTipoConta = new ArrayList<GastoDTO>();
+       
+       TipoContaDTO dto = new TipoContaDTO();      
+       dto.setValorDespesa(valorMaterial)       
+       dto.setDescricao("Materiais")
+       listaTipoConta.add(dto);
+       
+        
+       TipoContaDTO dto1 = new TipoContaDTO();      
+       dto1.setValorDespesa(valorMaoObra)       
+       dto1.setDescricao("Mão de Obra")
+       listaTipoConta.add(dto1);
+       
+       
+       TipoContaDTO dto2 = new TipoContaDTO();      
+       dto2.setValorDespesa(valorDecoracao)       
+       dto2.setDescricao("Decoração")
+       listaTipoConta.add(dto2);
+
+       TipoContaDTO dto3 = new TipoContaDTO();      
+       dto3.setValorDespesa(valorDocumentacao)       
+       dto3.setDescricao("Documentação")
+       listaTipoConta.add(dto3);
+
+       return ResponseEntity.ok().body(listaTipoConta);
+   }
 
 
 
@@ -222,7 +272,7 @@ public class GastoResource {
     public ResponseEntity<ResumoContaDTO> getResumoConta(@RequestParam Map<String, String> parameters) {
         log.debug("getResumoConta");
 
-        List<GastoDTO> invoiceList = new ArrayList<GastoDTO>();;
+        List<GastoDTO> invoiceList = new ArrayList<GastoDTO>();
 
         if(parameters.get("data")!=null) {
             SimpleDateFormat formato = new SimpleDateFormat("MMM/yyyy",new Locale("pt", "br"));
