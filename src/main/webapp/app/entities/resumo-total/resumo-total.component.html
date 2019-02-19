@@ -6,6 +6,16 @@
             <jhi-alert-error></jhi-alert-error>
             <div *ngIf="resumo" id="content-wrapper">
                 <div class="container-fluid">
+
+                    <div class="card mb-3">
+                        <div class="card-header">
+                            <i class="fas fa-chart-bar"></i>
+                            Gastos</div>
+                        <div class="card-body">
+                            <p-chart  height="210px" type="bar" [data]="dataBar"></p-chart>
+                        </div>
+                        <div class="card-footer small text-muted"></div>
+                    </div>
                     <div class="row">
                         <div class="col-lg-8">
                             <table class="table table-striped">

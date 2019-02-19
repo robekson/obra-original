@@ -30,6 +30,7 @@ export class ResumoTotalComponent implements OnInit, OnDestroy {
     nomeObra: any;
 
     data: any;
+    dataBar: any;
 
     constructor(
         protected gastoService: GastoService,
@@ -60,6 +61,18 @@ export class ResumoTotalComponent implements OnInit, OnDestroy {
                 (res: HttpResponse<IResumoGasto>) => this.montaGastos(res.body, res.headers),
                 (res: HttpErrorResponse) => this.onError(res.message)
             );
+
+        this.dataBar = {
+            labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
+            datasets: [
+                {
+                    label: 'My First dataset',
+                    backgroundColor: '#42A5F5',
+                    borderColor: '#1E88E5',
+                    data: [65, 59, 80, 81, 56, 55, 40]
+                }
+            ]
+        };
     }
 
     protected montaGastos(data: IResumoGasto, headers: HttpHeaders) {
