@@ -19,6 +19,22 @@ export const enum TipoConta {
     INVESTIMENTO_DEPOSITO = 'INVESTIMENTO_DEPOSITO'
 }
 
+
+export interface ITipoContaDto {
+        id?: number;
+        descricao?: string;
+        valorDespesa?: number;
+}
+
+export class TipoContaDto  implements ITipoContaDto {
+    constructor(
+        public id?: number,
+        public descricao?: string,
+        public valorDespesa?: number
+    ) {}
+}
+    
+    
 export interface MesAno {
     data?: string;
 }

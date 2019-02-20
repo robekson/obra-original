@@ -4,7 +4,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { Subscription, Observable } from 'rxjs';
 import { JhiEventManager, JhiParseLinks, JhiAlertService } from 'ng-jhipster';
 import { IObra } from 'app/shared/model/obra.model';
-import { IGasto, IResumoGasto, MesAno } from 'app/shared/model/gasto.model';
+import { IGasto, IResumoGasto, MesAno, ITipoContaDto } from 'app/shared/model/gasto.model';
 import { AccountService } from 'app/core';
 
 import { ITEMS_PER_PAGE } from 'app/shared';
@@ -51,9 +51,9 @@ export class ResumoTotalComponent implements OnInit, OnDestroy {
         this.nomeObra = localStorage.getItem('nomeObra');
 
         this.pieChartService
-            .query({})
+            .query({idObra: id})
             .subscribe(
-                (res: HttpResponse<IResumoGasto>) => this.montaGraficoPizza(res.body, res.headers),
+                (res: HttpResponse<ITipoContaDto[]>) => this.montaGraficoPizza(res.body, res.headers),
                 (res: HttpErrorResponse) => this.onError(res.message)
             );
 
@@ -82,22 +82,27 @@ export class ResumoTotalComponent implements OnInit, OnDestroy {
         window.history.back();
     }
 
-    protected montaGraficoPizza(data: IResumoGasto, headers: HttpHeaders) {
+    protected montaGraficoPizza(data: ITipoContaDto[], headers: HttpHeaders) {
         console.log(' montaGraficoPizza = ' + data);
         var v_json = {};
 
-        var lineChartLabels = ['Com Nota', 'Sem Nota', 'Honorários'];
-        var lineChartDataSet = [];
-        var dataValues = [1, 2, 1];
+        var pieChartLabels = [];
+        var pieChartDataSet = [];
+        var dataValues = [];
+               
+        for (let tipoConta of data) {
+            pieChartLabels.push(tipoConta.descricao);
+            dataValues.push(tipoConta.valorDespesa);
+        }
 
-        v_json['labels'] = lineChartLabels;
-        lineChartDataSet.push({
+        v_json['labels'] = pieChartLabels;
+        pieChartDataSet.push({
             data: dataValues,
             backgroundColor: ['#FF6384', '#36A2EB', '#FFCE56'],
             hoverBackgroundColor: ['#FF6384', '#36A2EB', '#FFCE56']
         });
 
-        v_json['datasets'] = lineChartDataSet;
+        v_json['datasets'] = pieChartDataSet;
         this.data = v_json;
         console.log(JSON.stringify(v_json));
     }

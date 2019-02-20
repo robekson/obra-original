@@ -217,57 +217,7 @@ public class GastoResource {
     }
     
     
-    /**
-    * 
-    * @param Map<String, String> parameters
-    * @return
-    */
-   @GetMapping("/graficoPizzaTipoConta")
-   @Timed
-   public ResponseEntity<List<TipoContaDTO>> graficoPizzaTipoConta(@RequestParam Map<String, String> parameters) {
-       log.debug("Request to Grafico Pizza Tipo Conta");
-       
-       List<MesAnoDTO> lista = getListaMesAno();
-       
-       List<GastoDTO> invoiceList = new ArrayList<GastoDTO>();
-
-       Long idObra = Long.valueOf(parameters.get("idObra"));
-       invoiceList = gastoService.findResumoTotalInterval(lista.get(0).getDataNaoFormatada(), lista.get(9).getDataNaoFormatada(),idObra);
-       
-       BigDecimal valorMaoObra = invoiceList.stream().filter(i -> i.getTipo().equals(TipoConta.MAO_DE_OBRA)).map(GastoDTO::getValor).reduce(BigDecimal.ZERO, BigDecimal::add);
-       BigDecimal valorMaterial = invoiceList.stream().filter(i -> i.getTipo().equals(TipoConta.MATERIAIS)).map(GastoDTO::getValor).reduce(BigDecimal.ZERO, BigDecimal::add);
-       BigDecimal valorDecoracao = invoiceList.stream().filter(i -> i.getTipo().equals(TipoConta.DECORACAO)).map(GastoDTO::getValor).reduce(BigDecimal.ZERO, BigDecimal::add);
-       BigDecimal valorDocumentacao = invoiceList.stream().filter(i -> i.getTipo().equals(TipoConta.DOCUMENTACAO)).map(GastoDTO::getValor).reduce(BigDecimal.ZERO, BigDecimal::add);
-       
-       
-       List<TipoContaDTO> listaTipoConta = new ArrayList<TipoContaDTO>();
-       
-       TipoContaDTO dto = new TipoContaDTO();      
-       dto.setValorDespesa(valorMaterial);        
-       dto.setDescricao("Materiais"); 
-       listaTipoConta.add(dto);
-       
-        
-       TipoContaDTO dto1 = new TipoContaDTO();      
-       dto1.setValorDespesa(valorMaoObra);        
-       dto1.setDescricao("Mão de Obra"); 
-       listaTipoConta.add(dto1);
-       
-       
-       TipoContaDTO dto2 = new TipoContaDTO();      
-       dto2.setValorDespesa(valorDecoracao);        
-       dto2.setDescricao("Decoração"); 
-       listaTipoConta.add(dto2);
-
-       TipoContaDTO dto3 = new TipoContaDTO();      
-       dto3.setValorDespesa(valorDocumentacao);        
-       dto3.setDescricao("Documentação"); 
-       listaTipoConta.add(dto3);
-
-       return ResponseEntity.ok().body(listaTipoConta);
-   }
-
-
+   
 
     @GetMapping("/resumoConta")
     @Timed
@@ -380,7 +330,9 @@ public class GastoResource {
     }
 
 
-
+    /**
+     * Servico para o Grafico do tipo Barra (Gasto intervalo de meses)
+     */
     @GetMapping("/graficoGastoObraIntervaloMensal")
     @Timed
     public ResponseEntity<List<ResumoContaDTO>> graficoGastoObraIntervaloMensal(@RequestParam Map<String, String> parameters) {
@@ -405,6 +357,58 @@ public class GastoResource {
         }
 
 		return ResponseEntity.ok().body(listaResumo);
+    }
+    
+    
+    /**
+     * Servico para o Grafico do tipo Pizza (Gasto intervalo de meses)
+     * 
+     * @param Map<String, String> parameters
+     * @return
+     */
+    @GetMapping("/graficoPizzaTipoConta")
+    @Timed
+    public ResponseEntity<List<TipoContaDTO>> graficoPizzaTipoConta(@RequestParam Map<String, String> parameters) {
+        log.debug("Request to Grafico Pizza Tipo Conta");
+        
+        List<MesAnoDTO> lista = getListaMesAno();
+        
+        List<GastoDTO> invoiceList = new ArrayList<GastoDTO>();
+
+        Long idObra = Long.valueOf(parameters.get("idObra"));
+        invoiceList = gastoService.findResumoTotalInterval(lista.get(0).getDataNaoFormatada(), lista.get(9).getDataNaoFormatada(),idObra);
+        
+        BigDecimal valorMaoObra = invoiceList.stream().filter(i -> i.getTipo().equals(TipoConta.MAO_DE_OBRA)).map(GastoDTO::getValor).reduce(BigDecimal.ZERO, BigDecimal::add);
+        BigDecimal valorMaterial = invoiceList.stream().filter(i -> i.getTipo().equals(TipoConta.MATERIAIS)).map(GastoDTO::getValor).reduce(BigDecimal.ZERO, BigDecimal::add);
+        BigDecimal valorDecoracao = invoiceList.stream().filter(i -> i.getTipo().equals(TipoConta.DECORACAO)).map(GastoDTO::getValor).reduce(BigDecimal.ZERO, BigDecimal::add);
+        BigDecimal valorDocumentacao = invoiceList.stream().filter(i -> i.getTipo().equals(TipoConta.DOCUMENTACAO)).map(GastoDTO::getValor).reduce(BigDecimal.ZERO, BigDecimal::add);
+        
+        
+        List<TipoContaDTO> listaTipoConta = new ArrayList<TipoContaDTO>();
+        
+        TipoContaDTO dto = new TipoContaDTO();      
+        dto.setValorDespesa(valorMaterial);        
+        dto.setDescricao("Materiais"); 
+        listaTipoConta.add(dto);
+        
+         
+        TipoContaDTO dto1 = new TipoContaDTO();      
+        dto1.setValorDespesa(valorMaoObra);        
+        dto1.setDescricao("Mão de Obra"); 
+        listaTipoConta.add(dto1);
+        
+        
+        TipoContaDTO dto2 = new TipoContaDTO();      
+        dto2.setValorDespesa(valorDecoracao);        
+        dto2.setDescricao("Decoração"); 
+        listaTipoConta.add(dto2);
+
+        TipoContaDTO dto3 = new TipoContaDTO();      
+        dto3.setValorDespesa(valorDocumentacao);        
+        dto3.setDescricao("Documentação"); 
+        listaTipoConta.add(dto3);
+
+        return ResponseEntity.ok().body(listaTipoConta);
     }
 
 
