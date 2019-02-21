@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy, ElementRef, ViewChild } from '@angular/core';
 import { HttpErrorResponse, HttpHeaders, HttpResponse } from '@angular/common/http';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Subscription, Observable } from 'rxjs';
@@ -10,7 +10,10 @@ import { AccountService } from 'app/core';
 import { ITEMS_PER_PAGE } from 'app/shared';
 import { GastoService } from 'app/entities/gasto/gasto.service';
 import { PiechartService } from 'app/dashboard/piechart/piechart.service';
-import { BarchartService } from "app/dashboard/barchart/barchart.service";
+import { BarchartService } from 'app/dashboard/barchart/barchart.service';
+
+import * as jspdf from 'jspdf';
+import * as html2canvas from 'html2canvas';
 
 @Component({
     selector: 'jhi-resumo-total',
@@ -51,31 +54,48 @@ export class ResumoTotalComponent implements OnInit, OnDestroy {
         this.nomeObra = localStorage.getItem('nomeObra');
 
         this.pieChartService
-            .query({idObra: id})
+            .query({ idObra: id })
             .subscribe(
                 (res: HttpResponse<ITipoContaDto[]>) => this.montaGraficoPizza(res.body, res.headers),
                 (res: HttpErrorResponse) => this.onError(res.message)
             );
 
         this.barChartService
-        .query({idObra: id })
-        .subscribe(
-            (res: HttpResponse<IResumoGasto[]>) => this.montaGraficoBarra(res.body, res.headers),
-            (res: HttpErrorResponse) => this.onError(res.message)
-        );
-        
+            .query({ idObra: id })
+            .subscribe(
+                (res: HttpResponse<IResumoGasto[]>) => this.montaGraficoBarra(res.body, res.headers),
+                (res: HttpErrorResponse) => this.onError(res.message)
+            );
+
         this.gastoService
             .resumoTotal({ idObra: id })
             .subscribe(
                 (res: HttpResponse<IResumoGasto>) => this.montaGastos(res.body, res.headers),
                 (res: HttpErrorResponse) => this.onError(res.message)
             );
-
     }
 
     protected montaGastos(data: IResumoGasto, headers: HttpHeaders) {
         this.resumo = data;
         console.log('Resumo =' + this.resumo);
+    }
+
+    public exportar() {
+        var data = document.getElementById('contentToConvert');
+        console.log('exportar =' + data);
+        html2canvas(data).then(canvas => {
+            // Few necessary setting options
+            var imgWidth = 208;
+            var pageHeight = 595;
+            var imgHeight = (canvas.height * imgWidth) / canvas.width;
+            var heightLeft = imgHeight;
+
+            const contentDataURL = canvas.toDataURL('image/png');
+            let pdf = new jspdf('p', 'mm', 'a4'); // A4 size page of PDF
+            var position = 0;
+            pdf.addImage(contentDataURL, 'PNG', 0, position, imgWidth, imgHeight);
+            pdf.save('resumoTotal.pdf'); // Generated PDF
+        });
     }
 
     previousState() {
@@ -89,7 +109,7 @@ export class ResumoTotalComponent implements OnInit, OnDestroy {
         var pieChartLabels = [];
         var pieChartDataSet = [];
         var dataValues = [];
-               
+
         for (let tipoConta of data) {
             pieChartLabels.push(tipoConta.descricao);
             dataValues.push(tipoConta.valorDespesa);
@@ -106,7 +126,6 @@ export class ResumoTotalComponent implements OnInit, OnDestroy {
         this.data = v_json;
         console.log(JSON.stringify(v_json));
     }
-    
 
     protected montaGraficoBarra(data: IResumoGasto[], headers: HttpHeaders) {
         console.log(' montaGraficoBarra = ' + data);
@@ -119,10 +138,10 @@ export class ResumoTotalComponent implements OnInit, OnDestroy {
             barChartLabels.push(resumoGasto.mesAnoFormatado);
             dataValues.push(resumoGasto.totalDespesas);
         }
-        
+
         v_json['labels'] = barChartLabels;
         barChartDataSet.push({
-            label: 'Gastos - '+this.nomeObra,
+            label: 'Gastos - ' + this.nomeObra,
             backgroundColor: '#42A5F5',
             borderColor: '#1E88E5',
             data: dataValues
@@ -132,9 +151,6 @@ export class ResumoTotalComponent implements OnInit, OnDestroy {
         this.dataBar = v_json;
         console.log(JSON.stringify(v_json));
     }
-    
-    
-    
 
     ngOnDestroy() {
         // this.eventManager.destroy(this.eventSubscriber);
