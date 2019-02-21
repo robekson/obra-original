@@ -85,7 +85,7 @@ export class ResumoTotalComponent implements OnInit, OnDestroy {
         console.log('exportar =' + data);
         html2canvas(data).then(canvas => {
             // Few necessary setting options
-            var imgWidth = 200;
+            var imgWidth = 195;
             var pageHeight = 695;
             var imgHeight = (canvas.height * imgWidth) / canvas.width;
             var heightLeft = imgHeight;
