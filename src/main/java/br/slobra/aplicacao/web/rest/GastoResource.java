@@ -341,6 +341,26 @@ public class GastoResource {
         ObraDTO obra = obraService.findOne(idObra).get();
         dto.setObraDTO(obra);
 
+
+        if(idObra!=null) {
+
+            //Se eu escolho o TIPO 1, você tem que fazer assim:
+            //Pegar TUDO que recebeu(INVESTIMENTO) e multiplica pela corretagem.
+            if(obra.getTipoCorretagem().equals(TipoCorretagem.Tipo1)) {
+                BigDecimal valorHonorario  =  percentage(valorDeposito,new BigDecimal(obra.getPorcentagemCorretagem()));
+                dto.setHonorarioAdministracao(valorHonorario);
+            }
+            //Se eu escolho o TIPO 2, você tem que fazer assim:
+            // Pegar TUDO que gastou(TODOS GASTOS) e multiplica pela corretagem.
+            if(obra.getTipoCorretagem().equals(TipoCorretagem.Tipo2)) {
+                BigDecimal valorGasto = invoiceList.stream().filter(i -> ! i.getTipo().equals(TipoConta.INVESTIMENTO_DEPOSITO)).map(GastoDTO::getValor).reduce(BigDecimal.ZERO, BigDecimal::add);
+                BigDecimal valorHonorario  =  percentage(valorGasto,new BigDecimal(obra.getPorcentagemCorretagem()));
+                dto.setHonorarioAdministracao(valorHonorario);
+            }
+        }
+
+
+
         List<GastoDTO> listData = invoiceList;
         if(!listData.isEmpty()) {
             dto.setMesAno(listData.get(0).getMesAno());
