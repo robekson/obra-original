@@ -49,6 +49,7 @@ import java.util.GregorianCalendar;
 import br.slobra.aplicacao.domain.enumeration.NotaFiscal;
 import br.slobra.aplicacao.domain.enumeration.TipoConta;
 import br.slobra.aplicacao.domain.enumeration.Pago;
+import br.slobra.aplicacao.domain.enumeration.TipoCorretagem;
 import java.util.Comparator;
 import java.util.stream.Collectors;
 import java.time.format.DateTimeFormatter;
@@ -266,6 +267,27 @@ public class GastoResource {
         dto.setQuantidadeSemNota(countSemNota);
         dto.setValorDeposito(valorDeposito);
         dto.setDespesaGeralSubTotal(total);
+        
+       
+        
+        if(parameters.get("idObra")!=null) {
+        	 ObraDTO obra = obraService.findOne(Long.valueOf(parameters.get("idObra"))).get();
+        	 //Se eu escolho o TIPO 1, você tem que fazer assim:
+        	 //Pegar TUDO que recebeu(INVESTIMENTO) e multiplica pela corretagem.
+        	 if(obra.getTipoCorretagem().equals(TipoCorretagem.Tipo1)) {        		 
+        		 BigDecimal valorHonorario  = valorDeposito.multiply(new BigDecimal(obra.getPorcentagemCorretagem()/100));
+        		 dto.setHonorarioAdministracao(valorHonorario);
+        	 }
+        	 //Se eu escolho o TIPO 2, você tem que fazer assim:
+        	// Pegar TUDO que gastou(TODOS GASTOS) e multiplica pela corretagem.
+        	 if(obra.getTipoCorretagem().equals(TipoCorretagem.Tipo2)) {
+        		 BigDecimal valorGasto = invoiceList.stream().filter(i -> ! i.getTipo().equals(TipoConta.INVESTIMENTO_DEPOSITO)).map(GastoDTO::getValor).reduce(BigDecimal.ZERO, BigDecimal::add);
+        		 BigDecimal valorHonorario  = valorGasto.multiply(new BigDecimal(obra.getPorcentagemCorretagem()/100));
+        		 dto.setHonorarioAdministracao(valorHonorario);
+        	 }
+        }
+        
+        
 
         List<GastoDTO> listData = invoiceList;
         if(!listData.isEmpty()) {
