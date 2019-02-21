@@ -54,7 +54,7 @@ export interface IGasto {
 
 export interface IResumoGasto {
     id?: number;
-    honorarioAdministracao?: string;
+    honorarioAdministracao?: number;
     valorDeposito?: number;
     quantidadeComNota?: number;
     quantidadeSemNota?: number;
@@ -71,7 +71,7 @@ export interface IResumoGasto {
 export class ResumoGasto implements IResumoGasto {
     constructor(
         public id?: number,
-        public honorarioAdministracao?: string,
+        public honorarioAdministracao?: number,
         public valorDeposito?: number,
         public quantidadeComNota?: number,
         public quantidadeSemNota?: number,
