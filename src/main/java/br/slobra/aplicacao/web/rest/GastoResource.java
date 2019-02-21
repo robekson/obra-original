@@ -73,6 +73,8 @@ public class GastoResource {
 
     private final GastoService gastoService;
 
+    public static final BigDecimal ONE_HUNDRED = new BigDecimal(100);
+
     @Autowired
     ResumoGastoService resumoGastoService;
 
@@ -112,7 +114,7 @@ public class GastoResource {
                     gastoDTO.setMesAno(localdate);
                     gastoDTO.setPagamento(Pago.NAO);//Lançar nos próximos meses como “PAGO” o valor NÃO.
                 }
-                
+
                 result = gravaGastoDTO(gastoDTO);
                 x++;
             }
@@ -216,9 +218,9 @@ public class GastoResource {
 
         return ResponseUtil.wrapOrNotFound(Optional.of(dto));
     }
-    
-    
-   
+
+
+
 
     @GetMapping("/resumoConta")
     @Timed
@@ -267,29 +269,27 @@ public class GastoResource {
         dto.setQuantidadeSemNota(countSemNota);
         dto.setValorDeposito(valorDeposito);
         dto.setDespesaGeralSubTotal(total);
-        
-       
-        
+
+
+
         if(parameters.get("idObra")!=null) {
         	 ObraDTO obra = obraService.findOne(Long.valueOf(parameters.get("idObra"))).get();
         	 //Se eu escolho o TIPO 1, você tem que fazer assim:
         	 //Pegar TUDO que recebeu(INVESTIMENTO) e multiplica pela corretagem.
-        	 log.debug("Tipo Corretagem "+obra.getTipoCorretagem());
-        	 if(obra.getTipoCorretagem().equals(TipoCorretagem.Tipo1)) {        		 
-        		 BigDecimal valorHonorario  = valorDeposito.multiply(new BigDecimal(obra.getPorcentagemCorretagem()/100));
-        		 log.debug("valorHonorario "+valorHonorario );
+        	 if(obra.getTipoCorretagem().equals(TipoCorretagem.Tipo1)) {
+                 BigDecimal valorHonorario  =  percentage(valorDeposito,new BigDecimal(obra.getPorcentagemCorretagem()));
         		 dto.setHonorarioAdministracao(valorHonorario);
         	 }
         	 //Se eu escolho o TIPO 2, você tem que fazer assim:
         	// Pegar TUDO que gastou(TODOS GASTOS) e multiplica pela corretagem.
         	 if(obra.getTipoCorretagem().equals(TipoCorretagem.Tipo2)) {
         		 BigDecimal valorGasto = invoiceList.stream().filter(i -> ! i.getTipo().equals(TipoConta.INVESTIMENTO_DEPOSITO)).map(GastoDTO::getValor).reduce(BigDecimal.ZERO, BigDecimal::add);
-        		 BigDecimal valorHonorario  = valorGasto.multiply(new BigDecimal(obra.getPorcentagemCorretagem()/100));
+                 BigDecimal valorHonorario  =  percentage(valorGasto,new BigDecimal(obra.getPorcentagemCorretagem()));
         		 dto.setHonorarioAdministracao(valorHonorario);
         	 }
         }
-        
-        
+
+
 
         List<GastoDTO> listData = invoiceList;
         if(!listData.isEmpty()) {
@@ -298,6 +298,10 @@ public class GastoResource {
 
 
         return ResponseUtil.wrapOrNotFound(Optional.of(dto));
+    }
+
+    public static BigDecimal percentage(BigDecimal base, BigDecimal pct){
+        return base.multiply(pct).divide(ONE_HUNDRED);
     }
 
 
@@ -360,7 +364,7 @@ public class GastoResource {
     @GetMapping("/graficoGastoObraIntervaloMensal")
     @Timed
     public ResponseEntity<List<ResumoContaDTO>> graficoGastoObraIntervaloMensal(@RequestParam Map<String, String> parameters) {
-   	
+
     	List<GastoDTO> listGasto = new ArrayList<GastoDTO>();
         List<MesAnoDTO> lista = getListaMesAno();
         Long idObra = Long.valueOf(parameters.get("idObra"));
@@ -382,11 +386,11 @@ public class GastoResource {
 
 		return ResponseEntity.ok().body(listaResumo);
     }
-    
-    
+
+
     /**
      * Servico para o Grafico do tipo Pizza (Gasto intervalo de meses)
-     * 
+     *
      * @param Map<String, String> parameters
      * @return
      */
@@ -394,42 +398,42 @@ public class GastoResource {
     @Timed
     public ResponseEntity<List<TipoContaDTO>> graficoPizzaTipoConta(@RequestParam Map<String, String> parameters) {
         log.debug("Request to Grafico Pizza Tipo Conta");
-        
+
         List<MesAnoDTO> lista = getListaMesAno();
-        
+
         List<GastoDTO> invoiceList = new ArrayList<GastoDTO>();
 
         Long idObra = Long.valueOf(parameters.get("idObra"));
         invoiceList = gastoService.findResumoTotalInterval(lista.get(0).getDataNaoFormatada(), lista.get(9).getDataNaoFormatada(),idObra);
-        
+
         BigDecimal valorMaoObra = invoiceList.stream().filter(i -> i.getTipo().equals(TipoConta.MAO_DE_OBRA)).map(GastoDTO::getValor).reduce(BigDecimal.ZERO, BigDecimal::add);
         BigDecimal valorMaterial = invoiceList.stream().filter(i -> i.getTipo().equals(TipoConta.MATERIAIS)).map(GastoDTO::getValor).reduce(BigDecimal.ZERO, BigDecimal::add);
         BigDecimal valorDecoracao = invoiceList.stream().filter(i -> i.getTipo().equals(TipoConta.DECORACAO)).map(GastoDTO::getValor).reduce(BigDecimal.ZERO, BigDecimal::add);
         BigDecimal valorDocumentacao = invoiceList.stream().filter(i -> i.getTipo().equals(TipoConta.DOCUMENTACAO)).map(GastoDTO::getValor).reduce(BigDecimal.ZERO, BigDecimal::add);
-        
-        
+
+
         List<TipoContaDTO> listaTipoConta = new ArrayList<TipoContaDTO>();
-        
-        TipoContaDTO dto = new TipoContaDTO();      
-        dto.setValorDespesa(valorMaterial);        
-        dto.setDescricao("Materiais"); 
+
+        TipoContaDTO dto = new TipoContaDTO();
+        dto.setValorDespesa(valorMaterial);
+        dto.setDescricao("Materiais");
         listaTipoConta.add(dto);
-        
-         
-        TipoContaDTO dto1 = new TipoContaDTO();      
-        dto1.setValorDespesa(valorMaoObra);        
-        dto1.setDescricao("Mão de Obra"); 
+
+
+        TipoContaDTO dto1 = new TipoContaDTO();
+        dto1.setValorDespesa(valorMaoObra);
+        dto1.setDescricao("Mão de Obra");
         listaTipoConta.add(dto1);
-        
-        
-        TipoContaDTO dto2 = new TipoContaDTO();      
-        dto2.setValorDespesa(valorDecoracao);        
-        dto2.setDescricao("Decoração"); 
+
+
+        TipoContaDTO dto2 = new TipoContaDTO();
+        dto2.setValorDespesa(valorDecoracao);
+        dto2.setDescricao("Decoração");
         listaTipoConta.add(dto2);
 
-        TipoContaDTO dto3 = new TipoContaDTO();      
-        dto3.setValorDespesa(valorDocumentacao);        
-        dto3.setDescricao("Documentação"); 
+        TipoContaDTO dto3 = new TipoContaDTO();
+        dto3.setValorDespesa(valorDocumentacao);
+        dto3.setDescricao("Documentação");
         listaTipoConta.add(dto3);
 
         return ResponseEntity.ok().body(listaTipoConta);
