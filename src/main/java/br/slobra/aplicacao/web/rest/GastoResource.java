@@ -274,8 +274,10 @@ public class GastoResource {
         	 ObraDTO obra = obraService.findOne(Long.valueOf(parameters.get("idObra"))).get();
         	 //Se eu escolho o TIPO 1, você tem que fazer assim:
         	 //Pegar TUDO que recebeu(INVESTIMENTO) e multiplica pela corretagem.
+        	 log.debug("Tipo Corretagem "+obra.getTipoCorretagem());
         	 if(obra.getTipoCorretagem().equals(TipoCorretagem.Tipo1)) {        		 
         		 BigDecimal valorHonorario  = valorDeposito.multiply(new BigDecimal(obra.getPorcentagemCorretagem()/100));
+        		 log.debug("valorHonorario "+valorHonorario );
         		 dto.setHonorarioAdministracao(valorHonorario);
         	 }
         	 //Se eu escolho o TIPO 2, você tem que fazer assim:
