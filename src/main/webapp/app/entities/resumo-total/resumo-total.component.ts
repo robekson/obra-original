@@ -85,15 +85,15 @@ export class ResumoTotalComponent implements OnInit, OnDestroy {
         console.log('exportar =' + data);
         html2canvas(data).then(canvas => {
             // Few necessary setting options
-            var imgWidth = 208;
-            var pageHeight = 595;
+            var imgWidth = 200;
+            var pageHeight = 695;
             var imgHeight = (canvas.height * imgWidth) / canvas.width;
             var heightLeft = imgHeight;
 
             const contentDataURL = canvas.toDataURL('image/png');
             let pdf = new jspdf('p', 'mm', 'a4'); // A4 size page of PDF
             var position = 0;
-            pdf.addImage(contentDataURL, 'PNG', 0, position, imgWidth, imgHeight);
+            pdf.addImage(contentDataURL, 'PNG', 2, position, imgWidth, imgHeight);
             pdf.save('resumoTotal.pdf'); // Generated PDF
         });
     }
