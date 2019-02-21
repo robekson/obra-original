@@ -37,8 +37,6 @@ export class GastoUpdateComponent implements OnInit {
             this.gasto = gasto;
             let dateString = localStorage.getItem('data');
             if (dateString != null && this.gasto.mesAno == null) {
-                console.log(dateString);
-                console.log(moment(dateString, 'MMM/YYYY', 'pt-BR'));
                 this.gasto.mesAno = moment(dateString, 'MMM/YYYY', 'pt-BR');
             }
         });
@@ -68,7 +66,6 @@ export class GastoUpdateComponent implements OnInit {
     }
     
     tipoContaChanged(event){
-        console.log("event "+event);
         if(event=='INVESTIMENTO_DEPOSITO'){
             this.gasto.pagamento=Pago.SIM;
         }     
