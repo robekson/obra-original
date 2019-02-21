@@ -85,6 +85,24 @@ export class ResumoTotalComponent implements OnInit, OnDestroy {
         console.log('exportar =' + data);
         html2canvas(data).then(canvas => {
             // Few necessary setting options
+            let pdf = new jspdf('p', 'mm', 'a4'); // A4 size page of PDF
+            var width = pdf.internal.pageSize.getWidth();
+            var height = pdf.internal.pageSize.getHeight();
+
+            const contentDataURL = canvas.toDataURL('image/png');
+            
+            var position = 0;
+            pdf.addImage(contentDataURL, 'PNG', 1, position, width, height);
+            pdf.save('resumoTotal.pdf'); // Generated PDF
+        });
+    }
+    
+    
+    /*public exportar() {
+        var data = document.getElementById('contentToConvert');
+        console.log('exportar =' + data);
+        html2canvas(data).then(canvas => {
+            // Few necessary setting options
             var imgWidth = 180;
             var pageHeight = 615;
             var imgHeight = (canvas.height * imgWidth) / canvas.width;
@@ -96,7 +114,7 @@ export class ResumoTotalComponent implements OnInit, OnDestroy {
             pdf.addImage(contentDataURL, 'PNG', 2, position, imgWidth, imgHeight);
             pdf.save('resumoTotal.pdf'); // Generated PDF
         });
-    }
+    }*/
 
     previousState() {
         window.history.back();
