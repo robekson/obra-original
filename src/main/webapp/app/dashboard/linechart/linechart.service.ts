@@ -12,7 +12,7 @@ type EntityResponseTypeResumo = HttpResponse<IResumoGasto[]>;
     providedIn: 'root'
 })
 export class LinechartService {
-    public resourceUrl = SERVER_API_URL + 'api/graficoGastoObra';
+    public resourceUrl = SERVER_API_URL + 'api/graficoGastoObraIntervaloMensal';
 
     constructor(protected http: HttpClient) {}
 
