@@ -20,6 +20,7 @@ export class HomeComponent implements OnInit {
     modalRef: NgbModalRef;
     data: any;
     msgs: Message[];
+    nomeObra: any;
 
     constructor(
         private accountService: AccountService,
@@ -38,6 +39,7 @@ export class HomeComponent implements OnInit {
         this.registerAuthenticationSuccess();
 
         let id = localStorage.getItem('idObra');
+        this.nomeObra = localStorage.getItem('nomeObra');
 
         this.lineChartService
             .query({ idObra: id })
