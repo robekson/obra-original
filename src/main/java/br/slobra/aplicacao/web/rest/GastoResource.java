@@ -568,7 +568,7 @@ public class GastoResource {
 		LocalDate localdate = obra.getDataInicio();
 						
 		List<MesAnoDTO> lista = new ArrayList<>();
-		MesAnoDTO dto = new MesAnoDTO();		
+		MesAnoDTO dto1 = new MesAnoDTO();		
 		dto1.setData(localdate.format(formatador));
 		dto1.setDataNaoFormatada(DateUtils.asDate(localdate));
 		lista.add(dto1);
