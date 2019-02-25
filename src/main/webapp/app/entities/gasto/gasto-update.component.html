@@ -1,7 +1,7 @@
 <div class="row justify-content-center">
     <div class="col-8">
         <form name="editForm" role="form" novalidate (ngSubmit)="save()" #editForm="ngForm">
-            <h2 id="jhi-gasto-heading" jhiTranslate="obrasAppEdit.gasto.home.createOrEditLabel">Create or edit a Gasto</h2>
+            <h2 id="jhi-gasto-heading" jhiTranslate="obrasAppEdit.gasto.home.createOrEditLabel">Create or edit a Gasto -  {{nomeObra}}</h2>
             <div>
                 <jhi-alert-error></jhi-alert-error>
                 <div class="form-group" [hidden]="!gasto.id">
@@ -94,13 +94,13 @@
                     </div>
                 </div>-->
 
-                <div class="form-group">
+                <!-- <div class="form-group">
                     <label class="form-control-label" jhiTranslate="obrasAppEdit.gasto.obra" for="field_obra">Obra</label>
                     <select class="form-control" id="field_obra" name="obra" [(ngModel)]="gasto.obraId" >
                         <option [ngValue]="null"></option>
                         <option [ngValue]="obraOption.id" *ngFor="let obraOption of obras; trackBy: trackObraById">{{obraOption.nome}}</option>
                     </select>
-                </div>
+                </div>-->
             </div>
             <div>
                 <button type="button" id="cancel-save" class="btn btn-secondary"  (click)="previousState()">

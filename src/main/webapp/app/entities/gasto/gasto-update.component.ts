@@ -6,11 +6,10 @@ import * as moment from 'moment';
 import 'moment/locale/pt-br';
 import { JhiAlertService } from 'ng-jhipster';
 
-import { IGasto , Pago } from 'app/shared/model/gasto.model';
+import { IGasto, Pago } from 'app/shared/model/gasto.model';
 import { GastoService } from './gasto.service';
 import { IObra } from 'app/shared/model/obra.model';
 import { ObraService } from 'app/entities/obra';
-
 
 @Component({
     selector: 'jhi-gasto-update',
@@ -23,6 +22,7 @@ export class GastoUpdateComponent implements OnInit {
     obras: IObra[];
     dataVencimentoDp: any;
     mesAnoDp: any;
+    nomeObra: any;
 
     constructor(
         protected jhiAlertService: JhiAlertService,
@@ -32,6 +32,7 @@ export class GastoUpdateComponent implements OnInit {
     ) {}
 
     ngOnInit() {
+        this.nomeObra = localStorage.getItem('nomeObra');
         this.isSaving = false;
         this.activatedRoute.data.subscribe(({ gasto }) => {
             this.gasto = gasto;
@@ -39,6 +40,9 @@ export class GastoUpdateComponent implements OnInit {
             if (dateString != null && this.gasto.mesAno == null) {
                 this.gasto.mesAno = moment(dateString, 'MMM/YYYY', 'pt-BR');
             }
+
+            let id = localStorage.getItem('idObra');
+            gasto.obraId = id;
         });
         this.obraService.query().subscribe(
             (res: HttpResponse<IObra[]>) => {
@@ -64,11 +68,11 @@ export class GastoUpdateComponent implements OnInit {
     protected subscribeToSaveResponse(result: Observable<HttpResponse<IGasto>>) {
         result.subscribe((res: HttpResponse<IGasto>) => this.onSaveSuccess(), (res: HttpErrorResponse) => this.onSaveError());
     }
-    
-    tipoContaChanged(event){
-        if(event=='INVESTIMENTO_DEPOSITO'){
-            this.gasto.pagamento=Pago.SIM;
-        }     
+
+    tipoContaChanged(event) {
+        if (event == 'INVESTIMENTO_DEPOSITO') {
+            this.gasto.pagamento = Pago.SIM;
+        }
     }
 
     protected onSaveSuccess() {
