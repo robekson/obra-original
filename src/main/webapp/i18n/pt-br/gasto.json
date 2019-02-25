@@ -4,7 +4,7 @@
             "home": {
                 "title": "Lista de Gastos",
                 "createLabel": "Adicionar Gasto",
-                "createOrEditLabel": "Criar ou editar Gasto  {{nomeObra }}"
+                "createOrEditLabel": "Criar ou editar Gasto"
             },
             "created": "Um novo Gasto foi criado com o identificador {{ param }}",
             "updated": "Um Gasto foi atualizado com o identificador {{ param }}",
