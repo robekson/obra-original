@@ -4,7 +4,7 @@
             "home": {
                 "title": "Gastos",
                 "createLabel": "Create a new Gasto",
-                "createOrEditLabel": "Create or edit a Gasto"
+                "createOrEditLabel": "Create or edit a Gasto {{nomeObra }}"
             },
             "created": "A new Gasto is created with identifier {{ param }}",
             "updated": "A Gasto is updated with identifier {{ param }}",

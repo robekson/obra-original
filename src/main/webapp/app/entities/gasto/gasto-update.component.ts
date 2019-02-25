@@ -42,7 +42,7 @@ export class GastoUpdateComponent implements OnInit {
             }
 
             let id = localStorage.getItem('idObra');
-            this.gasto.obraId = id;
+            this.gasto.obraId = parseInt(id);
         });
         this.obraService.query().subscribe(
             (res: HttpResponse<IObra[]>) => {
