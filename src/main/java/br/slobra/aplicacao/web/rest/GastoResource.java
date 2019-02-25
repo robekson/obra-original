@@ -574,7 +574,7 @@ public class GastoResource {
 		lista.add(dto1);
 		
 		
-		for(int x=0;x<10;x++) {
+		for(int x=0;x<11;x++) {
 			localdate = localdate.plusMonths(1);
 			MesAnoDTO dto = new MesAnoDTO();
 			dto.setData(localdate.format(formatador));
@@ -583,7 +583,7 @@ public class GastoResource {
 		}
 		
         log.debug("Lista : {}", lista );
-        Collections.reverse(lista);
+       // Collections.reverse(lista);
         log.debug("reverse : {}", lista );
 		
 
