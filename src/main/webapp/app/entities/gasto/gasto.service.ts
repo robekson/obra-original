@@ -67,8 +67,9 @@ export class GastoService {
     }
 
     findMesesAno(req?: any): Observable<EntityResponseTypeMesAno> {
+        const options = createRequestOption(req);
         return this.http
-            .get<MesAno[]>(this.resourceUrlMeses, { observe: 'response' })
+            .get<MesAno[]>(this.resourceUrlMeses, { params: options, observe: 'response' })
             .pipe(map((res: EntityResponseTypeMesAno) => this.convertDateArrayFromServer3(res)));
     }
 

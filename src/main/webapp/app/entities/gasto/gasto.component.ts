@@ -157,9 +157,11 @@ export class GastoComponent implements OnInit, OnDestroy {
             this.currentAccount = account;
         });
         this.registerChangeInGastos();
+        
+        let id = localStorage.getItem('idObra');
 
         this.gastoService
-            .findMesesAno({})
+            .findMesesAno({idObra: id})
             .subscribe(
                 (res: HttpResponse<MesAno[]>) => this.montaMeses(res.body, res.headers),
                 (res: HttpErrorResponse) => this.onError(res.message)

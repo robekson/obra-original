@@ -7,6 +7,7 @@ import br.slobra.aplicacao.service.ResumoGastoService;
 import br.slobra.aplicacao.web.rest.errors.BadRequestAlertException;
 import br.slobra.aplicacao.web.rest.util.HeaderUtil;
 import br.slobra.aplicacao.web.rest.util.PaginationUtil;
+import br.slobra.aplicacao.service.util.DateUtils;
 import br.slobra.aplicacao.service.dto.GastoDTO;
 import br.slobra.aplicacao.service.dto.ObraDTO;
 import br.slobra.aplicacao.service.dto.ResumoContaDTO;
@@ -313,9 +314,11 @@ public class GastoResource {
 
         List<GastoDTO> invoiceList = new ArrayList<GastoDTO>();
 
-        List<MesAnoDTO> lista = getListaMesAno();
-
         Long idObra = Long.valueOf(parameters.get("idObra"));
+        
+        List<MesAnoDTO> lista = getListaMesAno(idObra);
+
+        
         invoiceList = gastoService.findResumoTotalInterval(lista.get(0).getDataNaoFormatada(), lista.get(9).getDataNaoFormatada(),idObra);
 
 
@@ -372,8 +375,9 @@ public class GastoResource {
 
     @GetMapping("/gastoMesAno")
     @Timed
-    public ResponseEntity<List<MesAnoDTO>> getMesAno() {
-        List<MesAnoDTO> lista = getListaMesAno();
+    public ResponseEntity<List<MesAnoDTO>> getMesAno(@RequestParam Map<String, String> parameters) {
+    	Long idObra = Long.valueOf(parameters.get("idObra"));
+        List<MesAnoDTO> lista = getListaMesAno(idObra);
 		return ResponseEntity.ok().body(lista);
     }
 
@@ -386,8 +390,8 @@ public class GastoResource {
     public ResponseEntity<List<ResumoContaDTO>> graficoGastoObraIntervaloMensal(@RequestParam Map<String, String> parameters) {
 
     	List<GastoDTO> listGasto = new ArrayList<GastoDTO>();
-        List<MesAnoDTO> lista = getListaMesAno();
-        Long idObra = Long.valueOf(parameters.get("idObra"));
+    	Long idObra = Long.valueOf(parameters.get("idObra"));
+        List<MesAnoDTO> lista = getListaMesAno(idObra);        
         listGasto = gastoService.findResumoTotalInterval(lista.get(0).getDataNaoFormatada(), lista.get(9).getDataNaoFormatada(),idObra);
 
     	List<ResumoContaDTO> listaResumo = new ArrayList<>();
@@ -419,11 +423,12 @@ public class GastoResource {
     public ResponseEntity<List<TipoContaDTO>> graficoPizzaTipoConta(@RequestParam Map<String, String> parameters) {
         log.debug("Request to Grafico Pizza Tipo Conta");
 
-        List<MesAnoDTO> lista = getListaMesAno();
-
-        List<GastoDTO> invoiceList = new ArrayList<GastoDTO>();
-
         Long idObra = Long.valueOf(parameters.get("idObra"));
+        
+        List<MesAnoDTO> lista = getListaMesAno(idObra);
+               
+        List<GastoDTO> invoiceList = new ArrayList<GastoDTO>();
+       
         invoiceList = gastoService.findResumoTotalInterval(lista.get(0).getDataNaoFormatada(), lista.get(9).getDataNaoFormatada(),idObra);
 
         BigDecimal valorMaoObra = invoiceList.stream().filter(i -> i.getTipo().equals(TipoConta.MAO_DE_OBRA)).map(GastoDTO::getValor).reduce(BigDecimal.ZERO, BigDecimal::add);
@@ -555,27 +560,32 @@ public class GastoResource {
     }
 
 
-	private List<MesAnoDTO> getListaMesAno() {
+	private List<MesAnoDTO> getListaMesAno(Long idObra) {
 
-		SimpleDateFormat formato = new SimpleDateFormat("MMM/yyyy",new Locale("pt", "br"));
-		Calendar dia25 = Calendar.getInstance();
-
+		DateTimeFormatter formatador = DateTimeFormatter.ofPattern("MMM/yyyy").withLocale(new Locale("pt", "br"));
+		
+		ObraDTO obra = obraService.findOne(idObra).get();		
+		LocalDate localdate = obra.getDataInicio();
+						
 		List<MesAnoDTO> lista = new ArrayList<>();
-		MesAnoDTO dto1=new MesAnoDTO();
-		dto1.setData(formato.format(dia25.getTime()));
-        dto1.setDataNaoFormatada(dia25.getTime());
+		MesAnoDTO dto = new MesAnoDTO();		
+		dto1.setData(localdate.format(formatador));
+		dto1.setDataNaoFormatada(DateUtils.asDate(localdate));
 		lista.add(dto1);
-
+		
+		
 		for(int x=0;x<10;x++) {
-			dia25.add(Calendar.MONTH, -1);
-			MesAnoDTO dto= new MesAnoDTO();
-			dto.setData(formato.format(dia25.getTime()));
-			dto.setDataNaoFormatada(dia25.getTime());
+			localdate = localdate.plusMonths(1);
+			MesAnoDTO dto = new MesAnoDTO();
+			dto.setData(localdate.format(formatador));
+			dto.setDataNaoFormatada(DateUtils.asDate(localdate));
 			lista.add(dto);
 		}
+		
         log.debug("Lista : {}", lista );
         Collections.reverse(lista);
         log.debug("reverse : {}", lista );
+		
 
 		//lista = lista.stream().sorted(Comparator.comparing(MesAnoDTO::getData).reversed()).collect(Collectors.toList());
 		return lista;
