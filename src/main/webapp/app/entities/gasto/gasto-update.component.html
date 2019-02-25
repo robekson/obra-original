@@ -1,7 +1,7 @@
 <div class="row justify-content-center">
     <div class="col-8">
         <form name="editForm" role="form" novalidate (ngSubmit)="save()" #editForm="ngForm">
-            <h2 id="jhi-gasto-heading" jhiTranslate="obrasAppEdit.gasto.home.createOrEditLabel">Create or edit a Gasto -  {{nomeObra}}</h2>
+            <h2 id="jhi-gasto-heading" jhiTranslate="obrasAppEdit.gasto.home.createOrEditLabel">Create or edit a Gasto </h2> - {{nomeObra}}
             <div>
                 <jhi-alert-error></jhi-alert-error>
                 <div class="form-group" [hidden]="!gasto.id">
