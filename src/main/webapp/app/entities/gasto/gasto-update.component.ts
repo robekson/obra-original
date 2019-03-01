@@ -40,6 +40,11 @@ export class GastoUpdateComponent implements OnInit {
             if (dateString != null && this.gasto.mesAno == null) {
                 this.gasto.mesAno = moment(dateString, 'MMM/YYYY', 'pt-BR');
             }
+            
+            if (this.gasto.parcelado == null) {
+                this.gasto.parcelado = 0;
+            }
+            
 
             let id = localStorage.getItem('idObra');
             this.gasto.obraId = parseInt(id);
