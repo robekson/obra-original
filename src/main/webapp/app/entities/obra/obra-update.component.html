@@ -59,11 +59,17 @@
                 </div>
                 <div class="form-group">
                     <label class="form-control-label" jhiTranslate="obrasAppEdit.obra.tipoCorretagem" for="field_tipoCorretagem">Tipo Corretagem</label>
-                    <select class="form-control" name="tipoCorretagem" [(ngModel)]="obra.tipoCorretagem" id="field_tipoCorretagem" >
+                    <select class="form-control" name="tipoCorretagem" [(ngModel)]="obra.tipoCorretagem" id="field_tipoCorretagem" required >
                         <option value="Tipo1">{{'obrasApp.TipoCorretagem.Tipo1' | translate}}</option>
                         <option value="Tipo2">{{'obrasApp.TipoCorretagem.Tipo2' | translate}}</option>
                        <!--  <option value="Tipo3">{{'obrasApp.TipoCorretagem.Tipo3' | translate}}</option>--> 
                     </select>
+                    <div [hidden]="!(editForm.controls.tipoCorretagem?.dirty && editForm.controls.tipoCorretagem?.invalid)">
+                        <small class="form-text text-danger"
+                        [hidden]="!editForm.controls.tipoCorretagem?.errors?.required" jhiTranslate="entity.validation.required">
+                        This field is required.
+                        </small>
+                    </div>
                 </div>
                 <div class="form-group">
                     <label class="form-control-label" jhiTranslate="obrasAppEdit.obra.status" for="field_status">Status</label>
