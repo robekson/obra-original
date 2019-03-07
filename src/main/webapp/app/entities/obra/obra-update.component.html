@@ -49,7 +49,13 @@
                 <div class="form-group">
                     <label class="form-control-label" jhiTranslate="obrasAppEdit.obra.porcentagemCorretagem" for="field_porcentagemCorretagem">Porcentagem Corretagem</label>
                     <input type="number" class="form-control"  min="0" max="100" onKeyUp="if(this.value>100){this.value='100';}else if(this.value<0){this.value='0';}"  name="porcentagemCorretagem" id="field_porcentagemCorretagem"
-                        [(ngModel)]="obra.porcentagemCorretagem" />
+                        [(ngModel)]="obra.porcentagemCorretagem" required />                        
+                    <div [hidden]="!(editForm.controls.porcentagemCorretagem?.dirty && editForm.controls.porcentagemCorretagem?.invalid)">
+                        <small class="form-text text-danger"
+                        [hidden]="!editForm.controls.porcentagemCorretagem?.errors?.required" jhiTranslate="entity.validation.required">
+                        This field is required.
+                        </small>
+                    </div>                          
                 </div>
                 <div class="form-group">
                     <label class="form-control-label" jhiTranslate="obrasAppEdit.obra.tipoCorretagem" for="field_tipoCorretagem">Tipo Corretagem</label>
