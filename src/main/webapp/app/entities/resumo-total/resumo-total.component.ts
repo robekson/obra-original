@@ -87,6 +87,18 @@ export class ResumoTotalComponent implements OnInit, OnDestroy {
         var canvas : any = document.getElementById("barResumoTota");
         var ctx = canvas.getContext("2d");
         
+        ctx.textAlign = 'center';
+        ctx.textBaseline = 'bottom';
+        
+        
+        this.data.datasets.forEach(function (dataset) {
+            for (var i = 0; i < dataset.data.length; i++) {
+                var model = dataset._meta[Object.keys(dataset._meta)[0]].data[i]._model;
+                ctx.fillText(dataset.data[i], model.x, model.y - 5);
+            }
+        });
+        
+        
         console.log('exportar =' + data);
         html2canvas(data).then(canvas => {
             // Few necessary setting options
