@@ -81,7 +81,12 @@ export class ResumoTotalComponent implements OnInit, OnDestroy {
     }
 
     public exportar() {
+   
         var data = document.getElementById('contentToConvert');
+        
+        var canvas : any = document.getElementById("barResumoTota");
+        var ctx = canvas.getContext("2d");
+        
         console.log('exportar =' + data);
         html2canvas(data).then(canvas => {
             // Few necessary setting options
@@ -95,6 +100,9 @@ export class ResumoTotalComponent implements OnInit, OnDestroy {
             pdf.addImage(contentDataURL, 'PNG', 1, position, width, height);
             pdf.save('resumoTotal.pdf'); // Generated PDF
         });
+        
+        
+        
     }
     
     
