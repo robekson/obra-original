@@ -123,7 +123,6 @@ export class ResumoTotalComponent implements OnInit, OnDestroy {
         console.log(' montaGraficoPizza = ' + data);
                 
         var v_json = {};
-
         var pieChartLabels = [];
         var pieChartDataSet = [];
         var dataValues = [];
