@@ -81,16 +81,11 @@ export class ResumoTotalComponent implements OnInit, OnDestroy {
     }
 
     public exportar() {
-   
-        var data = document.getElementById('contentToConvert');
         
         var canvas : any = document.getElementsByClassName("chartjs-render-monitor")[0];
-        var ctx = canvas.getContext("2d");
-        
+        var ctx = canvas.getContext("2d");       
         ctx.textAlign = 'center';
-        ctx.textBaseline = 'bottom';
-        
-        
+        ctx.textBaseline = 'bottom';              
         this.dataBar.datasets.forEach(function (dataset) {
             for (var i = 0; i < dataset.data.length; i++) {
                 var model = dataset._meta[Object.keys(dataset._meta)[0]].data[i]._model;
@@ -98,9 +93,8 @@ export class ResumoTotalComponent implements OnInit, OnDestroy {
             }
         });
         
+        var data = document.getElementById('contentToConvert');
       
-        
-        console.log('exportar =' + data);
         html2canvas(data).then(canvas => {
             // Few necessary setting options
             let pdf = new jspdf('p', 'mm', 'a4'); // A4 size page of PDF
@@ -117,25 +111,7 @@ export class ResumoTotalComponent implements OnInit, OnDestroy {
         
         
     }
-    
-    
-    /*public exportar() {
-        var data = document.getElementById('contentToConvert');
-        console.log('exportar =' + data);
-        html2canvas(data).then(canvas => {
-            // Few necessary setting options
-            var imgWidth = 180;
-            var pageHeight = 615;
-            var imgHeight = (canvas.height * imgWidth) / canvas.width;
-            var heightLeft = imgHeight;
 
-            const contentDataURL = canvas.toDataURL('image/png');
-            let pdf = new jspdf('p', 'mm', 'a4'); // A4 size page of PDF
-            var position = 0;
-            pdf.addImage(contentDataURL, 'PNG', 2, position, imgWidth, imgHeight);
-            pdf.save('resumoTotal.pdf'); // Generated PDF
-        });
-    }*/
 
     previousState() {
         window.history.back();
