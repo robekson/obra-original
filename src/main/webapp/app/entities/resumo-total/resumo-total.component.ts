@@ -121,8 +121,7 @@ export class ResumoTotalComponent implements OnInit, OnDestroy {
 
     protected montaGraficoPizza(data: ITipoContaDto[], headers: HttpHeaders) {
         console.log(' montaGraficoPizza = ' + data);
-        
-        
+                
         var v_json = {};
 
         var pieChartLabels = [];
