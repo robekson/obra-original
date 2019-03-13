@@ -136,9 +136,16 @@ export class ResumoTotalComponent implements OnInit, OnDestroy {
         pieChartDataSet.push({
             data: dataValues,
             
-            onAnimationComplete: function() {
-                this.showTooltip(this.segments);
+            animation: {
+                
+                onComplete: function(animation) {
+                    alert('onAnimationComplete');
+                }
             },
+            
+           /* onAnimationComplete: function() {
+                this.showTooltip(this.segments);
+            },*/
 
             // Block the mouse tooltip events so the tooltips
             // won't disapear on mouse events
