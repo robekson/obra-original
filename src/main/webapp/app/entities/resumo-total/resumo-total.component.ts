@@ -93,6 +93,8 @@ export class ResumoTotalComponent implements OnInit, OnDestroy {
             }
         });
         
+
+        
         var data = document.getElementById('contentToConvert');
       
         html2canvas(data).then(canvas => {
@@ -119,6 +121,28 @@ export class ResumoTotalComponent implements OnInit, OnDestroy {
 
     protected montaGraficoPizza(data: ITipoContaDto[], headers: HttpHeaders) {
         console.log(' montaGraficoPizza = ' + data);
+        
+        var options = {
+                tooltips: {
+                    enabled: false
+                },
+                plugins: {
+                    datalabels: {
+                        formatter: (value, ctx) => {
+                            let sum = 0;
+                            let dataArr = ctx.chart.data.datasets[0].data;
+                            dataArr.map(data => {
+                                sum += data;
+                            });
+                            let percentage = (value*100 / sum).toFixed(2)+"%";
+                            return percentage;
+                        },
+                        color: '#fff',
+                    }
+                }
+            };
+        
+        
         var v_json = {};
 
         var pieChartLabels = [];
@@ -133,6 +157,7 @@ export class ResumoTotalComponent implements OnInit, OnDestroy {
         v_json['labels'] = pieChartLabels;
         pieChartDataSet.push({
             data: dataValues,
+            options: options,
             backgroundColor: ['#FF6384', '#36A2EB', '#FFCE56'],
             hoverBackgroundColor: ['#FF6384', '#36A2EB', '#FFCE56']
         });
