@@ -35,6 +35,7 @@ export class ResumoTotalComponent implements OnInit, OnDestroy {
 
     data: any;
     dataBar: any;
+    options: any;
 
     constructor(
         protected gastoService: GastoService,
@@ -121,7 +122,25 @@ export class ResumoTotalComponent implements OnInit, OnDestroy {
 
     protected montaGraficoPizza(data: ITipoContaDto[], headers: HttpHeaders) {
         console.log(' montaGraficoPizza = ' + data);
-                
+        
+        this.options = {
+                onAnimationComplete: function() {
+                  this.showTooltip(this.segments, true);
+                },
+
+                tooltipEvents: [],
+
+                showTooltips: true,
+                title: {
+                  display: true,
+                  text: 'My Title',
+                  fontSize: 16
+                },
+                legend: {
+                  position: 'bottom'
+                }
+        };
+        
         var v_json = {};
         var pieChartLabels = [];
         var pieChartDataSet = [];
@@ -134,23 +153,7 @@ export class ResumoTotalComponent implements OnInit, OnDestroy {
 
         v_json['labels'] = pieChartLabels;
         pieChartDataSet.push({
-            data: dataValues,
-            
-            animation: {
-                
-                onComplete: function(animation) {
-                    alert('onAnimationComplete');
-                }
-            },
-            
-           /* onAnimationComplete: function() {
-                this.showTooltip(this.segments);
-            },*/
-
-            // Block the mouse tooltip events so the tooltips
-            // won't disapear on mouse events
-            tooltipEvents: [],
-            
+            data: dataValues,           
             backgroundColor: ['#FF6384', '#36A2EB', '#FFCE56'],
             hoverBackgroundColor: ['#FF6384', '#36A2EB', '#FFCE56']
         });
