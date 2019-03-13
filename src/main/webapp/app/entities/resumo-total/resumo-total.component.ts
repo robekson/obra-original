@@ -84,7 +84,7 @@ export class ResumoTotalComponent implements OnInit, OnDestroy {
    
         var data = document.getElementById('contentToConvert');
         
-        var canvas : any = document.getElementById("barResumoTota");
+        var canvas : any = document.getElementsByClassName("chartjs-render-monitor")[0];
         var ctx = canvas.getContext("2d");
         
         ctx.textAlign = 'center';
