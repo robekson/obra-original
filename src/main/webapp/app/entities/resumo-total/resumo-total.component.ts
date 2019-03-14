@@ -123,7 +123,7 @@ export class ResumoTotalComponent implements OnInit, OnDestroy {
     protected montaGraficoPizza(data: ITipoContaDto[], headers: HttpHeaders) {
         console.log(' montaGraficoPizza = ' + data);
         
-        this.options = {
+       /* this.options = {
                 onAnimationComplete: function() {
                   this.showTooltip(this.segments, true);
                 },
@@ -139,7 +139,7 @@ export class ResumoTotalComponent implements OnInit, OnDestroy {
                 legend: {
                   position: 'bottom'
                 }
-        };
+        };*/
         
         var v_json = {};
         var pieChartLabels = [];
