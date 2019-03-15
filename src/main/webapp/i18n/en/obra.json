@@ -15,18 +15,18 @@
             "detail": {
                 "title": "Obra"
             },
-            "nome": "Nome",
-            "endereco": "Endereco",
-            "metragem": "Metragem",
-            "valorTerreno": "Terreno",
-            "valorEscritura": "Valor Escritura",
-            "porcentagemCorretagem": "Porcentagem Corretagem",
-            "tipoCorretagem": "Tipo Corretagem",
+            "nome": "Name",
+            "endereco": "Address",
+            "metragem": "Footage",
+            "valorTerreno": "Ground",
+            "valorEscritura": "Writing value",
+            "porcentagemCorretagem": "Administration",
+            "tipoCorretagem": "Type of Administration",
             "status": "Status",
-            "dataInicio": "Data Inicio",
-            "dataFim": "Data Fim",
-            "resumoGasto": "Resumo Gasto",
-            "gasto": "Gasto"
+            "dataInicio": "Start date",
+            "dataFim": "End Date",
+            "resumoGasto": "Summary Expense",
+            "gasto": "Expense"
         }
     }
 }
