@@ -2,8 +2,8 @@
     "obrasApp": {
         "TipoCorretagem": {
             "null": "",
-            "Tipo1": "Tipo1",
-            "Tipo2": "Tipo2",
+            "Tipo1": "Tipo1 - administração/depósitos",
+            "Tipo2": "Tipo2 - administração/gastos",
             "Tipo3": "Tipo3"
         }
     }
