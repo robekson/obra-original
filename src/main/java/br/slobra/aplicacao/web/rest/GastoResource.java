@@ -297,6 +297,13 @@ public class GastoResource {
             dto.setMesAno(listData.get(0).getMesAno());
         }
 
+        
+       // recebimento - gasto - administacao = valor em caixa              
+        BigDecimal valorCaixa = dto.getValorDeposito().subtract(dto.getDespesaGeralSubTotal()).subtract(dto.getHonorarioAdministracao());
+        
+        log.debug("valorCaixa "+valorCaixa);
+        dto.setValorCaixa(valorCaixa);
+        
 
         return ResponseUtil.wrapOrNotFound(Optional.of(dto));
     }

@@ -56,6 +56,7 @@ export interface IResumoGasto {
     id?: number;
     honorarioAdministracao?: number;
     valorDeposito?: number;
+    valorCaixa?: number;
     quantidadeComNota?: number;
     quantidadeSemNota?: number;
     mesAnoFormatado?: string;
@@ -73,6 +74,7 @@ export class ResumoGasto implements IResumoGasto {
         public id?: number,
         public honorarioAdministracao?: number,
         public valorDeposito?: number,
+        public valorCaixa?: number,
         public quantidadeComNota?: number,
         public quantidadeSemNota?: number,
         public mesAnoFormatado?: string,

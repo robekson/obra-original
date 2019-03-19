@@ -17,6 +17,8 @@ public class ResumoContaDTO implements Serializable {
     private BigDecimal honorarioAdministracao;
 
     private BigDecimal valorDeposito;
+    
+    private BigDecimal valorCaixa;
 
     private Long quantidadeComNota;
 
@@ -121,7 +123,15 @@ public class ResumoContaDTO implements Serializable {
     public void setValorDeposito(BigDecimal valorDeposito) {
         this.valorDeposito = valorDeposito;
     }
+    
+    public BigDecimal getValorCaixa() {
+        return valorCaixa;
+    }
 
+    public void setValorCaixa(BigDecimal valorCaixa) {
+        this.valorCaixa = valorCaixa;
+    }
+    
     public Long getQuantidadeComNota() {
         return quantidadeComNota;
     }
