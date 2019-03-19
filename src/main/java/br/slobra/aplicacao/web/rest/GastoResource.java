@@ -206,7 +206,7 @@ public class GastoResource {
 
         BigDecimal valorDeposito = invoiceList.stream().filter(i -> i.getTipo().equals(TipoConta.INVESTIMENTO_DEPOSITO)).map(GastoDTO::getValor).reduce(BigDecimal.ZERO, BigDecimal::add);
 
-        BigDecimal total = invoiceList.stream().map(GastoDTO::getValor).reduce(BigDecimal.ZERO, BigDecimal::add);
+        BigDecimal total = invoiceList.stream().filter(i -> !i.getTipo().equals(TipoConta.INVESTIMENTO_DEPOSITO)).map(GastoDTO::getValor).reduce(BigDecimal.ZERO, BigDecimal::add);
 
         ResumoContaDTO dto = new ResumoContaDTO();
         dto.setDespesaSemNota(semNota);
@@ -262,7 +262,7 @@ public class GastoResource {
 
         BigDecimal valorDeposito = invoiceList.stream().filter(i -> i.getTipo().equals(TipoConta.INVESTIMENTO_DEPOSITO)).map(GastoDTO::getValor).reduce(BigDecimal.ZERO, BigDecimal::add);
 
-        BigDecimal total = invoiceList.stream().map(GastoDTO::getValor).reduce(BigDecimal.ZERO, BigDecimal::add);
+        BigDecimal total = invoiceList.stream().filter(i -> !i.getTipo().equals(TipoConta.INVESTIMENTO_DEPOSITO)).map(GastoDTO::getValor).reduce(BigDecimal.ZERO, BigDecimal::add);
 
         ResumoContaDTO dto = new ResumoContaDTO();
         dto.setDespesaSemNota(semNota);
@@ -339,7 +339,7 @@ public class GastoResource {
 
         BigDecimal valorDeposito = invoiceList.stream().filter(i -> i.getTipo().equals(TipoConta.INVESTIMENTO_DEPOSITO)).map(GastoDTO::getValor).reduce(BigDecimal.ZERO, BigDecimal::add);
 
-        BigDecimal total = invoiceList.stream().map(GastoDTO::getValor).reduce(BigDecimal.ZERO, BigDecimal::add);
+        BigDecimal total = invoiceList.stream().filter(i -> !i.getTipo().equals(TipoConta.INVESTIMENTO_DEPOSITO)).map(GastoDTO::getValor).reduce(BigDecimal.ZERO, BigDecimal::add);
 
         ResumoContaDTO dto = new ResumoContaDTO();
         dto.setDespesaSemNota(semNota);
