@@ -197,11 +197,12 @@ public class GastoResource {
 
         Page<GastoDTO> invoiceList = gastoService.findAll(pageable);
 
-        BigDecimal semNota = invoiceList.stream().filter(i -> i.getNota().equals(NotaFiscal.NAO)).map(GastoDTO::getValor).reduce(BigDecimal.ZERO, BigDecimal::add);
-        BigDecimal comNota = invoiceList.stream().filter(i -> i.getNota().equals(NotaFiscal.SIM)).map(GastoDTO::getValor).reduce(BigDecimal.ZERO, BigDecimal::add);
+        BigDecimal semNota = invoiceList.stream().filter(i -> i.getNota().equals(NotaFiscal.NAO) && ! i.getTipo().equals(TipoConta.INVESTIMENTO_DEPOSITO)).map(GastoDTO::getValor).reduce(BigDecimal.ZERO, BigDecimal::add);
+        BigDecimal comNota = invoiceList.stream().filter(i -> i.getNota().equals(NotaFiscal.SIM) && ! i.getTipo().equals(TipoConta.INVESTIMENTO_DEPOSITO)).map(GastoDTO::getValor).reduce(BigDecimal.ZERO, BigDecimal::add);
+        
 
-        long countSemNota = invoiceList.stream().filter(i -> i.getNota().equals(NotaFiscal.NAO)).count();
-        long countComNota = invoiceList.stream().filter(i -> i.getNota().equals(NotaFiscal.SIM)).count();
+        long countSemNota = invoiceList.stream().filter(i -> i.getNota().equals(NotaFiscal.NAO) && ! i.getTipo().equals(TipoConta.INVESTIMENTO_DEPOSITO)).count();
+        long countComNota = invoiceList.stream().filter(i -> i.getNota().equals(NotaFiscal.SIM) && ! i.getTipo().equals(TipoConta.INVESTIMENTO_DEPOSITO)).count();
 
         BigDecimal valorDeposito = invoiceList.stream().filter(i -> i.getTipo().equals(TipoConta.INVESTIMENTO_DEPOSITO)).map(GastoDTO::getValor).reduce(BigDecimal.ZERO, BigDecimal::add);
 
@@ -253,11 +254,11 @@ public class GastoResource {
 
 
 
-        BigDecimal semNota = invoiceList.stream().filter(i -> i.getNota().equals(NotaFiscal.NAO)).map(GastoDTO::getValor).reduce(BigDecimal.ZERO, BigDecimal::add);
-        BigDecimal comNota = invoiceList.stream().filter(i -> i.getNota().equals(NotaFiscal.SIM)).map(GastoDTO::getValor).reduce(BigDecimal.ZERO, BigDecimal::add);
+        BigDecimal semNota = invoiceList.stream().filter(i -> i.getNota().equals(NotaFiscal.NAO) && ! i.getTipo().equals(TipoConta.INVESTIMENTO_DEPOSITO)).map(GastoDTO::getValor).reduce(BigDecimal.ZERO, BigDecimal::add);
+        BigDecimal comNota = invoiceList.stream().filter(i -> i.getNota().equals(NotaFiscal.SIM) && ! i.getTipo().equals(TipoConta.INVESTIMENTO_DEPOSITO)).map(GastoDTO::getValor).reduce(BigDecimal.ZERO, BigDecimal::add);
 
-        long countSemNota = invoiceList.stream().filter(i -> i.getNota().equals(NotaFiscal.NAO)).count();
-        long countComNota = invoiceList.stream().filter(i -> i.getNota().equals(NotaFiscal.SIM)).count();
+        long countSemNota = invoiceList.stream().filter(i -> i.getNota().equals(NotaFiscal.NAO) && ! i.getTipo().equals(TipoConta.INVESTIMENTO_DEPOSITO)).count();
+        long countComNota = invoiceList.stream().filter(i -> i.getNota().equals(NotaFiscal.SIM) && ! i.getTipo().equals(TipoConta.INVESTIMENTO_DEPOSITO)).count();
 
         BigDecimal valorDeposito = invoiceList.stream().filter(i -> i.getTipo().equals(TipoConta.INVESTIMENTO_DEPOSITO)).map(GastoDTO::getValor).reduce(BigDecimal.ZERO, BigDecimal::add);
 
@@ -330,11 +331,11 @@ public class GastoResource {
 
 
 
-        BigDecimal semNota = invoiceList.stream().filter(i -> i.getNota().equals(NotaFiscal.NAO)).map(GastoDTO::getValor).reduce(BigDecimal.ZERO, BigDecimal::add);
-        BigDecimal comNota = invoiceList.stream().filter(i -> i.getNota().equals(NotaFiscal.SIM)).map(GastoDTO::getValor).reduce(BigDecimal.ZERO, BigDecimal::add);
+        BigDecimal semNota = invoiceList.stream().filter(i -> i.getNota().equals(NotaFiscal.NAO) && ! i.getTipo().equals(TipoConta.INVESTIMENTO_DEPOSITO)).map(GastoDTO::getValor).reduce(BigDecimal.ZERO, BigDecimal::add);
+        BigDecimal comNota = invoiceList.stream().filter(i -> i.getNota().equals(NotaFiscal.SIM) && ! i.getTipo().equals(TipoConta.INVESTIMENTO_DEPOSITO)).map(GastoDTO::getValor).reduce(BigDecimal.ZERO, BigDecimal::add);
 
-        long countSemNota = invoiceList.stream().filter(i -> i.getNota().equals(NotaFiscal.NAO)).count();
-        long countComNota = invoiceList.stream().filter(i -> i.getNota().equals(NotaFiscal.SIM)).count();
+        long countSemNota = invoiceList.stream().filter(i -> i.getNota().equals(NotaFiscal.NAO) && ! i.getTipo().equals(TipoConta.INVESTIMENTO_DEPOSITO) ).count();
+        long countComNota = invoiceList.stream().filter(i -> i.getNota().equals(NotaFiscal.SIM) && ! i.getTipo().equals(TipoConta.INVESTIMENTO_DEPOSITO) ).count();
 
         BigDecimal valorDeposito = invoiceList.stream().filter(i -> i.getTipo().equals(TipoConta.INVESTIMENTO_DEPOSITO)).map(GastoDTO::getValor).reduce(BigDecimal.ZERO, BigDecimal::add);
 
