@@ -413,7 +413,7 @@ public class GastoResource {
         DateTimeFormatter formatador = DateTimeFormatter.ofPattern("MMM/yyyy").withLocale(new Locale("pt", "br"));
         for(MesAnoDTO mesAno : lista) {
         	ResumoContaDTO contaDTO = new ResumoContaDTO();
-            BigDecimal valorTotal = listGasto.stream().filter(i -> i.getMesAno().format(formatador).equals(mesAno.getData())).map(GastoDTO::getValor).reduce(BigDecimal.ZERO, BigDecimal::add);
+            BigDecimal valorTotal = listGasto.stream().filter(i -> i.getMesAno().format(formatador).equals(mesAno.getData())  && ! i.getTipo().equals(TipoConta.INVESTIMENTO_DEPOSITO) ).map(GastoDTO::getValor).reduce(BigDecimal.ZERO, BigDecimal::add);
             System.out.println("valorTotal "+valorTotal);
             System.out.println("mesAno.getData()"+mesAno.getData());
             contaDTO.setTotalDespesas(valorTotal);
