@@ -28,6 +28,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import java.math.BigDecimal;
+import java.math.RoundingMode;
 
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -382,7 +383,7 @@ public class GastoResource {
         BigDecimal valorCaixa = dto.getValorDeposito().subtract(dto.getDespesaGeralSubTotal()).subtract(dto.getHonorarioAdministracao());
         
         dto.setValorCaixa(valorCaixa);      
-        dto.setValoMetroQuadrado(total.divide(BigDecimal.valueOf(obra.getMetragem())));
+        dto.setValoMetroQuadrado(total.divide(BigDecimal.valueOf(obra.getMetragem()),2, RoundingMode.HALF_UP));
 
         return ResponseUtil.wrapOrNotFound(Optional.of(dto));
     }
