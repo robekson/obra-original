@@ -382,7 +382,7 @@ public class GastoResource {
         BigDecimal valorCaixa = dto.getValorDeposito().subtract(dto.getDespesaGeralSubTotal()).subtract(dto.getHonorarioAdministracao());
         
         dto.setValorCaixa(valorCaixa);      
-        dto.setValoMetroQuadrado(total.divide(BigDecimal.valueOf(obra.getMetragem()))):
+        dto.setValoMetroQuadrado(total.divide(BigDecimal.valueOf(obra.getMetragem())));
 
         return ResponseUtil.wrapOrNotFound(Optional.of(dto));
     }
