@@ -69,8 +69,13 @@
                                     <td>{{resumo.obraDTO.valorTerreno| currency: 'R$'}}</td>
                                 </tr>
                                 <tr>
-                                    <th>VALOR FISCAL</th>
-                                    <td>XXXXXX</td>
+                                    <th>VALOR METRO QUADRADO</th>
+                                    <td>{{resumo.valorMetroQuadrado| currency: 'R$'}}</td>
+                                </tr>
+                                
+                                 <tr>
+                                    <th>VALOR EM CAIXA</th>
+                                    <td>{{resumo.valorCaixa | currency: 'R$'}}</td>
                                 </tr>
                                 </tbody>
                             </table>

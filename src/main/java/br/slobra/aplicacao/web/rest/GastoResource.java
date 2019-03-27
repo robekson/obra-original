@@ -381,7 +381,8 @@ public class GastoResource {
         // recebimento - gasto - administacao = valor em caixa              
         BigDecimal valorCaixa = dto.getValorDeposito().subtract(dto.getDespesaGeralSubTotal()).subtract(dto.getHonorarioAdministracao());
         
-        dto.setValorCaixa(valorCaixa);
+        dto.setValorCaixa(valorCaixa);      
+        dto.setValoMetroQuadrado(total.divide(BigDecimal.valueOf(obra.getMetragem()))):
 
         return ResponseUtil.wrapOrNotFound(Optional.of(dto));
     }
