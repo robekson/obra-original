@@ -382,9 +382,12 @@ public class GastoResource {
         // recebimento - gasto - administacao = valor em caixa              
         BigDecimal valorCaixa = dto.getValorDeposito().subtract(dto.getDespesaGeralSubTotal()).subtract(dto.getHonorarioAdministracao());
         
-        dto.setValorCaixa(valorCaixa);      
-        dto.setValoMetroQuadrado(total.divide(BigDecimal.valueOf(obra.getMetragem()),2, RoundingMode.HALF_UP));
+        dto.setValorCaixa(valorCaixa); 
+       //Evitar java.lang.ArithmeticException: / by zero
+        if(obra.getMetragem()!=0) dto.setValoMetroQuadrado(total.divide(BigDecimal.valueOf(obra.getMetragem()),3, RoundingMode.HALF_UP));
 
+        log.debug("ValoMetroQuadrado "+dto.getValoMetroQuadrado());
+        
         return ResponseUtil.wrapOrNotFound(Optional.of(dto));
     }
 
