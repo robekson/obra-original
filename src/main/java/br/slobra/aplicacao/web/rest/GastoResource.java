@@ -384,9 +384,9 @@ public class GastoResource {
         
         dto.setValorCaixa(valorCaixa); 
        //Evitar java.lang.ArithmeticException: / by zero
-        if(obra.getMetragem()!=0) dto.setValoMetroQuadrado(total.divide(BigDecimal.valueOf(obra.getMetragem()),3, RoundingMode.HALF_UP));
+        if(obra.getMetragem()!=0) dto.setValorMetroQuadrado(total.divide(BigDecimal.valueOf(obra.getMetragem()),3, RoundingMode.HALF_UP));
 
-        log.debug("ValoMetroQuadrado "+dto.getValoMetroQuadrado());
+        log.debug("ValoMetroQuadrado "+dto.getValorMetroQuadrado());
         
         return ResponseUtil.wrapOrNotFound(Optional.of(dto));
     }

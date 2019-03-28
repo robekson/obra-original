@@ -18,7 +18,7 @@ public class ResumoContaDTO implements Serializable {
 
     private BigDecimal valorDeposito;
     
-    private BigDecimal valoMetroQuadrado;
+    private BigDecimal valorMetroQuadrado;
     
     private BigDecimal valorCaixa;
 
@@ -150,12 +150,12 @@ public class ResumoContaDTO implements Serializable {
         this.quantidadeSemNota = quantidadeSemNota;
     }
     
-	public BigDecimal getValoMetroQuadrado() {
-		return valoMetroQuadrado;
+    public BigDecimal getValorMetroQuadrado() {
+		return valorMetroQuadrado;
 	}
 
-	public void setValoMetroQuadrado(BigDecimal valoMetroQuadrado) {
-		this.valoMetroQuadrado = valoMetroQuadrado;
+	public void setValorMetroQuadrado(BigDecimal valorMetroQuadrado) {
+		this.valorMetroQuadrado = valorMetroQuadrado;
 	}
 
     public Long getId() {
