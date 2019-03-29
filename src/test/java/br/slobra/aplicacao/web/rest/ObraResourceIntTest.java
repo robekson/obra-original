@@ -63,6 +63,15 @@ public class ObraResourceIntTest {
     private static final BigDecimal DEFAULT_VALOR_ESCRITURA = new BigDecimal(1);
     private static final BigDecimal UPDATED_VALOR_ESCRITURA = new BigDecimal(2);
 
+    private static final BigDecimal DEFAULT_VALOR_ESCRITURA_COMPRA = new BigDecimal(1);
+    private static final BigDecimal UPDATED_VALOR_ESCRITURA_COMPRA = new BigDecimal(2);
+
+    private static final BigDecimal DEFAULT_VALOR_CORRETAGEM_VENDA = new BigDecimal(1);
+    private static final BigDecimal UPDATED_VALOR_CORRETAGEM_VENDA = new BigDecimal(2);
+
+    private static final BigDecimal DEFAULT_VALOR_FISCAL = new BigDecimal(1);
+    private static final BigDecimal UPDATED_VALOR_FISCAL = new BigDecimal(2);
+
     private static final Integer DEFAULT_PORCENTAGEM_CORRETAGEM = 1;
     private static final Integer UPDATED_PORCENTAGEM_CORRETAGEM = 2;
 
@@ -131,6 +140,9 @@ public class ObraResourceIntTest {
             .metragem(DEFAULT_METRAGEM)
             .valorTerreno(DEFAULT_VALOR_TERRENO)
             .valorEscritura(DEFAULT_VALOR_ESCRITURA)
+            .valorEscrituraCompra(DEFAULT_VALOR_ESCRITURA_COMPRA)
+            .valorCorretagemVenda(DEFAULT_VALOR_CORRETAGEM_VENDA)
+            .valorFiscal(DEFAULT_VALOR_FISCAL)
             .porcentagemCorretagem(DEFAULT_PORCENTAGEM_CORRETAGEM)
             .tipoCorretagem(DEFAULT_TIPO_CORRETAGEM)
             .status(DEFAULT_STATUS)
@@ -165,6 +177,9 @@ public class ObraResourceIntTest {
         assertThat(testObra.getMetragem()).isEqualTo(DEFAULT_METRAGEM);
         assertThat(testObra.getValorTerreno()).isEqualTo(DEFAULT_VALOR_TERRENO);
         assertThat(testObra.getValorEscritura()).isEqualTo(DEFAULT_VALOR_ESCRITURA);
+        assertThat(testObra.getValorEscrituraCompra()).isEqualTo(DEFAULT_VALOR_ESCRITURA_COMPRA);
+        assertThat(testObra.getValorCorretagemVenda()).isEqualTo(DEFAULT_VALOR_CORRETAGEM_VENDA);
+        assertThat(testObra.getValorFiscal()).isEqualTo(DEFAULT_VALOR_FISCAL);
         assertThat(testObra.getPorcentagemCorretagem()).isEqualTo(DEFAULT_PORCENTAGEM_CORRETAGEM);
         assertThat(testObra.getTipoCorretagem()).isEqualTo(DEFAULT_TIPO_CORRETAGEM);
         assertThat(testObra.getStatus()).isEqualTo(DEFAULT_STATUS);
@@ -303,6 +318,9 @@ public class ObraResourceIntTest {
             .andExpect(jsonPath("$.[*].metragem").value(hasItem(DEFAULT_METRAGEM.intValue())))
             .andExpect(jsonPath("$.[*].valorTerreno").value(hasItem(DEFAULT_VALOR_TERRENO.intValue())))
             .andExpect(jsonPath("$.[*].valorEscritura").value(hasItem(DEFAULT_VALOR_ESCRITURA.intValue())))
+            .andExpect(jsonPath("$.[*].valorEscrituraCompra").value(hasItem(DEFAULT_VALOR_ESCRITURA_COMPRA.intValue())))
+            .andExpect(jsonPath("$.[*].valorCorretagemVenda").value(hasItem(DEFAULT_VALOR_CORRETAGEM_VENDA.intValue())))
+            .andExpect(jsonPath("$.[*].valorFiscal").value(hasItem(DEFAULT_VALOR_FISCAL.intValue())))
             .andExpect(jsonPath("$.[*].porcentagemCorretagem").value(hasItem(DEFAULT_PORCENTAGEM_CORRETAGEM)))
             .andExpect(jsonPath("$.[*].tipoCorretagem").value(hasItem(DEFAULT_TIPO_CORRETAGEM.toString())))
             .andExpect(jsonPath("$.[*].status").value(hasItem(DEFAULT_STATUS.toString())))
@@ -326,6 +344,9 @@ public class ObraResourceIntTest {
             .andExpect(jsonPath("$.metragem").value(DEFAULT_METRAGEM.intValue()))
             .andExpect(jsonPath("$.valorTerreno").value(DEFAULT_VALOR_TERRENO.intValue()))
             .andExpect(jsonPath("$.valorEscritura").value(DEFAULT_VALOR_ESCRITURA.intValue()))
+            .andExpect(jsonPath("$.valorEscrituraCompra").value(DEFAULT_VALOR_ESCRITURA_COMPRA.intValue()))
+            .andExpect(jsonPath("$.valorCorretagemVenda").value(DEFAULT_VALOR_CORRETAGEM_VENDA.intValue()))
+            .andExpect(jsonPath("$.valorFiscal").value(DEFAULT_VALOR_FISCAL.intValue()))
             .andExpect(jsonPath("$.porcentagemCorretagem").value(DEFAULT_PORCENTAGEM_CORRETAGEM))
             .andExpect(jsonPath("$.tipoCorretagem").value(DEFAULT_TIPO_CORRETAGEM.toString()))
             .andExpect(jsonPath("$.status").value(DEFAULT_STATUS.toString()))
@@ -359,6 +380,9 @@ public class ObraResourceIntTest {
             .metragem(UPDATED_METRAGEM)
             .valorTerreno(UPDATED_VALOR_TERRENO)
             .valorEscritura(UPDATED_VALOR_ESCRITURA)
+            .valorEscrituraCompra(UPDATED_VALOR_ESCRITURA_COMPRA)
+            .valorCorretagemVenda(UPDATED_VALOR_CORRETAGEM_VENDA)
+            .valorFiscal(UPDATED_VALOR_FISCAL)
             .porcentagemCorretagem(UPDATED_PORCENTAGEM_CORRETAGEM)
             .tipoCorretagem(UPDATED_TIPO_CORRETAGEM)
             .status(UPDATED_STATUS)
@@ -380,6 +404,9 @@ public class ObraResourceIntTest {
         assertThat(testObra.getMetragem()).isEqualTo(UPDATED_METRAGEM);
         assertThat(testObra.getValorTerreno()).isEqualTo(UPDATED_VALOR_TERRENO);
         assertThat(testObra.getValorEscritura()).isEqualTo(UPDATED_VALOR_ESCRITURA);
+        assertThat(testObra.getValorEscrituraCompra()).isEqualTo(UPDATED_VALOR_ESCRITURA_COMPRA);
+        assertThat(testObra.getValorCorretagemVenda()).isEqualTo(UPDATED_VALOR_CORRETAGEM_VENDA);
+        assertThat(testObra.getValorFiscal()).isEqualTo(UPDATED_VALOR_FISCAL);
         assertThat(testObra.getPorcentagemCorretagem()).isEqualTo(UPDATED_PORCENTAGEM_CORRETAGEM);
         assertThat(testObra.getTipoCorretagem()).isEqualTo(UPDATED_TIPO_CORRETAGEM);
         assertThat(testObra.getStatus()).isEqualTo(UPDATED_STATUS);

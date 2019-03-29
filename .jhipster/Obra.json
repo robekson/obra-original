@@ -28,6 +28,18 @@
             "fieldType": "BigDecimal"
         },
         {
+            "fieldName": "valorEscrituraCompra",
+            "fieldType": "BigDecimal"
+        },
+        {
+            "fieldName": "valorCorretagemVenda",
+            "fieldType": "BigDecimal"
+        },
+        {
+            "fieldName": "valorFiscal",
+            "fieldType": "BigDecimal"
+        },
+        {
             "fieldName": "porcentagemCorretagem",
             "fieldType": "Integer"
         },

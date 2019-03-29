@@ -20,6 +20,9 @@ export interface IObra {
     metragem?: number;
     valorTerreno?: number;
     valorEscritura?: number;
+    valorEscrituraCompra?: number;
+    valorCorretagemVenda?: number;
+    valorFiscal?: number;
     porcentagemCorretagem?: number;
     tipoCorretagem?: TipoCorretagem;
     status?: StatusObra;
@@ -37,6 +40,9 @@ export class Obra implements IObra {
         public metragem?: number,
         public valorTerreno?: number,
         public valorEscritura?: number,
+        public valorEscrituraCompra?: number,
+        public valorCorretagemVenda?: number,
+        public valorFiscal?: number,
         public porcentagemCorretagem?: number,
         public tipoCorretagem?: TipoCorretagem,
         public status?: StatusObra,

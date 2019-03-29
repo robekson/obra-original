@@ -47,6 +47,21 @@
                         [(ngModel)]="obra.valorEscritura" />
                 </div>
                 <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="obrasAppEdit.obra.valorEscrituraCompra" for="field_valorEscrituraCompra">Valor Escritura Compra</label>
+                    <input type="number" class="form-control" name="valorEscrituraCompra" id="field_valorEscrituraCompra"
+                        [(ngModel)]="obra.valorEscrituraCompra" />
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="obrasAppEdit.obra.valorCorretagemVenda" for="field_valorCorretagemVenda">Valor Corretagem Venda</label>
+                    <input type="number" class="form-control" name="valorCorretagemVenda" id="field_valorCorretagemVenda"
+                        [(ngModel)]="obra.valorCorretagemVenda" />
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="obrasAppEdit.obra.valorFiscal" for="field_valorFiscal">Valor Fiscal</label>
+                    <input type="number" class="form-control" name="valorFiscal" id="field_valorFiscal"
+                        [(ngModel)]="obra.valorFiscal" />
+                </div>
+                <div class="form-group">
                     <label class="form-control-label" jhiTranslate="obrasAppEdit.obra.porcentagemCorretagem" for="field_porcentagemCorretagem">Porcentagem Corretagem</label>
                     <input type="number" class="form-control"  min="0" max="100" onKeyUp="if(this.value>100){this.value='100';}else if(this.value<0){this.value='0';}"  name="porcentagemCorretagem" id="field_porcentagemCorretagem"
                         [(ngModel)]="obra.porcentagemCorretagem" required />                        

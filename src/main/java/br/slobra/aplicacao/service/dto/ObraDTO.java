@@ -27,6 +27,12 @@ public class ObraDTO implements Serializable {
 
     private BigDecimal valorEscritura;
 
+    private BigDecimal valorEscrituraCompra;
+
+    private BigDecimal valorCorretagemVenda;
+
+    private BigDecimal valorFiscal;
+
     private Integer porcentagemCorretagem;
 
     private TipoCorretagem tipoCorretagem;
@@ -88,6 +94,30 @@ public class ObraDTO implements Serializable {
 
     public void setValorEscritura(BigDecimal valorEscritura) {
         this.valorEscritura = valorEscritura;
+    }
+
+    public BigDecimal getValorEscrituraCompra() {
+        return valorEscrituraCompra;
+    }
+
+    public void setValorEscrituraCompra(BigDecimal valorEscrituraCompra) {
+        this.valorEscrituraCompra = valorEscrituraCompra;
+    }
+
+    public BigDecimal getValorCorretagemVenda() {
+        return valorCorretagemVenda;
+    }
+
+    public void setValorCorretagemVenda(BigDecimal valorCorretagemVenda) {
+        this.valorCorretagemVenda = valorCorretagemVenda;
+    }
+
+    public BigDecimal getValorFiscal() {
+        return valorFiscal;
+    }
+
+    public void setValorFiscal(BigDecimal valorFiscal) {
+        this.valorFiscal = valorFiscal;
     }
 
     public Integer getPorcentagemCorretagem() {
@@ -168,6 +198,9 @@ public class ObraDTO implements Serializable {
             ", metragem=" + getMetragem() +
             ", valorTerreno=" + getValorTerreno() +
             ", valorEscritura=" + getValorEscritura() +
+            ", valorEscrituraCompra=" + getValorEscrituraCompra() +
+            ", valorCorretagemVenda=" + getValorCorretagemVenda() +
+            ", valorFiscal=" + getValorFiscal() +
             ", porcentagemCorretagem=" + getPorcentagemCorretagem() +
             ", tipoCorretagem='" + getTipoCorretagem() + "'" +
             ", status='" + getStatus() + "'" +

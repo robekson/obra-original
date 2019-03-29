@@ -47,6 +47,15 @@ public class Obra implements Serializable {
     @Column(name = "valor_escritura", precision = 10, scale = 2)
     private BigDecimal valorEscritura;
 
+    @Column(name = "valor_escritura_compra", precision = 10, scale = 2)
+    private BigDecimal valorEscrituraCompra;
+
+    @Column(name = "valor_corretagem_venda", precision = 10, scale = 2)
+    private BigDecimal valorCorretagemVenda;
+
+    @Column(name = "valor_fiscal", precision = 10, scale = 2)
+    private BigDecimal valorFiscal;
+
     @Column(name = "porcentagem_corretagem")
     private Integer porcentagemCorretagem;
 
@@ -144,6 +153,45 @@ public class Obra implements Serializable {
 
     public void setValorEscritura(BigDecimal valorEscritura) {
         this.valorEscritura = valorEscritura;
+    }
+
+    public BigDecimal getValorEscrituraCompra() {
+        return valorEscrituraCompra;
+    }
+
+    public Obra valorEscrituraCompra(BigDecimal valorEscrituraCompra) {
+        this.valorEscrituraCompra = valorEscrituraCompra;
+        return this;
+    }
+
+    public void setValorEscrituraCompra(BigDecimal valorEscrituraCompra) {
+        this.valorEscrituraCompra = valorEscrituraCompra;
+    }
+
+    public BigDecimal getValorCorretagemVenda() {
+        return valorCorretagemVenda;
+    }
+
+    public Obra valorCorretagemVenda(BigDecimal valorCorretagemVenda) {
+        this.valorCorretagemVenda = valorCorretagemVenda;
+        return this;
+    }
+
+    public void setValorCorretagemVenda(BigDecimal valorCorretagemVenda) {
+        this.valorCorretagemVenda = valorCorretagemVenda;
+    }
+
+    public BigDecimal getValorFiscal() {
+        return valorFiscal;
+    }
+
+    public Obra valorFiscal(BigDecimal valorFiscal) {
+        this.valorFiscal = valorFiscal;
+        return this;
+    }
+
+    public void setValorFiscal(BigDecimal valorFiscal) {
+        this.valorFiscal = valorFiscal;
     }
 
     public Integer getPorcentagemCorretagem() {
@@ -279,6 +327,9 @@ public class Obra implements Serializable {
             ", metragem=" + getMetragem() +
             ", valorTerreno=" + getValorTerreno() +
             ", valorEscritura=" + getValorEscritura() +
+            ", valorEscrituraCompra=" + getValorEscrituraCompra() +
+            ", valorCorretagemVenda=" + getValorCorretagemVenda() +
+            ", valorFiscal=" + getValorFiscal() +
             ", porcentagemCorretagem=" + getPorcentagemCorretagem() +
             ", tipoCorretagem='" + getTipoCorretagem() + "'" +
             ", status='" + getStatus() + "'" +
