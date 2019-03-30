@@ -21,17 +21,18 @@
     <addColumn tableName="obra">
         <column name="valor_escritura_compra" type="decimal(10,2)">
                 <constraints nullable="true" />
-        </column>
-        
-        <column name="valor_corretagem_venda" type="decimal(10,2)">
+        </column>      
+    </addColumn>
+     <addColumn tableName="obra">  
+         <column name="valor_corretagem_venda" type="decimal(10,2)">
                 <constraints nullable="true" />
         </column>
-
+     </addColumn>
+     <addColumn tableName="obra"> 
         <column name="valor_fiscal" type="decimal(10,2)">
                 <constraints nullable="true" />
         </column>
-    </addColumn>
-
+     </addColumn>
         
     </changeSet>
     <!-- jhipster-needle-liquibase-add-changeset - JHipster will add changesets here, do not remove-->
