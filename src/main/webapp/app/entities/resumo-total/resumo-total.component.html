@@ -58,11 +58,11 @@
                                 </tr>
                                 <tr>
                                     <th>DESPESAS ESCRITURA COMPRA</th>
-                                    <td>XXXXXX</td>
+                                    <td>{{resumo.valorEscrituraCompra| currency: 'R$'}}</td>
                                 </tr>
                                 <tr>
                                     <th>CORRETAGEM VENDA</th>
-                                    <td>XXXXXX</td>
+                                    <td>{{resumo.valorCorretagemVenda| currency: 'R$'}}</td>
                                 </tr>
                                 <tr>
                                     <th>VALOR REAL COMPRA TERRENO</th>
@@ -72,10 +72,10 @@
                                     <th>VALOR METRO QUADRADO</th>
                                     <td>{{resumo.valorMetroQuadrado| currency: 'R$'}}</td>
                                 </tr>
-                                
+
                                  <tr>
-                                    <th>VALOR EM CAIXA</th>
-                                    <td>{{resumo.valorCaixa | currency: 'R$'}}</td>
+                                    <th>VALOR FISCAL</th>
+                                    <td>{{resumo.valorFiscal | currency: 'R$'}}</td>
                                 </tr>
                                 </tbody>
                             </table>
