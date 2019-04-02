@@ -95,6 +95,7 @@ export class GastoComponent implements OnInit, OnDestroy {
         localStorage.setItem('data', param);
         let id = localStorage.getItem('idObra');
         this.nomeObra = localStorage.getItem('nomeObra');
+        this.page =1;
         this.gastoService
             .query({
                 page: this.page - 1,
