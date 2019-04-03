@@ -3597,7 +3597,7 @@ input[type='submit'].btn-block {
 }
 .nav-tabs .nav-link:focus,
 .nav-tabs .nav-link:hover {
-    border-color: #e9ecef #e9ecef #dee2e6;
+    border-color: #a3bdd6 #a3bdd6 #a3bdd6;
 }
 .nav-tabs .nav-link.disabled {
     color: #6c757d;
