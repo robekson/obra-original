@@ -5,6 +5,7 @@ import { JhiEventManager } from 'ng-jhipster';
 
 import { LoginService } from 'app/core/login/login.service';
 import { StateStorageService } from 'app/core/auth/state-storage.service';
+import { NgxUiLoaderService } from 'ngx-ui-loader'; 
 
 @Component({
     selector: 'jhi-login-modal',
@@ -24,7 +25,8 @@ export class JhiLoginModalComponent implements AfterViewInit {
         private elementRef: ElementRef,
         private renderer: Renderer,
         private router: Router,
-        public activeModal: NgbActiveModal
+        public activeModal: NgbActiveModal,
+        private ngxService: NgxUiLoaderService
     ) {
         this.credentials = {};
     }
@@ -44,6 +46,7 @@ export class JhiLoginModalComponent implements AfterViewInit {
     }
 
     login() {
+        this.ngxService.start(); 
         this.loginService
             .login({
                 username: this.username,
@@ -69,9 +72,11 @@ export class JhiLoginModalComponent implements AfterViewInit {
                     this.stateStorageService.storeUrl(null);
                     this.router.navigate([redirect]);
                 }
+                this.ngxService.stop();
             })
             .catch(() => {
                 this.authenticationError = true;
+                this.ngxService.stop();
             });
     }
 

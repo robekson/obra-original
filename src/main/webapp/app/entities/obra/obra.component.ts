@@ -9,6 +9,7 @@ import { AccountService } from 'app/core';
 
 import { ITEMS_PER_PAGE } from 'app/shared';
 import { ObraService } from './obra.service';
+import { NgxUiLoaderService } from 'ngx-ui-loader'; 
 
 @Component({
     selector: 'jhi-obra',
@@ -37,7 +38,8 @@ export class ObraComponent implements OnInit, OnDestroy {
         protected accountService: AccountService,
         protected activatedRoute: ActivatedRoute,
         protected router: Router,
-        protected eventManager: JhiEventManager
+        protected eventManager: JhiEventManager,
+        private ngxService: NgxUiLoaderService
     ) {
         this.itemsPerPage = ITEMS_PER_PAGE;
         this.routeData = this.activatedRoute.data.subscribe(data => {
@@ -49,6 +51,7 @@ export class ObraComponent implements OnInit, OnDestroy {
     }
 
     loadAll() {
+        this.ngxService.start(); 
         this.obraService
             .query({
                 page: this.page - 1,
@@ -59,6 +62,7 @@ export class ObraComponent implements OnInit, OnDestroy {
                 (res: HttpResponse<IObra[]>) => this.paginateObras(res.body, res.headers),
                 (res: HttpErrorResponse) => this.onError(res.message)
             );
+        this.ngxService.stop();
     }
 
     loadPage(page: number) {

@@ -9,6 +9,7 @@ import { IObra } from 'app/shared/model/obra.model';
 import { IGasto, IResumoGasto, MesAno } from 'app/shared/model/gasto.model';
 import { LinechartService } from 'app/dashboard/linechart/linechart.service';
 import { GastoService } from 'app/entities/gasto/gasto.service';
+import { NgxUiLoaderService } from 'ngx-ui-loader'; 
 
 @Component({
     selector: 'jhi-home',
@@ -27,12 +28,14 @@ export class HomeComponent implements OnInit {
         private loginModalService: LoginModalService,
         private eventManager: JhiEventManager,
         protected lineChartService: LinechartService,
-        protected jhiAlertService: JhiAlertService
+        protected jhiAlertService: JhiAlertService,
+        private ngxService: NgxUiLoaderService
     ) {
         this.data = {};
     }
 
     ngOnInit() {
+        this.ngxService.start(); 
         this.accountService.identity().then(account => {
             this.account = account;
         });
@@ -47,14 +50,19 @@ export class HomeComponent implements OnInit {
                 (res: HttpResponse<IResumoGasto[]>) => this.montaGraficoLinha(res.body, res.headers),
                 (res: HttpErrorResponse) => this.onError(res.message)
             );
+        
+        this.ngxService.stop();
     }
 
     registerAuthenticationSuccess() {
+        this.ngxService.start(); 
         this.eventManager.subscribe('authenticationSuccess', message => {
             this.accountService.identity().then(account => {
                 this.account = account;
             });
         });
+        
+        this.ngxService.stop();
     }
 
     isAuthenticated() {
@@ -66,6 +74,7 @@ export class HomeComponent implements OnInit {
     }
 
     protected montaGraficoLinha(data: IResumoGasto[], headers: HttpHeaders) {
+        this.ngxService.start(); 
         console.log('data = ' + data);
         var v_json = {};
         var lineChartLabels = [];
@@ -97,6 +106,7 @@ export class HomeComponent implements OnInit {
         v_json['datasets'] = lineChartDataSet;
         this.data = v_json;
         console.log(JSON.stringify(v_json));
+        this.ngxService.stop();
     }
 
     protected onError(errorMessage: string) {

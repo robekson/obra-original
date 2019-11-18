@@ -9,6 +9,7 @@ import { AccountService } from 'app/core';
 
 import { ITEMS_PER_PAGE } from 'app/shared';
 import { GastoService } from './gasto.service';
+import { NgxUiLoaderService } from 'ngx-ui-loader'; 
 
 @Component({
     selector: 'jhi-gasto',
@@ -40,7 +41,8 @@ export class GastoComponent implements OnInit, OnDestroy {
         protected accountService: AccountService,
         protected activatedRoute: ActivatedRoute,
         protected router: Router,
-        protected eventManager: JhiEventManager
+        protected eventManager: JhiEventManager,
+        private ngxService: NgxUiLoaderService
     ) {
         this.itemsPerPage = ITEMS_PER_PAGE;
         this.routeData = this.activatedRoute.data.subscribe(data => {
@@ -52,6 +54,7 @@ export class GastoComponent implements OnInit, OnDestroy {
     }
 
     loadAll() {
+        this.ngxService.start(); 
         let param = localStorage.getItem('data');
         let id = localStorage.getItem('idObra');
         if (param !== null) {
@@ -81,6 +84,7 @@ export class GastoComponent implements OnInit, OnDestroy {
                     (res: HttpErrorResponse) => this.onError(res.message)
                 );
         }
+        this.ngxService.stop();
     }
 
     loadPage(page: number) {
@@ -91,6 +95,7 @@ export class GastoComponent implements OnInit, OnDestroy {
     }
 
     selecionaData(param: any) {
+        this.ngxService.start(); 
         console.log(param);
         localStorage.setItem('data', param);
         let id = localStorage.getItem('idObra');
@@ -118,6 +123,7 @@ export class GastoComponent implements OnInit, OnDestroy {
                 (res: HttpResponse<IResumoGasto>) => this.montaGastos(res.body, res.headers),
                 (res: HttpErrorResponse) => this.onError(res.message)
             );
+        this.ngxService.stop();
     }
 
     transition() {
@@ -147,6 +153,7 @@ export class GastoComponent implements OnInit, OnDestroy {
     }
 
     ngOnInit() {
+        this.ngxService.start(); 
         const idObra = this.activatedRoute.snapshot.paramMap.get('id');
         if (idObra !== null) {
             localStorage.setItem('idObra', idObra);
@@ -167,6 +174,7 @@ export class GastoComponent implements OnInit, OnDestroy {
                 (res: HttpResponse<MesAno[]>) => this.montaMeses(res.body, res.headers),
                 (res: HttpErrorResponse) => this.onError(res.message)
             );
+        this.ngxService.stop();
     }
 
     ngOnDestroy() {

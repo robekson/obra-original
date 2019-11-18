@@ -22,6 +22,7 @@ import { ObrasDashboardModule } from './dashboard/dashboard.module';
 // jhipster-needle-angular-add-module-import JHipster will add new module here
 import { JhiMainComponent, NavbarComponent, FooterComponent, PageRibbonComponent, ActiveMenuDirective, ErrorComponent } from './layouts';
 import { CustomDateParserFormatter } from './datepicker-formatter';
+import { NgxUiLoaderModule } from  'ngx-ui-loader';
 
 @NgModule({
     imports: [
@@ -41,7 +42,8 @@ import { CustomDateParserFormatter } from './datepicker-formatter';
         ObrasAccountModule,
         ObrasDashboardModule,
         // jhipster-needle-angular-add-module JHipster will add new module here
-        ObrasEntityModule
+        ObrasEntityModule,
+        NgxUiLoaderModule
     ],
     declarations: [JhiMainComponent, NavbarComponent, ErrorComponent, PageRibbonComponent, ActiveMenuDirective, FooterComponent],
     providers: [
