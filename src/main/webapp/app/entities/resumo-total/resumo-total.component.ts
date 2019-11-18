@@ -14,6 +14,7 @@ import { BarchartService } from 'app/dashboard/barchart/barchart.service';
 
 import * as jspdf from 'jspdf';
 import * as html2canvas from 'html2canvas';
+import { NgxUiLoaderService } from 'ngx-ui-loader'; 
 
 @Component({
     selector: 'jhi-resumo-total',
@@ -46,11 +47,13 @@ export class ResumoTotalComponent implements OnInit, OnDestroy {
         protected router: Router,
         protected eventManager: JhiEventManager,
         protected pieChartService: PiechartService,
-        protected barChartService: BarchartService
+        protected barChartService: BarchartService,
+        private ngxService: NgxUiLoaderService
     ) {
         this.data = {};
     }
     ngOnInit() {
+        this.ngxService.start(); 
         let id = localStorage.getItem('idObra');
         this.nomeObra = localStorage.getItem('nomeObra');
 
@@ -74,6 +77,7 @@ export class ResumoTotalComponent implements OnInit, OnDestroy {
                 (res: HttpResponse<IResumoGasto>) => this.montaGastos(res.body, res.headers),
                 (res: HttpErrorResponse) => this.onError(res.message)
             );
+        this.ngxService.stop();
     }
 
     protected montaGastos(data: IResumoGasto, headers: HttpHeaders) {
