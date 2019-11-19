@@ -33,6 +33,7 @@ public class CacheConfiguration {
         return cm -> {
             cm.createCache(br.slobra.aplicacao.repository.UserRepository.USERS_BY_LOGIN_CACHE, jcacheConfiguration);
             cm.createCache(br.slobra.aplicacao.repository.UserRepository.USERS_BY_EMAIL_CACHE, jcacheConfiguration);
+            cm.createCache(br.slobra.aplicacao.repository.GastoRepository.GASTO_CACHE, jcacheConfiguration);
             // jhipster-needle-ehcache-add-entry
         };
     }

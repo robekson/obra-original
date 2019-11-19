@@ -12,7 +12,9 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
+import org.springframework.cache.annotation.CachePut;
+import org.springframework.cache.annotation.Cacheable;
+import org.springframework.cache.annotation.CacheEvict;
 import java.time.LocalDate;
 import java.time.ZoneId;
 import java.util.List;
@@ -44,7 +46,8 @@ public class GastoServiceImpl implements GastoService {
      * @param gastoDTO the entity to save
      * @return the persisted entity
      */
-    @Override
+    @Override    
+    @CachePut(value= GastoRepository.GASTO_CACHE)
     public GastoDTO save(GastoDTO gastoDTO) {
         log.debug("Request to save Gasto : {}", gastoDTO);
 
@@ -58,6 +61,8 @@ public class GastoServiceImpl implements GastoService {
      * @param pageable the pagination information
      * @return the list of entities
      */
+    @Cacheable(cacheNames = GastoRepository.GASTO_CACHE)
+    @CacheEvict(value = GastoRepository.GASTO_CACHE, allEntries = true)
     @Override
     @Transactional(readOnly = true)
     public Page<GastoDTO> findAll(Pageable pageable) {
@@ -129,6 +134,7 @@ public class GastoServiceImpl implements GastoService {
      * @param id the id of the entity
      */
     @Override
+    @CacheEvict(value = GastoRepository.GASTO_CACHE, allEntries = true)
     public void delete(Long id) {
         log.debug("Request to delete Gasto : {}", id);
         gastoRepository.deleteById(id);

@@ -21,6 +21,9 @@ import org.springframework.data.domain.Page;
 @Repository
 public interface GastoRepository extends JpaRepository<Gasto, Long> {
 
+	
+	String GASTO_CACHE = "cacheGasto";	
+	
 	@Query("SELECT g FROM Gasto g where g.obra.id = :id")
     List<Gasto> findByObra(@Param("id") Long idObra);
 
