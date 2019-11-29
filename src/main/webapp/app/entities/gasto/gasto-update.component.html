@@ -22,7 +22,7 @@
                 </div>
                 <div class="form-group">
                     <label class="form-control-label" jhiTranslate="obrasAppEdit.gasto.valor" for="field_valor">Valor</label>
-                    <input currencyMask" class="form-control" name="valor" id="field_valor"
+                    <input currencyMask class="form-control" name="valor" id="field_valor"
                         [(ngModel)]="gasto.valor"  required />                        
                      <div [hidden]="!(editForm.controls.valor?.dirty && editForm.controls.valor?.invalid)">
                         <small class="form-text text-danger"

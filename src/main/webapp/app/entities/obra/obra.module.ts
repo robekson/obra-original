@@ -3,6 +3,7 @@ import { RouterModule } from '@angular/router';
 import { ObrasSharedModule } from 'app/shared';
 import { FormsModule } from "@angular/forms";
 import { NgxCurrencyModule } from "ngx-currency";
+import { NgxMaskModule } from 'ngx-mask'
 
 import {
     ObraComponent,
