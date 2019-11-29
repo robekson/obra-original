@@ -1,10 +1,8 @@
 import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { RouterModule } from '@angular/router';
-import { FormsModule } from '@angular/forms';
 import { ObrasSharedModule } from 'app/shared';
+import { FormsModule } from "@angular/forms";
 import { NgxCurrencyModule } from "ngx-currency";
-import { NgxMaskModule } from 'ngx-mask'
-
 
 import {
     ObraComponent,
